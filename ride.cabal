@@ -26,3 +26,5 @@ executable ride
                      , wai-extra
                      , aeson
                      , process
+                     , filemanip
+                     

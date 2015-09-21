@@ -34,7 +34,9 @@ main =
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/haskell");
+    var session = editor.getSession()
+    session.setMode("ace/mode/haskell");
+    session.setTabSize(2);
 </script>
 </body>
 </html>
