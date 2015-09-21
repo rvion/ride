@@ -24,3 +24,5 @@ executable ride
                      , Spock
                      , wai-middleware-static
                      , wai-extra
+                     , aeson
+                     , process
