@@ -1,42 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ACE in Action</title>
-    <style type="text/css" media="screen">
-        #editor { 
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
+
+
+    <script type="text/javascript" src="//cdn.webix.com/edge/webix.js"></script>
+    <script type="text/javascript">webix.codebase = "/components/";</script>
+    <link   type="text/css"       href="//cdn.webix.com/edge/webix.css" rel="stylesheet">
+    <link   type="text/css"       href="monokai.css" rel="stylesheet">
+    <!-- include the component -->
+    <script type="text/javascript" src="/components/codemirror/codemirror.js"></script>
+    <!-- configure autoloading -->
+    <!-- <script> webix.codebase = "//cdn.webix.com/components/codemirror/"; </script> -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js "></script>
+    <!-- Load sublime text settings -->
+    <!-- <script type="text/javascript" src="//codemirror.net/keymap/sublime.js"></script> -->
+    <style type="text/css">
+    .cm-trailingspace {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QUXCToH00Y1UgAAACFJREFUCNdjPMDBUc/AwNDAAAFMTAwMDA0OP34wQgX/AQBYgwYEx4f9lQAAAABJRU5ErkJggg==);
+        background-position: bottom left;
+        background-repeat: repeat-x;
+    }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
 </head>
 <body>
-<div style="height:30px">test</div>
-<div id="editor">{-# LANGUAGE OverloadedStrings #-}
-module Main where
+ <script type="text/javascript" charset="utf-8">
+// webix.codebase = "http://cdn.webix.com/components/codemirror/";
+filesSource = new webix.TreeCollection({ url:"files" });
+loadFile = function (id) {
+  $$("ide-editor").setValue(filesSource.getItem(id).content);
+  // alert(filesSource.getItem(id).content);
+  // var text = "Selected: " + grid.getSelectedId(true).join();
+  // document.getElementById('testB').innerHTML = text;
+}
 
-import Web.Spock
-import Control.Monad
-import qualified Data.Text as T
-import Data.Text (Text)
+webix.ui(
+  { rows:
+    [ { view:"template", type:"header", template:"My App!" },
+      { cols:
+        [
+          {maxWidth:250, rows:
+            [ { id:"hs_files_tree", view:"tree", data:"", gravity:0.4, select:true
+              , on: {onSelectChange: loadFile}
+              }
+            , { id:"other_files_tree", view:"tree", data:"", gravity:0.4, select:true }
+            ]
+          },
+          { id:"kbpane", view:'resizer'},
+          { id:"ide-editor"
+          , view: "codemirror-editor"
+          , theme: "monokai"
+          , mode: "haskell"
+          , keyMap: "sublime"
+          , value: 'module Main where\n\nmain :: IO ()\nmain = print "ok"'}
+        ]
+      },
+      { view:'resizer'},
+      { view:"template", type:"header", template:"My App!" },
+      { view:"toolbar",
+        elements:
+        [ { view:"button", inputWidth: 80, width: 100},
+          { view:"segmented", options:[
+              {id:"create", value:"Create"},
+              {id:"edit", value:"Edit"},
+              {id:"delete", value:"Delete"}
+            ],
+            width: 200
+          },
+            {view:"text", label:"Text", labelAlign: "right"},
+            {view:"select", label:"Select", width:210, labelAlign: "right", options:[
+                {id:"create", value:"Create New Tab"},
+                {id:"edit", value:"Edit Tab"},
+                {id:"delete", value:"Delete Tab"}
+                ]
+            }
+            ],
+        elementsConfig:{value:"Add", labelWidth: 60}
+      }
+    ]
+  }
+);
+$$('hs_files_tree').data.sync(filesSource);
+// $$("editor").getValue();
 
-main :: IO ()
-main =
-  runSpock 3000 $ spockT id $ do
-    get "" $ file "test" "static/index.html"
-    get ("echo" <//> var) $ \something ->
-      text $ T.concat ["Echo: ", something]
-</div>
-    
-<script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    var session = editor.getSession()
-    session.setMode("ace/mode/haskell");
-    session.setTabSize(2);
+// $e = $$("ide-editor").getEditor()
+// $e.setOption("showTrailingSpace", true)
+/*
+
+  $e.on("cursorActivity",function(){
+    selects = $e.listSelections()
+    if (selects.length == 0) {return;}
+    typePos = selects[0]
+    alert("ok");
+  })
+
+*/
+
 </script>
+
 </body>
 </html>

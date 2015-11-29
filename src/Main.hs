@@ -30,6 +30,8 @@ import System.Process
     , terminateProcess
     )
 
+import Files
+
 type IDE = (Handle, Handle, Handle, ProcessHandle)
 data Ctx = Ctx  { ctxIde :: Maybe IDE }
 type M = StateT Ctx IO
@@ -37,15 +39,16 @@ type M = StateT Ctx IO
 main :: IO ()
 main = runSpock 3000 $ spockT runM ride
 
-runM :: M a -> IO a 
+runM :: M a -> IO a
 runM = flip evalStateT (Ctx Nothing)
 
 ride :: SpockT M ()
 ride = do
-    middleware $ staticPolicy (addBase "static/")
+    middleware $ staticPolicy (addBase "static")
     middleware $ logStdoutDev
+    get "files" $ liftIO fp' >>= json
     get "" $ file "test" "static/index.html"
-    post "save" $ json $ object 
+    post "save" $ json $ object
         [ "name" .= ("name" :: String)
         , "age" .= (3::Int)
         ]
@@ -66,7 +69,7 @@ getErrors (hin, hout, _, _) = do
 restartIde :: M ()
 restartIde = do
   prevCtx <- S.get
-  case prevCtx of 
+  case prevCtx of
     Ctx Nothing -> startIDE
     Ctx (Just (_,_,_,procHandle)) -> do
       liftIO (terminateProcess procHandle)
@@ -74,16 +77,17 @@ restartIde = do
 
 startIDE :: M ()
 startIDE = do
-  (Just hin, Just hout, Just herr, uid) <- liftIO $ createProcess (proc "stack" ["ide"]) 
-     { std_out = Inherit -- Fixme 
-     , std_in = CreatePipe 
-     , std_err = CreatePipe 
+  (Just hin, Just hout, Just herr, uid) <- liftIO $ createProcess (proc "stack" ["ide"])
+     { std_out = Inherit -- Fixme
+     , std_in = CreatePipe
+     , std_err = CreatePipe
      }
   S.put $ Ctx $ Just (hin, hout, herr, uid)
   return ()
 
 haskellFiles :: IO [FilePath]
-haskellFiles = find (return True) (extension ==? ".hs") ""
+haskellFiles = find (return True) (extension ==? ".hs") "src/"
+
 
 cabalFile :: String -> FilePath
 cabalFile projectName = projectName <> ".cabal"
