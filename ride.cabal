@@ -39,5 +39,6 @@ executable ride
                      , Cabal
                      , directory
                      , filepath
+                     , transformers
 
 

@@ -8,7 +8,7 @@ starting...
 open http://localhost:3000/ to access the ide
 ```
 
-# Features 
+# Features
 
 #### Import manager :
 
@@ -37,8 +37,8 @@ open http://localhost:3000/ to access the ide
     - stylish
 
 #### Module helper:
+__cause I don't want to think about files anymore!__
 
-##### cause I don't want to think about files anymore !
   - renaming facilities
   - automatic sync-ing between cabal file and module hierarchy
 
@@ -50,11 +50,35 @@ stack install
 wai-devel -p src/Main.hs -f main
 ```
 
+## Notes
+
+- hoogle commands
+
+```shell
+git clone https://github.com/ndmitchell/hoogle /tmp/hoogle
+cd /tmp/hoogle
+stack init
+stack install
+stack exec -- hoogle generate --local --database=.stack-work/hoogle
+stack exec -- hoogle $ARGS --database=.stack-work/hoogle
+```
+
+- hoogle should be installed from git (version 5)
+- on snapshot change, hoogle db should be rebuilt. Until done, check here:https://github.com/commercialhaskell/stack/issues/55#issuecomment-155186311
+- to install all tools, we should not rely on nightly but this repo should pick a nicely working snapshot
+- if you want to have hyperlinked source, please, check https://github.com/commercialhaskell/stack/pull/1070
+
 ## FAQ
-(and not ace or yyy)
+
+#### Why codemirror (and not ace or yyy)
 
 codemirror have more keymaps (includig sublime text, and I like sublime text)
 codemirror have is simple and have all required features:
   - https://codemirror.net/demo/lint.html
   - https://codemirror.net/demo/widget.html
-  - etc.
+  - Collaborative CodeMirror demo (CodeMirror + operational transforms) https://github.com/Operational-Transformation/ot.hs/tree/master/src/Control/OperationalTransformation
+
+
+#### Why need to install 
+https://github.com/commercialhaskell/stack/blob/6e3e8b1bbc27a744b0e486f93b94e2c9c5090a29/src/Stack/Build/Execute.hs#L1067
+otherwise ("Warning: haddock not generating hyperlinked sources because 'HsColour' not found on PATH (use 'stack install hscolour' to install)."

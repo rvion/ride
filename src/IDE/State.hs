@@ -15,18 +15,18 @@ import Distribution.InstalledPackageInfo -- (parseInstalledPackageInfo)
 import Distribution.ModuleName
 import System.Directory.Tree
 import System.Directory
+import Data.Map (Map)
 import qualified Data.Map as M
 import System.FilePath
 import Distribution.Package
 
-x :: IO ()
-x = do
-  fileNames <- return []
-  files <- mapM readFile fileNames
-  let contents = map parseInstalledPackageInfo files
-  return ()
+import Control.Monad.Trans.State
 
-
+data State = State
+  { dbs :: [FilePath]
+  , packages :: [InstalledPackageInfo]
+  , zpackages :: [InstalledPackageInfo]
+  }
 
 -- "/Users/rvion/.stack/programs/x86_64-osx/ghc-7.10.2/lib/ghc-7.10.2/package.conf.d:"
 -- "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/pkgdb:"
@@ -66,3 +66,22 @@ getModules = do
     b = concatMap exposedModules p
   mapM print a
   return b
+
+
+-- x :: IO ()
+-- x = do
+--   fileNames <- return []
+--   files <- mapM readFile fileNames
+--   let contents = map parseInstalledPackageInfo files
+--   return ()
+
+buildHoogle :: IO [Text]
+buildHoogle = do
+  (exitcode, tout, terr) <- T.readProcessWithExitCode "git"
+    (["clone", "", "ghc-pkg", "list"]) ""
+  let
+    lines = (T.lines tout)
+    packages = map T.init $ filter (\t -> (not.T.null) t && (T.head t) == '/') lines
+
+  mapM print packages
+  return packages
