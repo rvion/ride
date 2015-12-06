@@ -31,4 +31,7 @@ executable ride
                      , process
                      , filemanip
                      , directory-tree
+                     , ghc
+                     , bin-package-db
+                     , ghc-paths
 

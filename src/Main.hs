@@ -10,6 +10,7 @@ import Control.Monad.IO.Class  (liftIO)
 import Control.Monad.Trans.Class (lift)
 import Control.Lens ()
 
+import System.Environment (lookupEnv)
 import Data.Aeson (object, (.=), Value)
 import Data.Monoid ((<>))
 
@@ -31,13 +32,16 @@ import System.Process
     )
 
 import Files
-
+import Yolo.Test (demo)
 type IDE = (Handle, Handle, Handle, ProcessHandle)
 data Ctx = Ctx  { ctxIde :: Maybe IDE }
 type M = StateT Ctx IO
 
 main :: IO ()
-main = runSpock 3000 $ spockT runM ride
+main = do
+  demo
+  -- port <- maybe 3000 read  <$> lookupEnv "PORT"
+  -- runSpock port $ spockT runM ride
 
 runM :: M a -> IO a
 runM = flip evalStateT (Ctx Nothing)
