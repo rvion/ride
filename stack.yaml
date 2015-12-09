@@ -1,5 +1,6 @@
 flags: {}
 packages:
 - '.'
+- 'jetpack'
 extra-deps: []
 resolver: nightly-2015-11-29
