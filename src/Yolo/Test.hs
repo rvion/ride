@@ -5,6 +5,9 @@
 
 module Yolo.Test where
 
+-- [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
+-- [ ] mention backpack
+
 import GHC.PackageDb -- https://github.com/ghc/ghc/blob/master/libraries/ghc-boot/GHC/PackageDb.hs#L140
 import Binary -- https://github.com/ghc/ghc/blob/master/compiler/utils/Binary.hs
 import HscTypes -- https://github.com/ghc/ghc/blob/master/compiler/main/HscTypes.hs#L725
