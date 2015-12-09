@@ -16,7 +16,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     JetPack
   other-modules:       QualifiedText
-  build-depends:       base, lens, text, bytestring
+  build-depends:       base, text, bytestring, microlens
   default-language:    Haskell2010
 
 

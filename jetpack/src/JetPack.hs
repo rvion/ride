@@ -80,7 +80,9 @@ import Text.ParserCombinators.ReadP as Exports (ReadP, ReadS, readP_to_S, readS_
 import Text.ParserCombinators.ReadPrec as Exports (ReadPrec, readPrec_to_P, readP_to_Prec, readPrec_to_S, readS_to_Prec)
 import Text.Read as Exports (Read(..), readMaybe, readEither)
 import Unsafe.Coerce as Exports
+
 import QualifiedText as Exports
+import Lens.Micro as Exports
 -- Reimplementations
 -------------------------
 

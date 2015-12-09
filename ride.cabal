@@ -35,6 +35,7 @@ executable ride
                      , bin-package-db
                      , ghc-paths
                      , process-extras
+                     , MissingH
                      , yaml
                      , Cabal
                      , directory
