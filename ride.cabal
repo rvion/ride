@@ -14,7 +14,10 @@ cabal-version:       >=1.10
 executable ride
   hs-source-dirs:      src
   main-is:             Main.hs
-  other-modules:       Files IDE.Iface IDE.State IDE.Test1
+  other-modules:       Files
+                       IDE.Iface
+                       IDE.State
+                       IDE.JetpackGen
   default-language:    Haskell2010
   build-depends:       base
                      , transformers

@@ -49,8 +49,8 @@ whenValid x =
     then id
     else error "invalid chars"
 
-demo :: String -> IO ()
-demo prefix = whenValid prefix
+printReexports :: (String, String) -> IO ()
+printReexports (prefix, hiFilepath) = whenValid prefix
   defaultErrorHandler defaultFatalMessager defaultFlushOut $ do
     runGhc (Just libdir) $ do
       dflags <- getSessionDynFlags
@@ -59,7 +59,7 @@ demo prefix = whenValid prefix
 
       -- load interface file
       iface <- liftIO $ initTcRnIf 's' sess () () $
-         readBinIface IgnoreHiWay QuietBinIFaceReading fp
+         readBinIface IgnoreHiWay QuietBinIFaceReading hiFilepath
 
       let
         toS :: SDoc -> String
@@ -144,20 +144,20 @@ demo prefix = whenValid prefix
 
 -- http://downloads.haskell.org/~ghc/latest/docs/html/libraries/ghc-7.10.2/LoadIface.html
 
-fp :: FilePath
-fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/text-1.2.1.3-1l1AN4I48k37RaQ6fm6CEh/Data/Text.hi"
+-- fp :: FilePath
+-- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/text-1.2.1.3-1l1AN4I48k37RaQ6fm6CEh/Data/Text.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/tagged-0.8.2-4zanMqQLQHpBO0ZYm7KGkc/Data/Tagged.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/zlib-0.5.4.2-7EfFFsXSCF6JCVS3xlYBS8/Codec/Compression/Zlib/Raw.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-10/7.10.2/lib/x86_64-osx-ghc-7.10.2/text-1.2.1.3-1l1AN4I48k37RaQ6fm6CEh/Data/Text.hi"
 
-c :: IO ModIface
-c = do
-  binHandle <- readBinMem fp
-  !a <- get binHandle
-  return a
+-- c :: IO ModIface
+-- c = do
+--   binHandle <- readBinMem fp
+--   !a <- get binHandle
+--   return a
 
 -- d :: IO [AvailInfo] -- IO [IfaceExport]
-d = mi_module <$> c
+-- d = mi_module <$> c
 -- showSDoc
 
 -- e = d >>= print.(showSDocUnsafe.ppr).head

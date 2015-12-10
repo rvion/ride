@@ -32,14 +32,15 @@ import System.Process
     )
 
 import Files
-import Yolo.Test (demo)
+-- import Yolo.Test (demo)
 type IDE = (Handle, Handle, Handle, ProcessHandle)
 data Ctx = Ctx  { ctxIde :: Maybe IDE }
 type M = StateT Ctx IO
 
 main :: IO ()
 main = do
-  demo
+  -- demo
+  return ()
   -- port <- maybe 3000 read  <$> lookupEnv "PORT"
   -- runSpock port $ spockT runM ride
 

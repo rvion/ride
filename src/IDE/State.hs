@@ -1,8 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections #-}
 
+module IDE.State
+  ( getDB
+  , getPackageInfos
+  , listAllModuleSorted
+  , packageModulesIface
+  ) where
 
-module IDE.State where
 import Data.Text (Text)
 import Data.List (isSuffixOf, intercalate, sort, sortBy)
 import qualified Data.Text as T
@@ -28,42 +33,56 @@ data State = State
   , zpackages :: [InstalledPackageInfo]
   }
 
--- "/Users/rvion/.stack/programs/x86_64-osx/ghc-7.10.2/lib/ghc-7.10.2/package.conf.d:"
--- "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/pkgdb:"
--- "/Users/rvion/dev/ride/.stack-work/install/x86_64-osx/nightly-2015-11-29/7.10.2/pkgdb:"
-getDB :: IO [Text]
+-- | This function returns the list of folder containing the list of installed packages
+--   [ "$HOME/.stack/programs/x86_64-osx/ghc-7.10.2/lib/ghc-7.10.2/package.conf.d"
+--   , "$HOME/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/pkgdb"
+--   , "$HOME/dev/project/.stack-work/install/x86_64-osx/nightly-2015-11-29/7.10.2/pkgdb"
+--   ]
+getDB :: IO [FilePath]
 getDB = do
-  (exitcode, tout, terr) <- T.readProcessWithExitCode "stack"
+  (exitcode, tout, terr) <- S.readProcessWithExitCode "stack"
     ["exec", "--", "ghc-pkg", "list"] ""
-  let
-    lines = (T.lines tout)
-    packages = map T.init $ filter (\t -> (not.T.null) t && (T.head t) == '/') lines
-
-  mapM print packages
+  let dbs = lines tout
+      packages = map init $ filter (\t -> (not.null) t && (head t) == '/') dbs
+  -- mapM print packages
   return packages
-
-demodb :: FilePath
-demodb = "/Users/rvion/.stack/programs/x86_64-osx/ghc-7.10.2/lib/ghc-7.10.2/package.conf.d"
 
 getPackageInfos :: FilePath -> IO [InstalledPackageInfo]
 getPackageInfos dbpath = do
-  packageFiles <- filter (isSuffixOf ".conf") <$> getDirectoryContents demodb
+  packageFiles <- filter (isSuffixOf ".conf") <$> getDirectoryContents dbpath
   mbinfos <- mapM getPackageInfo packageFiles
   infos <- (flip filterM) mbinfos $ \pr -> case pr of
     ParseFailed err -> print ("error", err) >> return False
-    ParseOk warns a -> print ("warning", warns) >> return True
+    ParseOk [] _ -> return True
+    ParseOk warns _ -> print ("warning", warns) >> return True
   return $ map (\(ParseOk _ a) -> a) infos
-  where getPackageInfo f = parseInstalledPackageInfo <$> readFile (demodb </> f)
+  where getPackageInfo f = parseInstalledPackageInfo <$> readFile (dbpath </> f)
 
-getModules :: IO [ExposedModule]
-getModules = do
-  p <- getPackageInfos ""
+packageName :: InstalledPackageInfo -> String
+packageName = unPackageName . pkgName . sourcePackageId
+
+type ModuleNames  = [String]
+
+packageModules :: InstalledPackageInfo -> [ModuleNames]
+packageModules = map (components . exposedName) . exposedModules
+
+packageModulesIface :: InstalledPackageInfo -> [(String, FilePath)]
+packageModulesIface ipi =
+  for (packageModules ipi) $ \mod ->
+    ( intercalate "." mod
+    , libdir </> ((intercalate "/" mod) ++ ".hi")
+    )
+  where
+    libdir = head (libraryDirs ipi)
+
+listAllModuleSorted :: [InstalledPackageInfo] -> IO [ExposedModule]
+listAllModuleSorted ipis = do
   let
-    a = sortBy (compare `on` snd) $ concatMap _modules p
-    _modules p
-      = map ( (\(PackageIdentifier n _) -> unPackageName n)  (sourcePackageId p),)
-      $ map (intercalate "." . components . exposedName) (exposedModules p)
-    b = concatMap exposedModules p
+    a = sortBy (compare `on` snd) $ concatMap _modules ipis
+    _modules ipis
+      = map ( (\(PackageIdentifier n _) -> unPackageName n)  ( sourcePackageId ipis ),)
+      $ map (intercalate "." . components . exposedName) ( exposedModules ipis )
+    b = concatMap exposedModules ipis
   mapM print a
   return b
 
@@ -82,6 +101,28 @@ buildHoogle = do
   let
     lines = (T.lines tout)
     packages = map T.init $ filter (\t -> (not.T.null) t && (T.head t) == '/') lines
-
   mapM print packages
   return packages
+
+demodb :: FilePath
+demodb = "/Users/rvion/.stack/programs/x86_64-osx/ghc-7.10.2/lib/ghc-7.10.2/package.conf.d"
+
+for = flip map
+
+---------------------
+
+-- So far I'll try with the string variant until text is needed.
+-- Not sure about module name spec, though.
+
+-- getDBText :: IO [Text]
+-- getDBText = do
+--   (exitcode, tout, terr) <- T.readProcessWithExitCode "stack"
+--     ["exec", "--", "ghc-pkg", "list"] ""
+--   let
+--     dbs = T.lines tout
+--     packages = map T.init $ filter (\t -> (not.T.null) t && (T.head t) == '/') dbs
+
+--   mapM print packages
+--   return packages
+
+---------------------
