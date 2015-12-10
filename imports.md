@@ -36,7 +36,6 @@ _text_
   - t Data.Text
   - t Data.Text.Encoding
   - t Data.Text.IO
-
   - lt Data.Text.Lazy
   - lt Data.Text.Lazy.Encoding
   - lt Data.Text.Lazy.IO
@@ -45,7 +44,6 @@ _bytestring_
 
   - bs Data.ByteString
   - bs Data.ByteString.Char8
-
   - lbs Data.ByteString.Lazy
   - lbs Data.ByteString.Lazy.Char8
 
