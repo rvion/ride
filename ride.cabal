@@ -44,5 +44,5 @@ executable ride
                      , directory
                      , filepath
                      , transformers
-
+                     , split
 

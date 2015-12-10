@@ -20,7 +20,7 @@ import GHC.Paths ( libdir )
 import DynFlags
 import Control.Monad.IO.Class(liftIO)
 import Outputable (dot)
-
+import Data.List.Split
 import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
 import DynFlags (defaultDynFlags)
 import BinIface
@@ -28,7 +28,8 @@ import TcRnMonad
 import IfaceSyn  -- (ifType, ifName)
 import Control.Monad (forM_)
 import Data.Char (toLower, toUpper)
-
+import System.Directory (createDirectoryIfMissing)
+import Data.List (intersperse)
 import Data.String.Utils
 -- import Data.Tuple.Extra (both)
 both f (a,b) = (f a, f b)
@@ -68,17 +69,24 @@ printReexports (prefix, hiFilepath) = whenValid prefix
         exportedSymbols = concatMap (pretify toS) exports
         decls =  map snd $ mi_decls iface
         moduleName = toS.ppr $ mi_module iface
+        jetpackFolder = "jetpack/src/"
+        _folders = jetpackFolder ++ (replace "." "/" moduleName)
+          -- let parts = splitOn "." moduleName
+          -- in (concat$ intersperse "/" (init parts), last parts)
         (p:ps) = prefix
         sep = "_"
         _idPrefix = (toLower p : ps)
         _typePrefix = (toUpper p : ps)
-        _fileName = concat [moduleName, ".", "As", _typePrefix]
-        _filePath = ("jetpack/src/" ++ _fileName ++ ".hs")
+        _fileName = concat ["As", _typePrefix,".hs"]
+        _filePath = (_folders ++ "/" ++ _fileName)
 
       -- should we import the module qualified to avoid clashes with prelude ?
       -- if so, type signatures might not work anymore.
       -- are they working as of now anyway ?
       -- liftIO $ writeFile _filePath ""
+      -- liftIO $ print (_folders,_file)
+      liftIO $ createDirectoryIfMissing True _folders
+
       liftIO $ withFile _filePath WriteMode $ \fileHandle -> do
         let writeInFile = hPutStrLn fileHandle
         writeInFile . concat $
