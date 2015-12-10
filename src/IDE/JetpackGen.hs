@@ -22,6 +22,7 @@ jetpackGen = do
     print ("reexport " <> mod)
     printReexports (prefix, modules M.! mod)
   writeCabalFile reexports deps
+  writeReexportModule reexports
   print "done"
   reexportedPackages <- return ()
   return ()
@@ -45,6 +46,15 @@ load str action = do
 
 for = flip map
 
+writeReexportModule :: [(String, String)] -> IO ()
+writeReexportModule reexports = writeFile "jetpack/src/Exports.hs" content
+  where
+    toImport modName = concat ["\nimport ", modName, " as X"]
+    content = concat $
+      [ "\nmodule Exports (module X) where"
+      , "\n"] ++ map (toImport.toN) reexports ++
+      [ "\n\n"]
+
 writeCabalFile :: [(String, String)] -> [String] -> IO ()
 writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
   where
@@ -65,7 +75,8 @@ writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
       , "\nlibrary"
       , "\n  hs-source-dirs:      src"
       , "\n  exposed-modules:     JetPack"
-      , "\n  other-modules:       "] ++ intersperse ", " (map toN reexports) ++
+      , "\n  other-modules:       Exports, "]
+      ++ intersperse ", " (map toN reexports) ++
       [ "\n  build-depends:       "] ++ intersperse ", " deps ++
       [ "\n  default-language:    Haskell2010"
       , "\n"
