@@ -3,7 +3,7 @@
 {-#LANGUAGE GeneralizedNewtypeDeriving#-}
 {-#LANGUAGE BangPatterns#-}
 
-module Yolo.Test where
+module IDE.Iface where
 
 -- [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
 -- [ ] mention backpack
