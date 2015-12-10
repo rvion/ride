@@ -15,6 +15,10 @@
 
 ### Packages
 
+  * base
+  * unordered-containers
+  * containers
+  * semigroups
   * text
   * bytestring
   * tar
@@ -25,6 +29,7 @@
 
 ### Modules
 
+  - map Data.Map
   - map Data.Map.Strict
   - set Data.Set
   - hm Data.HashMap.Strict
