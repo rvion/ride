@@ -24,6 +24,7 @@ module JetPack
 )
 where
 
+import Exports
 -- Reexports
 -------------------------
 
@@ -81,8 +82,6 @@ import Text.ParserCombinators.ReadPrec as Exports (ReadPrec, readPrec_to_P, read
 import Text.Read as Exports (Read(..), readMaybe, readEither)
 import Unsafe.Coerce as Exports
 
-import QualifiedText as Exports
-import Lens.Micro as Exports
 -- Reimplementations
 -------------------------
 
