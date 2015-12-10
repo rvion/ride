@@ -2,15 +2,15 @@
 
 :memo:
 
-  - this file is parsed by jetpack-gen.
+  1. this file is parsed by jetpack-gen.
       - All lines starting with  `  - ` will generate a qualified reexport
       - All lines starting with  `  * ` will generate a package dependency
 
-  - one can look at modules listing on 
+  2. one can look at modules listing on 
       [stackage website](https://www.stackage.org/nightly-2015-12-10/docs)
 
-  - I built the list of reexport below from experience and by looking
-      at github search result of popular projects such as `stack`.
+  3. I built the list of reexport below from experience and by looking
+     at github search result of popular projects such as `stack`.
 
 
 ### Packages
@@ -21,7 +21,7 @@
   * zlib
   * megaparsec
   * conduit
-  * conduit.extra
+  * conduit-extra
 
 ### Modules
 
