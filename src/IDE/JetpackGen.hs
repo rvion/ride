@@ -4,6 +4,7 @@ import IDE.Iface
 import IDE.State
 import Data.List (isPrefixOf)
 import Data.Monoid
+import Control.Monad
 
 import Data.Map (Map)
 import qualified Data.Map as M
@@ -13,7 +14,10 @@ jetpackGen = do
   dbs       <- load "package DB" getDB
   packages  <- load "packages" (concat <$> mapM getPackageInfos dbs)
   modules   <- load "modules"  (return $ M.fromList $ concatMap packageModulesIface packages)
-  reexports <- load "reexports plan" (M.fromList <$> parseReexports)
+  reexports <- load "reexports plan" (parseReexports)
+  forM_ reexports $ \(prefix, mod) -> do
+    print ("reexport " <> mod)
+    printReexports (prefix, modules M.! mod)
   print "done"
   reexportedPackages <- return ()
   return ()
@@ -31,3 +35,4 @@ load str action = do
   putStrLn ("OK (" <> show (length result) <> " elems)")
   return result
 
+for = flip map
