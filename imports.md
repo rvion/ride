@@ -1,18 +1,19 @@
 ## Module definitions
 
-:memo: this file is parsed by jetpack-gen.
+:memo:
 
- - All lines starting with  `  - ` will generate a qualified reexport
- - All lines starting with  `  * ` will generate a package dependency
+  - this file is parsed by jetpack-gen.
+      - All lines starting with  `  - ` will generate a qualified reexport
+      - All lines starting with  `  * ` will generate a package dependency
 
-:memo: one can look at modules listing on 
-[stackage website](https://www.stackage.org/nightly-2015-12-10/docs)
+  - one can look at modules listing on 
+      [stackage website](https://www.stackage.org/nightly-2015-12-10/docs)
 
-:memo: I built the list of reexport below from experience and by looking
-at github search result of popular projects such as `stack`.
+  - I built the list of reexport below from experience and by looking
+      at github search result of popular projects such as `stack`.
 
 
-### Packages:
+### Packages
 
   * text
   * bytestring
@@ -22,14 +23,12 @@ at github search result of popular projects such as `stack`.
   * conduit
   * conduit.extra
 
-#### Containers
+### Modules
 
   - map Data.Map.Strict
   - set Data.Set
   - hm Data.HashMap.Strict
   - ne Data.List.NonEmpty
-
-#### Text types 
 
 _text_
 
@@ -47,8 +46,6 @@ _bytestring_
   - lbs Data.ByteString.Lazy
   - lbs Data.ByteString.Lazy.Char8
 
-#### compression
-
 _tar_
 
   - tar Codec.Archive.Tar
@@ -59,13 +56,9 @@ _zlib_
 
   - gzip Codec.Compression.GZip
 
-#### parser
-
 _megaparsec_
 
   - mp Text.Megaparsec
-
-#### conduit
 
 _conduit_
 _conduit-extra_
