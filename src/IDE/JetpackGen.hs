@@ -21,10 +21,12 @@ jetpackGen = do
   let f = \previouslyExportedSymbols (prefix, mod) -> do
         putStrLn ("reexport " <> mod)
         printReexports (prefix, modules M.! mod) previouslyExportedSymbols
-  foldM_ f [] reexports
+  allExportsFinal <- foldM f [] reexports
   writeCabalFile reexports deps
   writeReexportModule reexports
-  print "done"
+  putStrLn "done"
+  putStrLn "exported_symbols:"
+  print allExportsFinal
   reexportedPackages <- return ()
   return ()
 
