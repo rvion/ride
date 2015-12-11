@@ -18,9 +18,10 @@ jetpackGen = do
   modules <- load "modules"  (return $ M.fromList $ concatMap packageModulesIface packages)
   reexports <- load "reexports plan" parseReexports
   deps <- load "cabal deps" parseDeps
-  forM_ reexports $ \(prefix, mod) -> do
-    print ("reexport " <> mod)
-    printReexports (prefix, modules M.! mod)
+  let f = \previouslyExportedSymbols (prefix, mod) -> do
+        putStrLn ("reexport " <> mod)
+        printReexports (prefix, modules M.! mod) previouslyExportedSymbols
+  foldM_ f [] reexports
   writeCabalFile reexports deps
   writeReexportModule reexports
   print "done"
