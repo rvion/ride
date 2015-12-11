@@ -10,6 +10,7 @@ module IDE.Iface where
 import System.IO
 import GHC.PackageDb -- https://github.com/ghc/ghc/blob/master/libraries/ghc-boot/GHC/PackageDb.hs#L140
 import Binary -- https://github.com/ghc/ghc/blob/master/compiler/utils/Binary.hs
+import Data.Maybe
 import HscTypes -- https://github.com/ghc/ghc/blob/master/compiler/main/HscTypes.hs#L725
 import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
 import Name -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Name.hs#L37
@@ -106,14 +107,19 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
             _type = typeSdoc decl
 
           case () of
-            () | (_reexported_name `elem` previouslyExportedSymbols) -> putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
-               | not (_name `elem` exportedSymbols) -> return () -- putStrLn $ concat ["  WARNING:", _name, "not exported by current module"]
-               | (head _name) `elem` operators -> putStrLn $ concat ["  warn:", _name, "is an operator"]
+            () | not (_name `elem` exportedSymbols) ->
+                    return Nothing
+               | (_reexported_name `elem` previouslyExportedSymbols) -> do
+                    putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
+                    return Nothing
+                -- putStrLn $ concat ["  WARNING:", _name, "not exported by current module"]
+               | (head _name) `elem` operators -> do
+                    putStrLn $ concat ["  warn:", _name, "is an operator"]
+                    return Nothing
                | otherwise -> do
                   put $ case decl of
                     IfaceId{} ->
                       -- ["\n", _idPrefix, sep, _name, " :: ", replace "\n" "\n  " (toS _type)
-                      -- ,"\n", _idPrefix, sep, _name, " =  T.", _name]
                       ["\n", _reexported_name, " =  I.", _name]
                     IfaceData{} ->
                       ["\n", "type ", _typePrefix,sep, _name, " = I.", _name]
@@ -122,9 +128,9 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
                     IfaceClass{} -> ["-- (",_name,") :: IfaceClass -> NOT YET SUPPORTED"]
                     IfaceAxiom{} -> ["-- (",_name,") :: IfaceAxiom -> NOT YET SUPPORTED"]
                     IfacePatSyn{} -> ["-- (",_name,") :: IfacePatSyn -> NOT YET SUPPORTED"]
-          return _reexported_name
+                  return (Just _reexported_name)
         -- print (previouslyExportedSymbols)
-        return (previouslyExportedSymbols ++ newDecl)
+        return (previouslyExportedSymbols ++ (catMaybes newDecl))
 
 
 typeSdoc :: IfaceDecl -> SDoc

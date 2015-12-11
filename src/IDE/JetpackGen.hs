@@ -75,7 +75,7 @@ writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
       , "\n"
       , "\nlibrary"
       , "\n  hs-source-dirs:      src"
-      , "\n  exposed-modules:     JetPack"
+      , "\n  exposed-modules:     JetPack Exports"
       , "\n  other-modules:       Exports, "]
       ++ intersperse ", " (map toN reexports) ++
       [ "\n  build-depends:       "] ++ intersperse ", " deps ++
