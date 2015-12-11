@@ -16,6 +16,7 @@
 ### Packages
 
   * base
+  * base-prelude
   * unordered-containers
   * containers
   * semigroups
