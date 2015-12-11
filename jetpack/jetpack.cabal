@@ -17,6 +17,7 @@ library
   exposed-modules:     JetPack Exports
   other-modules:       Data.Map.AsMap, Data.Map.Strict.AsMap, Data.Set.AsSet, Data.HashMap.Strict.AsHm, Data.List.NonEmpty.AsNe, Data.Text.AsT, Data.Text.Encoding.AsT, Data.Text.IO.AsT, Data.Text.Lazy.AsLt, Data.Text.Lazy.Encoding.AsLt, Data.Text.Lazy.IO.AsLt, Data.ByteString.AsBs, Data.ByteString.Char8.AsBs, Data.ByteString.Lazy.AsLbs, Data.ByteString.Lazy.Char8.AsLbs, Codec.Archive.Tar.AsTar, Codec.Archive.Tar.Entry.AsTar, Codec.Archive.Tar.Check.AsTar, Codec.Compression.GZip.AsGzip, Text.Megaparsec.AsMp, Data.Conduit.AsC, Data.Conduit.List.AsCl, Data.Conduit.Binary.AsCb, Lens.Micro.Platform.AsLens
   build-depends:       base, base-prelude, unordered-containers, containers, semigroups, text, bytestring, tar, zlib, megaparsec, conduit, conduit-extra, microlens-platform
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -Wall
   default-language:    Haskell2010
 
 source-repository head

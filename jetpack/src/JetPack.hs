@@ -7,5 +7,5 @@ module JetPack
   ( module X
   ) where
 
-import Exports as X
+import Exports as X hiding ((!!), (\\), (&))
 import BasePrelude as X

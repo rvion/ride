@@ -79,7 +79,8 @@ writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
       , "\n  other-modules:       "]
       ++ intersperse ", " (map toN reexports) ++
       [ "\n  build-depends:       "] ++ intersperse ", " deps ++
-      [ "\n  default-language:    Haskell2010"
+      [ "\n  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -Wall"
+      , "\n  default-language:    Haskell2010"
       , "\n"
       , "\nsource-repository head"
       , "\n  type:     git"
