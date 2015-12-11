@@ -120,7 +120,7 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
                   put $ case decl of
                     IfaceId{} ->
                       -- ["\n", _idPrefix, sep, _name, " :: ", replace "\n" "\n  " (toS _type)
-                      [_reexported_name, " =  I.", _name]
+                      [_reexported_name, " = I.", _name]
                     IfaceData{} ->
                       ["type ", _typePrefix,sep, _name, " = I.", _name]
                     IfaceSynonym{} -> ["-- (",_name,") :: IfaceSynonym -> NOT YET SUPPORTED"]

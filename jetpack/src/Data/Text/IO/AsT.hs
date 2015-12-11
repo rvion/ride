@@ -5,16 +5,16 @@ module Data.Text.IO.AsT where
 
 import Data.Text.IO as I
 
-t_appendFile =  I.appendFile
-t_getContents =  I.getContents
-t_getLine =  I.getLine
-t_hGetChunk =  I.hGetChunk
-t_hGetContents =  I.hGetContents
-t_hGetLine =  I.hGetLine
-t_hPutStr =  I.hPutStr
-t_hPutStrLn =  I.hPutStrLn
-t_interact =  I.interact
-t_putStr =  I.putStr
-t_putStrLn =  I.putStrLn
-t_readFile =  I.readFile
-t_writeFile =  I.writeFile
+t_appendFile = I.appendFile
+t_getContents = I.getContents
+t_getLine = I.getLine
+t_hGetChunk = I.hGetChunk
+t_hGetContents = I.hGetContents
+t_hGetLine = I.hGetLine
+t_hPutStr = I.hPutStr
+t_hPutStrLn = I.hPutStrLn
+t_interact = I.interact
+t_putStr = I.putStr
+t_putStrLn = I.putStrLn
+t_readFile = I.readFile
+t_writeFile = I.writeFile
