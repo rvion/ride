@@ -5,7 +5,5 @@ module Data.Conduit.AsC where
 
 import Data.Conduit as I
 
-
 c_connect =  I.connect
-
 c_fuse =  I.fuse

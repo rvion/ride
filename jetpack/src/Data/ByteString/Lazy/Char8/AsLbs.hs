@@ -5,17 +5,10 @@ module Data.ByteString.Lazy.Char8.AsLbs where
 
 import Data.ByteString.Lazy.Char8 as I
 
-
 lbs_hPutStrLn =  I.hPutStrLn
-
 lbs_lines =  I.lines
-
 lbs_readInt =  I.readInt
-
 lbs_readInteger =  I.readInteger
-
 lbs_unlines =  I.unlines
-
 lbs_unwords =  I.unwords
-
 lbs_words =  I.words

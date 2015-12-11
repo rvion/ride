@@ -5,23 +5,13 @@ module Data.HashMap.Strict.AsHm where
 
 import Data.HashMap.Strict as I
 
-
 hm_adjust =  I.adjust
-
 hm_fromList =  I.fromList
-
 hm_fromListWith =  I.fromListWith
-
 hm_insert =  I.insert
-
 hm_insertWith =  I.insertWith
-
 hm_intersectionWith =  I.intersectionWith
-
 hm_map =  I.map
-
 hm_mapWithKey =  I.mapWithKey
-
 hm_singleton =  I.singleton
-
 hm_unionWith =  I.unionWith

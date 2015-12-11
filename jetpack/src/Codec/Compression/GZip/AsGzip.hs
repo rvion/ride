@@ -5,11 +5,7 @@ module Codec.Compression.GZip.AsGzip where
 
 import Codec.Compression.GZip as I
 
-
 gzip_compress =  I.compress
-
 gzip_compressWith =  I.compressWith
-
 gzip_decompress =  I.decompress
-
 gzip_decompressWith =  I.decompressWith

@@ -107,12 +107,12 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
             _type = typeSdoc decl
 
           case () of
-            () | not (_name `elem` exportedSymbols) ->
+            () | not (_name `elem` exportedSymbols) -> do
+                    putStrLn $ concat ["  warn: ", _name, " is not exported by current module"]
                     return Nothing
                | (_reexported_name `elem` previouslyExportedSymbols) -> do
                     putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
                     return Nothing
-                -- putStrLn $ concat ["  WARNING:", _name, "not exported by current module"]
                | (head _name) `elem` operators -> do
                     putStrLn $ concat ["  warn: (", _name, ") is not reexported because it is an operator"]
                     return Nothing
@@ -120,9 +120,9 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
                   put $ case decl of
                     IfaceId{} ->
                       -- ["\n", _idPrefix, sep, _name, " :: ", replace "\n" "\n  " (toS _type)
-                      ["\n", _reexported_name, " =  I.", _name]
+                      [_reexported_name, " =  I.", _name]
                     IfaceData{} ->
-                      ["\n", "type ", _typePrefix,sep, _name, " = I.", _name]
+                      ["type ", _typePrefix,sep, _name, " = I.", _name]
                     IfaceSynonym{} -> ["-- (",_name,") :: IfaceSynonym -> NOT YET SUPPORTED"]
                     IfaceFamily{} -> ["-- (",_name,") :: IfaceFamily -> NOT YET SUPPORTED"]
                     IfaceClass{} -> ["-- (",_name,") :: IfaceClass -> NOT YET SUPPORTED"]

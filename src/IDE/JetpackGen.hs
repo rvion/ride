@@ -76,7 +76,7 @@ writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
       , "\nlibrary"
       , "\n  hs-source-dirs:      src"
       , "\n  exposed-modules:     JetPack Exports"
-      , "\n  other-modules:       Exports, "]
+      , "\n  other-modules:       "]
       ++ intersperse ", " (map toN reexports) ++
       [ "\n  build-depends:       "] ++ intersperse ", " deps ++
       [ "\n  default-language:    Haskell2010"

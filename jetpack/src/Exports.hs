@@ -24,4 +24,5 @@ import Text.Megaparsec.AsMp as X
 import Data.Conduit.AsC as X
 import Data.Conduit.List.AsCl as X
 import Data.Conduit.Binary.AsCb as X
+import Lens.Micro.Platform.AsLens as X
 

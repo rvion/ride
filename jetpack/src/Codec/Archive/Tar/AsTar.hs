@@ -5,9 +5,6 @@ module Codec.Archive.Tar.AsTar where
 
 import Codec.Archive.Tar as I
 
-
 tar_append =  I.append
-
 tar_create =  I.create
-
 tar_extract =  I.extract

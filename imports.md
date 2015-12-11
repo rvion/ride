@@ -27,6 +27,7 @@
   * megaparsec
   * conduit
   * conduit-extra
+  * microlens-platform
 
 ### Modules
 
@@ -72,4 +73,8 @@ _conduit-extra_
   - c Data.Conduit
   - cl Data.Conduit.List
   - cb Data.Conduit.Binary
+
+_lens_
+
+  - lens Lens.Micro.Platform
 
