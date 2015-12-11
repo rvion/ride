@@ -114,7 +114,7 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
                     return Nothing
                 -- putStrLn $ concat ["  WARNING:", _name, "not exported by current module"]
                | (head _name) `elem` operators -> do
-                    putStrLn $ concat ["  warn:", _name, "is an operator"]
+                    putStrLn $ concat ["  warn: (", _name, ") is not reexported because it is an operator"]
                     return Nothing
                | otherwise -> do
                   put $ case decl of
