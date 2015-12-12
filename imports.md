@@ -31,7 +31,7 @@
 
 ### Modules
 
-  - map Data.Map
+  - map_lazy Data.Map
   - map Data.Map.Strict
   - set Data.Set
   - hm Data.HashMap.Strict
@@ -78,3 +78,6 @@ _lens_
 
   - lens Lens.Micro.Platform
 
+_test purpose:_
+
+  - demo ReexportDemo
