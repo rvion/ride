@@ -15,7 +15,6 @@ executable ride
   main-is:             Main.hs
   other-modules:       Files
                        IDE.Iface
-                       IDE.IfaceOld
                        IDE.State
                        IDE.NameInfos
                        IDE.JetpackGen

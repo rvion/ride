@@ -66,7 +66,8 @@ whenValid x =
     then id
     else error "invalid chars"
 
-test = printReexports ("lens", "/Users/RemiVion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/microlens-platform-0.1.5.0-GZu1yvU44tYD8BDHxEQWch/Lens/Micro/Platform.hi") []
+-- test = printReexports ("lens", "/Users/RemiVion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/microlens-platform-0.1.5.0-GZu1yvU44tYD8BDHxEQWch/Lens/Micro/Platform.hi") []
+
 printReexports :: (String, String) -> [String] -> IO [String]
 printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
   defaultErrorHandler defaultFatalMessager defaultFlushOut $ do
