@@ -28,6 +28,7 @@
   * conduit
   * conduit-extra
   * microlens-platform
+  * reexport-demo
 
 ### Modules
 

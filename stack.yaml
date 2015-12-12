@@ -1,6 +1,6 @@
 flags: {}
 packages:
-- '.'
+- 'ride'
 - 'jetpack'
 - 'jetpack-gen'
 - 'reexport-demo'

@@ -3,7 +3,6 @@ version:             0.1.0.0
 synopsis:            Haskell Web Ide using Spock, Stack and git-webui
 description:         Please see README.md
 homepage:            http://github.com/rvion/ride#readme
-license-file:        LICENSE
 author:              rvion
 maintainer:          example@example.com
 copyright:           2010 Author Here
