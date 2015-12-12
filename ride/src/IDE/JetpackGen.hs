@@ -12,19 +12,24 @@ import System.Directory (createDirectoryIfMissing)
 import qualified Data.Map as M
 import IDE.JetpackGen.Cabal (writeCabalFile)
 import IDE.JetpackGen.Names
+import IDE.JetpackGen.Modules
 import IDE.Types
 
 jetpackGen :: IO ()
 jetpackGen = do
-  dbs <- load "package DB" getDB
-  packages <- load "packages" (concat <$> mapM getPackageInfos dbs)
-  modules <- load "modules"  (return $ M.fromList $ concatMap packageModulesIface packages)
-  reexports <- load "reexports plan" parseReexports
-  deps <- load "cabal deps" parseDeps
-  let f = \previouslyExportedSymbols (prefix, mod) -> do
-        putStrLn ("reexport " <> mod)
-        printReexports (prefix, mod, modules) previouslyExportedSymbols
-  allExportsFinal <- foldM f [] reexports
+  dbs <- trace "loading package DB" getDB
+  packages <- trace "loading packages" (concat <$> mapM getPackageInfos dbs)
+  modules <- trace "loading modules"  (return $ M.fromList $ concatMap packageModulesIface packages)
+  reexports <- trace "loading reexports plan" parseReexports
+  deps <- trace "loading cabal deps" parseDeps
+
+  let
+    reexportModule = \previouslyExportedSymbols (prefix, mod) ->
+      trace ("reexporting.. " <> mod) $ do
+        reexports <- findReexports (mod, modules) previouslyExportedSymbols
+        printReexports (mod, prefix) reexports previouslyExportedSymbols
+
+  allExportsFinal <- foldM reexportModule [] reexports
   writeCabalFile reexports deps
   writeReexportModule reexports
   putStrLn "done"
@@ -43,9 +48,10 @@ parseDeps = do
   f <- readFile "imports.md"
   return $ map (drop 4) $ filter (isPrefixOf "  * ") $ lines f
 
-load :: (Traversable a) => String -> IO (a b) -> IO (a b)
-load str action = do
-  putStr ("loading " <> str <> "... ")
+-- TODO (add benchmark data)
+trace :: (Traversable a) => String -> IO (a b) -> IO (a b)
+trace str action = do
+  putStr (str <> "... ")
   result <- action
   putStrLn ("OK (" <> show (length result) <> " elems)")
   return result
