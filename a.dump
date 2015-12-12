@@ -1,0 +1,45 @@
+Magic: Wanted 33214052,
+       got    33214052
+Version: Wanted [7, 1, 0, 2],
+         got    [7, 1, 0, 2]
+Way: Wanted [],
+     got    []
+interface Exports 7102
+  interface hash: 5e1cb1968e5ea61525cf6345a7b46a60
+  ABI hash: 261a6dcb5933e24c845082016b0bdff4
+  export-list hash: 50f5daa2f573c964f8aeb4d47a3c7d37
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 56b9a755d22be00f2eba50f3628a69c7
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  map_fold
+  map_foldWithKey
+  map_insertLookupWithKey'
+  map_insertWith'
+  map_insertWithKey'
+module dependencies: Data.Map.AsMap
+package dependencies: array-0.5.1.0 base-4.8.1.0*
+                      containers-0.5.6.2 deepseq-1.4.1.1 ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+orphans: GHC.Base GHC.Float
+family instance modules: Control.Applicative Data.Either
+                         Data.Functor.Identity Data.Monoid Data.Type.Equality Data.Void
+                         GHC.Exts GHC.Generics Data.Map.Base Data.Set.Base
+import  -/  Prelude 518f762991bc287d78f21a73c974da1f
+import  -/  Data.Map.AsMap b166d0dcd552823a92e771d337016cb2
+  exports: 50f5daa2f573c964f8aeb4d47a3c7d37
+  map_fold f71e1321e784f2df7595fadd9b7bb0be
+  map_foldWithKey d93f6ae7602944644c61413c109d5908
+  map_insertLookupWithKey' 4ac79ec6eac733ffb1de87d0a937af1e
+  map_insertWith' 11b86968d854d324efe83e095fe91694
+  map_insertWithKey' 18ed0d1336c6d2e5d3bda0f1161f0177
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

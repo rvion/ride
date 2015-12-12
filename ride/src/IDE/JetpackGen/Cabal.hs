@@ -3,6 +3,11 @@ module IDE.JetpackGen.Cabal where
 import IDE.JetpackGen.Names
 import Data.List
 
+-- Necessary Extensions
+--  - DataKinds to be able to reexport prefixed promoted data kinds
+--  - FlexibleContexts to be able to
+--  - MagicHash for
+--  - NoMonomorphismRestriction
 
 writeCabalFile :: [(String, String)] -> [String] -> IO ()
 writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
@@ -28,7 +33,7 @@ writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
       ++ intersperse ", " (map toN reexports) ++
       [ "\n  build-depends:       "] ++ intersperse ", " deps ++
       [ "\n  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -Wall -fno-warn-missing-signatures"
-      , "\n  default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash"
+      , "\n  default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds"
       , "\n  default-language:    Haskell2010"
       , "\n"
       , "\nsource-repository head"

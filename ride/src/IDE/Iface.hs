@@ -1,4 +1,4 @@
-{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE StandaloneDeriving, NamedFieldPuns #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE BangPatterns #-}
@@ -7,6 +7,7 @@ module IDE.Iface where
 
 -- [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
 -- [ ] mention backpack
+import qualified Data.Map as Map
 import System.IO
 import GHC.PackageDb -- https://github.com/ghc/ghc/blob/master/libraries/ghc-boot/GHC/PackageDb.hs#L140
 import Binary -- https://github.com/ghc/ghc/blob/master/compiler/utils/Binary.hs
@@ -32,19 +33,32 @@ import Data.Char (toLower, toUpper, isLower, isUpper)
 import System.Directory (createDirectoryIfMissing)
 import Data.List (intersperse)
 import Data.String.Utils
+import IDE.NameInfos
 -- import Data.Tuple.Extra (both)
+import Data.List
 both f (a,b) = (f a, f b)
 
 text_Just = Just
-
 type Renderer = SDoc -> String
 
 pretify :: Renderer -> AvailInfo -> [String]
 pretify toS exportedName = case exportedName of
  Avail n -> [asString n]
  AvailTC x [] -> []
- AvailTC x xs -> if x == head xs then [asString x] else []
+ AvailTC x xs -> nub (asString x:(map asString xs))
  where asString = toS . ppr
+
+-- pretify :: Renderer -> AvailInfo -> [String]
+-- pretify toS exportedName = case exportedName of
+--  Avail n -> [asString n]
+--  AvailTC x [] -> []
+--  AvailTC x xs -> if x == head xs then [asString x] else []
+--  where asString = toS . ppr
+
+extractAllNames :: AvailInfo -> [Name]
+extractAllNames ai = case ai of
+ Avail n -> [n]
+ AvailTC x xs -> x:xs
 
 whenValid "" = error "prefix can't be empty"
 whenValid x =
@@ -69,8 +83,9 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
         toS :: SDoc -> String
         toS = showSDoc dflags
         exports = mi_exports iface
-        exportedSymbols = concatMap (pretify toS) exports
+        exportedSymbols = concatMap extractAllNames exports -- concatMap (pretify toS) exports
         decls =  mi_decls iface
+        declsMap = Map.fromList (map ((\i -> (toS . ppr $ ifName i, i)).snd) decls)
         moduleName = toS.ppr $ mi_module iface
         jetpackFolder = "jetpack/src/"
         _folders = jetpackFolder ++ (replace "." "/" moduleName)
@@ -82,6 +97,16 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
         _typePrefix = (toUpper p : ps)
         _fileName = concat ["As", _typePrefix]
         _filePath = (_folders ++ "/" ++ _fileName ++ ".hs")
+
+      -- let a = (concatMap extractAllNames exports)
+      liftIO $ print $ length exports
+      liftIO $ forM_ exports $ \exp -> do
+        putStrLn $ toS (vcat $ concatMap getNameInfos (extractAllNames exp))
+        putStrLn "--------"
+
+
+
+      -- liftIO $ print $ toS $ (map getNameInfos
 
       -- should we import the module qualified to avoid clashes with prelude ?
       -- if so, type signatures might not work anymore.
@@ -102,13 +127,18 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
         -- putStrLn (toS.ppr$head $mi_exports iface)
         -- http://haddock.stackage.org/nightly-2015-12-09/ghc-7.10.2/GHC.html#t:ModIface
         -- http://haddock.stackage.org/nightly-2015-12-09/ghc-7.10.2/IfaceSyn.html#t:IfaceDecl
-        newDecl <- (flip mapM) exportedSymbols $ \_name -> do
+        newDecl <- (flip mapM) exportedSymbols $ \_ghcName -> do
           let
+            _name = toS (ppr _ghcName)
             _reexported_name = concat [_idPrefix, sep, _name]
+            _reexported_type = concat [_typePrefix, _name]
             -- _type = typeSdoc decl
 
           case () of
-            () | (_reexported_name `elem` previouslyExportedSymbols) -> do
+            () | isJust ((mi_warn_fn iface) _ghcName) ->  do
+                    putStrLn $ "not reexporting deprecated stuff"
+                    return Nothing
+               | (_reexported_name `elem` previouslyExportedSymbols) -> do
                     putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
                     return Nothing
                   -- | not (_name `elem` exportedSymbols) -> do
@@ -128,6 +158,17 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
                | isLower (head _name) || (head _name) == '_' -> do
                     put [_reexported_name, " = I.", _name]
                     return (Just _reexported_name)
+               | isUpper (head _name) -> do
+                   case Map.lookup _name declsMap of
+                      Just IfaceSynonym{ifTyVars} -> do
+                        -- print ((toS.ppr$showIfaceConstr xxx )++ (toS$ showIfaceInfo xxx))
+                        -- print (toS.ppr$xxx)
+                        let tyVars = intersperse ' ' $ take (length ifTyVars) ['a'..'z']
+                        put ["type ", _reexported_type," ",tyVars, " = I.", _name, " ",tyVars]
+                        return (Just _reexported_type) -- tyvars needed because type synonym must be instanciated
+                      _  -> do
+                        put ["type ", _reexported_type, " = I.", _name, " -- not declared in module, :/ ? "]
+                        return (Just _reexported_type)
                | otherwise -> do
                     -- put $ case decl of
                     --   IfaceId{} ->
@@ -158,12 +199,22 @@ isIfaceId _ = False
 showIfaceConstr x = case x of
   IfaceId{} -> "IfaceId"
   IfaceData{} -> "IfaceData"
-  IfaceSynonym{} -> "IfaceSynonym"
+  IfaceSynonym{ifTyVars} -> "IfaceSynonym: "
   IfaceFamily{} -> "IfaceFamily"
   IfaceClass{} -> "IfaceClass"
   IfaceAxiom{} -> "IfaceAxiom"
   IfacePatSyn{} -> "IfacePatSyn"
           -- _ -> "ERROR"
+
+showIfaceInfo :: IfaceDecl -> SDoc
+showIfaceInfo x = case x of
+  IfaceId{} -> ppr "IfaceId"
+  IfaceData{} -> ppr "IfaceData"
+  IfaceSynonym{ifTyVars} -> ppr ifTyVars
+  IfaceFamily{} -> ppr "IfaceFamily"
+  IfaceClass{} -> ppr "IfaceClass"
+  IfaceAxiom{} -> ppr "IfaceAxiom"
+  IfacePatSyn{} -> ppr "IfacePatSyn"
 
 for :: [a] -> (a->b) -> [b]
 for = flip map
