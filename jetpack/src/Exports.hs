@@ -1,7 +1,7 @@
 
 module Exports (module X) where
 
-import Data.Map.AsMap as X
+import Data.Map.AsMap_lazy as X
 import Data.Map.Strict.AsMap as X
 import Data.Set.AsSet as X
 import Data.HashMap.Strict.AsHm as X
@@ -25,4 +25,5 @@ import Data.Conduit.AsC as X
 import Data.Conduit.List.AsCl as X
 import Data.Conduit.Binary.AsCb as X
 import Lens.Micro.Platform.AsLens as X
+import ReexportDemo.AsDemo as X
 
