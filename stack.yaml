@@ -2,5 +2,7 @@ flags: {}
 packages:
 - '.'
 - 'jetpack'
+- 'jetpack-gen'
+- 'reexport-demo'
 extra-deps: []
 resolver: nightly-2015-11-29
