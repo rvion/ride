@@ -61,43 +61,46 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
         _reexported_type = concat [_typePrefix, _name]
         -- _type = typeSdoc decl
 
-      if (_reexported_name `elem` previouslyExportedSymbols)
-        then do
-          putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
-          return Nothing
-        else case rTerm of
-          RId _
-            | (head _name) `elem` operators -> do
-                put ["(",_name,")", " = (I.", _name,")"]
-                print _name
-                return (Just _name)
-            | isLower (head _name) || (head _name) == '_' -> do
-                put [_reexported_name, " = I.", _name]
-                return (Just _reexported_name)
-            | otherwise -> error "ahaha"
-              -- RSynonym _ _ -> error "not yet SUPPORTED"
-          RData _ nbTyVars -> do
+      case rTerm of
+        RId _
+          | (_reexported_name `elem` previouslyExportedSymbols) -> do
+              putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
+              return Nothing
+          | (head _name) `elem` operators -> do
+              put ["(",_name,")", " = (I.", _name,")"]
+              print _name
+              return (Just _name)
+          | isLower (head _name) || (head _name) == '_' -> do
+              put [_reexported_name, " = I.", _name]
+              return (Just _reexported_name)
+          | otherwise -> error "ahaha"
+            -- RSynonym _ _ -> error "not yet SUPPORTED"
+        RData _ nbTyVars
+          | (_reexported_type `elem` previouslyExportedSymbols) -> do
+              putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
+              return Nothing
+          | otherwise -> do
               let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
               put ["type ", _reexported_type," ",tyVars, " = I.", _name, " ",tyVars]
               return (Just _reexported_type) -- tyvars needed because type synonym must be instanciated
-              -- _  -> do
-              --   put ["type ", _reexported_type, " = I.", _name, " -- not declared in module, :/ ? "]
-              --   return (Just _reexported_type)
-          -- _ -> do
-                -- return Nothing
+            -- _  -> do
+            --   put ["type ", _reexported_type, " = I.", _name, " -- not declared in module, :/ ? "]
+            --   return (Just _reexported_type)
+        -- _ -> do
+              -- return Nothing
 
-                -- put $ case decl of
-                --   IfaceId{} ->
-                -- ["\n", _idPrefix, sep, _name, " :: ", replace "\n" "\n  " (toS _type)
-                -- put [_reexported_name, " = I.", _name]
-                -- IfaceData{} ->
-                -- put ["type ", _typePrefix,sep, _name, " = I.", _name]
-                -- return (Just _reexported_name)
-                -- IfaceSynonym{} -> ["-- (",_name,") :: IfaceSynonym -> NOT YET SUPPORTED"]
-                -- IfaceFamily{} -> ["-- (",_name,") :: IfaceFamily -> NOT YET SUPPORTED"]
-                -- IfaceClass{} -> ["-- (",_name,") :: IfaceClass -> NOT YET SUPPORTED"]
-                -- IfaceAxiom{} -> ["-- (",_name,") :: IfaceAxiom -> NOT YET SUPPORTED"]
-                -- IfacePatSyn{} -> ["-- (",_name,") :: IfacePatSyn -> NOT YET SUPPORTED"]
+              -- put $ case decl of
+              --   IfaceId{} ->
+              -- ["\n", _idPrefix, sep, _name, " :: ", replace "\n" "\n  " (toS _type)
+              -- put [_reexported_name, " = I.", _name]
+              -- IfaceData{} ->
+              -- put ["type ", _typePrefix,sep, _name, " = I.", _name]
+              -- return (Just _reexported_name)
+              -- IfaceSynonym{} -> ["-- (",_name,") :: IfaceSynonym -> NOT YET SUPPORTED"]
+              -- IfaceFamily{} -> ["-- (",_name,") :: IfaceFamily -> NOT YET SUPPORTED"]
+              -- IfaceClass{} -> ["-- (",_name,") :: IfaceClass -> NOT YET SUPPORTED"]
+              -- IfaceAxiom{} -> ["-- (",_name,") :: IfaceAxiom -> NOT YET SUPPORTED"]
+              -- IfacePatSyn{} -> ["-- (",_name,") :: IfacePatSyn -> NOT YET SUPPORTED"]
     -- print (previouslyExportedSymbols)
     return (previouslyExportedSymbols ++ (catMaybes newDecl))
 

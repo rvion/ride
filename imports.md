@@ -30,54 +30,55 @@
   * microlens-platform
   * reexport-demo
 
-a ### Modules
-a 
-a   - map_lazy Data.Map
-a   - map Data.Map.Strict
-a   - set Data.Set
-a   - hm Data.HashMap.Strict
-a   - ne Data.List.NonEmpty
-a 
-a _text_
-a 
-a   - t Data.Text
-a   - t Data.Text.Encoding
-a   - t Data.Text.IO
-a   - lt Data.Text.Lazy
-a   - lt Data.Text.Lazy.Encoding
-a   - lt Data.Text.Lazy.IO
-a 
-a _bytestring_
-a 
-a   - bs Data.ByteString
-a   - bs Data.ByteString.Char8
-a   - lbs Data.ByteString.Lazy
-a   - lbs Data.ByteString.Lazy.Char8
-a 
-a _tar_
-a 
-a   - tar Codec.Archive.Tar
-a   - tar Codec.Archive.Tar.Entry
-a   - tar Codec.Archive.Tar.Check
-a 
-a _zlib_
-a 
-a   - gzip Codec.Compression.GZip
-a 
-a _megaparsec_
-a 
-a   - mp Text.Megaparsec
-a 
-a _conduit_
-a _conduit-extra_
-a 
-a   - c Data.Conduit
-a   - cl Data.Conduit.List
-a   - cb Data.Conduit.Binary
-a 
-a _lens_
-a 
-a   - lens Lens.Micro.Platform
+### Modules
+
+  - map_lazy Data.Map
+  - map Data.Map.Strict
+  - set Data.Set
+  - hm Data.HashMap.Strict
+  - ne Data.List.NonEmpty
+
+_text_
+
+  - t Data.Text
+  - t Data.Text.Encoding
+  - t Data.Text.IO
+  - lt Data.Text.Lazy
+  - lt Data.Text.Lazy.Encoding
+  - lt Data.Text.Lazy.IO
+
+_bytestring_
+
+  - bs Data.ByteString
+  - bs Data.ByteString.Char8
+  - lbs Data.ByteString.Lazy
+  - lbs Data.ByteString.Lazy.Char8
+
+_tar_
+
+  - tar Codec.Archive.Tar
+  - tar Codec.Archive.Tar.Entry
+  - tar Codec.Archive.Tar.Check
+
+_zlib_
+
+  - gzip Codec.Compression.GZip
+
+_megaparsec_
+
+  - mp Text.Megaparsec
+
+_conduit_
+_conduit-extra_
+
+  - c Data.Conduit
+  - cl Data.Conduit.List
+  - cb Data.Conduit.Binary
+
+_lens_
+
+-- http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
+--  - lens Lens.Micro.Platform
 
 _test purpose:_
 

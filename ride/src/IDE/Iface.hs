@@ -21,6 +21,7 @@ import IfaceSyn  -- (ifType, ifName)
 import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
 import qualified Data.Map as Map
 import System.Directory (createDirectoryIfMissing)
+import Module as Mod
 import System.IO
 import TcRnMonad
 import Data.Map (Map)
@@ -86,11 +87,11 @@ findReexports (mod, modules) previouslyExportedSymbols =
         -- _fileName = concat ["As", _typePrefix]
         -- _filePath = (_folders ++ "/" ++ _fileName ++ ".hs")
 
-      liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
+      -- liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
 
       -- find all decls corresponding to names
       declsF <- forM exportedSymbols $ \name -> do
-        liftIO$putStrLn("  trying to find "++toS name)
+        -- liftIO$putStrLn("  trying to find "++toS name)
         let
           _name = toS name
           _success ifaceDecl = return (name, Just ifaceDecl)
@@ -100,15 +101,25 @@ findReexports (mod, modules) previouslyExportedSymbols =
 
         case Map.lookup _name declsMap of
           Just ifaceDecl -> _success ifaceDecl
-          Nothing -> case (toS <$> nameModule_maybe name) of
-            Just nameModule -> do -- eg: Data.Either
-              liftIO $ putStrLn ("    - loading "++ nameModule)
-              otherIface <- getIface (modules Map.! nameModule)
-              let _otherIfaceMap = mkIfaceDeclMap toSDoc otherIface
-              case Map.lookup _name _otherIfaceMap of
-                Just otherIfaceDecl -> _success otherIfaceDecl
-                Nothing -> _fail
-            Nothing -> _fail
+          Nothing ->
+            case (nameModule_maybe name) of
+              Nothing -> _fail
+              Just nameModule -> do -- eg: Data.Either
+                let nameModuleStr = toS nameModule
+                    -- xx= Mod.moduleName nameModule
+                    -- nameModuleFS  = moduleNameFS $ Mod.moduleName nameModule
+                -- liftIO $ error $ toS nameModuleFS
+                -- liftIO $ putStrLn ("    - loading "++ nameModuleStr)
+                case Map.lookup nameModuleStr modules of
+                  Nothing -> do
+                    liftIO $ putStrLn $ concat ["  module (",nameModuleStr,") is really nowhere... :/"]
+                    _fail
+                  Just _ifacePath -> do
+                    _otherIface <- getIface _ifacePath
+                    let _otherIfaceMap = mkIfaceDeclMap toSDoc _otherIface
+                    case Map.lookup _name _otherIfaceMap of
+                      Just otherIfaceDecl -> _success otherIfaceDecl
+                      Nothing -> _fail
 
       return $ catMaybes <$> for declsF $ \(n, decl) ->
         case decl of
