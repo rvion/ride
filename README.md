@@ -1,3 +1,9 @@
+-- [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
+-- [ ] mention backpack
+
+
+
+
 # haskell-web-ide
 
 All-in-one web-based ide (for stack projects)
