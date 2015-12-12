@@ -1,93 +1,80 @@
 {-# LANGUAGE StandaloneDeriving, NamedFieldPuns #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE BangPatterns,Rank2Types #-}
 
 module IDE.Iface where
 
--- [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
--- [ ] mention backpack
-import qualified Data.Map as Map
-import System.IO
-import GHC.PackageDb -- https://github.com/ghc/ghc/blob/master/libraries/ghc-boot/GHC/PackageDb.hs#L140
-import Binary -- https://github.com/ghc/ghc/blob/master/compiler/utils/Binary.hs
-import Data.Maybe
-import HscTypes -- https://github.com/ghc/ghc/blob/master/compiler/main/HscTypes.hs#L725
 import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
-import Name -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Name.hs#L37
-import Module -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Module.hs#L248
-import LoadIface
+import BinIface
+import Control.Monad (forM)
+import Data.Char (toLower, toUpper, isLower, isUpper)
+import Name
+import Data.List
+import Data.Maybe
+import Data.String.Utils
+import DynFlags
 import GHC
 import GHC.Paths ( libdir )
-import DynFlags
-import Control.Monad.IO.Class(liftIO)
-import Outputable (dot)
-import Data.List.Split
-import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
-import DynFlags (defaultDynFlags)
-import BinIface
-import TcRnMonad
+import IDE.Types
 import IfaceSyn  -- (ifType, ifName)
-import Control.Monad (forM_)
-import Data.Char (toLower, toUpper, isLower, isUpper)
+import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
+import qualified Data.Map as Map
 import System.Directory (createDirectoryIfMissing)
-import Data.List (intersperse)
-import Data.String.Utils
-import IDE.NameInfos
--- import Data.Tuple.Extra (both)
-import Data.List
-both f (a,b) = (f a, f b)
+import System.IO
+import TcRnMonad
+import Data.Map (Map)
 
-text_Just = Just
 type Renderer = SDoc -> String
+type IfaceDeclMap = Map String IfaceDecl
 
-pretify :: Renderer -> AvailInfo -> [String]
-pretify toS exportedName = case exportedName of
- Avail n -> [asString n]
- AvailTC x [] -> []
- AvailTC x xs -> nub (asString x:(map asString xs))
- where asString = toS . ppr
+getIface :: String -> Ghc ModIface
+getIface hiFilepath = do
+  sess <- getSession
+  liftIO $ initTcRnIf 's' sess () () $
+    readBinIface IgnoreHiWay QuietBinIFaceReading hiFilepath
 
--- pretify :: Renderer -> AvailInfo -> [String]
--- pretify toS exportedName = case exportedName of
---  Avail n -> [asString n]
---  AvailTC x [] -> []
---  AvailTC x xs -> if x == head xs then [asString x] else []
---  where asString = toS . ppr
+-- getIfaceDecl :: Renderer -> Name -> ModIface -> IfaceDecl
+-- getIfaceDecl toS name modIface =
+--   let modIfaceMap = mkIfaceDeclMap toS modIface
+--   in  modIfaceMap Map.! (toS.ppr$name)
 
-extractAllNames :: AvailInfo -> [Name]
-extractAllNames ai = case ai of
- Avail n -> [n]
- AvailTC x xs -> x:xs
+mkIfaceDeclMap :: Renderer -> ModIface -> IfaceDeclMap
+mkIfaceDeclMap toS iface =
+  Map.fromList (map toTupple ifaceDecls)
+  where
+    toTupple ifaceDecl = (nameAsString ifaceDecl, ifaceDecl)
+    ifaceDecls = map snd $ mi_decls iface
+    nameAsString = toS . ppr . ifName
 
-whenValid "" = error "prefix can't be empty"
-whenValid x =
-  if all (`elem` ('_':['a'..'z']++['A'..'Z'])) x
-    then id
-    else error "invalid chars"
-
--- test = printReexports ("lens", "/Users/RemiVion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/microlens-platform-0.1.5.0-GZu1yvU44tYD8BDHxEQWch/Lens/Micro/Platform.hi") []
-
-printReexports :: (String, String) -> [String] -> IO [String]
-printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
+printReexports :: (String, String, Modules) -> [String] -> IO [String]
+printReexports (prefix, mod, modules) previouslyExportedSymbols = whenValid prefix
   defaultErrorHandler defaultFatalMessager defaultFlushOut $ do
+    -- Init GHC compiler
     runGhc (Just libdir) $ do
       dflags <- getSessionDynFlags
       pkgs   <- setSessionDynFlags dflags
       sess   <- getSession
 
-      -- load .hi interface file
-      iface <- liftIO $ initTcRnIf 's' sess () () $
-         readBinIface IgnoreHiWay QuietBinIFaceReading hiFilepath
+      -- define context-dependant helper functions
+      let
+        toSDoc :: SDoc -> String
+        toSDoc = showSDoc dflags
+
+        toS :: Outputable a => a -> String
+        toS = toSDoc . ppr
+
+      -- load the initial .hi interface file
+      iface <- getIface (modules Map.! mod)
 
       let
-        toS :: SDoc -> String
-        toS = showSDoc dflags
-        exports = mi_exports iface
-        exportedSymbols = concatMap extractAllNames exports -- concatMap (pretify toS) exports
-        decls =  mi_decls iface
-        declsMap = Map.fromList (map ((\i -> (toS . ppr $ ifName i, i)).snd) decls)
-        moduleName = toS.ppr $ mi_module iface
+        -- we want to reexport all IfacesExport,
+        ifaceExports = mi_exports iface
+        exportedSymbols = concatMap extractAllNames ifaceExports
+        decls = mi_decls iface
+        declsMap = mkIfaceDeclMap toSDoc iface
+
+        moduleName = toS $ mi_module iface
         jetpackFolder = "jetpack/src/"
         _folders = jetpackFolder ++ (replace "." "/" moduleName)
           -- let parts = splitOn "." moduleName
@@ -99,21 +86,31 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
         _fileName = concat ["As", _typePrefix]
         _filePath = (_folders ++ "/" ++ _fileName ++ ".hs")
 
-      -- let a = (concatMap extractAllNames exports)
-      liftIO $ print $ length exports
-      liftIO $ forM_ exports $ \exp -> do
-        putStrLn $ toS (vcat $ concatMap getNameInfos (extractAllNames exp))
-        putStrLn "--------"
+      liftIO.print$concat ["exports are ",toS exportedSymbols]
+      declsF <- forM exportedSymbols $ \name -> do
+        liftIO$print ("trying to find "++toS name)
+        let
+          _name = toS name
+          _success ifaceDecl = return (name, Just ifaceDecl)
+          _fail = do
+            liftIO.print.concat$["  warn: impossible to find decl for (",toS name,")"]
+            return (name, Nothing)
+
+        case Map.lookup _name declsMap of
+          Just ifaceDecl -> _success ifaceDecl
+          Nothing -> case (toS <$> nameModule_maybe name) of
+            Just nameModule -> do -- eg: Data.Either
+              liftIO $ putStrLn ("  - loading "++ nameModule)
+              otherIface <- getIface (modules Map.! nameModule)
+              let _otherIfaceMap = mkIfaceDeclMap toSDoc otherIface
+              case Map.lookup _name _otherIfaceMap of
+                Just otherIfaceDecl -> _success otherIfaceDecl
+                Nothing -> _fail
+            Nothing -> _fail
+
+      liftIO $ print$toS declsF
 
 
-
-      -- liftIO $ print $ toS $ (map getNameInfos
-
-      -- should we import the module qualified to avoid clashes with prelude ?
-      -- if so, type signatures might not work anymore.
-      -- are they working as of now anyway ?
-      -- liftIO $ writeFile _filePath ""
-      -- liftIO $ print (_folders,_file)
       liftIO $ createDirectoryIfMissing True _folders
 
       liftIO $ withFile _filePath WriteMode $ \fileHandle -> do
@@ -125,19 +122,16 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
           , "\n"
           ]
 
-        -- putStrLn (toS.ppr$head $mi_exports iface)
-        -- http://haddock.stackage.org/nightly-2015-12-09/ghc-7.10.2/GHC.html#t:ModIface
-        -- http://haddock.stackage.org/nightly-2015-12-09/ghc-7.10.2/IfaceSyn.html#t:IfaceDecl
         newDecl <- (flip mapM) exportedSymbols $ \_ghcName -> do
           let
-            _name = toS (ppr _ghcName)
+            _name = toS _ghcName
             _reexported_name = concat [_idPrefix, sep, _name]
             _reexported_type = concat [_typePrefix, _name]
             -- _type = typeSdoc decl
 
           case () of
             () | isJust ((mi_warn_fn iface) _ghcName) ->  do
-                    putStrLn $ "not reexporting deprecated stuff"
+                    putStrLn $ concat ["  warn: (",_reexported_name,") not exported because it is deprecated"]
                     return Nothing
                | (_reexported_name `elem` previouslyExportedSymbols) -> do
                     putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
@@ -162,7 +156,7 @@ printReexports (prefix, hiFilepath) previouslyExportedSymbols = whenValid prefix
                | isUpper (head _name) -> do
                    case Map.lookup _name declsMap of
                       Just IfaceSynonym{ifTyVars} -> do
-                        -- print ((toS.ppr$showIfaceConstr xxx )++ (toS$ showIfaceInfo xxx))
+                        -- print ((toS.ppr$showIfaceKind xxx )++ (toS$ showIfaceInfo xxx))
                         -- print (toS.ppr$xxx)
                         let tyVars = intersperse ' ' $ take (length ifTyVars) ['a'..'z']
                         put ["type ", _reexported_type," ",tyVars, " = I.", _name, " ",tyVars]
@@ -197,7 +191,8 @@ typeSdoc x =
 isIfaceId (IfaceId{}) = True
 isIfaceId _ = False
 
-showIfaceConstr x = case x of
+showIfaceKind :: IfaceDecl -> String
+showIfaceKind x = case x of
   IfaceId{} -> "IfaceId"
   IfaceData{} -> "IfaceData"
   IfaceSynonym{ifTyVars} -> "IfaceSynonym: "
@@ -223,6 +218,49 @@ for = flip map
 operators :: String
 operators = ['!','#','$','%','&','*','+','.','/','<','=','>','?','@','\\','^','|','-','~',':']
 
+
+
+pretify :: Renderer -> AvailInfo -> [String]
+pretify toS exportedName = case exportedName of
+ Avail n -> [asString n]
+ AvailTC x [] -> []
+ AvailTC x xs -> nub (asString x:(map asString xs))
+ where asString = toS . ppr
+
+-- pretify :: Renderer -> AvailInfo -> [String]
+-- pretify toS exportedName = case exportedName of
+--  Avail n -> [asString n]
+--  AvailTC x [] -> []
+--  AvailTC x xs -> if x == head xs then [asString x] else []
+--  where asString = toS . ppr
+
+extractAllNames :: AvailInfo -> [Name]
+extractAllNames ai = case ai of
+ Avail n -> [n]
+ AvailTC x xs -> [x] -- :xs -- TODO
+
+whenValid "" = error "prefix can't be empty"
+whenValid x =
+  if all (`elem` ('_':['a'..'z']++['A'..'Z'])) x
+    then id
+    else error "invalid chars"
+
+-- test = printReexports ("lens", "/Users/RemiVion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/microlens-platform-0.1.5.0-GZu1yvU44tYD8BDHxEQWch/Lens/Micro/Platform.hi") []
+
+-- import Binary -- https://github.com/ghc/ghc/blob/master/compiler/utils/Binary.hs
+-- import Control.Monad (forM_)
+-- import Control.Monad.IO.Class(liftIO)
+-- import Data.List (intersperse)
+-- import Data.List.Split
+-- import DynFlags (defaultDynFlags)
+-- import GHC.PackageDb -- https://github.com/ghc/ghc/blob/master/libraries/ghc-boot/GHC/PackageDb.hs#L140
+-- import HscTypes -- https://github.com/ghc/ghc/blob/master/compiler/main/HscTypes.hs#L725
+-- import IDE.NameInfos
+-- import LoadIface
+-- import Module -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Module.hs#L248
+-- import Name -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Name.hs#L37
+-- import Outputable (dot)
+
 -- http://downloads.haskell.org/~ghc/latest/docs/html/libraries/ghc-7.10.2/LoadIface.html
 
 -- fp :: FilePath
@@ -230,3 +268,22 @@ operators = ['!','#','$','%','&','*','+','.','/','<','=','>','?','@','\\','^','|
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/tagged-0.8.2-4zanMqQLQHpBO0ZYm7KGkc/Data/Tagged.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/zlib-0.5.4.2-7EfFFsXSCF6JCVS3xlYBS8/Codec/Compression/Zlib/Raw.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-10/7.10.2/lib/x86_64-osx-ghc-7.10.2/text-1.2.1.3-1l1AN4I48k37RaQ6fm6CEh/Data/Text.hi"
+
+
+-- DEBUG
+--------
+-- let a = (concatMap extractAllNames exports)
+-- liftIO $ print $ length exports
+-- liftIO $ forM_ exports $ \exp -> do
+--   putStrLn $ toS (vcat $ concatMap getNameInfos (extractAllNames exp))
+--   putStrLn "--------"
+
+
+
+-- liftIO $ print $ toS $ (map getNameInfos
+
+-- should we import the module qualified to avoid clashes with prelude ?
+-- if so, type signatures might not work anymore.
+-- are they working as of now anyway ?
+-- liftIO $ writeFile _filePath ""
+-- liftIO $ print (_folders,_file)

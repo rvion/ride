@@ -12,6 +12,7 @@ import System.Directory (createDirectoryIfMissing)
 import qualified Data.Map as M
 import IDE.JetpackGen.Cabal (writeCabalFile)
 import IDE.JetpackGen.Names
+import IDE.Types
 
 jetpackGen :: IO ()
 jetpackGen = do
@@ -22,7 +23,7 @@ jetpackGen = do
   deps <- load "cabal deps" parseDeps
   let f = \previouslyExportedSymbols (prefix, mod) -> do
         putStrLn ("reexport " <> mod)
-        printReexports (prefix, modules M.! mod) previouslyExportedSymbols
+        printReexports (prefix, mod, modules) previouslyExportedSymbols
   allExportsFinal <- foldM f [] reexports
   writeCabalFile reexports deps
   writeReexportModule reexports
