@@ -5,7 +5,7 @@ import Data.Char (toLower, toUpper, isLower) -- , isUpper)
 import Data.List
 import Data.Maybe
 import Data.String.Utils
-import Types
+import Gen.Types
 import System.Directory (createDirectoryIfMissing)
 import System.IO
 

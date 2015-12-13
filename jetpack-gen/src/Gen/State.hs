@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections #-}
 
-module State
+module Gen.State
   ( getDB
   , getPackageInfos
   , listAllModuleSorted

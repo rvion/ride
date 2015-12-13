@@ -43,5 +43,6 @@ Library
                      , filepath
                      , ansi-terminal
                      , transformers
+                     , jetpack-gen
                      , split
 

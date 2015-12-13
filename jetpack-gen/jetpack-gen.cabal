@@ -11,21 +11,19 @@ category:              Web
 build-type:            Simple
 cabal-version:         >=1.10
 
-executable jetpack-gen
+library
   hs-source-dirs:      src
-  main-is:             Main.hs
-  other-modules:       Iface
-                       Types
-                       State
-                       NameInfos
-                       Gen
-                       Log
+  exposed-modules:     Gen
+                       Gen.Iface
+                       Gen.Types
+                       Gen.State
+                       Gen.NameInfos
+                       Gen.Log
                        Gen.Names
                        Gen.Cabal
                        Gen.Modules
   default-language:    Haskell2010
   default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , transformers
                      , lens
@@ -49,4 +47,14 @@ executable jetpack-gen
                      , transformers
                      , split
 
+
+
+executable jetpack-gen-exe
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , jetpack-gen
 

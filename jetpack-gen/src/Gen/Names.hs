@@ -1,6 +1,5 @@
 module Gen.Names where
 
-import Data.List
 import Data.Char
 
 toN (prefix, mod) = concat [mod, ".", "As", _typePrefix]

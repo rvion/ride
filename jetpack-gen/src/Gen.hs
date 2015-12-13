@@ -6,10 +6,10 @@ import Data.Monoid
 import Gen.Cabal (writeCabalFile)
 import Gen.Modules
 import Gen.Names
-import Iface
-import Log
-import State
-import Types
+import Gen.Iface
+import Gen.Log
+import Gen.State
+import Gen.Types
 import qualified Data.Map as M
 
 jetpackGen :: IO ()

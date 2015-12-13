@@ -1,4 +1,5 @@
-module NameInfos where
+module Gen.NameInfos where
+
 import Name
 import Outputable
 
