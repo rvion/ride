@@ -15,9 +15,7 @@ mp_asciiChar = I.asciiChar
 mp_char = I.char
 -- mp_char' :: forall (m :: * -> *) s. MonadParsec s m Char => Char -> m Char
 mp_char' = I.char'
--- mp_charCategory :: forall (m :: * -> *) s.
-MonadParsec s m Char =>
-GeneralCategory -> m Char
+-- mp_charCategory :: forall (m :: * -> *) s. MonadParsec s m Char => GeneralCategory -> m Char
 mp_charCategory = I.charCategory
 -- mp_controlChar :: forall (m :: * -> *) s. MonadParsec s m Char => m Char
 mp_controlChar = I.controlChar
@@ -55,9 +53,7 @@ mp_oneOf' = I.oneOf'
 mp_printChar = I.printChar
 -- mp_punctuationChar :: forall (m :: * -> *) s. MonadParsec s m Char => m Char
 mp_punctuationChar = I.punctuationChar
--- mp_satisfy :: forall (m :: * -> *) s.
-MonadParsec s m Char =>
-(Char -> Bool) -> m Char
+-- mp_satisfy :: forall (m :: * -> *) s. MonadParsec s m Char => (Char -> Bool) -> m Char
 mp_satisfy = I.satisfy
 -- mp_separatorChar :: forall (m :: * -> *) s. MonadParsec s m Char => m Char
 mp_separatorChar = I.separatorChar
@@ -75,13 +71,9 @@ mp_symbolChar = I.symbolChar
 mp_tab = I.tab
 -- mp_upperChar :: forall (m :: * -> *) s. MonadParsec s m Char => m Char
 mp_upperChar = I.upperChar
--- mp_between :: forall (m :: * -> *) open close a.
-Applicative m =>
-m open -> m close -> m a -> m a
+-- mp_between :: forall (m :: * -> *) open close a. Applicative m => m open -> m close -> m a -> m a
 mp_between = I.between
--- mp_choice :: forall (f :: * -> *) (m :: * -> *) a.
-(Foldable f, Alternative m) =>
-f (m a) -> m a
+-- mp_choice :: forall (f :: * -> *) (m :: * -> *) a. (Foldable f, Alternative m) => f (m a) -> m a
 mp_choice = I.choice
 -- mp_count :: forall (m :: * -> *) a. Alternative m => Int -> m a -> m [a]
 mp_count = I.count
@@ -115,9 +107,7 @@ mp_badMessage = I.badMessage
 mp_errorIsUnknown = I.errorIsUnknown
 -- mp_messageString :: Message -> String
 mp_messageString = I.messageString
--- (<?>) :: forall (m :: * -> *) a s t.
-MonadParsec s m t =>
-m a -> String -> m a
+-- (<?>) :: forall (m :: * -> *) a s t. MonadParsec s m t => m a -> String -> m a
 (<?>) = (I.<?>)
 -- mp_getInput :: forall (m :: * -> *) s t. MonadParsec s m t => m s
 mp_getInput = I.getInput
@@ -125,33 +115,21 @@ mp_getInput = I.getInput
 mp_getPosition = I.getPosition
 -- mp_getTabWidth :: forall (m :: * -> *) s t. MonadParsec s m t => m Int
 mp_getTabWidth = I.getTabWidth
--- mp_parse :: forall s a t.
-Stream s t =>
-Parsec s a -> String -> s -> Either ParseError a
+-- mp_parse :: forall s a t. Stream s t => Parsec s a -> String -> s -> Either ParseError a
 mp_parse = I.parse
--- mp_parseFromFile :: forall s a t.
-StorableStream s t =>
-Parsec s a -> FilePath -> IO (Either ParseError a)
+-- mp_parseFromFile :: forall s a t. StorableStream s t => Parsec s a -> FilePath -> IO (Either ParseError a)
 mp_parseFromFile = I.parseFromFile
 -- mp_parseMaybe :: forall s a t. Stream s t => Parsec s a -> s -> Maybe a
 mp_parseMaybe = I.parseMaybe
 -- mp_parseTest :: forall s a t. (Stream s t, Show a) => Parsec s a -> s -> IO ()
 mp_parseTest = I.parseTest
--- mp_runParser :: forall s a t.
-Stream s t =>
-Parsec s a -> String -> s -> Either ParseError a
+-- mp_runParser :: forall s a t. Stream s t => Parsec s a -> String -> s -> Either ParseError a
 mp_runParser = I.runParser
--- mp_runParser' :: forall s a t.
-Stream s t =>
-Parsec s a -> State s -> (State s, Either ParseError a)
+-- mp_runParser' :: forall s a t. Stream s t => Parsec s a -> State s -> (State s, Either ParseError a)
 mp_runParser' = I.runParser'
--- mp_runParserT :: forall s (m :: * -> *) a t.
-(Monad m, Stream s t) =>
-ParsecT s m a -> String -> s -> m (Either ParseError a)
+-- mp_runParserT :: forall s (m :: * -> *) a t. (Monad m, Stream s t) => ParsecT s m a -> String -> s -> m (Either ParseError a)
 mp_runParserT = I.runParserT
--- mp_runParserT' :: forall s (m :: * -> *) a t.
-(Monad m, Stream s t) =>
-ParsecT s m a -> State s -> m (State s, Either ParseError a)
+-- mp_runParserT' :: forall s (m :: * -> *) a t. (Monad m, Stream s t) => ParsecT s m a -> State s -> m (State s, Either ParseError a)
 mp_runParserT' = I.runParserT'
 -- mp_setInput :: forall s (m :: * -> *) t. MonadParsec s m t => s -> m ()
 mp_setInput = I.setInput

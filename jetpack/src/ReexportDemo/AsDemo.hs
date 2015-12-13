@@ -3,6 +3,10 @@ module ReexportDemo.AsDemo where
 
 import ReexportDemo as I
 
+-- demo_a' :: Integer -> Integer -> Integer
+demo_a' = I.a'
+-- demo_b :: forall a. Num a => a -> a -> a
+demo_b = I.b
 type DemoEither a b = I.Either a b
 type DemoAcc a b = I.Acc a b
 type DemoFoo  = I.Foo 

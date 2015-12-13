@@ -7,15 +7,11 @@ import Data.Map as I
 lm_fold = I.fold
 -- lm_foldWithKey :: forall k a b. (k -> a -> b -> b) -> b -> Map k a -> b
 lm_foldWithKey = I.foldWithKey
--- lm_insertLookupWithKey' :: forall k a.
-Ord k =>
-(k -> a -> a -> a) -> k -> a -> Map k a -> (Maybe a, Map k a)
+-- lm_insertLookupWithKey' :: forall k a. Ord k => (k -> a -> a -> a) -> k -> a -> Map k a -> (Maybe a, Map k a)
 lm_insertLookupWithKey' = I.insertLookupWithKey'
 -- lm_insertWith' :: forall a k. Ord k => (a -> a -> a) -> k -> a -> Map k a -> Map k a
 lm_insertWith' = I.insertWith'
--- lm_insertWithKey' :: forall k a.
-Ord k =>
-(k -> a -> a -> a) -> k -> a -> Map k a -> Map k a
+-- lm_insertWithKey' :: forall k a. Ord k => (k -> a -> a -> a) -> k -> a -> Map k a -> Map k a
 lm_insertWithKey' = I.insertWithKey'
 -- (!) :: forall k a. Ord k => Map k a -> k -> a
 (!) = (I.!)
@@ -25,9 +21,7 @@ lm_insertWithKey' = I.insertWithKey'
 lm_adjust = I.adjust
 -- lm_adjustWithKey :: forall k a. Ord k => (k -> a -> a) -> k -> Map k a -> Map k a
 lm_adjustWithKey = I.adjustWithKey
--- lm_alter :: forall a k.
-Ord k =>
-(Maybe a -> Maybe a) -> k -> Map k a -> Map k a
+-- lm_alter :: forall a k. Ord k => (Maybe a -> Maybe a) -> k -> Map k a -> Map k a
 lm_alter = I.alter
 -- lm_assocs :: forall k a. Map k a -> [(k, a)]
 lm_assocs = I.assocs
@@ -45,13 +39,9 @@ lm_deleteMax = I.deleteMax
 lm_deleteMin = I.deleteMin
 -- lm_difference :: forall k a b. Ord k => Map k a -> Map k b -> Map k a
 lm_difference = I.difference
--- lm_differenceWith :: forall a b k.
-Ord k =>
-(a -> b -> Maybe a) -> Map k a -> Map k b -> Map k a
+-- lm_differenceWith :: forall a b k. Ord k => (a -> b -> Maybe a) -> Map k a -> Map k b -> Map k a
 lm_differenceWith = I.differenceWith
--- lm_differenceWithKey :: forall k a b.
-Ord k =>
-(k -> a -> b -> Maybe a) -> Map k a -> Map k b -> Map k a
+-- lm_differenceWithKey :: forall k a b. Ord k => (k -> a -> b -> Maybe a) -> Map k a -> Map k b -> Map k a
 lm_differenceWithKey = I.differenceWithKey
 -- lm_elemAt :: forall k a. Int -> Map k a -> (k, a)
 lm_elemAt = I.elemAt
@@ -107,37 +97,25 @@ lm_fromListWithKey = I.fromListWithKey
 lm_fromSet = I.fromSet
 -- lm_insert :: forall k a. Ord k => k -> a -> Map k a -> Map k a
 lm_insert = I.insert
--- lm_insertLookupWithKey :: forall k a.
-Ord k =>
-(k -> a -> a -> a) -> k -> a -> Map k a -> (Maybe a, Map k a)
+-- lm_insertLookupWithKey :: forall k a. Ord k => (k -> a -> a -> a) -> k -> a -> Map k a -> (Maybe a, Map k a)
 lm_insertLookupWithKey = I.insertLookupWithKey
 -- lm_insertWith :: forall a k. Ord k => (a -> a -> a) -> k -> a -> Map k a -> Map k a
 lm_insertWith = I.insertWith
--- lm_insertWithKey :: forall k a.
-Ord k =>
-(k -> a -> a -> a) -> k -> a -> Map k a -> Map k a
+-- lm_insertWithKey :: forall k a. Ord k => (k -> a -> a -> a) -> k -> a -> Map k a -> Map k a
 lm_insertWithKey = I.insertWithKey
 -- lm_intersection :: forall k a b. Ord k => Map k a -> Map k b -> Map k a
 lm_intersection = I.intersection
--- lm_intersectionWith :: forall a b c k.
-Ord k =>
-(a -> b -> c) -> Map k a -> Map k b -> Map k c
+-- lm_intersectionWith :: forall a b c k. Ord k => (a -> b -> c) -> Map k a -> Map k b -> Map k c
 lm_intersectionWith = I.intersectionWith
--- lm_intersectionWithKey :: forall k a b c.
-Ord k =>
-(k -> a -> b -> c) -> Map k a -> Map k b -> Map k c
+-- lm_intersectionWithKey :: forall k a b c. Ord k => (k -> a -> b -> c) -> Map k a -> Map k b -> Map k c
 lm_intersectionWithKey = I.intersectionWithKey
 -- lm_isProperSubmapOf :: forall k a. (Ord k, Eq a) => Map k a -> Map k a -> Bool
 lm_isProperSubmapOf = I.isProperSubmapOf
--- lm_isProperSubmapOfBy :: forall a b k.
-Ord k =>
-(a -> b -> Bool) -> Map k a -> Map k b -> Bool
+-- lm_isProperSubmapOfBy :: forall a b k. Ord k => (a -> b -> Bool) -> Map k a -> Map k b -> Bool
 lm_isProperSubmapOfBy = I.isProperSubmapOfBy
 -- lm_isSubmapOf :: forall k a. (Ord k, Eq a) => Map k a -> Map k a -> Bool
 lm_isSubmapOf = I.isSubmapOf
--- lm_isSubmapOfBy :: forall a b k.
-Ord k =>
-(a -> b -> Bool) -> Map k a -> Map k b -> Bool
+-- lm_isSubmapOfBy :: forall a b k. Ord k => (a -> b -> Bool) -> Map k a -> Map k b -> Bool
 lm_isSubmapOfBy = I.isSubmapOfBy
 -- lm_keys :: forall k a. Map k a -> [k]
 lm_keys = I.keys
@@ -159,24 +137,19 @@ lm_lookupLT = I.lookupLT
 lm_map = I.map
 -- lm_mapAccum :: forall a b c k. (a -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
 lm_mapAccum = I.mapAccum
--- lm_mapAccumRWithKey :: forall a k b c.
-(a -> k -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
+-- lm_mapAccumRWithKey :: forall a k b c. (a -> k -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
 lm_mapAccumRWithKey = I.mapAccumRWithKey
--- lm_mapAccumWithKey :: forall a k b c.
-(a -> k -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
+-- lm_mapAccumWithKey :: forall a k b c. (a -> k -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
 lm_mapAccumWithKey = I.mapAccumWithKey
 -- lm_mapEither :: forall a b c k. (a -> Either b c) -> Map k a -> (Map k b, Map k c)
 lm_mapEither = I.mapEither
--- lm_mapEitherWithKey :: forall k a b c.
-(k -> a -> Either b c) -> Map k a -> (Map k b, Map k c)
+-- lm_mapEitherWithKey :: forall k a b c. (k -> a -> Either b c) -> Map k a -> (Map k b, Map k c)
 lm_mapEitherWithKey = I.mapEitherWithKey
 -- lm_mapKeys :: forall k1 k2 a. Ord k2 => (k1 -> k2) -> Map k1 a -> Map k2 a
 lm_mapKeys = I.mapKeys
 -- lm_mapKeysMonotonic :: forall k1 k2 a. (k1 -> k2) -> Map k1 a -> Map k2 a
 lm_mapKeysMonotonic = I.mapKeysMonotonic
--- lm_mapKeysWith :: forall a k1 k2.
-Ord k2 =>
-(a -> a -> a) -> (k1 -> k2) -> Map k1 a -> Map k2 a
+-- lm_mapKeysWith :: forall a k1 k2. Ord k2 => (a -> a -> a) -> (k1 -> k2) -> Map k1 a -> Map k2 a
 lm_mapKeysWith = I.mapKeysWith
 -- lm_mapMaybe :: forall a b k. (a -> Maybe b) -> Map k a -> Map k b
 lm_mapMaybe = I.mapMaybe
@@ -190,14 +163,7 @@ lm_maxView = I.maxView
 lm_maxViewWithKey = I.maxViewWithKey
 -- lm_member :: forall k a. Ord k => k -> Map k a -> Bool
 lm_member = I.member
--- lm_mergeWithKey :: forall k a b c.
-Ord k =>
-(k -> a -> b -> Maybe c)
--> (Map k a -> Map k c)
--> (Map k b -> Map k c)
--> Map k a
--> Map k b
--> Map k c
+-- lm_mergeWithKey :: forall k a b c. Ord k => (k -> a -> b -> Maybe c) -> (Map k a -> Map k c) -> (Map k b -> Map k c) -> Map k a -> Map k b -> Map k c
 lm_mergeWithKey = I.mergeWithKey
 -- lm_minView :: forall k a. Map k a -> Maybe (a, Map k a)
 lm_minView = I.minView
@@ -231,17 +197,13 @@ lm_toAscList = I.toAscList
 lm_toDescList = I.toDescList
 -- lm_toList :: forall k a. Map k a -> [(k, a)]
 lm_toList = I.toList
--- lm_traverseWithKey :: forall k a (t :: * -> *) b.
-Applicative t =>
-(k -> a -> t b) -> Map k a -> t (Map k b)
+-- lm_traverseWithKey :: forall k a (t :: * -> *) b. Applicative t => (k -> a -> t b) -> Map k a -> t (Map k b)
 lm_traverseWithKey = I.traverseWithKey
 -- lm_union :: forall k a. Ord k => Map k a -> Map k a -> Map k a
 lm_union = I.union
 -- lm_unionWith :: forall a k. Ord k => (a -> a -> a) -> Map k a -> Map k a -> Map k a
 lm_unionWith = I.unionWith
--- lm_unionWithKey :: forall k a.
-Ord k =>
-(k -> a -> a -> a) -> Map k a -> Map k a -> Map k a
+-- lm_unionWithKey :: forall k a. Ord k => (k -> a -> a -> a) -> Map k a -> Map k a -> Map k a
 lm_unionWithKey = I.unionWithKey
 -- lm_unions :: forall k a. Ord k => [Map k a] -> Map k a
 lm_unions = I.unions
@@ -251,9 +213,7 @@ lm_unionsWith = I.unionsWith
 lm_update = I.update
 -- lm_updateAt :: forall k a. (k -> a -> Maybe a) -> Int -> Map k a -> Map k a
 lm_updateAt = I.updateAt
--- lm_updateLookupWithKey :: forall k a.
-Ord k =>
-(k -> a -> Maybe a) -> k -> Map k a -> (Maybe a, Map k a)
+-- lm_updateLookupWithKey :: forall k a. Ord k => (k -> a -> Maybe a) -> k -> Map k a -> (Maybe a, Map k a)
 lm_updateLookupWithKey = I.updateLookupWithKey
 -- lm_updateMax :: forall a k. (a -> Maybe a) -> Map k a -> Map k a
 lm_updateMax = I.updateMax

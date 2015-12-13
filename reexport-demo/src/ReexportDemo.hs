@@ -17,3 +17,7 @@ data Foo = Foo1 {test :: Int} | Foo2 {test::Int, bar :: String}
 
 {-# DEPRECATED a "Don't use a pleaz" #-}
 a x y = 333
+
+
+a' = b
+b x y = x+y

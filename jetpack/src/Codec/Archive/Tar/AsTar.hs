@@ -17,8 +17,7 @@ tar_read = I.read
 tar_entryPath = I.entryPath
 -- tar_foldEntries :: forall a e. (Entry -> a -> a) -> a -> (e -> a) -> Entries e -> a
 tar_foldEntries = I.foldEntries
--- tar_mapEntries :: forall e' e.
-(Entry -> Either e' Entry) -> Entries e -> Entries (Either e e')
+-- tar_mapEntries :: forall e' e. (Entry -> Either e' Entry) -> Entries e -> Entries (Either e e')
 tar_mapEntries = I.mapEntries
 -- tar_mapEntriesNoFail :: forall e. (Entry -> Entry) -> Entries e -> Entries e
 tar_mapEntriesNoFail = I.mapEntriesNoFail

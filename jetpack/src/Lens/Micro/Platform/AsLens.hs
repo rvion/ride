@@ -5,33 +5,19 @@ import Lens.Micro.Platform as I
 
 -- (&) :: forall a b. a -> (a -> b) -> b
 (&) = (I.&)
--- (%=) :: forall s a b (m :: * -> *).
-MonadState s m =>
-ASetter s s a b -> (a -> b) -> m ()
+-- (%=) :: forall s a b (m :: * -> *). MonadState s m => ASetter s s a b -> (a -> b) -> m ()
 (%=) = (I.%=)
--- (*=) :: forall s a (m :: * -> *).
-(MonadState s m, Num a) =>
-ASetter s s a a -> a -> m ()
+-- (*=) :: forall s a (m :: * -> *). (MonadState s m, Num a) => ASetter s s a a -> a -> m ()
 (*=) = (I.*=)
--- (+=) :: forall s a (m :: * -> *).
-(MonadState s m, Num a) =>
-ASetter s s a a -> a -> m ()
+-- (+=) :: forall s a (m :: * -> *). (MonadState s m, Num a) => ASetter s s a a -> a -> m ()
 (+=) = (I.+=)
--- (-=) :: forall s a (m :: * -> *).
-(MonadState s m, Num a) =>
-ASetter s s a a -> a -> m ()
+-- (-=) :: forall s a (m :: * -> *). (MonadState s m, Num a) => ASetter s s a a -> a -> m ()
 (-=) = (I.-=)
--- (.=) :: forall s a b (m :: * -> *).
-MonadState s m =>
-ASetter s s a b -> b -> m ()
+-- (.=) :: forall s a b (m :: * -> *). MonadState s m => ASetter s s a b -> b -> m ()
 (.=) = (I..=)
--- (//=) :: forall s a (m :: * -> *).
-(MonadState s m, Fractional a) =>
-ASetter s s a a -> a -> m ()
+-- (//=) :: forall s a (m :: * -> *). (MonadState s m, Fractional a) => ASetter s s a a -> a -> m ()
 (//=) = (I.//=)
--- lens_preview :: forall a s (m :: * -> *).
-MonadReader s m =>
-Getting (First a) s a -> m (Maybe a)
+-- lens_preview :: forall a s (m :: * -> *). MonadReader s m => Getting (First a) s a -> m (Maybe a)
 lens_preview = I.preview
 -- lens_use :: forall a s (m :: * -> *). MonadState s m => Getting a s a -> m a
 lens_use = I.use
@@ -97,8 +83,7 @@ lens__last = I._last
 lens__tail = I._tail
 -- lens_both :: forall a b. Traversal (a, a) (b, b) a b
 lens_both = I.both
--- lens_failing :: forall s t a b.
-Traversal s t a b -> Traversal s t a b -> Traversal s t a b
+-- lens_failing :: forall s t a b. Traversal s t a b -> Traversal s t a b -> Traversal s t a b
 lens_failing = I.failing
 -- lens_filtered :: forall a. (a -> Bool) -> Traversal' a a
 lens_filtered = I.filtered
@@ -118,15 +103,11 @@ lens_set = I.set
 lens_to = I.to
 -- lens_toListOf :: forall a s. Getting (Endo [a]) s a -> s -> [a]
 lens_toListOf = I.toListOf
--- lens_folded :: forall r (f :: * -> *) a.
-(Foldable f, Applicative (Const r)) =>
-Getting r (f a) a
+-- lens_folded :: forall r (f :: * -> *) a. (Foldable f, Applicative (Const r)) => Getting r (f a) a
 lens_folded = I.folded
 -- lens_sets :: forall a b s t. ((a -> b) -> s -> t) -> ASetter s t a b
 lens_sets = I.sets
--- lens_traversed :: forall (f :: * -> *) a b.
-Traversable f =>
-Traversal (f a) (f b) a b
+-- lens_traversed :: forall (f :: * -> *) a b. Traversable f => Traversal (f a) (f b) a b
 lens_traversed = I.traversed
 type LensDefName  = I.DefName 
 type LensFold a b = I.Fold a b

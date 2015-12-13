@@ -57,15 +57,11 @@ m_foldrWithKey' = I.foldrWithKey'
 m_intersection = I.intersection
 -- m_isProperSubmapOf :: forall k a. (Ord k, Eq a) => Map k a -> Map k a -> Bool
 m_isProperSubmapOf = I.isProperSubmapOf
--- m_isProperSubmapOfBy :: forall a b k.
-Ord k =>
-(a -> b -> Bool) -> Map k a -> Map k b -> Bool
+-- m_isProperSubmapOfBy :: forall a b k. Ord k => (a -> b -> Bool) -> Map k a -> Map k b -> Bool
 m_isProperSubmapOfBy = I.isProperSubmapOfBy
 -- m_isSubmapOf :: forall k a. (Ord k, Eq a) => Map k a -> Map k a -> Bool
 m_isSubmapOf = I.isSubmapOf
--- m_isSubmapOfBy :: forall a b k.
-Ord k =>
-(a -> b -> Bool) -> Map k a -> Map k b -> Bool
+-- m_isSubmapOfBy :: forall a b k. Ord k => (a -> b -> Bool) -> Map k a -> Map k b -> Bool
 m_isSubmapOfBy = I.isSubmapOfBy
 -- m_keys :: forall k a. Map k a -> [k]
 m_keys = I.keys
@@ -123,9 +119,7 @@ m_toAscList = I.toAscList
 m_toDescList = I.toDescList
 -- m_toList :: forall k a. Map k a -> [(k, a)]
 m_toList = I.toList
--- m_traverseWithKey :: forall k a (t :: * -> *) b.
-Applicative t =>
-(k -> a -> t b) -> Map k a -> t (Map k b)
+-- m_traverseWithKey :: forall k a (t :: * -> *) b. Applicative t => (k -> a -> t b) -> Map k a -> t (Map k b)
 m_traverseWithKey = I.traverseWithKey
 -- m_union :: forall k a. Ord k => Map k a -> Map k a -> Map k a
 m_union = I.union
@@ -137,17 +131,11 @@ m_valid = I.valid
 m_adjust = I.adjust
 -- m_adjustWithKey :: forall k a. Ord k => (k -> a -> a) -> k -> Map k a -> Map k a
 m_adjustWithKey = I.adjustWithKey
--- m_alter :: forall a k.
-Ord k =>
-(Maybe a -> Maybe a) -> k -> Map k a -> Map k a
+-- m_alter :: forall a k. Ord k => (Maybe a -> Maybe a) -> k -> Map k a -> Map k a
 m_alter = I.alter
--- m_differenceWith :: forall a b k.
-Ord k =>
-(a -> b -> Maybe a) -> Map k a -> Map k b -> Map k a
+-- m_differenceWith :: forall a b k. Ord k => (a -> b -> Maybe a) -> Map k a -> Map k b -> Map k a
 m_differenceWith = I.differenceWith
--- m_differenceWithKey :: forall k a b.
-Ord k =>
-(k -> a -> b -> Maybe a) -> Map k a -> Map k b -> Map k a
+-- m_differenceWithKey :: forall k a b. Ord k => (k -> a -> b -> Maybe a) -> Map k a -> Map k b -> Map k a
 m_differenceWithKey = I.differenceWithKey
 -- m_findWithDefault :: forall a k. Ord k => a -> k -> Map k a -> a
 m_findWithDefault = I.findWithDefault
@@ -169,42 +157,29 @@ m_fromListWithKey = I.fromListWithKey
 m_fromSet = I.fromSet
 -- m_insert :: forall k a. Ord k => k -> a -> Map k a -> Map k a
 m_insert = I.insert
--- m_insertLookupWithKey :: forall k a.
-Ord k =>
-(k -> a -> a -> a) -> k -> a -> Map k a -> (Maybe a, Map k a)
+-- m_insertLookupWithKey :: forall k a. Ord k => (k -> a -> a -> a) -> k -> a -> Map k a -> (Maybe a, Map k a)
 m_insertLookupWithKey = I.insertLookupWithKey
 -- m_insertWith :: forall a k. Ord k => (a -> a -> a) -> k -> a -> Map k a -> Map k a
 m_insertWith = I.insertWith
--- m_insertWithKey :: forall k a.
-Ord k =>
-(k -> a -> a -> a) -> k -> a -> Map k a -> Map k a
+-- m_insertWithKey :: forall k a. Ord k => (k -> a -> a -> a) -> k -> a -> Map k a -> Map k a
 m_insertWithKey = I.insertWithKey
--- m_intersectionWith :: forall a b c k.
-Ord k =>
-(a -> b -> c) -> Map k a -> Map k b -> Map k c
+-- m_intersectionWith :: forall a b c k. Ord k => (a -> b -> c) -> Map k a -> Map k b -> Map k c
 m_intersectionWith = I.intersectionWith
--- m_intersectionWithKey :: forall k a b c.
-Ord k =>
-(k -> a -> b -> c) -> Map k a -> Map k b -> Map k c
+-- m_intersectionWithKey :: forall k a b c. Ord k => (k -> a -> b -> c) -> Map k a -> Map k b -> Map k c
 m_intersectionWithKey = I.intersectionWithKey
 -- m_map :: forall a b k. (a -> b) -> Map k a -> Map k b
 m_map = I.map
 -- m_mapAccum :: forall a b c k. (a -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
 m_mapAccum = I.mapAccum
--- m_mapAccumRWithKey :: forall a k b c.
-(a -> k -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
+-- m_mapAccumRWithKey :: forall a k b c. (a -> k -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
 m_mapAccumRWithKey = I.mapAccumRWithKey
--- m_mapAccumWithKey :: forall a k b c.
-(a -> k -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
+-- m_mapAccumWithKey :: forall a k b c. (a -> k -> b -> (a, c)) -> a -> Map k b -> (a, Map k c)
 m_mapAccumWithKey = I.mapAccumWithKey
 -- m_mapEither :: forall a b c k. (a -> Either b c) -> Map k a -> (Map k b, Map k c)
 m_mapEither = I.mapEither
--- m_mapEitherWithKey :: forall k a b c.
-(k -> a -> Either b c) -> Map k a -> (Map k b, Map k c)
+-- m_mapEitherWithKey :: forall k a b c. (k -> a -> Either b c) -> Map k a -> (Map k b, Map k c)
 m_mapEitherWithKey = I.mapEitherWithKey
--- m_mapKeysWith :: forall a k1 k2.
-Ord k2 =>
-(a -> a -> a) -> (k1 -> k2) -> Map k1 a -> Map k2 a
+-- m_mapKeysWith :: forall a k1 k2. Ord k2 => (a -> a -> a) -> (k1 -> k2) -> Map k1 a -> Map k2 a
 m_mapKeysWith = I.mapKeysWith
 -- m_mapMaybe :: forall a b k. (a -> Maybe b) -> Map k a -> Map k b
 m_mapMaybe = I.mapMaybe
@@ -212,22 +187,13 @@ m_mapMaybe = I.mapMaybe
 m_mapMaybeWithKey = I.mapMaybeWithKey
 -- m_mapWithKey :: forall k a b. (k -> a -> b) -> Map k a -> Map k b
 m_mapWithKey = I.mapWithKey
--- m_mergeWithKey :: forall k a b c.
-Ord k =>
-(k -> a -> b -> Maybe c)
--> (Map k a -> Map k c)
--> (Map k b -> Map k c)
--> Map k a
--> Map k b
--> Map k c
+-- m_mergeWithKey :: forall k a b c. Ord k => (k -> a -> b -> Maybe c) -> (Map k a -> Map k c) -> (Map k b -> Map k c) -> Map k a -> Map k b -> Map k c
 m_mergeWithKey = I.mergeWithKey
 -- m_singleton :: forall k a. k -> a -> Map k a
 m_singleton = I.singleton
 -- m_unionWith :: forall a k. Ord k => (a -> a -> a) -> Map k a -> Map k a -> Map k a
 m_unionWith = I.unionWith
--- m_unionWithKey :: forall k a.
-Ord k =>
-(k -> a -> a -> a) -> Map k a -> Map k a -> Map k a
+-- m_unionWithKey :: forall k a. Ord k => (k -> a -> a -> a) -> Map k a -> Map k a -> Map k a
 m_unionWithKey = I.unionWithKey
 -- m_unionsWith :: forall a k. Ord k => (a -> a -> a) -> [Map k a] -> Map k a
 m_unionsWith = I.unionsWith
@@ -235,9 +201,7 @@ m_unionsWith = I.unionsWith
 m_update = I.update
 -- m_updateAt :: forall k a. (k -> a -> Maybe a) -> Int -> Map k a -> Map k a
 m_updateAt = I.updateAt
--- m_updateLookupWithKey :: forall k a.
-Ord k =>
-(k -> a -> Maybe a) -> k -> Map k a -> (Maybe a, Map k a)
+-- m_updateLookupWithKey :: forall k a. Ord k => (k -> a -> Maybe a) -> k -> Map k a -> (Maybe a, Map k a)
 m_updateLookupWithKey = I.updateLookupWithKey
 -- m_updateMax :: forall a k. (a -> Maybe a) -> Map k a -> Map k a
 m_updateMax = I.updateMax

@@ -8,6 +8,7 @@ module IDE.Iface where
 import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
 import BinIface
 import Control.Monad (forM)
+import Data.List (intersperse)
 -- import Data.Char (toLower, toUpper, isLower, isUpper)
 import Name
 -- import Data.List
@@ -120,20 +121,21 @@ findReexports (mod, modules) previouslyExportedSymbols =
                           else _success otherIfaceDecl
                       Nothing -> _fail
 
+      let onOneLine = concat . intersperse " " . lines
       return $ catMaybes <$> for declsF $ \(n, decl) ->
         case decl of
           Nothing -> Nothing
-          Just (_t@(IfaceId{})) -> Just $ RId (toS n) (toS (ifType _t))
+          Just (_t@(IfaceId{})) -> Just $ RId (toS n) (onOneLine $ toS (ifType _t))
           Just (_t@(IfaceData{})) -> Just $
             RData
               { rName = (toS n)
-              , rType = (toS (ifType _t))
+              , rType = (onOneLine $ toS (ifType _t))
               , rNbTyVars = (length (ifTyVars _t))
               }
           Just (_t@(IfaceSynonym{})) -> Just $
             RData
               { rName = (toS n)
-              , rType = (toS (ifType _t))
+              , rType = (onOneLine $ toS (ifType _t))
               , rNbTyVars = (length (ifTyVars _t))
               }
           Just (IfaceFamily{}) -> Nothing

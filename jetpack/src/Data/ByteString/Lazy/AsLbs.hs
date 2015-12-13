@@ -109,13 +109,9 @@ lbs_last = I.last
 lbs_length = I.length
 -- lbs_map :: (Word8 -> Word8) -> ByteString -> ByteString
 lbs_map = I.map
--- lbs_mapAccumL :: forall acc.
-(acc -> Word8 -> (acc, Word8))
--> acc -> ByteString -> (acc, ByteString)
+-- lbs_mapAccumL :: forall acc. (acc -> Word8 -> (acc, Word8)) -> acc -> ByteString -> (acc, ByteString)
 lbs_mapAccumL = I.mapAccumL
--- lbs_mapAccumR :: forall acc.
-(acc -> Word8 -> (acc, Word8))
--> acc -> ByteString -> (acc, ByteString)
+-- lbs_mapAccumR :: forall acc. (acc -> Word8 -> (acc, Word8)) -> acc -> ByteString -> (acc, ByteString)
 lbs_mapAccumR = I.mapAccumR
 -- lbs_maximum :: ByteString -> Word8
 lbs_maximum = I.maximum

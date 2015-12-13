@@ -115,13 +115,9 @@ bs_last = I.last
 bs_length = I.length
 -- bs_map :: (Word8 -> Word8) -> ByteString -> ByteString
 bs_map = I.map
--- bs_mapAccumL :: forall acc.
-(acc -> Word8 -> (acc, Word8))
--> acc -> ByteString -> (acc, ByteString)
+-- bs_mapAccumL :: forall acc. (acc -> Word8 -> (acc, Word8)) -> acc -> ByteString -> (acc, ByteString)
 bs_mapAccumL = I.mapAccumL
--- bs_mapAccumR :: forall acc.
-(acc -> Word8 -> (acc, Word8))
--> acc -> ByteString -> (acc, ByteString)
+-- bs_mapAccumR :: forall acc. (acc -> Word8 -> (acc, Word8)) -> acc -> ByteString -> (acc, ByteString)
 bs_mapAccumR = I.mapAccumR
 -- bs_maximum :: ByteString -> Word8
 bs_maximum = I.maximum
@@ -185,8 +181,7 @@ bs_transpose = I.transpose
 bs_uncons = I.uncons
 -- bs_unfoldr :: forall a. (a -> Maybe (Word8, a)) -> a -> ByteString
 bs_unfoldr = I.unfoldr
--- bs_unfoldrN :: forall a.
-Int -> (a -> Maybe (Word8, a)) -> a -> (ByteString, Maybe a)
+-- bs_unfoldrN :: forall a. Int -> (a -> Maybe (Word8, a)) -> a -> (ByteString, Maybe a)
 bs_unfoldrN = I.unfoldrN
 -- bs_unpack :: ByteString -> [Word8]
 bs_unpack = I.unpack
