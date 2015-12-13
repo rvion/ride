@@ -31,55 +31,54 @@
   * reexport-demo
 
 ### Modules
-
-  - map_lazy Data.Map
-  - map Data.Map.Strict
-  - set Data.Set
-  - hm Data.HashMap.Strict
-  - ne Data.List.NonEmpty
-
-_text_
-
-  - t Data.Text
-  - t Data.Text.Encoding
-  - t Data.Text.IO
-  - lt Data.Text.Lazy
-  - lt Data.Text.Lazy.Encoding
-  - lt Data.Text.Lazy.IO
-
-_bytestring_
-
-  - bs Data.ByteString
-  - bs Data.ByteString.Char8
-  - lbs Data.ByteString.Lazy
-  - lbs Data.ByteString.Lazy.Char8
-
-_tar_
-
-  - tar Codec.Archive.Tar
-  - tar Codec.Archive.Tar.Entry
-  - tar Codec.Archive.Tar.Check
-
-_zlib_
-
-  - gzip Codec.Compression.GZip
-
-_megaparsec_
-
-  - mp Text.Megaparsec
-
-_conduit_
-_conduit-extra_
-
-  - c Data.Conduit
-  - cl Data.Conduit.List
-  - cb Data.Conduit.Binary
+- 
+-   - map_lazy Data.Map
+-   - map Data.Map.Strict
+-   - set Data.Set
+-   - hm Data.HashMap.Strict
+-   - ne Data.List.NonEmpty
+- 
+- _text_
+- 
+-   - t Data.Text
+-   - t Data.Text.Encoding
+-   - t Data.Text.IO
+-   - lt Data.Text.Lazy
+-   - lt Data.Text.Lazy.Encoding
+-   - lt Data.Text.Lazy.IO
+- 
+- _bytestring_
+- 
+-   - bs Data.ByteString
+-   - bs Data.ByteString.Char8
+-   - lbs Data.ByteString.Lazy
+-   - lbs Data.ByteString.Lazy.Char8
+- 
+- _tar_
+- 
+-   - tar Codec.Archive.Tar
+-   - tar Codec.Archive.Tar.Entry
+-   - tar Codec.Archive.Tar.Check
+- 
+- _zlib_
+- 
+-   - gzip Codec.Compression.GZip
+- 
+- _megaparsec_
+- 
+-   - mp Text.Megaparsec
+- 
+- _conduit_
+- _conduit-extra_
+- 
+-   - c Data.Conduit
+-   - cl Data.Conduit.List
+-   - cb Data.Conduit.Binary
 
 _lens_
 
 -- http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
---  - lens Lens.Micro.Platform
+  - lens Lens.Micro.Platform
 
 _test purpose:_
-
-  - demo ReexportDemo
+-  - demo ReexportDemo

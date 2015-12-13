@@ -68,7 +68,6 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
               return Nothing
           | (head _name) `elem` operators -> do
               put ["(",_name,")", " = (I.", _name,")"]
-              print _name
               return (Just _name)
           | isLower (head _name) || (head _name) == '_' -> do
               put [_reexported_name, " = I.", _name]

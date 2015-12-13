@@ -1,6 +1,7 @@
 -- [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
 -- [ ] mention backpack
-
+-- [ ] check how to deal with http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
+-- [ ] re-handle deprecated types
 
 
 

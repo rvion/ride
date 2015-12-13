@@ -118,7 +118,9 @@ findReexports (mod, modules) previouslyExportedSymbols =
                     _otherIface <- getIface _ifacePath
                     let _otherIfaceMap = mkIfaceDeclMap toSDoc _otherIface
                     case Map.lookup _name _otherIfaceMap of
-                      Just otherIfaceDecl -> _success otherIfaceDecl
+                      Just otherIfaceDecl -> do
+                        liftIO$ putStrLn $ toS (ifType otherIfaceDecl)
+                        _success otherIfaceDecl
                       Nothing -> _fail
 
       return $ catMaybes <$> for declsF $ \(n, decl) ->
