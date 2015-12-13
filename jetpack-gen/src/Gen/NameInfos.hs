@@ -1,7 +1,7 @@
 module Gen.NameInfos where
 
-import Name
-import Outputable
+import           Name
+import           Outputable
 
 getNameInfos n =
   [ ppr $ getSrcLoc n --       -> Unique

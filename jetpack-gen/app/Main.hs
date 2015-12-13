@@ -1,6 +1,6 @@
 module Main where
 
-import Gen
+import           Gen
 
 main :: IO ()
 main = do

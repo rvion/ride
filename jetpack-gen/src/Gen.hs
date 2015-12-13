@@ -1,16 +1,16 @@
 module Gen where
 
-import Control.Monad
-import Data.List (isPrefixOf, intersperse, intercalate)
-import Data.Monoid
-import Gen.Cabal (writeCabalFile)
-import Gen.Modules
-import Gen.Names
-import Gen.Iface
-import Gen.Log
-import Gen.State
-import Gen.Types
-import qualified Data.Map as M
+import           Control.Monad
+import           Data.List     (intercalate, intersperse, isPrefixOf)
+import qualified Data.Map      as M
+import           Data.Monoid
+import           Gen.Cabal     (writeCabalFile)
+import           Gen.Iface
+import           Gen.Log
+import           Gen.Modules
+import           Gen.Names
+import           Gen.State
+import           Gen.Types
 
 jetpackGen :: IO ()
 jetpackGen = do

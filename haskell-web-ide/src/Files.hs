@@ -1,22 +1,22 @@
+{-# LANGUAGE FlexibleInstances         #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE PackageImports #-}
+{-# LANGUAGE OverloadedStrings         #-}
+{-# LANGUAGE PackageImports            #-}
 
 module Files where
 
-import "cryptohash" Crypto.Hash
-import Data.Aeson
-import Data.Aeson.Types
-import Data.ByteString (ByteString)
-import Data.Text (Text)
-import GHC.Generics
-import GHC.IO.Exception
-import qualified Data.ByteString as BS
-import qualified Data.ByteString.Lazy as LBS
-import qualified Data.Text as T
-import System.Directory.Tree
-import System.IO.Error (userError)
+import           "cryptohash" Crypto.Hash
+import           Data.Aeson
+import           Data.Aeson.Types
+import           Data.ByteString       (ByteString)
+import qualified Data.ByteString       as BS
+import qualified Data.ByteString.Lazy  as LBS
+import           Data.Text             (Text)
+import qualified Data.Text             as T
+import           GHC.Generics
+import           GHC.IO.Exception
+import           System.Directory.Tree
+import           System.IO.Error       (userError)
 
 sha1 :: ByteString -> Digest SHA1
 sha1 = hash

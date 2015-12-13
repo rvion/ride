@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE TupleSections     #-}
 
 module Gen.State
   ( getDB
@@ -9,27 +9,28 @@ module Gen.State
   ) where
 
 -- import Data.Aeson
-import Control.Monad
-import Data.Function (on)
-import Data.List (isSuffixOf, intercalate, sort, sortBy)
-import Data.Map (Map)
-import Data.Text (Text)
-import Distribution.InstalledPackageInfo -- (parseInstalledPackageInfo)
-import Distribution.ModuleName
-import Distribution.Package
-import qualified Data.Map as M
-import qualified Data.Text as T
-import qualified System.Process as S
-import qualified System.Process.Text as T
-import System.Directory
-import System.Directory.Tree
-import System.FilePath
+import           Control.Monad
+import           Data.Function                     (on)
+import           Data.List                         (intercalate, isSuffixOf,
+                                                    sort, sortBy)
+import           Data.Map                          (Map)
+import qualified Data.Map                          as M
+import           Data.Text                         (Text)
+import qualified Data.Text                         as T
+import           Distribution.InstalledPackageInfo
+import           Distribution.ModuleName
+import           Distribution.Package
+import           System.Directory
+import           System.Directory.Tree
+import           System.FilePath
+import qualified System.Process                    as S
+import qualified System.Process.Text               as T
 
-import Control.Monad.Trans.State
+import           Control.Monad.Trans.State
 
 data State = State
-  { dbs :: [FilePath]
-  , packages :: [InstalledPackageInfo]
+  { dbs       :: [FilePath]
+  , packages  :: [InstalledPackageInfo]
   , zpackages :: [InstalledPackageInfo]
   }
 

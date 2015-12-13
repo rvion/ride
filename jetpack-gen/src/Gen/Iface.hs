@@ -1,26 +1,26 @@
-{-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE NamedFieldPuns       #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
-{-# LANGUAGE Rank2Types #-}
+{-# LANGUAGE Rank2Types           #-}
 
 module Gen.Iface where
 
-import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
-import BinIface
-import Control.Monad (forM)
-import Data.List (intersperse)
-import Data.Map (Map)
-import Data.Maybe
-import Data.String.Utils
-import DynFlags
-import GHC
-import GHC.Paths ( libdir )
-import Gen.Types
-import IfaceSyn  -- (ifType, ifName)
-import Name
-import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
-import qualified Data.Map as Map
-import TcRnMonad
+import           Avail
+import           BinIface
+import           Control.Monad     (forM)
+import           Data.List         (intersperse)
+import           Data.Map          (Map)
+import qualified Data.Map          as Map
+import           Data.Maybe
+import           Data.String.Utils
+import           DynFlags
+import           Gen.Types
+import           GHC
+import           GHC.Paths         (libdir)
+import           IfaceSyn
+import           Name
+import           Outputable
+import           TcRnMonad
 
 type Renderer = SDoc -> String
 type IfaceDeclMap = Map String IfaceDecl

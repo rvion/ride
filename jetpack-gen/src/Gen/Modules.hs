@@ -1,13 +1,13 @@
 module Gen.Modules where
 
-import Control.Monad (forM)
-import Data.Char (toLower, toUpper, isLower) -- , isUpper)
-import Data.List
-import Data.Maybe
-import Data.String.Utils
-import Gen.Types
-import System.Directory (createDirectoryIfMissing)
-import System.IO
+import           Control.Monad     (forM)
+import           Data.Char         (isLower, toLower, toUpper)
+import           Data.List
+import           Data.Maybe
+import           Data.String.Utils
+import           Gen.Types
+import           System.Directory  (createDirectoryIfMissing)
+import           System.IO
 
 
 whenValid "" = error "prefix can't be empty"

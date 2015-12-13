@@ -1,6 +1,6 @@
 module REPL where
 
-import Gen
+import           Gen
 
 main :: IO ()
 main = jetpackGen

@@ -1,5 +1,5 @@
 module Gen.Log where
-import System.Console.ANSI
+import           System.Console.ANSI
 
 asStep, asSuccess, asInfo, asWarning, asError :: IO a -> IO a
 asStep = writeIn Blue

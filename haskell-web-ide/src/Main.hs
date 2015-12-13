@@ -1,38 +1,39 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
+{-# LANGUAGE OverloadedStrings         #-}
 
 module Main where
 
-import Control.Concurrent (forkIO)
-import Control.Monad ()
-import Control.Monad.Trans.State (StateT, evalStateT)
-import qualified Control.Monad.Trans.State as S
-import Control.Monad.IO.Class  (liftIO)
-import Control.Monad.Trans.Class (lift)
-import Control.Lens ()
+import           Control.Concurrent                   (forkIO)
+import           Control.Lens                         ()
+import           Control.Monad                        ()
+import           Control.Monad.IO.Class               (liftIO)
+import           Control.Monad.Trans.Class            (lift)
+import           Control.Monad.Trans.State            (StateT, evalStateT)
+import qualified Control.Monad.Trans.State            as S
 
-import System.Environment (lookupEnv)
-import Data.Aeson (object, (.=), Value)
-import Data.Monoid ((<>))
+import           Data.Aeson                           (Value, object, (.=))
+import           Data.Monoid                          ((<>))
+import           System.Environment                   (lookupEnv)
 
-import Data.Text (Text)
-import qualified Data.Text as T
-import Data.Map (Map)
-import qualified Data.Map as M
+import           Data.Map                             (Map)
+import qualified Data.Map                             as M
+import           Data.Text                            (Text)
+import qualified Data.Text                            as T
 
-import Network.Wai.Middleware.Static (staticPolicy, addBase)
-import Network.Wai.Middleware.RequestLogger (logStdoutDev, logStdout)
-import Web.Spock
+import           Network.Wai.Middleware.RequestLogger (logStdout, logStdoutDev)
+import           Network.Wai.Middleware.Static        (addBase, staticPolicy)
+import           Web.Spock
 
-import System.FilePath.Find (find, extension, (==?))
-import System.IO (Handle, hPrint, hPutStrLn)
-import System.Process
-    ( system, ProcessHandle, createProcess, proc
-    , std_out, std_in, std_err, StdStream(..)
-    , terminateProcess
-    )
+import           System.FilePath.Find                 (extension, find, (==?))
+import           System.IO                            (Handle, hPrint,
+                                                       hPutStrLn)
+import           System.Process                       (ProcessHandle,
+                                                       StdStream (..),
+                                                       createProcess, proc,
+                                                       std_err, std_in, std_out,
+                                                       system, terminateProcess)
 
-import Files
+import           Files
 -- import Yolo.Test (demo)
 type IDE = (Handle, Handle, Handle, ProcessHandle)
 data Ctx = Ctx  { ctxIde :: Maybe IDE }
