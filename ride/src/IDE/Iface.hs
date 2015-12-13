@@ -178,21 +178,6 @@ showIfaceInfo x = case x of
 for :: [a] -> (a->b) -> [b]
 for = flip map
 
-
-pretify :: Renderer -> AvailInfo -> [String]
-pretify toS exportedName = case exportedName of
- Avail n -> [asString n]
- AvailTC x [] -> []
- AvailTC x xs -> nub (asString x:(map asString xs))
- where asString = toS . ppr
-
--- pretify :: Renderer -> AvailInfo -> [String]
--- pretify toS exportedName = case exportedName of
---  Avail n -> [asString n]
---  AvailTC x [] -> []
---  AvailTC x xs -> if x == head xs then [asString x] else []
---  where asString = toS . ppr
-
 extractAllNames :: AvailInfo -> [Name]
 extractAllNames ai = case ai of
  Avail n -> [n]
@@ -201,20 +186,6 @@ extractAllNames ai = case ai of
 
 -- test = printReexports ("lens", "/Users/RemiVion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/microlens-platform-0.1.5.0-GZu1yvU44tYD8BDHxEQWch/Lens/Micro/Platform.hi") []
 
--- import Binary -- https://github.com/ghc/ghc/blob/master/compiler/utils/Binary.hs
--- import Control.Monad (forM_)
--- import Control.Monad.IO.Class(liftIO)
--- import Data.List (intersperse)
--- import Data.List.Split
--- import DynFlags (defaultDynFlags)
--- import GHC.PackageDb -- https://github.com/ghc/ghc/blob/master/libraries/ghc-boot/GHC/PackageDb.hs#L140
--- import HscTypes -- https://github.com/ghc/ghc/blob/master/compiler/main/HscTypes.hs#L725
--- import IDE.NameInfos
--- import LoadIface
--- import Module -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Module.hs#L248
--- import Name -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Name.hs#L37
--- import Outputable (dot)
-
 -- http://downloads.haskell.org/~ghc/latest/docs/html/libraries/ghc-7.10.2/LoadIface.html
 
 -- fp :: FilePath
@@ -222,15 +193,6 @@ extractAllNames ai = case ai of
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/tagged-0.8.2-4zanMqQLQHpBO0ZYm7KGkc/Data/Tagged.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/zlib-0.5.4.2-7EfFFsXSCF6JCVS3xlYBS8/Codec/Compression/Zlib/Raw.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-10/7.10.2/lib/x86_64-osx-ghc-7.10.2/text-1.2.1.3-1l1AN4I48k37RaQ6fm6CEh/Data/Text.hi"
-
-
--- DEBUG
---------
--- let a = (concatMap extractAllNames exports)
--- liftIO $ print $ length exports
--- liftIO $ forM_ exports $ \exp -> do
---   putStrLn $ toS (vcat $ concatMap getNameInfos (extractAllNames exp))
---   putStrLn "--------"
 
 
 
