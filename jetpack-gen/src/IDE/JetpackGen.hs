@@ -31,7 +31,7 @@ jetpackGen = do
   writeCabalFile reexports deps
   writeReexportModule reexports
   asSuccess $ putStrLn "done"
-  writeFile (jetpackFolder ++ "allExportsFinal.txt") (concat $ intersperse "\n" allExportsFinal)
+  writeFile (jetpackFolder ++ "full-exported-symbol-list.txt") (concat $ intersperse "\n" allExportsFinal)
   reexportedPackages <- return ()
   return ()
 

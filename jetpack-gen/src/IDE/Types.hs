@@ -13,4 +13,7 @@ data RTerm
 
 
 jetpackFolder :: String
-jetpackFolder = "jetpack/src/"
+jetpackFolder = "jetpack/"
+
+jetpackLibFolder :: String
+jetpackLibFolder = jetpackFolder ++ "src/"
