@@ -82,7 +82,7 @@ listAllModuleSorted ipis = do
   let
     a = sortBy (compare `on` snd) $ concatMap _modules ipis
     _modules ipis
-      = map (( (\(PackageIdentifier n _) -> unPackageName n)  ( sourcePackageId ipis ),) . (intercalate "." . components . exposedName)) ( exposedModules ipis )
+      = map (( (\(PackageIdentifier n _) -> unPackageName n)  ( sourcePackageId ipis ),) . intercalate "." . components . exposedName) ( exposedModules ipis )
     b = concatMap exposedModules ipis
   mapM_ print a
   return b

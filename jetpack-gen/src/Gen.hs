@@ -1,7 +1,7 @@
 module Gen where
 
 import Control.Monad
-import Data.List (isPrefixOf, intersperse)
+import Data.List (isPrefixOf, intersperse, intercalate)
 import Data.Monoid
 import Gen.Cabal (writeCabalFile)
 import Gen.Modules
@@ -10,7 +10,6 @@ import Iface
 import Log
 import State
 import Types
-import Data.List (intercalate)
 import qualified Data.Map as M
 
 jetpackGen :: IO ()
