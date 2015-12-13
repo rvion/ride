@@ -84,12 +84,18 @@ findReexports (mod, modules) previouslyExportedSymbols =
         let
           _name = toS name
           _success ifaceDecl = return (name, Just ifaceDecl)
+          _failDeprecated = do
+            liftIO.putStr.concat$["\n    info: (",toS name,") is not reexported because it is deprecated."]
+            return (name, Nothing)
           _fail = do
-            liftIO.putStrLn.concat$["    warn: impossible to find decl for (",toS name,")"]
+            liftIO.putStr.concat$["\n    warn: impossible to find decl for (",toS name,")"]
             return (name, Nothing)
 
         case Map.lookup _name declsMap of
-          Just ifaceDecl -> _success ifaceDecl
+          Just ifaceDecl ->
+            if (isJust (mi_warn_fn iface name))
+              then _failDeprecated
+              else _success ifaceDecl
           Nothing ->
             case (nameModule_maybe name) of
               Nothing -> _fail
@@ -98,10 +104,10 @@ findReexports (mod, modules) previouslyExportedSymbols =
                     -- xx= Mod.moduleName nameModule
                     -- nameModuleFS  = moduleNameFS $ Mod.moduleName nameModule
                 -- liftIO $ error $ toS nameModuleFS
-                liftIO $ putStrLn ("    - loading "++ nameModuleStr)
+                -- liftIO $ putStrLn ("    - loading "++ nameModuleStr)
                 case Map.lookup nameModuleStr modules of
                   Nothing -> do
-                    liftIO $ putStrLn $ concat ["  module (",nameModuleStr,") is really nowhere... :/"]
+                    liftIO $ putStr $ concat ["\n  module (",nameModuleStr,") is really nowhere... :/"]
                     _fail
                   Just _ifacePath -> do
                     _otherIface <- getIface _ifacePath
@@ -109,7 +115,9 @@ findReexports (mod, modules) previouslyExportedSymbols =
                     case Map.lookup _name _otherIfaceMap of
                       Just otherIfaceDecl -> do
                         -- liftIO$ putStrLn $ toS (ifType otherIfaceDecl)
-                        _success otherIfaceDecl
+                        if (isJust (mi_warn_fn _otherIface name))
+                          then _failDeprecated
+                          else _success otherIfaceDecl
                       Nothing -> _fail
 
       return $ catMaybes <$> for declsF $ \(n, decl) ->
