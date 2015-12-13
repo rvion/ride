@@ -282,4 +282,4 @@ t_unpack = I.unpack
 -- t_unpackCString# :: Addr# -> Text
 t_unpackCString# = I.unpackCString#
 
-type TText  = I.Text 
+type TText  = I.Text

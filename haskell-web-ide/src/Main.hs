@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
+
 module Main where
 
 import Control.Concurrent (forkIO)
@@ -99,6 +100,6 @@ cabalFile projectName = projectName <> ".cabal"
 stackFile :: FilePath
 stackFile = "stack.yaml"
 
-startGitWebUI = forkIO $ Control.Monad.void (system "git webgui")
+-- startGitWebUI = forkIO $ Control.Monad.void (system "git webgui")
 installGitWebUI = system installGitWebUICmd
 installGitWebUICmd = "curl https://raw.githubusercontent.com/alberthier/git-webui/master/install/installer.sh | bash"

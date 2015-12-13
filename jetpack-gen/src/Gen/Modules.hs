@@ -73,7 +73,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
           | otherwise -> do
               let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
               -- put ["-- ",_reexported_type," :: ",rType]
-              put ["type ", _reexported_type," ",tyVars, " = I.", _name, " ",tyVars]
+              put (["type ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
               return (Just _reexported_type) -- tyvars needed because type synonym must be instanciated
     -- print (previouslyExportedSymbols)
     return (previouslyExportedSymbols ++ catMaybes newDecl)

@@ -10,6 +10,7 @@ import Iface
 import Log
 import State
 import Types
+import Data.List (intercalate)
 import qualified Data.Map as M
 
 jetpackGen :: IO ()

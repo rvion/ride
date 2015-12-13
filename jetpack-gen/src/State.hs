@@ -52,9 +52,9 @@ getPackageInfos dbpath = do
   packageFiles <- filter (isSuffixOf ".conf") <$> getDirectoryContents dbpath
   mbinfos <- mapM getPackageInfo packageFiles
   infos <- flip filterM mbinfos $ \pr -> case pr of
-  ParseFailed err -> print ("error", err) >> return False
-  ParseOk [] _ -> return True
-  ParseOk warns _ -> print ("warning", warns) >> return True
+    ParseFailed err -> print ("error", err) >> return False
+    ParseOk [] _ -> return True
+    ParseOk warns _ -> print ("warning", warns) >> return True
   return $ map (\(ParseOk _ a) -> a) infos
   where getPackageInfo f = parseInstalledPackageInfo <$> readFile (dbpath </> f)
 
