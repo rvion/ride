@@ -1,4 +1,4 @@
-## RIDE project : Ride Haskell like a Pro
+# RIDE project : Ride Haskell like a Pro
 
 :warning: This is WIP. 
 Please, __don't post anything on reddit for now__.
@@ -14,15 +14,19 @@ Ride is a big project aiming to provide
  2. A full featured prelude exposing all necessary features for most project.
 
 
--------------
+### hack on this:
 
-some next steps:
-  - [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
-  - [ ] mention backpack
-  - [ ] cache module loading
-  - [ ] export promoted kind aliases
-  - [X] re-handle deprecated types
-  - [x] show commented types above each definitions
-  - [x] check how to deal with http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
+Those 2 commands should help
+```shell
+stack ghci repl
+stack build --fast --file-watch
+```
 
+### packages: 
+
+- '.' (ride) only usefull for playground. 
+- 'haskell-web-ide'
+- 'jetpack'
+- 'jetpack-gen'
+- 'reexport-demo'
 

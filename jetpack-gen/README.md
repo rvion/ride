@@ -50,3 +50,17 @@ m Data.Map.Strict
  - DataKinds to be able to reexport prefixed promoted data kinds
  - FlexibleContexts to be able to handle aliasing [Those kinds of types](http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type)
  - NoMonomorphismRestriction 
+
+
+-------------
+
+some next steps:
+  - [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
+  - [ ] mention backpack
+  - [ ] cache module loading
+  - [ ] export promoted kind aliases
+  - [X] re-handle deprecated types
+  - [x] show commented types above each definitions
+  - [x] check how to deal with http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
+
+
