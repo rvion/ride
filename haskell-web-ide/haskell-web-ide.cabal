@@ -1,18 +1,19 @@
-name:                  ride
+name:                  haskell-web-ide
 version:               0.1.0.0
 synopsis:              Haskell Web Ide using Spock, Stack and git-webui
 description:           Please see README.md
 homepage:              http://github.com/rvion/ride#readme
 author:                rvion
-maintainer:            example@example.com
-copyright:             2010 Author Here
+maintainer:            vion.remi@gmail.com
+copyright:             Rémi Vion
 category:              Web
 build-type:            Simple
 cabal-version:         >=1.10
 
-Library
-  hs-source-dirs:      .
-  exposed-modules:     REPL
+executable ride
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  other-modules:       Files
   default-language:    Haskell2010
   default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
