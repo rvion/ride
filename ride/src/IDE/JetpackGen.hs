@@ -45,7 +45,7 @@ parseDeps = do
   f <- readFile "imports.md"
   return $ map (drop 4) $ filter (isPrefixOf "  * ") $ lines f
 
--- TODO (add benchmark data)
+-- IDEA (add benchmark data .)
 trace :: (Traversable a) => String -> IO (a b) -> IO (a b)
 trace str action = do
   asStep $ putStrLn (str <> "... ")
@@ -53,6 +53,7 @@ trace str action = do
   asSuccess $ putStrLn ("  OK (" <> show (length result) <> " elems)")
   return result
 
+for :: [a] -> (a->b) -> [b]
 for = flip map
 
 writeReexportModule :: [(String, String)] -> IO ()
@@ -63,7 +64,6 @@ writeReexportModule reexports = writeFile "jetpack/src/Exports.hs" content
       [ "\nmodule Exports (module X) where"
       , "\n"] ++ map (toImport.toN) reexports ++
       [ "\n\n"]
-
 
 asStep, asSuccess, asInfo, asWarning, asError :: IO a -> IO a
 asStep = writeIn Blue
