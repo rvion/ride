@@ -1,5 +1,6 @@
 module IDE.JetpackGen where
 
+import System.Console.ANSI
 import Control.Monad
 import Data.List (isPrefixOf)
 import Data.Monoid
@@ -9,6 +10,8 @@ import IDE.JetpackGen.Modules
 import IDE.JetpackGen.Names
 import IDE.State
 import qualified Data.Map as M
+import IDE.Types
+import Data.List (intersperse)
 
 jetpackGen :: IO ()
 jetpackGen = do
@@ -27,9 +30,8 @@ jetpackGen = do
   allExportsFinal <- foldM reexportModule [] reexports
   writeCabalFile reexports deps
   writeReexportModule reexports
-  putStrLn "done"
-  putStrLn "exported_symbols:"
-  print allExportsFinal
+  asSuccess $ putStrLn "done"
+  writeFile (jetpackFolder ++ "allExportsFinal.txt") (concat $ intersperse "\n" allExportsFinal)
   reexportedPackages <- return ()
   return ()
 
@@ -46,9 +48,9 @@ parseDeps = do
 -- TODO (add benchmark data)
 trace :: (Traversable a) => String -> IO (a b) -> IO (a b)
 trace str action = do
-  putStrLn (str <> "... ")
+  asStep $ putStrLn (str <> "... ")
   result <- action
-  putStrLn ("  OK (" <> show (length result) <> " elems)")
+  asSuccess $ putStrLn ("  OK (" <> show (length result) <> " elems)")
   return result
 
 for = flip map
@@ -61,4 +63,19 @@ writeReexportModule reexports = writeFile "jetpack/src/Exports.hs" content
       [ "\nmodule Exports (module X) where"
       , "\n"] ++ map (toImport.toN) reexports ++
       [ "\n\n"]
+
+
+asStep, asSuccess, asInfo, asWarning, asError :: IO a -> IO a
+asStep = writeIn Blue
+asSuccess = writeIn Green
+asInfo = writeIn Cyan
+asWarning = writeIn Yellow
+asError = writeIn Red
+
+writeIn :: Color -> IO a -> IO a
+writeIn col x = do
+  setSGR [SetColor Foreground Vivid col]
+  _r <- x
+  setSGR [Reset]
+  return _r
 
