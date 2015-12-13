@@ -70,7 +70,6 @@ findReexports (mod, modules) previouslyExportedSymbols =
         decls = mi_decls iface
         declsMap = mkIfaceDeclMap toSDoc iface
         moduleName = toS $ mi_module iface
-        jetpackFolder = "jetpack/src/"
         _folders = jetpackFolder ++ (replace "." "/" moduleName)
       -- liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
 
