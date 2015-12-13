@@ -18,10 +18,10 @@ executable jetpack-gen
                        IDE.Types
                        IDE.State
                        IDE.NameInfos
-                       IDE.JetpackGen
-                       IDE.JetpackGen.Names
-                       IDE.JetpackGen.Cabal
-                       IDE.JetpackGen.Modules
+                       IDE.Gen
+                       IDE.Gen.Names
+                       IDE.Gen.Cabal
+                       IDE.Gen.Modules
   default-language:    Haskell2010
   default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N

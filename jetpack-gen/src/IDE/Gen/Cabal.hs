@@ -1,6 +1,6 @@
-module IDE.JetpackGen.Cabal where
+module IDE.Gen.Cabal where
 
-import IDE.JetpackGen.Names
+import IDE.Gen.Names
 import Data.List
 
 -- Necessary Extensions

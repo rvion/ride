@@ -1,4 +1,4 @@
-module IDE.JetpackGen.Names where
+module IDE.Gen.Names where
 
 import Data.List
 import Data.Char

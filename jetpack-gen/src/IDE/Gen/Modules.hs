@@ -1,4 +1,4 @@
-module IDE.JetpackGen.Modules where
+module IDE.Gen.Modules where
 
 import Control.Monad (forM)
 import Data.Char (toLower, toUpper, isLower) -- , isUpper)
@@ -58,10 +58,8 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
               putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
               return Nothing
           | (head _name) `elem` operators -> do
-              -- putStrLn rType
               put ["-- (",_name,") :: ",rType]
               put ["(",_name,")", " = (I.", _name,")\n"]
-              -- print _reexported_name
               return (Just _reexported_name)
           | isLower (head _name) || (head _name) == '_' -> do
               put ["-- ",_reexported_name," :: ",rType]
@@ -77,24 +75,6 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
               -- put ["-- ",_reexported_type," :: ",rType]
               put ["type ", _reexported_type," ",tyVars, " = I.", _name, " ",tyVars]
               return (Just _reexported_type) -- tyvars needed because type synonym must be instanciated
-            -- _  -> do
-            --   put ["type ", _reexported_type, " = I.", _name, " -- not declared in module, :/ ? "]
-            --   return (Just _reexported_type)
-        -- _ -> do
-              -- return Nothing
-
-              -- put $ case decl of
-              --   IfaceId{} ->
-              -- ["\n", _idPrefix, sep, _name, " :: ", replace "\n" "\n  " (toS _type)
-              -- put [_reexported_name, " = I.", _name]
-              -- IfaceData{} ->
-              -- put ["type ", _typePrefix,sep, _name, " = I.", _name]
-              -- return (Just _reexported_name)
-              -- IfaceSynonym{} -> ["-- (",_name,") :: IfaceSynonym -> NOT YET SUPPORTED"]
-              -- IfaceFamily{} -> ["-- (",_name,") :: IfaceFamily -> NOT YET SUPPORTED"]
-              -- IfaceClass{} -> ["-- (",_name,") :: IfaceClass -> NOT YET SUPPORTED"]
-              -- IfaceAxiom{} -> ["-- (",_name,") :: IfaceAxiom -> NOT YET SUPPORTED"]
-              -- IfacePatSyn{} -> ["-- (",_name,") :: IfacePatSyn -> NOT YET SUPPORTED"]
     -- print (previouslyExportedSymbols)
     return (previouslyExportedSymbols ++ (catMaybes newDecl))
 

@@ -1,13 +1,13 @@
-module IDE.JetpackGen where
+module IDE.Gen where
 
 import System.Console.ANSI
 import Control.Monad
 import Data.List (isPrefixOf)
 import Data.Monoid
 import IDE.Iface
-import IDE.JetpackGen.Cabal (writeCabalFile)
-import IDE.JetpackGen.Modules
-import IDE.JetpackGen.Names
+import IDE.Gen.Cabal (writeCabalFile)
+import IDE.Gen.Modules
+import IDE.Gen.Names
 import IDE.State
 import qualified Data.Map as M
 import IDE.Types

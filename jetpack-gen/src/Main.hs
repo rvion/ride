@@ -1,6 +1,6 @@
 module Main where
 
-import IDE.JetpackGen
+import IDE.Gen
 
 main :: IO ()
 main = do
