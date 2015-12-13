@@ -11,7 +11,7 @@ type Acc a b = Yo a b
 --   Type synonym ‘Acc’ should have 2 arguments, but has been given none
 --   In the type declaration for ‘YoPlop’
 
-data Eq a => Yo a b = Yo { aa :: a, bb :: b, cc :: (a,b,b,a)}
+data Yo a b = Yo { aa :: a, bb :: b, cc :: (a,b,b,a)}
 data Foo = Foo1 {test :: Int} | Foo2 {test::Int, bar :: String}
 
 
