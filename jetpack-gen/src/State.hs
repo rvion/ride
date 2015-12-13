@@ -1,29 +1,29 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections #-}
 
-module IDE.State
+module State
   ( getDB
   , getPackageInfos
   , listAllModuleSorted
   , packageModulesIface
   ) where
 
-import Data.Text (Text)
-import Data.List (isSuffixOf, intercalate, sort, sortBy)
-import qualified Data.Text as T
-import Control.Monad
-import qualified System.Process.Text as T
-import qualified System.Process as S
 -- import Data.Aeson
+import Control.Monad
 import Data.Function (on)
+import Data.List (isSuffixOf, intercalate, sort, sortBy)
+import Data.Map (Map)
+import Data.Text (Text)
 import Distribution.InstalledPackageInfo -- (parseInstalledPackageInfo)
 import Distribution.ModuleName
-import System.Directory.Tree
-import System.Directory
-import Data.Map (Map)
-import qualified Data.Map as M
-import System.FilePath
 import Distribution.Package
+import qualified Data.Map as M
+import qualified Data.Text as T
+import qualified System.Process as S
+import qualified System.Process.Text as T
+import System.Directory
+import System.Directory.Tree
+import System.FilePath
 
 import Control.Monad.Trans.State
 

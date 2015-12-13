@@ -1,4 +1,4 @@
-module IDE.NameInfos where
+module NameInfos where
 import Name
 import Outputable
 

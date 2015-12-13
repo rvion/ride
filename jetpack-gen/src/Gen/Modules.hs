@@ -1,11 +1,11 @@
-module IDE.Gen.Modules where
+module Gen.Modules where
 
 import Control.Monad (forM)
 import Data.Char (toLower, toUpper, isLower) -- , isUpper)
 import Data.List
 import Data.Maybe
 import Data.String.Utils
-import IDE.Types
+import Types
 import System.Directory (createDirectoryIfMissing)
 import System.IO
 

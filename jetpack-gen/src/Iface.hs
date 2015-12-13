@@ -3,7 +3,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE BangPatterns,Rank2Types #-}
 
-module IDE.Iface where
+module Iface where
 
 import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
 import BinIface
@@ -15,7 +15,7 @@ import Data.String.Utils
 import DynFlags
 import GHC
 import GHC.Paths ( libdir )
-import IDE.Types
+import Types
 import IfaceSyn  -- (ifType, ifName)
 import Name
 import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs

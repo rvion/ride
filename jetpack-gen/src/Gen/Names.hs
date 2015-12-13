@@ -1,4 +1,4 @@
-module IDE.Gen.Names where
+module Gen.Names where
 
 import Data.List
 import Data.Char

@@ -1,6 +1,6 @@
-module IDE.Gen.Cabal where
+module Gen.Cabal where
 
-import IDE.Gen.Names
+import Gen.Names
 import Data.List
 
 -- Necessary Extensions

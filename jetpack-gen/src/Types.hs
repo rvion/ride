@@ -1,4 +1,4 @@
-module IDE.Types where
+module Types where
 
 import qualified Data.Map as Map
 import Data.Map (Map)

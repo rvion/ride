@@ -1,17 +1,17 @@
-module IDE.Gen where
+module Gen where
 
-import System.Console.ANSI
 import Control.Monad
 import Data.List (isPrefixOf)
 import Data.Monoid
-import IDE.Iface
-import IDE.Gen.Cabal (writeCabalFile)
-import IDE.Gen.Modules
-import IDE.Gen.Names
-import IDE.State
-import qualified Data.Map as M
-import IDE.Types
 import Data.List (intersperse)
+import Gen.Cabal (writeCabalFile)
+import Gen.Modules
+import Gen.Names
+import Iface
+import Log
+import State
+import Types
+import qualified Data.Map as M
 
 jetpackGen :: IO ()
 jetpackGen = do
@@ -64,18 +64,4 @@ writeReexportModule reexports = writeFile "jetpack/src/Exports.hs" content
       [ "\nmodule Exports (module X) where"
       , "\n"] ++ map (toImport.toN) reexports ++
       [ "\n\n"]
-
-asStep, asSuccess, asInfo, asWarning, asError :: IO a -> IO a
-asStep = writeIn Blue
-asSuccess = writeIn Green
-asInfo = writeIn Cyan
-asWarning = writeIn Yellow
-asError = writeIn Red
-
-writeIn :: Color -> IO a -> IO a
-writeIn col x = do
-  setSGR [SetColor Foreground Vivid col]
-  _r <- x
-  setSGR [Reset]
-  return _r
 
