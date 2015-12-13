@@ -14,11 +14,11 @@ import           Gen.Types
 
 jetpackGen :: IO ()
 jetpackGen = do
-  dbs <- trace "loading package DB" getDB
-  packages <- trace "loading packages" (concat <$> mapM getPackageInfos dbs)
-  modules <- trace "loading modules"  (return $ M.fromList $ concatMap packageModulesIface packages)
+  dbs       <- trace "loading package DB" getDB
+  packages  <- trace "loading packages" (concat <$> mapM getPackageInfos dbs)
+  modules   <- trace "loading modules"  (return $ M.fromList $ concatMap packageModulesIface packages)
   reexports <- trace "loading reexports plan" parseReexports
-  deps <- trace "loading cabal deps" parseDeps
+  deps      <- trace "loading cabal deps" parseDeps
 
   let
     reexportModule = \previouslyExportedSymbols (prefix, mod) ->

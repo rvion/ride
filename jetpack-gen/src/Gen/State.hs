@@ -8,11 +8,10 @@ module Gen.State
   , packageModulesIface
   ) where
 
--- import Data.Aeson
 import           Control.Monad
+import           Control.Monad.Trans.State
 import           Data.Function                     (on)
-import           Data.List                         (intercalate, isSuffixOf,
-                                                    sort, sortBy)
+import           Data.List                         (intercalate, isSuffixOf, sort, sortBy)
 import           Data.Map                          (Map)
 import qualified Data.Map                          as M
 import           Data.Text                         (Text)
@@ -25,8 +24,6 @@ import           System.Directory.Tree
 import           System.FilePath
 import qualified System.Process                    as S
 import qualified System.Process.Text               as T
-
-import           Control.Monad.Trans.State
 
 data State = State
   { dbs       :: [FilePath]
@@ -109,6 +106,7 @@ buildHoogle = do
 demodb :: FilePath
 demodb = "/Users/rvion/.stack/programs/x86_64-osx/ghc-7.10.2/lib/ghc-7.10.2/package.conf.d"
 
+for :: [a] -> (a -> b) -> [b]
 for = flip map
 
 ---------------------

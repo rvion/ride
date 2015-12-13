@@ -8,5 +8,4 @@ module JetPack
   ) where
 
 import           BasePrelude as X
-import           Exports     as X hiding (yield, (!!), (&), (<$>), (<**>), (<>),
-                                   (\\))
+import           Exports     as X hiding (yield, (!!), (&), (<$>), (<**>), (<>), (\\))

@@ -25,13 +25,9 @@ import           Network.Wai.Middleware.Static        (addBase, staticPolicy)
 import           Web.Spock
 
 import           System.FilePath.Find                 (extension, find, (==?))
-import           System.IO                            (Handle, hPrint,
-                                                       hPutStrLn)
-import           System.Process                       (ProcessHandle,
-                                                       StdStream (..),
-                                                       createProcess, proc,
-                                                       std_err, std_in, std_out,
-                                                       system, terminateProcess)
+import           System.IO                            (Handle, hPrint, hPutStrLn)
+import           System.Process                       (ProcessHandle, StdStream (..), createProcess, proc, std_err,
+                                                       std_in, std_out, system, terminateProcess)
 
 import           Files
 -- import Yolo.Test (demo)
