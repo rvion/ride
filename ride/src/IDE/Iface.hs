@@ -8,9 +8,9 @@ module IDE.Iface where
 import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
 import BinIface
 import Control.Monad (forM)
-import Data.Char (toLower, toUpper, isLower, isUpper)
+-- import Data.Char (toLower, toUpper, isLower, isUpper)
 import Name
-import Data.List
+-- import Data.List
 import Data.Maybe
 import Data.String.Utils
 import DynFlags
@@ -20,9 +20,9 @@ import IDE.Types
 import IfaceSyn  -- (ifType, ifName)
 import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
 import qualified Data.Map as Map
-import System.Directory (createDirectoryIfMissing)
-import Module as Mod
-import System.IO
+-- import System.Directory (createDirectoryIfMissing)
+-- import Module as Mod
+-- import System.IO
 import TcRnMonad
 import Data.Map (Map)
 
@@ -57,11 +57,10 @@ findReexports (mod, modules) previouslyExportedSymbols =
       pkgs   <- setSessionDynFlags dflags
       sess   <- getSession
 
-      -- define context-dependant helper functions
       let
+        -- define context-dependant helper functions
         toSDoc :: SDoc -> String
         toSDoc = showSDoc dflags
-
         toS :: Outputable a => a -> String
         toS = toSDoc . ppr
 
@@ -74,19 +73,9 @@ findReexports (mod, modules) previouslyExportedSymbols =
         exportedSymbols = concatMap extractAllNames ifaceExports
         decls = mi_decls iface
         declsMap = mkIfaceDeclMap toSDoc iface
-
         moduleName = toS $ mi_module iface
         jetpackFolder = "jetpack/src/"
         _folders = jetpackFolder ++ (replace "." "/" moduleName)
-          -- let parts = splitOn "." moduleName
-          -- in (concat$ intersperse "/" (init parts), last parts)
-        -- (p:ps) = prefix
-        -- sep = "_"
-        -- _idPrefix = (toLower p : ps)
-        -- _typePrefix = (toUpper p : ps)
-        -- _fileName = concat ["As", _typePrefix]
-        -- _filePath = (_folders ++ "/" ++ _fileName ++ ".hs")
-
       -- liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
 
       -- find all decls corresponding to names
@@ -126,12 +115,19 @@ findReexports (mod, modules) previouslyExportedSymbols =
       return $ catMaybes <$> for declsF $ \(n, decl) ->
         case decl of
           Nothing -> Nothing
-          Just (IfaceId{}) ->
-            Just $ RId (toS n)
-          Just (IfaceData{ifTyVars}) ->
-            Just (RData (toS n) (length ifTyVars))
-          Just (IfaceSynonym{ifTyVars}) ->
-            Just (RData (toS n) (length ifTyVars))
+          Just (_t@(IfaceId{})) -> Just $ RId (toS n) (toS (ifType _t))
+          Just (_t@(IfaceData{})) -> Just $
+            RData
+              { rName = (toS n)
+              , rType = (toS (ifType _t))
+              , rNbTyVars = (length (ifTyVars _t))
+              }
+          Just (_t@(IfaceSynonym{})) -> Just $
+            RData
+              { rName = (toS n)
+              , rType = (toS (ifType _t))
+              , rNbTyVars = (length (ifTyVars _t))
+              }
           Just (IfaceFamily{}) -> Nothing
           Just (IfaceClass{}) -> Nothing
           Just (IfaceAxiom{}) -> Nothing
@@ -187,14 +183,11 @@ extractAllNames ai = case ai of
 -- test = printReexports ("lens", "/Users/RemiVion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/microlens-platform-0.1.5.0-GZu1yvU44tYD8BDHxEQWch/Lens/Micro/Platform.hi") []
 
 -- http://downloads.haskell.org/~ghc/latest/docs/html/libraries/ghc-7.10.2/LoadIface.html
-
 -- fp :: FilePath
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/text-1.2.1.3-1l1AN4I48k37RaQ6fm6CEh/Data/Text.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/tagged-0.8.2-4zanMqQLQHpBO0ZYm7KGkc/Data/Tagged.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/zlib-0.5.4.2-7EfFFsXSCF6JCVS3xlYBS8/Codec/Compression/Zlib/Raw.hi"
 -- fp = "/Users/rvion/.stack/snapshots/x86_64-osx/nightly-2015-11-10/7.10.2/lib/x86_64-osx-ghc-7.10.2/text-1.2.1.3-1l1AN4I48k37RaQ6fm6CEh/Data/Text.hi"
-
-
 
 -- liftIO $ print $ toS $ (map getNameInfos
 

@@ -3,8 +3,6 @@ module Data.Map.Strict.AsM where
 
 import Data.Map.Strict as I
 
-(!) = (I.!)
-(\\) = (I.\\)
 m_assocs = I.assocs
 m_delete = I.delete
 m_deleteAt = I.deleteAt

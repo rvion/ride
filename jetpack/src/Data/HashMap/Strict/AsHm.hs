@@ -3,7 +3,6 @@ module Data.HashMap.Strict.AsHm where
 
 import Data.HashMap.Strict as I
 
-(!) = (I.!)
 hm_delete = I.delete
 hm_difference = I.difference
 hm_elems = I.elems

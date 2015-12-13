@@ -8,6 +8,6 @@ type Modules = Map String FilePath
 
 -- | RTerm stands for Reexportable Term
 data RTerm
-  = RId { rName :: String }
-  | RData { rName :: String, rNbTyVars :: Int }
+  = RId { rName, rType :: String }
+  | RData { rName, rType :: String, rNbTyVars :: Int }
   -- | RSynonym { rName :: String, rNbTyVars :: Int }

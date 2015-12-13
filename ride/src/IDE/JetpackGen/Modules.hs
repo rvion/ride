@@ -1,24 +1,24 @@
 module IDE.JetpackGen.Modules where
 
-import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
-import BinIface
+-- import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
+-- import BinIface
 import Control.Monad (forM)
-import Data.Char (toLower, toUpper, isLower, isUpper)
-import Name
+import Data.Char (toLower, toUpper, isLower) -- , isUpper)
+-- import Name
 import Data.List
 import Data.Maybe
 import Data.String.Utils
-import DynFlags
-import GHC
-import GHC.Paths ( libdir )
+-- import DynFlags
+-- import GHC
+-- import GHC.Paths ( libdir )
 import IDE.Types
-import IfaceSyn  -- (ifType, ifName)
-import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
-import qualified Data.Map as Map
+-- import IfaceSyn  -- (ifType, ifName)
+-- import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
+-- import qualified Data.Map as Map
 import System.Directory (createDirectoryIfMissing)
 import System.IO
-import TcRnMonad
-import Data.Map (Map)
+-- import TcRnMonad
+-- import Data.Map (Map)
 
 
 whenValid "" = error "prefix can't be empty"
@@ -57,24 +57,27 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
     newDecl <- forM reexports $ \rTerm -> do
       let
         _name = rName rTerm
-        _reexported_name = concat [_idPrefix, sep, _name]
+        _reexported_name =
+          if (head _name) `elem` operators
+            then _name
+            else concat [_idPrefix, sep, _name]
         _reexported_type = concat [_typePrefix, _name]
         -- _type = typeSdoc decl
 
       case rTerm of
-        RId _
+        RId _ _
           | (_reexported_name `elem` previouslyExportedSymbols) -> do
               putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
               return Nothing
           | (head _name) `elem` operators -> do
               put ["(",_name,")", " = (I.", _name,")"]
-              return (Just _name)
+              print _reexported_name
+              return (Just _reexported_name)
           | isLower (head _name) || (head _name) == '_' -> do
               put [_reexported_name, " = I.", _name]
               return (Just _reexported_name)
           | otherwise -> error "ahaha"
-            -- RSynonym _ _ -> error "not yet SUPPORTED"
-        RData _ nbTyVars
+        RData _ _ nbTyVars
           | (_reexported_type `elem` previouslyExportedSymbols) -> do
               putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
               return Nothing

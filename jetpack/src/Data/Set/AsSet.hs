@@ -3,7 +3,6 @@ module Data.Set.AsSet where
 
 import Data.Set as I
 
-(\\) = (I.\\)
 set_delete = I.delete
 set_deleteAt = I.deleteAt
 set_deleteFindMax = I.deleteFindMax

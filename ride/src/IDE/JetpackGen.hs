@@ -5,15 +5,15 @@ import IDE.State
 import Data.List (isPrefixOf)
 import Data.Monoid
 import Control.Monad
-import Data.List (intersperse)
-import Data.Char
-import Data.Map (Map)
-import System.Directory (createDirectoryIfMissing)
+-- import Data.List (intersperse)
+-- import Data.Char
+-- import Data.Map (Map)
+-- import System.Directory (createDirectoryIfMissing)
 import qualified Data.Map as M
 import IDE.JetpackGen.Cabal (writeCabalFile)
 import IDE.JetpackGen.Names
 import IDE.JetpackGen.Modules
-import IDE.Types
+-- import IDE.Types
 
 jetpackGen :: IO ()
 jetpackGen = do
