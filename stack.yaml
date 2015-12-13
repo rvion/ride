@@ -1,6 +1,7 @@
 flags: {}
 packages:
 - '.'
+- 'haskell-web-ide'
 - 'jetpack'
 - 'jetpack-gen'
 - 'reexport-demo'
