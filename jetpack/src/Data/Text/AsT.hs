@@ -93,4 +93,7 @@ t_words = I.words
 t_zip = I.zip
 t_zipWith = I.zipWith
 t_empty = I.empty
+t_singleton = I.singleton
+t_unpack = I.unpack
+t_unpackCString# = I.unpackCString#
 type TText  = I.Text 

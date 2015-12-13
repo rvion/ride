@@ -3,6 +3,28 @@ module Data.HashMap.Strict.AsHm where
 
 import Data.HashMap.Strict as I
 
+(!) = (I.!)
+hm_delete = I.delete
+hm_difference = I.difference
+hm_elems = I.elems
+hm_empty = I.empty
+hm_filter = I.filter
+hm_filterWithKey = I.filterWithKey
+hm_foldl' = I.foldl'
+hm_foldlWithKey' = I.foldlWithKey'
+hm_foldr = I.foldr
+hm_foldrWithKey = I.foldrWithKey
+hm_intersection = I.intersection
+hm_keys = I.keys
+hm_lookup = I.lookup
+hm_lookupDefault = I.lookupDefault
+hm_member = I.member
+hm_null = I.null
+hm_size = I.size
+hm_toList = I.toList
+hm_traverseWithKey = I.traverseWithKey
+hm_union = I.union
+hm_unions = I.unions
 hm_adjust = I.adjust
 hm_fromList = I.fromList
 hm_fromListWith = I.fromListWith
@@ -13,3 +35,4 @@ hm_map = I.map
 hm_mapWithKey = I.mapWithKey
 hm_singleton = I.singleton
 hm_unionWith = I.unionWith
+type HmHashMap a b = I.HashMap a b
