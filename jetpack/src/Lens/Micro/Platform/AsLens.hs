@@ -162,10 +162,10 @@ lens_sets = I.sets
 -- lens_traversed :: forall (f :: * -> *) a b. Traversable f => Traversal (f a) (f b) a b
 lens_traversed = I.traversed
 
-type LensDefName  = I.DefName 
+type LensDefName  = I.DefName
 type LensFold a b = I.Fold a b
 type LensGetter a b = I.Getter a b
-type LensLensRules  = I.LensRules 
+type LensLensRules  = I.LensRules
 type LensASetter a b c d = I.ASetter a b c d
 type LensASetter' a b = I.ASetter' a b
 type LensGetting a b c = I.Getting a b c

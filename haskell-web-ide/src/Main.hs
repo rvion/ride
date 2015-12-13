@@ -38,8 +38,7 @@ data Ctx = Ctx  { ctxIde :: Maybe IDE }
 type M = StateT Ctx IO
 
 main :: IO ()
-main = do
-  -- demo
+main =
   return ()
   -- port <- maybe 3000 read  <$> lookupEnv "PORT"
   -- runSpock port $ spockT runM ride
@@ -50,7 +49,7 @@ runM = flip evalStateT (Ctx Nothing)
 ride :: SpockT M ()
 ride = do
     middleware $ staticPolicy (addBase "static")
-    middleware $ logStdoutDev
+    middleware logStdoutDev
     get "files" $ liftIO fp' >>= json
     get "" $ file "test" "static/index.html"
     post "save" $ json $ object
@@ -61,7 +60,7 @@ ride = do
 
 withIde :: (IDE -> IO String) -> ActionT M String
 withIde f = do
-    ctx <- lift $ S.get
+    ctx <- lift S.get
     case ctxIde ctx of
         Nothing -> lift restartIde >> withIde f
         Just ide -> liftIO $ f ide
@@ -100,6 +99,6 @@ cabalFile projectName = projectName <> ".cabal"
 stackFile :: FilePath
 stackFile = "stack.yaml"
 
-startGitWebUI = forkIO $ system "git webgui" >> return ()
+startGitWebUI = forkIO $ Control.Monad.void (system "git webgui")
 installGitWebUI = system installGitWebUICmd
 installGitWebUICmd = "curl https://raw.githubusercontent.com/alberthier/git-webui/master/install/installer.sh | bash"

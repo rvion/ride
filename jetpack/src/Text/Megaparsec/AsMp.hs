@@ -210,9 +210,9 @@ mp_setTabWidth = I.setTabWidth
 -- mp_unexpected :: forall (m :: * -> *) a s t. MonadParsec s m t => String -> m a
 mp_unexpected = I.unexpected
 
-type MpMessage  = I.Message 
-type MpParseError  = I.ParseError 
-type MpSourcePos  = I.SourcePos 
+type MpMessage  = I.Message
+type MpParseError  = I.ParseError
+type MpSourcePos  = I.SourcePos
 type MpParsec a = I.Parsec a
 type MpParsecT a b c = I.ParsecT a b c
 type MpState a = I.State a

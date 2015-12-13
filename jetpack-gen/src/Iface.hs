@@ -1,7 +1,7 @@
-{-# LANGUAGE StandaloneDeriving, NamedFieldPuns #-}
+{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE TypeSynonymInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE BangPatterns,Rank2Types #-}
+
+{-# LANGUAGE Rank2Types #-}
 
 module Iface where
 
@@ -46,96 +46,94 @@ mkIfaceDeclMap toS iface =
 
 findReexports :: (String, Modules) -> [String] -> IO [RTerm]
 findReexports (mod, modules) previouslyExportedSymbols =
-  defaultErrorHandler defaultFatalMessager defaultFlushOut $ do
-    -- Init GHC compiler
+  defaultErrorHandler defaultFatalMessager defaultFlushOut $
     runGhc (Just libdir) $ do
-      dflags <- getSessionDynFlags
-      pkgs   <- setSessionDynFlags dflags
-      sess   <- getSession
+  dflags <- getSessionDynFlags
+  pkgs   <- setSessionDynFlags dflags
+  sess   <- getSession
 
-      let
-        -- define context-dependant helper functions
-        toSDoc :: SDoc -> String
-        toSDoc = showSDoc dflags
-        toS :: Outputable a => a -> String
-        toS = toSDoc . ppr
+  let
+    -- define context-dependant helper functions
+    toSDoc :: SDoc -> String
+    toSDoc = showSDoc dflags
+    toS :: Outputable a => a -> String
+    toS = toSDoc . ppr
 
-      -- load the initial .hi interface file
-      iface <- getIface (modules Map.! mod)
+  -- load the initial .hi interface file
+  iface <- getIface (modules Map.! mod)
 
-      let
-        -- we want to reexport all IfacesExport,
-        ifaceExports = mi_exports iface
-        exportedSymbols = concatMap extractAllNames ifaceExports
-        decls = mi_decls iface
-        declsMap = mkIfaceDeclMap toSDoc iface
-        moduleName = toS $ mi_module iface
-        _folders = jetpackLibFolder ++ (replace "." "/" moduleName)
-      -- liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
+  let
+    -- we want to reexport all IfacesExport,
+    ifaceExports = mi_exports iface
+    exportedSymbols = concatMap extractAllNames ifaceExports
+    decls = mi_decls iface
+    declsMap = mkIfaceDeclMap toSDoc iface
+    moduleName = toS $ mi_module iface
+    _folders = jetpackLibFolder ++ replace "." "/" moduleName
+  -- liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
 
-      -- find all decls corresponding to names
-      declsF <- forM exportedSymbols $ \name -> do
-        -- liftIO$putStrLn("  trying to find "++toS name)
-        let
-          _name = toS name
-          _success ifaceDecl = return (name, Just ifaceDecl)
-          _failDeprecated = do
-            liftIO.putStrLn.concat$["  info: (",toS name,") is not reexported because it is deprecated."]
-            return (name, Nothing)
-          _fail = do
-            liftIO.putStrLn.concat$["  warn: impossible to find decl for (",toS name,")"]
-            return (name, Nothing)
+  -- find all decls corresponding to names
+  declsF <- forM exportedSymbols $ \name -> do
+    -- liftIO$putStrLn("  trying to find "++toS name)
+    let
+      _name = toS name
+      _success ifaceDecl = return (name, Just ifaceDecl)
+      _failDeprecated = do
+        liftIO.putStrLn.concat$["  info: (",toS name,") is not reexported because it is deprecated."]
+        return (name, Nothing)
+      _fail = do
+        liftIO.putStrLn.concat$["  warn: impossible to find decl for (",toS name,")"]
+        return (name, Nothing)
 
-        case Map.lookup _name declsMap of
-          Just ifaceDecl ->
-            if (isJust (mi_warn_fn iface name))
-              then _failDeprecated
-              else _success ifaceDecl
-          Nothing ->
-            case (nameModule_maybe name) of
-              Nothing -> _fail
-              Just nameModule -> do -- eg: Data.Either
-                let nameModuleStr = toS nameModule
-                    -- xx= Mod.moduleName nameModule
-                    -- nameModuleFS  = moduleNameFS $ Mod.moduleName nameModule
-                -- liftIO $ error $ toS nameModuleFS
-                -- liftIO $ putStrLn ("    - loading "++ nameModuleStr)
-                case Map.lookup nameModuleStr modules of
-                  Nothing -> do
-                    liftIO $ putStr $ concat ["\n  module (",nameModuleStr,") is really nowhere... :/"]
-                    _fail
-                  Just _ifacePath -> do
-                    _otherIface <- getIface _ifacePath
-                    let _otherIfaceMap = mkIfaceDeclMap toSDoc _otherIface
-                    case Map.lookup _name _otherIfaceMap of
-                      Just otherIfaceDecl -> do
-                        -- liftIO$ putStrLn $ toS (ifType otherIfaceDecl)
-                        if (isJust (mi_warn_fn _otherIface name))
-                          then _failDeprecated
-                          else _success otherIfaceDecl
-                      Nothing -> _fail
+    case Map.lookup _name declsMap of
+      Just ifaceDecl ->
+        if isJust (mi_warn_fn iface name)
+          then _failDeprecated
+          else _success ifaceDecl
+      Nothing ->
+        case nameModule_maybe name of
+          Nothing -> _fail
+          Just nameModule -> do -- eg: Data.Either
+            let nameModuleStr = toS nameModule
+                -- xx= Mod.moduleName nameModule
+                -- nameModuleFS  = moduleNameFS $ Mod.moduleName nameModule
+            -- liftIO $ error $ toS nameModuleFS
+            -- liftIO $ putStrLn ("    - loading "++ nameModuleStr)
+            case Map.lookup nameModuleStr modules of
+              Nothing -> do
+                liftIO $ putStr $ concat ["\n  module (",nameModuleStr,") is really nowhere... :/"]
+                _fail
+              Just _ifacePath -> do
+                _otherIface <- getIface _ifacePath
+                let _otherIfaceMap = mkIfaceDeclMap toSDoc _otherIface
+                case Map.lookup _name _otherIfaceMap of
+                  Just otherIfaceDecl ->
+                    if isJust (mi_warn_fn _otherIface name)
+                      then _failDeprecated
+                      else _success otherIfaceDecl
+                  Nothing -> _fail
 
-      let onOneLine = concat . intersperse " " . lines
-      return $ catMaybes <$> for declsF $ \(n, decl) ->
-        case decl of
-          Nothing -> Nothing
-          Just (_t@(IfaceId{})) -> Just $ RId (toS n) (onOneLine $ toS (ifType _t))
-          Just (_t@(IfaceData{})) -> Just $
-            RData
-              { rName = (toS n)
-              , rType = (onOneLine $ toS (ifType _t))
-              , rNbTyVars = (length (ifTyVars _t))
-              }
-          Just (_t@(IfaceSynonym{})) -> Just $
-            RData
-              { rName = (toS n)
-              , rType = (onOneLine $ toS (ifType _t))
-              , rNbTyVars = (length (ifTyVars _t))
-              }
-          Just (IfaceFamily{}) -> Nothing
-          Just (IfaceClass{}) -> Nothing
-          Just (IfaceAxiom{}) -> Nothing
-          Just (IfacePatSyn{}) -> Nothing
+  let onOneLine = unwords . lines
+  return $ catMaybes <$> for declsF $ \(n, decl) ->
+    case decl of
+      Nothing -> Nothing
+      Just (_t@(IfaceId{})) -> Just $ RId (toS n) (onOneLine $ toS (ifType _t))
+      Just (_t@(IfaceData{})) -> Just
+        RData
+          { rName = toS n
+          , rType = onOneLine $ toS (ifType _t)
+          , rNbTyVars = length (ifTyVars _t)
+          }
+      Just (_t@(IfaceSynonym{})) -> Just
+        RData
+          { rName = toS n
+          , rType = onOneLine $ toS (ifType _t)
+          , rNbTyVars = length (ifTyVars _t)
+          }
+      Just (IfaceFamily{}) -> Nothing
+      Just (IfaceClass{}) -> Nothing
+      Just (IfaceAxiom{}) -> Nothing
+      Just (IfacePatSyn{}) -> Nothing
 
 
 -- isDeprecated n = mi_warn_fn iface

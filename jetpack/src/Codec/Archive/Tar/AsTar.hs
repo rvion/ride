@@ -39,7 +39,7 @@ tar_unpack = I.unpack
 -- tar_write :: [Entry] -> ByteString
 tar_write = I.write
 
-type TarFormatError  = I.FormatError 
+type TarFormatError  = I.FormatError
 type TarEntries a = I.Entries a
-type TarEntry  = I.Entry 
-type TarEntryContent  = I.EntryContent 
+type TarEntry  = I.Entry
+type TarEntryContent  = I.EntryContent

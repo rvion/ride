@@ -11,6 +11,6 @@ demo_b = I.b
 
 type DemoEither a b = I.Either a b
 type DemoAcc a b = I.Acc a b
-type DemoFoo  = I.Foo 
-type DemoThisIsAType  = I.ThisIsAType 
+type DemoFoo  = I.Foo
+type DemoThisIsAType  = I.ThisIsAType
 type DemoYo a b = I.Yo a b

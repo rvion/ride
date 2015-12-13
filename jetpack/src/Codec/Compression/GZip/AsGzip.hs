@@ -66,10 +66,10 @@ gzip_noCompression = I.noCompression
 -- gzip_windowBits :: Int -> WindowBits
 gzip_windowBits = I.windowBits
 
-type GzipCompressParams  = I.CompressParams 
-type GzipDecompressParams  = I.DecompressParams 
-type GzipCompressionLevel  = I.CompressionLevel 
-type GzipCompressionStrategy  = I.CompressionStrategy 
-type GzipMemoryLevel  = I.MemoryLevel 
-type GzipMethod  = I.Method 
-type GzipWindowBits  = I.WindowBits 
+type GzipCompressParams  = I.CompressParams
+type GzipDecompressParams  = I.DecompressParams
+type GzipCompressionLevel  = I.CompressionLevel
+type GzipCompressionStrategy  = I.CompressionStrategy
+type GzipMemoryLevel  = I.MemoryLevel
+type GzipMethod  = I.Method
+type GzipWindowBits  = I.WindowBits

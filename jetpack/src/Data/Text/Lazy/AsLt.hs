@@ -300,4 +300,4 @@ lt_zip = I.zip
 -- lt_zipWith :: (Char -> Char -> Char) -> Text -> Text -> Text
 lt_zipWith = I.zipWith
 
-type LtText  = I.Text 
+type LtText  = I.Text

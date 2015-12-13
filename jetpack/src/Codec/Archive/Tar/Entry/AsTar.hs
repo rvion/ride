@@ -54,13 +54,13 @@ tar_toLinkTarget = I.toLinkTarget
 -- tar_toTarPath :: Bool -> FilePath -> Either String TarPath
 tar_toTarPath = I.toTarPath
 
-type TarDevMajor  = I.DevMajor 
-type TarDevMinor  = I.DevMinor 
-type TarEpochTime  = I.EpochTime 
-type TarFileSize  = I.FileSize 
-type TarFormat  = I.Format 
-type TarLinkTarget  = I.LinkTarget 
-type TarOwnership  = I.Ownership 
-type TarPermissions  = I.Permissions 
-type TarTarPath  = I.TarPath 
-type TarTypeCode  = I.TypeCode 
+type TarDevMajor  = I.DevMajor
+type TarDevMinor  = I.DevMinor
+type TarEpochTime  = I.EpochTime
+type TarFileSize  = I.FileSize
+type TarFormat  = I.Format
+type TarLinkTarget  = I.LinkTarget
+type TarOwnership  = I.Ownership
+type TarPermissions  = I.Permissions
+type TarTarPath  = I.TarPath
+type TarTypeCode  = I.TypeCode

@@ -273,4 +273,4 @@ lbs_foldlChunks = I.foldlChunks
 -- lbs_foldrChunks :: forall a. (ByteString -> a -> a) -> a -> ByteString -> a
 lbs_foldrChunks = I.foldrChunks
 
-type LbsByteString  = I.ByteString 
+type LbsByteString  = I.ByteString

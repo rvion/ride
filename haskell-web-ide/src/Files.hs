@@ -1,8 +1,8 @@
-{-# LANGUAGE DeriveGeneric #-}
+
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE StandaloneDeriving #-}
+
 {-# LANGUAGE PackageImports #-}
 
 module Files where
@@ -40,7 +40,7 @@ sha1 = hash
 --     ]}
 -- ]
 instance ToJSON (DirTree String) where
-  toJSON (Failed name err) = object ["value" .= name, "err" .= (show err)]
+  toJSON (Failed name err) = object ["value" .= name, "err" .= show err]
   toJSON (Dir name contents) = object ["value" .= name, "data" .= contents]
   toJSON (File name file) = object ["value" .= name, "content" .= file]
 

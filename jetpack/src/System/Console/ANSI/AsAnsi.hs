@@ -186,10 +186,10 @@ ansi_showCursor = I.showCursor
 -- ansi_showCursorCode :: String
 ansi_showCursorCode = I.showCursorCode
 
-type AnsiBlinkSpeed  = I.BlinkSpeed 
-type AnsiColor  = I.Color 
-type AnsiColorIntensity  = I.ColorIntensity 
-type AnsiConsoleIntensity  = I.ConsoleIntensity 
-type AnsiConsoleLayer  = I.ConsoleLayer 
-type AnsiSGR  = I.SGR 
-type AnsiUnderlining  = I.Underlining 
+type AnsiBlinkSpeed  = I.BlinkSpeed
+type AnsiColor  = I.Color
+type AnsiColorIntensity  = I.ColorIntensity
+type AnsiConsoleIntensity  = I.ConsoleIntensity
+type AnsiConsoleLayer  = I.ConsoleLayer
+type AnsiSGR  = I.SGR
+type AnsiUnderlining  = I.Underlining

@@ -66,4 +66,4 @@ t_streamDecodeUtf8 = I.streamDecodeUtf8
 -- t_streamDecodeUtf8With :: OnDecodeError -> ByteString -> Decoding
 t_streamDecodeUtf8With = I.streamDecodeUtf8With
 
-type TDecoding  = I.Decoding 
+type TDecoding  = I.Decoding

@@ -297,4 +297,4 @@ bs_zip = I.zip
 -- bs_zipWith :: forall a. (Word8 -> Word8 -> a) -> ByteString -> ByteString -> [a]
 bs_zipWith = I.zipWith
 
-type BsByteString  = I.ByteString 
+type BsByteString  = I.ByteString

@@ -12,7 +12,7 @@ tar_checkSecurity = I.checkSecurity
 -- tar_checkTarbomb :: forall e. FilePath -> Entries e -> Entries (Either e TarBombError)
 tar_checkTarbomb = I.checkTarbomb
 
-type TarFileNameError  = I.FileNameError 
-type TarPortabilityError  = I.PortabilityError 
-type TarPortabilityPlatform  = I.PortabilityPlatform 
-type TarTarBombError  = I.TarBombError 
+type TarFileNameError  = I.FileNameError
+type TarPortabilityError  = I.PortabilityError
+type TarPortabilityPlatform  = I.PortabilityPlatform
+type TarTarBombError  = I.TarBombError

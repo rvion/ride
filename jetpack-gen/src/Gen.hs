@@ -1,9 +1,8 @@
 module Gen where
 
 import Control.Monad
-import Data.List (isPrefixOf)
+import Data.List (isPrefixOf, intersperse)
 import Data.Monoid
-import Data.List (intersperse)
 import Gen.Cabal (writeCabalFile)
 import Gen.Modules
 import Gen.Names
@@ -31,8 +30,8 @@ jetpackGen = do
   writeCabalFile reexports deps
   writeReexportModule reexports
   asSuccess $ putStrLn "done"
-  writeFile (jetpackFolder ++ "full-exported-symbol-list.txt") (concat $ intersperse "\n" allExportsFinal)
-  reexportedPackages <- return ()
+  writeFile (jetpackFolder ++ "full-exported-symbol-list.txt") (intercalate "\n" allExportsFinal)
+  let reexportedPackages = ()
   return ()
 
 parseReexports :: IO [(String, String)]
