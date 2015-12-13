@@ -5,200 +5,299 @@ import Data.Text.Lazy as I
 
 -- lt_empty :: Text
 lt_empty = I.empty
+
 -- lt_foldlChunks :: forall a. (a -> Text -> a) -> a -> Text -> a
 lt_foldlChunks = I.foldlChunks
+
 -- lt_foldrChunks :: forall a. (Text -> a -> a) -> a -> Text -> a
 lt_foldrChunks = I.foldrChunks
+
 -- lt_all :: (Char -> Bool) -> Text -> Bool
 lt_all = I.all
+
 -- lt_any :: (Char -> Bool) -> Text -> Bool
 lt_any = I.any
+
 -- lt_append :: Text -> Text -> Text
 lt_append = I.append
+
 -- lt_break :: (Char -> Bool) -> Text -> (Text, Text)
 lt_break = I.break
+
 -- lt_breakOn :: Text -> Text -> (Text, Text)
 lt_breakOn = I.breakOn
+
 -- lt_breakOnAll :: Text -> Text -> [(Text, Text)]
 lt_breakOnAll = I.breakOnAll
+
 -- lt_breakOnEnd :: Text -> Text -> (Text, Text)
 lt_breakOnEnd = I.breakOnEnd
+
 -- lt_center :: Int64 -> Char -> Text -> Text
 lt_center = I.center
+
 -- lt_chunksOf :: Int64 -> Text -> [Text]
 lt_chunksOf = I.chunksOf
+
 -- lt_commonPrefixes :: Text -> Text -> Maybe (Text, Text, Text)
 lt_commonPrefixes = I.commonPrefixes
+
 -- lt_compareLength :: Text -> Int64 -> Ordering
 lt_compareLength = I.compareLength
+
 -- lt_concat :: [Text] -> Text
 lt_concat = I.concat
+
 -- lt_concatMap :: (Char -> Text) -> Text -> Text
 lt_concatMap = I.concatMap
+
 -- lt_cons :: Char -> Text -> Text
 lt_cons = I.cons
+
 -- lt_count :: Text -> Text -> Int64
 lt_count = I.count
+
 -- lt_cycle :: Text -> Text
 lt_cycle = I.cycle
+
 -- lt_drop :: Int64 -> Text -> Text
 lt_drop = I.drop
+
 -- lt_dropAround :: (Char -> Bool) -> Text -> Text
 lt_dropAround = I.dropAround
+
 -- lt_dropEnd :: Int64 -> Text -> Text
 lt_dropEnd = I.dropEnd
+
 -- lt_dropWhile :: (Char -> Bool) -> Text -> Text
 lt_dropWhile = I.dropWhile
+
 -- lt_dropWhileEnd :: (Char -> Bool) -> Text -> Text
 lt_dropWhileEnd = I.dropWhileEnd
+
 -- lt_filter :: (Char -> Bool) -> Text -> Text
 lt_filter = I.filter
+
 -- lt_find :: (Char -> Bool) -> Text -> Maybe Char
 lt_find = I.find
+
 -- lt_foldl :: forall a. (a -> Char -> a) -> a -> Text -> a
 lt_foldl = I.foldl
+
 -- lt_foldl' :: forall a. (a -> Char -> a) -> a -> Text -> a
 lt_foldl' = I.foldl'
+
 -- lt_foldl1 :: (Char -> Char -> Char) -> Text -> Char
 lt_foldl1 = I.foldl1
+
 -- lt_foldl1' :: (Char -> Char -> Char) -> Text -> Char
 lt_foldl1' = I.foldl1'
+
 -- lt_foldr :: forall a. (Char -> a -> a) -> a -> Text -> a
 lt_foldr = I.foldr
+
 -- lt_foldr1 :: (Char -> Char -> Char) -> Text -> Char
 lt_foldr1 = I.foldr1
+
 -- lt_fromChunks :: [Text] -> Text
 lt_fromChunks = I.fromChunks
+
 -- lt_fromStrict :: Text -> Text
 lt_fromStrict = I.fromStrict
+
 -- lt_group :: Text -> [Text]
 lt_group = I.group
+
 -- lt_groupBy :: (Char -> Char -> Bool) -> Text -> [Text]
 lt_groupBy = I.groupBy
+
 -- lt_head :: Text -> Char
 lt_head = I.head
+
 -- lt_index :: Text -> Int64 -> Char
 lt_index = I.index
+
 -- lt_init :: Text -> Text
 lt_init = I.init
+
 -- lt_inits :: Text -> [Text]
 lt_inits = I.inits
+
 -- lt_intercalate :: Text -> [Text] -> Text
 lt_intercalate = I.intercalate
+
 -- lt_intersperse :: Char -> Text -> Text
 lt_intersperse = I.intersperse
+
 -- lt_isInfixOf :: Text -> Text -> Bool
 lt_isInfixOf = I.isInfixOf
+
 -- lt_isPrefixOf :: Text -> Text -> Bool
 lt_isPrefixOf = I.isPrefixOf
+
 -- lt_isSuffixOf :: Text -> Text -> Bool
 lt_isSuffixOf = I.isSuffixOf
+
 -- lt_iterate :: (Char -> Char) -> Char -> Text
 lt_iterate = I.iterate
+
 -- lt_justifyLeft :: Int64 -> Char -> Text -> Text
 lt_justifyLeft = I.justifyLeft
+
 -- lt_justifyRight :: Int64 -> Char -> Text -> Text
 lt_justifyRight = I.justifyRight
+
 -- lt_last :: Text -> Char
 lt_last = I.last
+
 -- lt_length :: Text -> Int64
 lt_length = I.length
+
 -- lt_lines :: Text -> [Text]
 lt_lines = I.lines
+
 -- lt_map :: (Char -> Char) -> Text -> Text
 lt_map = I.map
+
 -- lt_mapAccumL :: forall a. (a -> Char -> (a, Char)) -> a -> Text -> (a, Text)
 lt_mapAccumL = I.mapAccumL
+
 -- lt_mapAccumR :: forall a. (a -> Char -> (a, Char)) -> a -> Text -> (a, Text)
 lt_mapAccumR = I.mapAccumR
+
 -- lt_maximum :: Text -> Char
 lt_maximum = I.maximum
+
 -- lt_minimum :: Text -> Char
 lt_minimum = I.minimum
+
 -- lt_null :: Text -> Bool
 lt_null = I.null
+
 -- lt_pack :: String -> Text
 lt_pack = I.pack
+
 -- lt_partition :: (Char -> Bool) -> Text -> (Text, Text)
 lt_partition = I.partition
+
 -- lt_repeat :: Char -> Text
 lt_repeat = I.repeat
+
 -- lt_replace :: Text -> Text -> Text -> Text
 lt_replace = I.replace
+
 -- lt_replicate :: Int64 -> Text -> Text
 lt_replicate = I.replicate
+
 -- lt_reverse :: Text -> Text
 lt_reverse = I.reverse
+
 -- lt_scanl :: (Char -> Char -> Char) -> Char -> Text -> Text
 lt_scanl = I.scanl
+
 -- lt_scanl1 :: (Char -> Char -> Char) -> Text -> Text
 lt_scanl1 = I.scanl1
+
 -- lt_scanr :: (Char -> Char -> Char) -> Char -> Text -> Text
 lt_scanr = I.scanr
+
 -- lt_scanr1 :: (Char -> Char -> Char) -> Text -> Text
 lt_scanr1 = I.scanr1
+
 -- lt_singleton :: Char -> Text
 lt_singleton = I.singleton
+
 -- lt_snoc :: Text -> Char -> Text
 lt_snoc = I.snoc
+
 -- lt_span :: (Char -> Bool) -> Text -> (Text, Text)
 lt_span = I.span
+
 -- lt_split :: (Char -> Bool) -> Text -> [Text]
 lt_split = I.split
+
 -- lt_splitAt :: Int64 -> Text -> (Text, Text)
 lt_splitAt = I.splitAt
+
 -- lt_splitOn :: Text -> Text -> [Text]
 lt_splitOn = I.splitOn
+
 -- lt_strip :: Text -> Text
 lt_strip = I.strip
+
 -- lt_stripEnd :: Text -> Text
 lt_stripEnd = I.stripEnd
+
 -- lt_stripPrefix :: Text -> Text -> Maybe Text
 lt_stripPrefix = I.stripPrefix
+
 -- lt_stripStart :: Text -> Text
 lt_stripStart = I.stripStart
+
 -- lt_stripSuffix :: Text -> Text -> Maybe Text
 lt_stripSuffix = I.stripSuffix
+
 -- lt_tail :: Text -> Text
 lt_tail = I.tail
+
 -- lt_tails :: Text -> [Text]
 lt_tails = I.tails
+
 -- lt_take :: Int64 -> Text -> Text
 lt_take = I.take
+
 -- lt_takeEnd :: Int64 -> Text -> Text
 lt_takeEnd = I.takeEnd
+
 -- lt_takeWhile :: (Char -> Bool) -> Text -> Text
 lt_takeWhile = I.takeWhile
+
 -- lt_toCaseFold :: Text -> Text
 lt_toCaseFold = I.toCaseFold
+
 -- lt_toChunks :: Text -> [Text]
 lt_toChunks = I.toChunks
+
 -- lt_toLower :: Text -> Text
 lt_toLower = I.toLower
+
 -- lt_toStrict :: Text -> Text
 lt_toStrict = I.toStrict
+
 -- lt_toTitle :: Text -> Text
 lt_toTitle = I.toTitle
+
 -- lt_toUpper :: Text -> Text
 lt_toUpper = I.toUpper
+
 -- lt_transpose :: [Text] -> [Text]
 lt_transpose = I.transpose
+
 -- lt_uncons :: Text -> Maybe (Char, Text)
 lt_uncons = I.uncons
+
 -- lt_unfoldr :: forall a. (a -> Maybe (Char, a)) -> a -> Text
 lt_unfoldr = I.unfoldr
+
 -- lt_unfoldrN :: forall a. Int64 -> (a -> Maybe (Char, a)) -> a -> Text
 lt_unfoldrN = I.unfoldrN
+
 -- lt_unlines :: [Text] -> Text
 lt_unlines = I.unlines
+
 -- lt_unpack :: Text -> String
 lt_unpack = I.unpack
+
 -- lt_unwords :: [Text] -> Text
 lt_unwords = I.unwords
+
 -- lt_words :: Text -> [Text]
 lt_words = I.words
+
 -- lt_zip :: Text -> Text -> [(Char, Char)]
 lt_zip = I.zip
+
 -- lt_zipWith :: (Char -> Char -> Char) -> Text -> Text -> Text
 lt_zipWith = I.zipWith
+
 type LtText  = I.Text 

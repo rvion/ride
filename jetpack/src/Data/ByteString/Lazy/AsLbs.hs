@@ -5,182 +5,272 @@ import Data.ByteString.Lazy as I
 
 -- lbs_all :: (Word8 -> Bool) -> ByteString -> Bool
 lbs_all = I.all
+
 -- lbs_any :: (Word8 -> Bool) -> ByteString -> Bool
 lbs_any = I.any
+
 -- lbs_append :: ByteString -> ByteString -> ByteString
 lbs_append = I.append
+
 -- lbs_appendFile :: FilePath -> ByteString -> IO ()
 lbs_appendFile = I.appendFile
+
 -- lbs_break :: (Word8 -> Bool) -> ByteString -> (ByteString, ByteString)
 lbs_break = I.break
+
 -- lbs_concat :: [ByteString] -> ByteString
 lbs_concat = I.concat
+
 -- lbs_concatMap :: (Word8 -> ByteString) -> ByteString -> ByteString
 lbs_concatMap = I.concatMap
+
 -- lbs_cons :: Word8 -> ByteString -> ByteString
 lbs_cons = I.cons
+
 -- lbs_cons' :: Word8 -> ByteString -> ByteString
 lbs_cons' = I.cons'
+
 -- lbs_copy :: ByteString -> ByteString
 lbs_copy = I.copy
+
 -- lbs_count :: Word8 -> ByteString -> Int64
 lbs_count = I.count
+
 -- lbs_cycle :: ByteString -> ByteString
 lbs_cycle = I.cycle
+
 -- lbs_drop :: Int64 -> ByteString -> ByteString
 lbs_drop = I.drop
+
 -- lbs_dropWhile :: (Word8 -> Bool) -> ByteString -> ByteString
 lbs_dropWhile = I.dropWhile
+
 -- lbs_elem :: Word8 -> ByteString -> Bool
 lbs_elem = I.elem
+
 -- lbs_elemIndex :: Word8 -> ByteString -> Maybe Int64
 lbs_elemIndex = I.elemIndex
+
 -- lbs_elemIndexEnd :: Word8 -> ByteString -> Maybe Int64
 lbs_elemIndexEnd = I.elemIndexEnd
+
 -- lbs_elemIndices :: Word8 -> ByteString -> [Int64]
 lbs_elemIndices = I.elemIndices
+
 -- lbs_empty :: ByteString
 lbs_empty = I.empty
+
 -- lbs_filter :: (Word8 -> Bool) -> ByteString -> ByteString
 lbs_filter = I.filter
+
 -- lbs_find :: (Word8 -> Bool) -> ByteString -> Maybe Word8
 lbs_find = I.find
+
 -- lbs_findIndex :: (Word8 -> Bool) -> ByteString -> Maybe Int64
 lbs_findIndex = I.findIndex
+
 -- lbs_findIndices :: (Word8 -> Bool) -> ByteString -> [Int64]
 lbs_findIndices = I.findIndices
+
 -- lbs_foldl :: forall a. (a -> Word8 -> a) -> a -> ByteString -> a
 lbs_foldl = I.foldl
+
 -- lbs_foldl' :: forall a. (a -> Word8 -> a) -> a -> ByteString -> a
 lbs_foldl' = I.foldl'
+
 -- lbs_foldl1 :: (Word8 -> Word8 -> Word8) -> ByteString -> Word8
 lbs_foldl1 = I.foldl1
+
 -- lbs_foldl1' :: (Word8 -> Word8 -> Word8) -> ByteString -> Word8
 lbs_foldl1' = I.foldl1'
+
 -- lbs_foldr :: forall a. (Word8 -> a -> a) -> a -> ByteString -> a
 lbs_foldr = I.foldr
+
 -- lbs_foldr1 :: (Word8 -> Word8 -> Word8) -> ByteString -> Word8
 lbs_foldr1 = I.foldr1
+
 -- lbs_fromChunks :: [ByteString] -> ByteString
 lbs_fromChunks = I.fromChunks
+
 -- lbs_fromStrict :: ByteString -> ByteString
 lbs_fromStrict = I.fromStrict
+
 -- lbs_getContents :: IO ByteString
 lbs_getContents = I.getContents
+
 -- lbs_group :: ByteString -> [ByteString]
 lbs_group = I.group
+
 -- lbs_groupBy :: (Word8 -> Word8 -> Bool) -> ByteString -> [ByteString]
 lbs_groupBy = I.groupBy
+
 -- lbs_hGet :: Handle -> Int -> IO ByteString
 lbs_hGet = I.hGet
+
 -- lbs_hGetContents :: Handle -> IO ByteString
 lbs_hGetContents = I.hGetContents
+
 -- lbs_hGetNonBlocking :: Handle -> Int -> IO ByteString
 lbs_hGetNonBlocking = I.hGetNonBlocking
+
 -- lbs_hPut :: Handle -> ByteString -> IO ()
 lbs_hPut = I.hPut
+
 -- lbs_hPutNonBlocking :: Handle -> ByteString -> IO ByteString
 lbs_hPutNonBlocking = I.hPutNonBlocking
+
 -- lbs_hPutStr :: Handle -> ByteString -> IO ()
 lbs_hPutStr = I.hPutStr
+
 -- lbs_head :: ByteString -> Word8
 lbs_head = I.head
+
 -- lbs_index :: ByteString -> Int64 -> Word8
 lbs_index = I.index
+
 -- lbs_init :: ByteString -> ByteString
 lbs_init = I.init
+
 -- lbs_inits :: ByteString -> [ByteString]
 lbs_inits = I.inits
+
 -- lbs_interact :: (ByteString -> ByteString) -> IO ()
 lbs_interact = I.interact
+
 -- lbs_intercalate :: ByteString -> [ByteString] -> ByteString
 lbs_intercalate = I.intercalate
+
 -- lbs_intersperse :: Word8 -> ByteString -> ByteString
 lbs_intersperse = I.intersperse
+
 -- lbs_isPrefixOf :: ByteString -> ByteString -> Bool
 lbs_isPrefixOf = I.isPrefixOf
+
 -- lbs_isSuffixOf :: ByteString -> ByteString -> Bool
 lbs_isSuffixOf = I.isSuffixOf
+
 -- lbs_iterate :: (Word8 -> Word8) -> Word8 -> ByteString
 lbs_iterate = I.iterate
+
 -- lbs_last :: ByteString -> Word8
 lbs_last = I.last
+
 -- lbs_length :: ByteString -> Int64
 lbs_length = I.length
+
 -- lbs_map :: (Word8 -> Word8) -> ByteString -> ByteString
 lbs_map = I.map
+
 -- lbs_mapAccumL :: forall acc. (acc -> Word8 -> (acc, Word8)) -> acc -> ByteString -> (acc, ByteString)
 lbs_mapAccumL = I.mapAccumL
+
 -- lbs_mapAccumR :: forall acc. (acc -> Word8 -> (acc, Word8)) -> acc -> ByteString -> (acc, ByteString)
 lbs_mapAccumR = I.mapAccumR
+
 -- lbs_maximum :: ByteString -> Word8
 lbs_maximum = I.maximum
+
 -- lbs_minimum :: ByteString -> Word8
 lbs_minimum = I.minimum
+
 -- lbs_notElem :: Word8 -> ByteString -> Bool
 lbs_notElem = I.notElem
+
 -- lbs_null :: ByteString -> Bool
 lbs_null = I.null
+
 -- lbs_pack :: [Word8] -> ByteString
 lbs_pack = I.pack
+
 -- lbs_partition :: (Word8 -> Bool) -> ByteString -> (ByteString, ByteString)
 lbs_partition = I.partition
+
 -- lbs_putStr :: ByteString -> IO ()
 lbs_putStr = I.putStr
+
 -- lbs_readFile :: FilePath -> IO ByteString
 lbs_readFile = I.readFile
+
 -- lbs_repeat :: Word8 -> ByteString
 lbs_repeat = I.repeat
+
 -- lbs_replicate :: Int64 -> Word8 -> ByteString
 lbs_replicate = I.replicate
+
 -- lbs_reverse :: ByteString -> ByteString
 lbs_reverse = I.reverse
+
 -- lbs_scanl :: (Word8 -> Word8 -> Word8) -> Word8 -> ByteString -> ByteString
 lbs_scanl = I.scanl
+
 -- lbs_singleton :: Word8 -> ByteString
 lbs_singleton = I.singleton
+
 -- lbs_snoc :: ByteString -> Word8 -> ByteString
 lbs_snoc = I.snoc
+
 -- lbs_span :: (Word8 -> Bool) -> ByteString -> (ByteString, ByteString)
 lbs_span = I.span
+
 -- lbs_split :: Word8 -> ByteString -> [ByteString]
 lbs_split = I.split
+
 -- lbs_splitAt :: Int64 -> ByteString -> (ByteString, ByteString)
 lbs_splitAt = I.splitAt
+
 -- lbs_splitWith :: (Word8 -> Bool) -> ByteString -> [ByteString]
 lbs_splitWith = I.splitWith
+
 -- lbs_tail :: ByteString -> ByteString
 lbs_tail = I.tail
+
 -- lbs_tails :: ByteString -> [ByteString]
 lbs_tails = I.tails
+
 -- lbs_take :: Int64 -> ByteString -> ByteString
 lbs_take = I.take
+
 -- lbs_takeWhile :: (Word8 -> Bool) -> ByteString -> ByteString
 lbs_takeWhile = I.takeWhile
+
 -- lbs_toChunks :: ByteString -> [ByteString]
 lbs_toChunks = I.toChunks
+
 -- lbs_toStrict :: ByteString -> ByteString
 lbs_toStrict = I.toStrict
+
 -- lbs_transpose :: [ByteString] -> [ByteString]
 lbs_transpose = I.transpose
+
 -- lbs_uncons :: ByteString -> Maybe (Word8, ByteString)
 lbs_uncons = I.uncons
+
 -- lbs_unfoldr :: forall a. (a -> Maybe (Word8, a)) -> a -> ByteString
 lbs_unfoldr = I.unfoldr
+
 -- lbs_unpack :: ByteString -> [Word8]
 lbs_unpack = I.unpack
+
 -- lbs_unsnoc :: ByteString -> Maybe (ByteString, Word8)
 lbs_unsnoc = I.unsnoc
+
 -- lbs_unzip :: [(Word8, Word8)] -> (ByteString, ByteString)
 lbs_unzip = I.unzip
+
 -- lbs_writeFile :: FilePath -> ByteString -> IO ()
 lbs_writeFile = I.writeFile
+
 -- lbs_zip :: ByteString -> ByteString -> [(Word8, Word8)]
 lbs_zip = I.zip
+
 -- lbs_zipWith :: forall a. (Word8 -> Word8 -> a) -> ByteString -> ByteString -> [a]
 lbs_zipWith = I.zipWith
+
 -- lbs_foldlChunks :: forall a. (a -> ByteString -> a) -> a -> ByteString -> a
 lbs_foldlChunks = I.foldlChunks
+
 -- lbs_foldrChunks :: forall a. (ByteString -> a -> a) -> a -> ByteString -> a
 lbs_foldrChunks = I.foldrChunks
+
 type LbsByteString  = I.ByteString 

@@ -5,122 +5,182 @@ import Data.List.NonEmpty as I
 
 -- (!!) :: forall a. NonEmpty a -> Int -> a
 (!!) = (I.!!)
+
 -- (<|) :: forall a. a -> NonEmpty a -> NonEmpty a
 (<|) = (I.<|)
+
 -- ne_break :: forall a. (a -> Bool) -> NonEmpty a -> ([a], [a])
 ne_break = I.break
+
 -- ne_cons :: forall a. a -> NonEmpty a -> NonEmpty a
 ne_cons = I.cons
+
 -- ne_cycle :: forall a. NonEmpty a -> NonEmpty a
 ne_cycle = I.cycle
+
 -- ne_drop :: forall a. Int -> NonEmpty a -> [a]
 ne_drop = I.drop
+
 -- ne_dropWhile :: forall a. (a -> Bool) -> NonEmpty a -> [a]
 ne_dropWhile = I.dropWhile
+
 -- ne_filter :: forall a. (a -> Bool) -> NonEmpty a -> [a]
 ne_filter = I.filter
+
 -- ne_fromList :: forall a. [a] -> NonEmpty a
 ne_fromList = I.fromList
+
 -- ne_group :: forall (f :: * -> *) a. (Foldable f, Eq a) => f a -> [NonEmpty a]
 ne_group = I.group
+
 -- ne_group1 :: forall a. Eq a => NonEmpty a -> NonEmpty (NonEmpty a)
 ne_group1 = I.group1
+
 -- ne_groupAllWith :: forall a b. Ord b => (a -> b) -> [a] -> [NonEmpty a]
 ne_groupAllWith = I.groupAllWith
+
 -- ne_groupAllWith1 :: forall a b. Ord b => (a -> b) -> NonEmpty a -> NonEmpty (NonEmpty a)
 ne_groupAllWith1 = I.groupAllWith1
+
 -- ne_groupBy :: forall a (f :: * -> *). Foldable f => (a -> a -> Bool) -> f a -> [NonEmpty a]
 ne_groupBy = I.groupBy
+
 -- ne_groupBy1 :: forall a. (a -> a -> Bool) -> NonEmpty a -> NonEmpty (NonEmpty a)
 ne_groupBy1 = I.groupBy1
+
 -- ne_groupWith :: forall a b (f :: * -> *). (Foldable f, Eq b) => (a -> b) -> f a -> [NonEmpty a]
 ne_groupWith = I.groupWith
+
 -- ne_groupWith1 :: forall a b. Eq b => (a -> b) -> NonEmpty a -> NonEmpty (NonEmpty a)
 ne_groupWith1 = I.groupWith1
+
 -- ne_head :: forall a. NonEmpty a -> a
 ne_head = I.head
+
 -- ne_init :: forall a. NonEmpty a -> [a]
 ne_init = I.init
+
 -- ne_inits :: forall (f :: * -> *) a. Foldable f => f a -> NonEmpty [a]
 ne_inits = I.inits
+
 -- ne_insert :: forall a (f :: * -> *). (Foldable f, Ord a) => a -> f a -> NonEmpty a
 ne_insert = I.insert
+
 -- ne_intersperse :: forall a. a -> NonEmpty a -> NonEmpty a
 ne_intersperse = I.intersperse
+
 -- ne_isPrefixOf :: forall a. Eq a => [a] -> NonEmpty a -> Bool
 ne_isPrefixOf = I.isPrefixOf
+
 -- ne_iterate :: forall a. (a -> a) -> a -> NonEmpty a
 ne_iterate = I.iterate
+
 -- ne_last :: forall a. NonEmpty a -> a
 ne_last = I.last
+
 -- ne_length :: forall a. NonEmpty a -> Int
 ne_length = I.length
+
 -- ne_lines :: NonEmpty Char -> NonEmpty String
 ne_lines = I.lines
+
 -- ne_map :: forall a b. (a -> b) -> NonEmpty a -> NonEmpty b
 ne_map = I.map
+
 -- ne_nonEmpty :: forall a. [a] -> Maybe (NonEmpty a)
 ne_nonEmpty = I.nonEmpty
+
 -- ne_nub :: forall a. Eq a => NonEmpty a -> NonEmpty a
 ne_nub = I.nub
+
 -- ne_nubBy :: forall a. (a -> a -> Bool) -> NonEmpty a -> NonEmpty a
 ne_nubBy = I.nubBy
+
 -- ne_partition :: forall a. (a -> Bool) -> NonEmpty a -> ([a], [a])
 ne_partition = I.partition
+
 -- ne_repeat :: forall a. a -> NonEmpty a
 ne_repeat = I.repeat
+
 -- ne_reverse :: forall a. NonEmpty a -> NonEmpty a
 ne_reverse = I.reverse
+
 -- ne_scanl :: forall b a (f :: * -> *). Foldable f => (b -> a -> b) -> b -> f a -> NonEmpty b
 ne_scanl = I.scanl
+
 -- ne_scanl1 :: forall a. (a -> a -> a) -> NonEmpty a -> NonEmpty a
 ne_scanl1 = I.scanl1
+
 -- ne_scanr :: forall a b (f :: * -> *). Foldable f => (a -> b -> b) -> b -> f a -> NonEmpty b
 ne_scanr = I.scanr
+
 -- ne_scanr1 :: forall a. (a -> a -> a) -> NonEmpty a -> NonEmpty a
 ne_scanr1 = I.scanr1
+
 -- ne_some1 :: forall (f :: * -> *) a. Alternative f => f a -> f (NonEmpty a)
 ne_some1 = I.some1
+
 -- ne_sort :: forall a. Ord a => NonEmpty a -> NonEmpty a
 ne_sort = I.sort
+
 -- ne_sortBy :: forall a. (a -> a -> Ordering) -> NonEmpty a -> NonEmpty a
 ne_sortBy = I.sortBy
+
 -- ne_sortWith :: forall a o. Ord o => (a -> o) -> NonEmpty a -> NonEmpty a
 ne_sortWith = I.sortWith
+
 -- ne_span :: forall a. (a -> Bool) -> NonEmpty a -> ([a], [a])
 ne_span = I.span
+
 -- ne_splitAt :: forall a. Int -> NonEmpty a -> ([a], [a])
 ne_splitAt = I.splitAt
+
 -- ne_tail :: forall a. NonEmpty a -> [a]
 ne_tail = I.tail
+
 -- ne_tails :: forall (f :: * -> *) a. Foldable f => f a -> NonEmpty [a]
 ne_tails = I.tails
+
 -- ne_take :: forall a. Int -> NonEmpty a -> [a]
 ne_take = I.take
+
 -- ne_takeWhile :: forall a. (a -> Bool) -> NonEmpty a -> [a]
 ne_takeWhile = I.takeWhile
+
 -- ne_toList :: forall a. NonEmpty a -> [a]
 ne_toList = I.toList
+
 -- ne_transpose :: forall a. NonEmpty (NonEmpty a) -> NonEmpty (NonEmpty a)
 ne_transpose = I.transpose
+
 -- ne_uncons :: forall a. NonEmpty a -> (a, Maybe (NonEmpty a))
 ne_uncons = I.uncons
+
 -- ne_unfold :: forall a b. (a -> (b, Maybe a)) -> a -> NonEmpty b
 ne_unfold = I.unfold
+
 -- ne_unfoldr :: forall a b. (a -> (b, Maybe a)) -> a -> NonEmpty b
 ne_unfoldr = I.unfoldr
+
 -- ne_unlines :: NonEmpty String -> NonEmpty Char
 ne_unlines = I.unlines
+
 -- ne_unwords :: NonEmpty String -> NonEmpty Char
 ne_unwords = I.unwords
+
 -- ne_unzip :: forall (f :: * -> *) a b. Functor f => f (a, b) -> (f a, f b)
 ne_unzip = I.unzip
+
 -- ne_words :: NonEmpty Char -> NonEmpty String
 ne_words = I.words
+
 -- ne_xor :: NonEmpty Bool -> Bool
 ne_xor = I.xor
+
 -- ne_zip :: forall a b. NonEmpty a -> NonEmpty b -> NonEmpty (a, b)
 ne_zip = I.zip
+
 -- ne_zipWith :: forall a b c. (a -> b -> c) -> NonEmpty a -> NonEmpty b -> NonEmpty c
 ne_zipWith = I.zipWith
+
 type NeNonEmpty a = I.NonEmpty a

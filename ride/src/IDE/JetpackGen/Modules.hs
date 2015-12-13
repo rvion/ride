@@ -72,12 +72,12 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
           | (head _name) `elem` operators -> do
               putStrLn rType
               put ["-- (",_name,") :: ",rType]
-              put ["(",_name,")", " = (I.", _name,")"]
+              put ["(",_name,")", " = (I.", _name,")\n"]
               -- print _reexported_name
               return (Just _reexported_name)
           | isLower (head _name) || (head _name) == '_' -> do
               put ["-- ",_reexported_name," :: ",rType]
-              put [_reexported_name, " = I.", _name]
+              put [_reexported_name, " = I.", _name,"\n"]
               return (Just _reexported_name)
           | otherwise -> error "ahaha"
         RData _ rType nbTyVars
