@@ -3,7 +3,13 @@
 :warning: WIP
 Please, __don't post anything on reddit for now__.
 
-jetpack-gen is a tool that generate 
+### Input
+
+```
+m Data.Map.Strict
+```
+
+### output
 
 ```haskell
 module Data.Map.Strict.AsM where
@@ -30,12 +36,6 @@ m_deleteAt = I.deleteAt
 m_deleteFindMax = I.deleteFindMax
 
 [...]
-```
-
-from this line:
-
-```
-m Data.Map.Strict
 ```
 
 ## Usages
