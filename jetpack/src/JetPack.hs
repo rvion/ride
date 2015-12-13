@@ -7,6 +7,5 @@ module JetPack
   ( module X
   ) where
 
-import Exports as X -- hiding ((!!), (\\), (&))
-import BasePrelude as X hiding ((&), yield, (\\), (!!))
--- import Lens.Micro.Platform as X
+import Exports as X hiding ((&), yield, (\\), (!!), (<>), (<**>), (<$>))
+import BasePrelude as X

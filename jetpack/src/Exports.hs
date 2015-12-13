@@ -22,6 +22,8 @@ import Codec.Archive.Tar.Entry.AsTar as X
 import Codec.Archive.Tar.Check.AsTar as X
 import Codec.Compression.GZip.AsGzip as X
 import Text.Megaparsec.AsMp as X
+import System.Console.ANSI.AsAnsi as X
+import Options.Applicative.AsOpt as X
 import Data.Conduit.AsC as X
 import Data.Conduit.List.AsCl as X
 import Data.Conduit.Binary.AsCb as X

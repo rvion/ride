@@ -81,10 +81,10 @@ findReexports (mod, modules) previouslyExportedSymbols =
           _name = toS name
           _success ifaceDecl = return (name, Just ifaceDecl)
           _failDeprecated = do
-            liftIO.putStr.concat$["\n    info: (",toS name,") is not reexported because it is deprecated."]
+            liftIO.putStrLn.concat$["  info: (",toS name,") is not reexported because it is deprecated."]
             return (name, Nothing)
           _fail = do
-            liftIO.putStr.concat$["\n    warn: impossible to find decl for (",toS name,")"]
+            liftIO.putStrLn.concat$["  warn: impossible to find decl for (",toS name,")"]
             return (name, Nothing)
 
         case Map.lookup _name declsMap of

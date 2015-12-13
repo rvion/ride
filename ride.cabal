@@ -50,6 +50,7 @@ executable ride
                      , Cabal
                      , directory
                      , filepath
+                     , ansi-terminal
                      , transformers
                      , split
 

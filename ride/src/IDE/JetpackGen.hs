@@ -46,9 +46,9 @@ parseDeps = do
 -- TODO (add benchmark data)
 trace :: (Traversable a) => String -> IO (a b) -> IO (a b)
 trace str action = do
-  putStr (str <> "... ")
+  putStrLn (str <> "... ")
   result <- action
-  putStrLn ("OK (" <> show (length result) <> " elems)")
+  putStrLn ("  OK (" <> show (length result) <> " elems)")
   return result
 
 for = flip map

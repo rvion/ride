@@ -30,6 +30,8 @@
   * microlens-platform
   * reexport-demo
   * stm
+  * ansi-terminal
+  * optparse-applicative
 
 ### Modules
 
@@ -74,6 +76,14 @@ _zlib_
 _megaparsec_
 
   - mp Text.Megaparsec
+
+_ansi_
+
+  - ansi System.Console.ANSI
+
+_optoparse-applicative_
+
+  - opt Options.Applicative
 
 _conduit_
 _conduit-extra_
