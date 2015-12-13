@@ -94,7 +94,6 @@ _conduit-extra_
 
 _lens_
 
--- http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
   - lens Lens.Micro.Platform
 
 _test purpose:_

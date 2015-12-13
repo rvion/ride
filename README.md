@@ -6,7 +6,7 @@ Please, __don't post anything on reddit for now__.
 Ride is a big project aiming to provide 
 
  1. A full feature web-based IDE, fast and as complete as possible.
-      - [see planned features](/haskell-web-ide/README.md)
+      - [see planned features](/haskell-web-ide#haskell-web-ide)
  2. A tool `jetpack-gen` able to generate full-featured preludes with "prefixed" names
       - see an exemple input file: [imports.md](/imports.md)
       - see [the corresponding generated prelude](/jetpack/src)
