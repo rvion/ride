@@ -1,8 +1,8 @@
 
 module Exports (module X) where
 
-import Data.Map.AsLm as X
 import Data.Map.Strict.AsM as X
+import Data.Map.AsLm as X
 import Data.Set.AsSet as X
 import Data.HashMap.Strict.AsHm as X
 import Data.List.NonEmpty.AsNe as X
@@ -16,6 +16,7 @@ import Data.ByteString.AsBs as X
 import Data.ByteString.Char8.AsBs as X
 import Data.ByteString.Lazy.AsLbs as X
 import Data.ByteString.Lazy.Char8.AsLbs as X
+import Control.Concurrent.STM.AsStm as X
 import Codec.Archive.Tar.AsTar as X
 import Codec.Archive.Tar.Entry.AsTar as X
 import Codec.Archive.Tar.Check.AsTar as X

@@ -18,12 +18,6 @@ lm_insertWith' = I.insertWith'
 -- lm_insertWithKey' :: forall k a. Ord k => (k -> a -> a -> a) -> k -> a -> Map k a -> Map k a
 lm_insertWithKey' = I.insertWithKey'
 
--- (!) :: forall k a. Ord k => Map k a -> k -> a
-(!) = (I.!)
-
--- (\\) :: forall k a b. Ord k => Map k a -> Map k b -> Map k a
-(\\) = (I.\\)
-
 -- lm_adjust :: forall a k. Ord k => (a -> a) -> k -> Map k a -> Map k a
 lm_adjust = I.adjust
 

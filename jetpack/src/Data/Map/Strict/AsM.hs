@@ -3,6 +3,12 @@ module Data.Map.Strict.AsM where
 
 import Data.Map.Strict as I
 
+-- (!) :: forall k a. Ord k => Map k a -> k -> a
+(!) = (I.!)
+
+-- (\\) :: forall k a b. Ord k => Map k a -> Map k b -> Map k a
+(\\) = (I.\\)
+
 -- m_assocs :: forall k a. Map k a -> [(k, a)]
 m_assocs = I.assocs
 

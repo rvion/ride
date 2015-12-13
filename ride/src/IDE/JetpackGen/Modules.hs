@@ -70,7 +70,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
               putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
               return Nothing
           | (head _name) `elem` operators -> do
-              putStrLn rType
+              -- putStrLn rType
               put ["-- (",_name,") :: ",rType]
               put ["(",_name,")", " = (I.", _name,")\n"]
               -- print _reexported_name

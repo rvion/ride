@@ -29,11 +29,14 @@
   * conduit-extra
   * microlens-platform
   * reexport-demo
+  * stm
 
 ### Modules
 
-  - lm Data.Map
+_containers_
+
   - m Data.Map.Strict
+  - lm Data.Map
   - set Data.Set
   - hm Data.HashMap.Strict
   - ne Data.List.NonEmpty
@@ -53,6 +56,10 @@ _bytestring_
   - bs Data.ByteString.Char8
   - lbs Data.ByteString.Lazy
   - lbs Data.ByteString.Lazy.Char8
+
+_stm_
+
+  - stm Control.Concurrent.STM
 
 _tar_
 
@@ -82,3 +89,4 @@ _lens_
 
 _test purpose:_
   - demo ReexportDemo
+
