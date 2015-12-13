@@ -64,7 +64,9 @@ packageName = unPackageName . pkgName . sourcePackageId
 type ModuleNames  = [String]
 
 packageModules :: InstalledPackageInfo -> [ModuleNames]
-packageModules = map (components . exposedName) . exposedModules
+packageModules ipi =
+   (map (components . exposedName) . exposedModules $ ipi)
+   ++ (map components $ hiddenModules ipi)
 
 packageModulesIface :: InstalledPackageInfo -> [(String, FilePath)]
 packageModulesIface ipi =

@@ -109,7 +109,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
                     -- xx= Mod.moduleName nameModule
                     -- nameModuleFS  = moduleNameFS $ Mod.moduleName nameModule
                 -- liftIO $ error $ toS nameModuleFS
-                -- liftIO $ putStrLn ("    - loading "++ nameModuleStr)
+                liftIO $ putStrLn ("    - loading "++ nameModuleStr)
                 case Map.lookup nameModuleStr modules of
                   Nothing -> do
                     liftIO $ putStrLn $ concat ["  module (",nameModuleStr,") is really nowhere... :/"]
@@ -119,7 +119,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
                     let _otherIfaceMap = mkIfaceDeclMap toSDoc _otherIface
                     case Map.lookup _name _otherIfaceMap of
                       Just otherIfaceDecl -> do
-                        liftIO$ putStrLn $ toS (ifType otherIfaceDecl)
+                        -- liftIO$ putStrLn $ toS (ifType otherIfaceDecl)
                         _success otherIfaceDecl
                       Nothing -> _fail
 
