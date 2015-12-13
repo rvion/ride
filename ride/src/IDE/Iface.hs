@@ -9,9 +9,7 @@ import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail
 import BinIface
 import Control.Monad (forM)
 import Data.List (intersperse)
--- import Data.Char (toLower, toUpper, isLower, isUpper)
-import Name
--- import Data.List
+import Data.Map (Map)
 import Data.Maybe
 import Data.String.Utils
 import DynFlags
@@ -19,13 +17,10 @@ import GHC
 import GHC.Paths ( libdir )
 import IDE.Types
 import IfaceSyn  -- (ifType, ifName)
+import Name
 import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
 import qualified Data.Map as Map
--- import System.Directory (createDirectoryIfMissing)
--- import Module as Mod
--- import System.IO
 import TcRnMonad
-import Data.Map (Map)
 
 type Renderer = SDoc -> String
 type IfaceDeclMap = Map String IfaceDecl

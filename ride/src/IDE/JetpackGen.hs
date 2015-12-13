@@ -1,19 +1,14 @@
 module IDE.JetpackGen where
 
-import IDE.Iface
-import IDE.State
+import Control.Monad
 import Data.List (isPrefixOf)
 import Data.Monoid
-import Control.Monad
--- import Data.List (intersperse)
--- import Data.Char
--- import Data.Map (Map)
--- import System.Directory (createDirectoryIfMissing)
-import qualified Data.Map as M
+import IDE.Iface
 import IDE.JetpackGen.Cabal (writeCabalFile)
-import IDE.JetpackGen.Names
 import IDE.JetpackGen.Modules
--- import IDE.Types
+import IDE.JetpackGen.Names
+import IDE.State
+import qualified Data.Map as M
 
 jetpackGen :: IO ()
 jetpackGen = do

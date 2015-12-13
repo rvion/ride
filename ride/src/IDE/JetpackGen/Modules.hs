@@ -1,24 +1,13 @@
 module IDE.JetpackGen.Modules where
 
--- import Avail -- https://github.com/ghc/ghc/blob/master/compiler/basicTypes/Avail.hs#L37
--- import BinIface
 import Control.Monad (forM)
 import Data.Char (toLower, toUpper, isLower) -- , isUpper)
--- import Name
 import Data.List
 import Data.Maybe
 import Data.String.Utils
--- import DynFlags
--- import GHC
--- import GHC.Paths ( libdir )
 import IDE.Types
--- import IfaceSyn  -- (ifType, ifName)
--- import Outputable -- https://github.com/ghc/ghc/blob/8c5fe53b411d83279fea44f89538a7265b1275ff/compiler/utils/Outputable.hs
--- import qualified Data.Map as Map
 import System.Directory (createDirectoryIfMissing)
 import System.IO
--- import TcRnMonad
--- import Data.Map (Map)
 
 
 whenValid "" = error "prefix can't be empty"
