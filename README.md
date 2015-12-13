@@ -1,8 +1,10 @@
--- [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
--- [ ] mention backpack
--- [ ] check how to deal with http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
--- [ ] re-handle deprecated types
-
+some next steps
+  - [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
+  - [ ] mention backpack
+  - [ ] re-handle deprecated types
+  - [ ] show commented types above each definitions
+  - [ ] export promoted kind aliases
+  - [x] check how to deal with http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
 
 
 # haskell-web-ide

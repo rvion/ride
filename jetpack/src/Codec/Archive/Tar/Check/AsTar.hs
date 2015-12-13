@@ -3,8 +3,11 @@ module Codec.Archive.Tar.Check.AsTar where
 
 import Codec.Archive.Tar.Check as I
 
+-- tar_checkPortability :: forall e. Entries e -> Entries (Either e PortabilityError)
 tar_checkPortability = I.checkPortability
+-- tar_checkSecurity :: forall e. Entries e -> Entries (Either e FileNameError)
 tar_checkSecurity = I.checkSecurity
+-- tar_checkTarbomb :: forall e. FilePath -> Entries e -> Entries (Either e TarBombError)
 tar_checkTarbomb = I.checkTarbomb
 type TarFileNameError  = I.FileNameError 
 type TarPortabilityError  = I.PortabilityError 

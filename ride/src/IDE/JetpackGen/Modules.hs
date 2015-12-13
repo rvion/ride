@@ -65,24 +65,27 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
         -- _type = typeSdoc decl
 
       case rTerm of
-        RId _ _
+        RId _ rType
           | (_reexported_name `elem` previouslyExportedSymbols) -> do
               putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
               return Nothing
           | (head _name) `elem` operators -> do
+              put ["-- (",_name,") :: ",rType]
               put ["(",_name,")", " = (I.", _name,")"]
-              print _reexported_name
+              -- print _reexported_name
               return (Just _reexported_name)
           | isLower (head _name) || (head _name) == '_' -> do
+              put ["-- ",_reexported_name," :: ",rType]
               put [_reexported_name, " = I.", _name]
               return (Just _reexported_name)
           | otherwise -> error "ahaha"
-        RData _ _ nbTyVars
+        RData _ rType nbTyVars
           | (_reexported_type `elem` previouslyExportedSymbols) -> do
               putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
               return Nothing
           | otherwise -> do
               let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
+              -- put ["-- ",_reexported_type," :: ",rType]
               put ["type ", _reexported_type," ",tyVars, " = I.", _name, " ",tyVars]
               return (Just _reexported_type) -- tyvars needed because type synonym must be instanciated
             -- _  -> do
