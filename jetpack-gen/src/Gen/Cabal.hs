@@ -3,12 +3,6 @@ module Gen.Cabal where
 import Gen.Names
 import Data.List
 
--- Necessary Extensions
---  - DataKinds to be able to reexport prefixed promoted data kinds
---  - FlexibleContexts to be able to
---  - MagicHash for
---  - NoMonomorphismRestriction
-
 writeCabalFile :: [(String, String)] -> [String] -> IO ()
 writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
   where
