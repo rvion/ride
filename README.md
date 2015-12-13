@@ -14,13 +14,15 @@ Ride is a big project aiming to provide
  2. A full featured prelude exposing all necessary features for most project.
 
 
-some next steps
+-------------
+
+some next steps:
   - [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
   - [ ] mention backpack
   - [ ] cache module loading
+  - [ ] export promoted kind aliases
   - [X] re-handle deprecated types
   - [x] show commented types above each definitions
-  - [ ] export promoted kind aliases
   - [x] check how to deal with http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard
 
 
