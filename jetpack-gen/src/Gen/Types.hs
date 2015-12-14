@@ -19,3 +19,4 @@ jetpackFolder = "jetpack/"
 
 jetpackLibFolder :: String
 jetpackLibFolder = jetpackFolder ++ "src/"
+

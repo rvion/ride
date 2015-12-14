@@ -21,7 +21,7 @@ jetpackGen = do
   deps      <- trace "loading cabal deps" parseDeps
 
   let
-    reexportModule = \previouslyExportedSymbols (prefix, mod) ->
+    reexportModule previouslyExportedSymbols (prefix, mod) =
       trace ("reexporting.. " <> mod) $ do
         reexports <- findReexports (mod, modules) previouslyExportedSymbols
         printReexports (mod, prefix) reexports previouslyExportedSymbols
@@ -63,4 +63,3 @@ writeReexportModule reexports = writeFile "jetpack/src/Exports.hs" content
       [ "\nmodule Exports (module X) where"
       , "\n"] ++ map (toImport.toN) reexports ++
       [ "\n\n"]
-
