@@ -1,13 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Chrome.Command where
-import           Data.Aeson
-import qualified Data.Aeson           as A
-import           Data.ByteString.Lazy (ByteString)
-import qualified Data.ByteString.Lazy as LBS
-import qualified Data.Map             as M
-import           Data.Text            (Text)
-import qualified Data.Text            as T
-type LBS = ByteString
+import JetPack
+-- import           Data.Aeson
+-- import qualified Data.Aeson           as A
+-- import           Data.ByteString.Lazy (ByteString)
+-- import qualified Data.ByteString.Lazy as LBS
+-- import qualified Data.Map             as M
+-- import           Data.Text            (Text)
+-- import qualified Data.Text            as T
+-- type LBS = ByteString
+
 
 data Command = Command
   { commandId     :: Int

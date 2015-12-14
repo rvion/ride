@@ -95,7 +95,7 @@ startTool _db _dbpath = do
 loopAnalyse :: Ctx -> IO ()
 loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
   msg <- WS.receiveData _conn
-  putStrLn "-----" >> C8.putStrLn msg >> putStrLn "-----"
+  putStrLn "-----" >> ws_putStrLn msg >> putStrLn "-----"
   let mbres = A.decode msg :: Maybe CommandResult
       mbLifeS = mbres >>= \res -> Just (A.fromJSON (resultValue res))
       mbLife = mbLifeS >>= \lifeS -> case lifeS of {A.Success m -> m; A.Error a -> traceShow a Nothing}

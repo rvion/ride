@@ -22,7 +22,7 @@ Library
   ghc-options:         -fdefer-type-errors
   build-depends:       base
                      , jetpack-gen
-                     , chrotomate
+                    -- , chrotomate
                      , jetpack-gen
                      , jetpack
                      , ghc

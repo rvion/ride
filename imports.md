@@ -19,7 +19,9 @@
   * base-prelude
   * unordered-containers
   * containers
+  * transformers
   * semigroups
+  * websockets
   * text
   * bytestring
   * tar
@@ -38,16 +40,28 @@
   * case-insensitive
   * Spock
   * Spock-digestive
+  * aeson
+  * lens-aeson
+  * mtl
+  * wai-extra
+  * wai-middleware-static
+  * vector
 
 ### Modules
 
+_aeson_
+
+  - js Data.Aeson
+  - js Data.Aeson.Lens
+
 _containers_
 
-  - m Data.Map.Strict
-  - lm Data.Map
+  - map Data.Map.Strict
+  - lmap Data.Map
   - set Data.Set
   - hm Data.HashMap.Strict
   - ne Data.List.NonEmpty
+  - vec Data.Vector
 
 _text_
 
@@ -63,7 +77,7 @@ _bytestring_
   - bs Data.ByteString
   - bs Data.ByteString.Char8
   - lbs Data.ByteString.Lazy
-  - lbs Data.ByteString.Lazy.Char8
+  - c8 Data.ByteString.Lazy.Char8
 
 _stm_
 
@@ -109,7 +123,21 @@ _test purpose:_
   - wai Network.Wai
   - wai Network.Wai.Handler.Warp
   - wai Network.HTTP.Types.Status
+  - wai Network.Wai.Middleware.RequestLogger
+  - wai Network.Wai.Middleware.Static
   - ci Data.CaseInsensitive
 
   - spock Web.Spock.Digestive
   - spock Web.Spock.Safe
+
+
+  - trans Control.Monad.Trans.Class
+  - trans Control.Monad.IO.Class
+  - trans Control.Monad.Trans.Class
+  - trans Control.Monad.Trans.State.Lazy
+
+  - mtl Control.Monad.State.Lazy
+
+
+  - ws Network.WebSockets
+  - ws Network.WebSockets.Connection

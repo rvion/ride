@@ -1,29 +1,30 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Chrome.Chromium where
 
-import           Control.Concurrent     (ThreadId, forkIO)
-import           Control.Monad          (forever, unless)
-import           Control.Monad.IO.Class (MonadIO)
-import           Control.Monad.Trans    (liftIO)
+import JetPack
+-- import           Control.Concurrent     (ThreadId, forkIO)
+-- import           Control.Monad          (forever, unless)
+-- import           Control.Monad.IO.Class (MonadIO)
+-- import           Control.Monad.Trans    (liftIO)
 
-import           Network.HTTP.Conduit
-import           Network.Socket         (withSocketsDo)
-import qualified Network.WebSockets     as WS
+-- import           Network.HTTP.Conduit
+-- import           Network.Socket         (withSocketsDo)
+-- import qualified Network.WebSockets     as WS
 
-import           Data.Text              (Text)
-import qualified Data.Text              as T
-import qualified Data.Text.IO           as T
+-- import           Data.Text              (Text)
+-- import qualified Data.Text              as T
+-- import qualified Data.Text.IO           as T
 
-import           System.Exit            (ExitCode)
-import           System.Process         (system)
+-- import           System.Exit            (ExitCode)
+-- import           System.Process         (system)
 
-import           Control.Lens           (filtered, folded, to, (^.), (^..), (^?))
-import           Data.Aeson
-import           Data.Aeson.Lens        (key, _Array, _String)
-import qualified Data.ByteString.Lazy   as LBS
-import           Data.List              (isPrefixOf)
-import           Data.Maybe             (fromJust)
-import           Data.Monoid
+-- import           Control.Lens           (filtered, folded, to, (^.), (^..), (^?))
+-- import           Data.Aeson
+-- import           Data.Aeson.Lens        (key, _Array, _String)
+-- import qualified Data.ByteString.Lazy   as LBS
+-- import           Data.List              (isPrefixOf)
+-- import           Data.Maybe             (fromJust)
+-- import           Data.Monoid
 
 type LBS = LBS.ByteString
 
