@@ -10,9 +10,7 @@ module Util
 import           Control.Monad.Logger         as X
 import           Control.Monad.Trans.Reader   as X (ReaderT)
 import           Control.Monad.Trans.Resource as X (ResourceT, runResourceT)
-import           Data.HVect                   as X (HVect (..), HVectElim,
-                                                    HasRep, ListContains,
-                                                    NotInList, findFirst)
+import           Data.HVect                   as X (HVect (..), HVectElim, HasRep, ListContains, NotInList, findFirst)
 -- import Data.Maybe                   as X (isJust)
 -- import Data.Monoid                  as X ((<>))
 import           Control.Exception            (SomeException (..))
@@ -24,8 +22,7 @@ import qualified Data.Text.Lazy               as LT
 import           Data.Time                    as X
 
 -- WEB
-import           Web.Spock.Safe               as X hiding (SessionId, delete,
-                                                    get, text)
+import           Web.Spock.Safe               as X hiding (SessionId, delete, get, text)
 
 -- View
 import           Lucid                        as X
@@ -37,7 +34,7 @@ import           Database.Persist.Sql         as X
 import           Database.Persist.Sqlite      as X
 import           Models                       as X
 
-import qualified Data.ByteString.Char8 as BS
+import qualified Data.ByteString.Char8        as BS
 
 page :: MonadIO m => Html a -> ActionCtxT ctx m b
 page = lucid . defaultLayout

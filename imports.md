@@ -33,6 +33,7 @@
   * ansi-terminal
   * optparse-applicative
   * wai
+  * warp
   * http-types
   * case-insensitive
   * Spock

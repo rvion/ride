@@ -63,7 +63,7 @@ ride = do
       json [ A.object
           [ "value" A..= ("All" :: T.Text)
           , "open" A..= True
-          , "data"  A..= (M.elems ctxDB)
+          , "data"  A..= M.elems ctxDB
           ]
         ]
 

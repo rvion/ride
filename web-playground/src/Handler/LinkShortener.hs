@@ -1,16 +1,16 @@
 module Handler.LinkShortener where
 
 import           ClassyPrelude
-import           Control.Exception (SomeException (..))
+import           Control.Exception         (SomeException (..))
+import qualified Data.ByteString           as BS
+import           Data.Time.Clock           (getCurrentTime)
 import           Forms
+import           Network.HTTP.Types.Method
+import           Network.Wai
+import           Route                     (urlPath)
 import           Template.Layout
 import           Util
-import           Web.Hashids       as HID
-import           Route (urlPath)
-import           Data.Time.Clock (getCurrentTime)
-import qualified Data.ByteString as BS
-import Network.Wai
-import Network.HTTP.Types.Method
+import           Web.Hashids               as HID
 type Widget a = Handler a HTML
 
 allLinksWidget :: Widget a
@@ -115,7 +115,7 @@ restore :: ByteString -> [Int]
 restore x = HID.decode ctx x
 
 data NewLinkForm = NewLinkForm
-  { url :: Text
+  { url          :: Text
   , preferedHash :: Maybe Text
   } deriving (Show)
 

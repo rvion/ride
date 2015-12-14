@@ -73,6 +73,23 @@ columns: 120
 #
 # No language extensions are enabled by default.
 language_extensions:
-  - MagicHash
+  - DataKinds
+  - FlexibleContexts
+  - FlexibleInstances
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - MultiParamTypeClasses
+  - NoMonomorphismRestriction
+  - OverloadedStrings
+  - RankNTypes
+  - RecordWildCards
+  - TupleSections
+  - TypeFamilies
+  - ScopedTypeVariables
+  - TypeOperators
+  - NoImplicitPrelude
+  - LambdaCase
+  - NamedFieldPuns
+  # - MagicHash
   # - TemplateHaskell
   # - QuasiQuotes
