@@ -6,7 +6,7 @@
       - All lines starting with  `  - ` will generate a qualified reexport
       - All lines starting with  `  * ` will generate a package dependency
 
-  2. one can look at modules listing on 
+  2. one can look at modules listing on
       [stackage website](https://www.stackage.org/nightly-2015-12-10/docs)
 
   3. I built the list of reexport below from experience and by looking

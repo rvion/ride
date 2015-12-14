@@ -112,7 +112,7 @@ shorten :: Int -> ByteString
 shorten x = HID.encodeList ctx [x]
 
 restore :: ByteString -> [Int]
-restore x = HID.decode ctx x
+restore = HID.decode ctx
 
 data NewLinkForm = NewLinkForm
   { url          :: Text
@@ -140,10 +140,7 @@ addError :: Text -> HTML ->View HTML -> View HTML
 addError field err view = view {viewErrors = ([field], err) : viewErrors view}
 
 seed :: Maybe (Entity Link) -> Int
-seed mbe = maybe 1 (\(Entity k _) -> 1 + keyToInt k) mbe
+seed = maybe 1 (\(Entity k _) -> 1 + keyToInt k)
 
 keyToInt :: (ToBackendKey SqlBackend a) => Key a -> Int
 keyToInt = fromIntegral . fromSqlKey
-
-
-
