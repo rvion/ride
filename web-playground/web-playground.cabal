@@ -1,8 +1,8 @@
-name:                dgx
+name:                web-playground
 version:             0.2.0.0
 synopsis:            Simple project template from stack
 description:         Please see README.md
-homepage:            http://github.com/githubuser/dgx#readme
+homepage:            http://github.com/rvion/ride#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Rémi Vion
