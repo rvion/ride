@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Command where
+module Chrome.Command where
 import           Data.Aeson
 import qualified Data.Aeson           as A
 import           Data.ByteString.Lazy (ByteString)

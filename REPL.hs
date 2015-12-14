@@ -1,9 +1,7 @@
 module REPL where
 
-import           Gen
-
 main :: IO ()
-main = jetpackGen
+main = print "this module is just here to help sublime text plugin"
 
 
 

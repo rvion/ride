@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module DB where
+module Chrome.DB where
 
 import           Control.Monad
 import           Data.Aeson

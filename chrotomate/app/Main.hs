@@ -3,14 +3,10 @@
 
 module Main ( main ) where
 import           Control.Monad              (forever, mzero)
--- import           Control.Monad.IO.Class     (MonadIO)
 import           Control.Monad.Trans        (liftIO)
 import           Data.Aeson                 (FromJSON (..), (.:))
 
-
-
-import           DB
-                                            --  (.=))
+import           Chrome.DB
 import qualified Data.Aeson                 as A
 import qualified Data.ByteString.Lazy.Char8 as LBS
 import           Data.List                  (isPrefixOf)
@@ -30,8 +26,8 @@ import qualified Network.HTTP.Conduit       as Http
 import qualified Network.URI                as Uri
 import qualified Network.WebSockets         as WS
 
-import           Command
-import           Server
+import           Chrome.Command
+import           Chrome.Server
 -- import           System.Exit                (ExitCode)
 import           Control.Concurrent
 import           System.Directory           (doesFileExist)
@@ -74,8 +70,6 @@ main = do
       <> progDesc "Print a greeting for TARGET"
       <> header "hello - a test for optparse-applicative" )
 
-
-
 tryUntilItIsWorking :: String -> IO (Maybe a) -> IO a
 tryUntilItIsWorking errMsg action =
   action >>= \mbres -> case mbres of
@@ -94,7 +88,7 @@ startTool _db _dbpath = do
       (linkedinPage : _) -> linkedinPage
 
   WS.runClient host port path $ \_conn -> do
-    let ctx = Ctx  _db _dbpath _conn
+    let ctx = Ctx _db _dbpath _conn
     _ <- forkIO (webserver ctx)
     loopAnalyse ctx
 
@@ -114,7 +108,7 @@ loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
     Just life -> do
       putStrLn "------- LIFE --------"
       let newDB = M.insert (name life) life (ctxDB ctx)
-      let ctx' = ctx{ctxDB=newDB }
+      let ctx' = ctx{ ctxDB = newDB }
       writeFile _dbpath (show newDB)
       print "written:"
       print newDB
@@ -125,7 +119,6 @@ loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
         -- print (A.encode cmd)
         -- WS.sendTextData conn $ A.encode cmd
 
--- Helpers
 parseUri :: String -> (String, Int, String)
 parseUri uri = fromMaybe (error "parseUri: Invalid URI") $ do
   _u    <- Uri.parseURI uri

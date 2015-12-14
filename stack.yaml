@@ -1,12 +1,13 @@
 flags: {}
 packages:
+# Libraries
 - '.'
-- 'haskell-web-ide'
 - 'jetpack'
-- 'jetpack-gen'
 - 'reexport-demo'
-- 'lucid-forms'
 - 'db-layer'
+# Libraries + executables
+- 'haskell-web-ide'
+- 'jetpack-gen'
 - 'web-playground'
 - 'chrotomate'
 extra-deps:

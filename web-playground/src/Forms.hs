@@ -5,7 +5,7 @@ module Forms
 
 import           ClassyPrelude
 import qualified Data.Text           as T
-import           Lucid.Forms         as X (errorList, inputText, label)
+import           Text.Digestive.Lucid.Html5 as X (errorList, inputText, label)
 import           Text.Digestive      as X hiding (Path, file, text)
 import           Text.Digestive      as X (text)
 import           Util                hiding (text)

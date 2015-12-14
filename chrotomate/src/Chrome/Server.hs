@@ -3,30 +3,24 @@
 {-# LANGUAGE OverloadedStrings         #-}
 {-# LANGUAGE ScopedTypeVariables       #-}
 
-module Server where
+module Chrome.Server where
 
 import           Control.Concurrent                   (forkIO, threadDelay)
 import           Debug.Trace
--- import           Control.Lens                         ()
--- import           Control.Monad                        ()
 import           Control.Monad.IO.Class               (liftIO)
 import           Control.Monad.Trans.Class            (lift)
 import           Control.Monad.Trans.State            (StateT, evalStateT)
 import qualified Control.Monad.Trans.State            as S
 import           System.Environment                   (lookupEnv)
 
--- import           Data.Aeson                           (Value, object, (.=))
 import           Data.Monoid                          ((<>))
 
--- import           Data.Map                             (Map)
--- import qualified Data.Map                             as M
--- import           Data.Text                            (Text)
-import           Command
+import           Chrome.Command
 import qualified Data.Aeson                           as A
 import qualified Data.ByteString.Lazy.Char8           as C8
 import qualified Data.Map                             as M
 import qualified Data.Text                            as T
-import           DB
+import           Chrome.DB
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
 import           Network.Wai.Middleware.Static        (addBase, staticPolicy)
 import qualified Network.WebSockets                   as WS

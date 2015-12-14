@@ -14,9 +14,14 @@ Library
   hs-source-dirs:      .
   exposed-modules:     REPL
   default-language:    Haskell2010
-  default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  -- -fwarn-unused-imports
+  default-extensions:  NoMonomorphismRestriction
+                     , FlexibleContexts
+                     , MagicHash
+                     , DataKinds
+  ghc-options:         -fdefer-type-errors
   build-depends:       base
                      , jetpack-gen
+                     , chrotomate
+                     , jetpack-gen
+                     , jetpack
 

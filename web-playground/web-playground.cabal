@@ -12,7 +12,7 @@ category:            Web
 build-type:          Simple
 cabal-version:       >=1.10
 
-executable dgx
+executable web-playground
   hs-source-dirs:    src
   main-is:           Main.hs
   other-modules:     Util
@@ -80,7 +80,7 @@ executable dgx
                    , http-types
 
                    , db-layer
-                   , lucid-forms
+                   , digestive-functors-lucid
                    , esqueleto
                    , classy-prelude
                    , hashids

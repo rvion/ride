@@ -7,4 +7,3 @@ main = do
   putStrLn "start"
   jetpackGen
   putStrLn "end"
-

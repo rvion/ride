@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Chromium where
+module Chrome.Chromium where
 
 import           Control.Concurrent     (ThreadId, forkIO)
 import           Control.Monad          (forever, unless)

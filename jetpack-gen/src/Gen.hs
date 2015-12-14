@@ -11,6 +11,7 @@ import           Gen.Modules
 import           Gen.Names
 import           Gen.State
 import           Gen.Types
+import           Data.List (sort)
 
 jetpackGen :: IO ()
 jetpackGen = do
@@ -58,8 +59,8 @@ for = flip map
 writeReexportModule :: [(String, String)] -> IO ()
 writeReexportModule reexports = writeFile "jetpack/src/Exports.hs" content
   where
-    toImport modName = concat ["\nimport ", modName, " as X"]
+    toImport modName = concat ["\nimport           ", modName, " as X"]
     content = concat $
       [ "\nmodule Exports (module X) where"
-      , "\n"] ++ map (toImport.toN) reexports ++
+      , "\n"] ++  sort ((map (toImport.toN)) reexports) ++
       [ "\n\n"]
