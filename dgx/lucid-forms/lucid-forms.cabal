@@ -1,0 +1,17 @@
+Name:          lucid-forms
+Version:       0.0.0.3
+License:       BSD3
+Category:      Web
+Build-type:    Simple
+Cabal-version: >= 1.6
+
+Library
+  Hs-source-dirs:  src
+  GHC-options:     -Wall -fwarn-tabs
+  Exposed-modules: Lucid.Forms
+
+  Build-depends:
+    base,
+    lucid,
+    digestive-functors,
+    text
