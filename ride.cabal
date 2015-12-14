@@ -18,10 +18,12 @@ Library
                      , FlexibleContexts
                      , MagicHash
                      , DataKinds
+                     , RankNTypes
   ghc-options:         -fdefer-type-errors
   build-depends:       base
                      , jetpack-gen
                      , chrotomate
                      , jetpack-gen
                      , jetpack
+                     , ghc
 
