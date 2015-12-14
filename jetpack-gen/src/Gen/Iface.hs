@@ -117,7 +117,10 @@ findReexports (mod, modules) previouslyExportedSymbols =
   return $ catMaybes <$> for declsF $ \(n, decl) ->
     case decl of
       Nothing -> Nothing
-      Just (_t@(IfaceId{})) -> Just $ RId (toS n) (onOneLine $ toS (ifType _t))
+      Just (_t@(IfaceId{})) -> Just $
+        RId
+          (toS n)
+          (onOneLine $ toS (ifType _t))
       Just (_t@(IfaceData{})) -> Just
         RData
           { rName = toS n
@@ -130,8 +133,15 @@ findReexports (mod, modules) previouslyExportedSymbols =
           , rType = onOneLine $ toS (ifType _t)
           , rNbTyVars = length (ifTyVars _t)
           }
+      Just (_t@(IfaceClass{})) -> Just $
+        RClass
+          ( toS n)
+          (map
+            (\(IfaceClassOp n' _ t') -> RId (toS n') (onOneLine.toS$t'))
+            (ifSigs _t)
+          )
+
       Just (IfaceFamily{}) -> Nothing
-      Just (IfaceClass{}) -> Nothing
       Just (IfaceAxiom{}) -> Nothing
       Just (IfacePatSyn{}) -> Nothing
 

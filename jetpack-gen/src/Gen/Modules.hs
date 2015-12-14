@@ -43,40 +43,48 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
       ]
 
     newDecl <- forM reexports $ \rTerm -> do
-      let
-        _name = rName rTerm
-        _reexported_name =
-          if head _name `elem` operators
-            then _name
-            else concat [_idPrefix, sep, _name]
-        _reexported_type = _typePrefix ++ _name
-        -- _type = typeSdoc decl
 
-      case rTerm of
-        RId _ rType
-          | _reexported_name `elem` previouslyExportedSymbols -> do
-              putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
-              return Nothing
-          | head _name `elem` operators -> do
-              put ["-- (",_name,") :: ",rType]
-              put ["(",_name,")", " = (I.", _name,")\n"]
-              return (Just _reexported_name)
-          | isLower (head _name) || head _name == '_' -> do
-              put ["-- ",_reexported_name," :: ",rType]
-              put [_reexported_name, " = I.", _name,"\n"]
-              return (Just _reexported_name)
-          | otherwise -> error "ahaha"
-        RData _ rType nbTyVars
-          | _reexported_type `elem` previouslyExportedSymbols -> do
-              putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
-              return Nothing
-          | otherwise -> do
-              let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
-              -- put ["-- ",_reexported_type," :: ",rType]
-              put (["type ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
-              return (Just _reexported_type) -- tyvars needed because type synonym must be instanciated
+      let
+        -- core reexport codegen
+        reexportFn x = do
+          let
+            _name = rName x
+            _reexported_name =
+              if head _name `elem` operators
+                then _name
+                else concat [_idPrefix, sep, _name]
+            _reexported_type = _typePrefix ++ _name
+            -- _type = typeSdoc decl
+          case x of
+            RId _ rType
+              | _reexported_name `elem` previouslyExportedSymbols -> do
+                  putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
+                  return [Nothing]
+              | head _name `elem` operators -> do
+                  put ["-- (",_name,") :: ",rType]
+                  put ["(",_name,")", " = (I.", _name,")\n"]
+                  return [Just _reexported_name]
+              | isLower (head _name) || head _name == '_' -> do
+                  put ["-- ",_reexported_name," :: ",rType]
+                  put [_reexported_name, " = I.", _name,"\n"]
+                  return [Just _reexported_name]
+              | otherwise -> error ("ahaha " ++ _name)
+            RData _ rType nbTyVars
+              | _reexported_type `elem` previouslyExportedSymbols -> do
+                  putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
+                  return [Nothing]
+              | otherwise -> do
+                  let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
+                  -- put ["-- ",_reexported_type," :: ",rType]
+                  put (["type ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
+                  return [Just _reexported_type] -- tyvars needed because type synonym must be instanciated
+            RClass n fns -> do
+              print (RClass n fns)
+              concat <$> forM fns reexportFn
+
+      reexportFn rTerm
     -- print (previouslyExportedSymbols)
-    return (previouslyExportedSymbols ++ catMaybes newDecl)
+    return (previouslyExportedSymbols ++ catMaybes(concat newDecl))
 
 -- handleDeprecated :: RTerm -> IO (Maybe String)
 -- handleDeprecated rTerm = do
