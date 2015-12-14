@@ -3,7 +3,6 @@ module Handler.LinkShortener where
 import           ClassyPrelude
 import           Control.Exception (SomeException (..))
 import           Forms
-import           Network.Wai       (rawPathInfo)
 import           Template.Layout
 import           Util
 import           Web.Hashids       as HID
@@ -81,7 +80,7 @@ linkShortenerHandler = do
 
   page $ do
     h1_ "Add new link:"
-    when (not _isGet) _msg
+    unless _isGet _msg
     mkForm [method_ "post", action_ req] $ do
       newLinkView view
       button_ [class_ "btn btn-success "] "Submit"

@@ -1,11 +1,11 @@
+{-# LANGUAGE NamedFieldPuns            #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
-{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE OverloadedStrings         #-}
-{-# LANGUAGE ScopedTypeVariables         #-}
+{-# LANGUAGE ScopedTypeVariables       #-}
 
 module Server where
 
-import           Control.Concurrent                   (threadDelay, forkIO)
+import           Control.Concurrent                   (forkIO, threadDelay)
 import           Debug.Trace
 -- import           Control.Lens                         ()
 -- import           Control.Monad                        ()
@@ -13,7 +13,7 @@ import           Control.Monad.IO.Class               (liftIO)
 import           Control.Monad.Trans.Class            (lift)
 import           Control.Monad.Trans.State            (StateT, evalStateT)
 import qualified Control.Monad.Trans.State            as S
-import System.Environment (lookupEnv)
+import           System.Environment                   (lookupEnv)
 
 -- import           Data.Aeson                           (Value, object, (.=))
 import           Data.Monoid                          ((<>))
@@ -21,28 +21,28 @@ import           Data.Monoid                          ((<>))
 -- import           Data.Map                             (Map)
 -- import qualified Data.Map                             as M
 -- import           Data.Text                            (Text)
+import           Command
+import qualified Data.Aeson                           as A
+import qualified Data.ByteString.Lazy.Char8           as C8
+import qualified Data.Map                             as M
 import qualified Data.Text                            as T
-import qualified Data.ByteString.Lazy.Char8 as C8
-import qualified Network.WebSockets         as WS
-import qualified Data.Map as M
 import           DB
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
 import           Network.Wai.Middleware.Static        (addBase, staticPolicy)
+import qualified Network.WebSockets                   as WS
 import           Web.Spock
-import qualified Data.Aeson as A
-import Command
 
 data Ctx = Ctx
-  { ctxDB   :: DB
+  { ctxDB     :: DB
   , ctxDbPath :: FilePath
-  , ctxConn :: WS.Connection
+  , ctxConn   :: WS.Connection
   }
 
 type M = StateT Ctx IO
 
 webserver ::Ctx -> IO ()
 webserver _ctx = do
-  port <- maybe 3000 read <$> (lookupEnv "PORT")
+  port <- maybe 3000 read <$> lookupEnv "PORT"
   runSpock port $ spockT (runM _ctx) ride
 
 runM :: Ctx -> M a -> IO a
@@ -60,7 +60,7 @@ ride = do
 
     get "people" $ do
       (Ctx{ctxDB}) <- lift S.get
-      json $ [ A.object
+      json [ A.object
           [ "value" A..= ("All" :: T.Text)
           , "open" A..= True
           , "data"  A..= (M.elems ctxDB)
@@ -93,4 +93,4 @@ ride = do
         C8.putStrLn ms3
         WS.sendTextData ctxConn ms3
 
-      text (_name)
+      text _name

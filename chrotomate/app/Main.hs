@@ -1,11 +1,7 @@
+{-# LANGUAGE NamedFieldPuns    #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE NamedFieldPuns #-}
 
 module Main ( main ) where
-
--- import           Control.Concurrent         (forkIO)
--- import           Control.Applicative        ((<$>))
-import           Control.Concurrent         (ThreadId, forkIO)
 import           Control.Monad              (forever, mzero)
 -- import           Control.Monad.IO.Class     (MonadIO)
 import           Control.Monad.Trans        (liftIO)
@@ -16,20 +12,20 @@ import           Data.Aeson                 (FromJSON (..), (.:))
 import           DB
                                             --  (.=))
 import qualified Data.Aeson                 as A
-import Debug.Trace
 import qualified Data.ByteString.Lazy.Char8 as LBS
 import           Data.List                  (isPrefixOf)
 import qualified Data.Map                   as M
 import           Data.Maybe                 (fromMaybe)
 import           Data.Monoid                ((<>))
 import qualified Data.Text.IO               as T
+import           Debug.Trace
 import           Options.Applicative
 import           Opts
-import           System.IO.Strict as SIO
 import           System.IO
+import           System.IO.Strict           as SIO
 
-import qualified Network.HTTP.Conduit       as Http
 import qualified Data.ByteString.Lazy.Char8 as C8
+import qualified Network.HTTP.Conduit       as Http
 
 import qualified Network.URI                as Uri
 import qualified Network.WebSockets         as WS
@@ -38,7 +34,7 @@ import           Command
 import           Server
 -- import           System.Exit                (ExitCode)
 import           Control.Concurrent
-import System.Directory (doesFileExist)
+import           System.Directory           (doesFileExist)
 
 import           Control.Concurrent.STM
 import           System.Process             (system)
@@ -113,7 +109,7 @@ loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
   print mbres
 
   case mbLife of
-    Nothing -> do
+    Nothing ->
       loopAnalyse ctx
     Just life -> do
       putStrLn "------- LIFE --------"

@@ -1,14 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Command where
-
-import           Data.Aeson (ToJSON, (.=))
-import qualified Data.Aeson as A
-import Data.Aeson
-import qualified Data.Map   as M
-import qualified Data.Text  as T
+import           Data.Aeson
+import qualified Data.Aeson           as A
+import           Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as LBS
-import Data.ByteString.Lazy (ByteString)
-import Data.Text (Text)
+import qualified Data.Map             as M
+import           Data.Text            (Text)
+import qualified Data.Text            as T
 type LBS = ByteString
 
 data Command = Command
@@ -25,8 +23,8 @@ instance ToJSON Command where
     ]
 
 data CommandResult = CommandResult
-  { resultId     :: Int
-  , resultValue  :: Value
+  { resultId    :: Int
+  , resultValue :: Value
   } deriving (Show)
 
 instance FromJSON CommandResult where
@@ -57,7 +55,7 @@ getExperiences :: Command
 getExperiences = jsEval getExperiences'
 
 getExperiences'  :: Text
-getExperiences' = T.concat $
+getExperiences' = T.concat
   [ "result={"
   , "  name: $('#name .full-name').text(),"
   , "  life: $.map($('#background #background-experience-container .editable-item.section-item'),function(e){"

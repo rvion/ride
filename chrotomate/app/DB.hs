@@ -1,20 +1,20 @@
 {-# LANGUAGE OverloadedStrings #-}
 module DB where
 
-import Data.Thyme
-import Data.Map (Map)
-import Data.Aeson
-import Control.Monad
+import           Control.Monad
+import           Data.Aeson
+import           Data.Map      (Map)
+import           Data.Thyme
 -- import qualified Data.Map as M
 
 type Name = String
 type DB = Map Name Life
 
 data Position = Position
-  { title :: String
-  , company :: String
+  { title     :: String
+  , company   :: String
   , starttime :: String
-  , endtime :: String
+  , endtime   :: String
   } deriving (Show, Read)
 
 instance ToJSON Position where
@@ -34,7 +34,7 @@ instance FromJSON Position where
   parseJSON _ = mzero
 
 data Life = Life
-  { name :: String
+  { name   :: String
   , events :: [Position]
   } deriving (Show, Read)
 

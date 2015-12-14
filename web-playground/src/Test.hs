@@ -1,5 +1,5 @@
 module Test where
-import ClassyPrelude
+import           ClassyPrelude
 
 test :: [()]
 test = return ()

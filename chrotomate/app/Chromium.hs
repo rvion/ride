@@ -17,8 +17,7 @@ import qualified Data.Text.IO           as T
 import           System.Exit            (ExitCode)
 import           System.Process         (system)
 
-import           Control.Lens           (filtered, folded, to, (^.), (^..),
-                                         (^?))
+import           Control.Lens           (filtered, folded, to, (^.), (^..), (^?))
 import           Data.Aeson
 import           Data.Aeson.Lens        (key, _Array, _String)
 import qualified Data.ByteString.Lazy   as LBS
