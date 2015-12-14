@@ -6,4 +6,4 @@ packages:
 - 'jetpack-gen'
 - 'reexport-demo'
 extra-deps: []
-resolver: nightly-2015-11-29
+resolver: nightly-2015-12-14

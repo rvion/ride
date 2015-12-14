@@ -29,4 +29,10 @@ import Data.Conduit.List.AsCl as X
 import Data.Conduit.Binary.AsCb as X
 import Lens.Micro.Platform.AsLens as X
 import ReexportDemo.AsDemo as X
+import Network.Wai.AsWai as X
+import Network.Wai.Handler.Warp.AsWai as X
+import Network.HTTP.Types.Status.AsWai as X
+import Data.CaseInsensitive.AsCi as X
+import Web.Spock.Digestive.AsSpock as X
+import Web.Spock.Safe.AsSpock as X
 

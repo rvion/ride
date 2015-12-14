@@ -25,27 +25,26 @@ library
   default-language:    Haskell2010
   default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds
   build-depends:       base
-                     , transformers
-                     , lens
-                     , containers
-                     , text
-                     , bytestring
                      , aeson
-                     , process
-                     , filemanip
-                     , directory-tree
-                     , ghc
-                     , bin-package-db
-                     , ghc-paths
-                     , process-extras
-                     , MissingH
-                     , yaml
-                     , Cabal
-                     , directory
-                     , filepath
                      , ansi-terminal
-                     , transformers
+                     , bin-package-db
+                     , bytestring
+                     , Cabal
+                     , containers
+                     , directory
+                     , directory-tree
+                     , filemanip
+                     , filepath
+                     , ghc
+                     , ghc-paths
+                     , MissingH
+                     , process
+                     , process-extras
                      , split
+                     , text
+                     , transformers
+                     , transformers
+                     , yaml
 
 
 

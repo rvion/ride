@@ -18,31 +18,29 @@ Library
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   -- -fwarn-unused-imports
   build-depends:       base
-                     , transformers
-                     , lens
-                     , containers
-                     , text
-                     , bytestring
-                     , Spock
-                     , lens
-                     , cryptohash
-                     , wai-middleware-static
-                     , wai-extra
                      , aeson
-                     , process
-                     , filemanip
-                     , directory-tree
-                     , ghc
-                     , bin-package-db
-                     , ghc-paths
-                     , process-extras
-                     , MissingH
-                     , yaml
-                     , Cabal
-                     , directory
-                     , filepath
                      , ansi-terminal
-                     , transformers
+                     , bin-package-db
+                     , bytestring
+                     , Cabal
+                     , containers
+                     , cryptohash
+                     , directory
+                     , directory-tree
+                     , filemanip
+                     , filepath
+                     , ghc
+                     , ghc-paths
                      , jetpack-gen
+                     , MissingH
+                     , process
+                     , process-extras
                      , split
+                     , Spock
+                     , text
+                     , transformers
+                     , transformers
+                     , wai-extra
+                     , wai-middleware-static
+                     , yaml
 

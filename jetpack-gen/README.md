@@ -55,10 +55,12 @@ m_deleteFindMax = I.deleteFindMax
 -------------
 
 some next steps:
-  - [ ] mention https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
-  - [ ] mention backpack
+  - [ ] remove the need to manually specify packages !
   - [ ] cache module loading
+  - [ ] ensure all necessary packages are installed
   - [ ] export promoted kind aliases
+  - [ ] document https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
+  - [ ] document backpack
   - [X] re-handle deprecated types
   - [x] show commented types above each definitions
   - [x] check how to deal with http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard

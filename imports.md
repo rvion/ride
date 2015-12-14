@@ -32,6 +32,11 @@
   * stm
   * ansi-terminal
   * optparse-applicative
+  * wai
+  * http-types
+  * case-insensitive
+  * Spock
+  * Spock-digestive
 
 ### Modules
 
@@ -99,3 +104,11 @@ _lens_
 _test purpose:_
   - demo ReexportDemo
 
+
+  - wai Network.Wai
+  - wai Network.Wai.Handler.Warp
+  - wai Network.HTTP.Types.Status
+  - ci Data.CaseInsensitive
+
+  - spock Web.Spock.Digestive
+  - spock Web.Spock.Safe

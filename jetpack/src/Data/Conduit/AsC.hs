@@ -90,6 +90,9 @@ c_mapOutput = I.mapOutput
 -- c_mapOutputMaybe :: forall o1 o2 i (m :: * -> *) r. Monad m => (o1 -> Maybe o2) -> ConduitM i o1 m r -> ConduitM i o2 m r
 c_mapOutputMaybe = I.mapOutputMaybe
 
+-- c_mergeSource :: forall (m :: * -> *) i a. Monad m => Source m i -> Conduit a m (i, a)
+c_mergeSource = I.mergeSource
+
 -- c_newResumableConduit :: forall i (m :: * -> *) o. Monad m => Conduit i m o -> ResumableConduit i m o
 c_newResumableConduit = I.newResumableConduit
 
@@ -110,6 +113,9 @@ c_sequenceSinks = I.sequenceSinks
 
 -- c_sequenceSources :: forall (f :: * -> *) (m :: * -> *) o. (Traversable f, Monad m) => f (Source m o) -> Source m (f o)
 c_sequenceSources = I.sequenceSources
+
+-- c_sourceToList :: forall (m :: * -> *) a. Monad m => Source m a -> m [a]
+c_sourceToList = I.sourceToList
 
 -- c_toConsumer :: forall a (m :: * -> *) b. Monad m => Sink a m b -> Consumer a m b
 c_toConsumer = I.toConsumer

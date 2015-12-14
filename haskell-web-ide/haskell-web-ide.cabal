@@ -20,12 +20,10 @@ executable ride
   -- -fwarn-unused-imports
   build-depends:       base
                      , transformers
-                     , lens
                      , containers
                      , text
                      , bytestring
                      , Spock
-                     , lens
                      , cryptohash
                      , wai-middleware-static
                      , wai-extra

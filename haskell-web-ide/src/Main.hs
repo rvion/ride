@@ -4,8 +4,6 @@
 module Main where
 
 import           Control.Concurrent                   (forkIO)
-import           Control.Lens                         ()
-import           Control.Monad                        ()
 import           Control.Monad.IO.Class               (liftIO)
 import           Control.Monad.Trans.Class            (lift)
 import           Control.Monad.Trans.State            (StateT, evalStateT)
