@@ -39,28 +39,6 @@ User json
   UniqueUsername name
   UniqueEmail email
   deriving Show
-
-Post
-  title Text
-  date UTCTime
-  content Text
-  deriving Show
-
-PostTags
-  postId PostId
-  tagId TagId
-  UniquePostTag postId tagId
-  deriving Show
-
-Tag
-  tag Text
-  UniqueTag tag
-  deriving Show
-
-Comment
-  author Text
-  email Text Maybe
-  content Text
-  post PostId
-  deriving Show
 |]
+
+

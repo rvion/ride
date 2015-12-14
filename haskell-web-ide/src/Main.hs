@@ -44,34 +44,34 @@ runM = flip evalStateT (Ctx Nothing)
 
 ride :: SpockT M ()
 ride = do
-    middleware $ staticPolicy (addBase "static")
-    middleware logStdoutDev
-    get "files" $ liftIO fp' >>= json
-    get "" $ file "test" "static/index.html"
-    post "save" $ json $ object
-        [ "name" .= ("name" :: String)
-        , "age" .= (3::Int)
-        ]
-    get "errors" $ withIde getErrors >>= json
+  middleware $ staticPolicy (addBase "static")
+  middleware logStdoutDev
+  get "files" $ liftIO fp' >>= json
+  get "" $ file "test" "static/index.html"
+  post "save" $ json $ object
+      [ "name" .= ("name" :: String)
+      , "age" .= (3::Int)
+      ]
+  get "errors" $ withIde getErrors >>= json
 
 withIde :: (IDE -> IO String) -> ActionT M String
 withIde f = do
-    ctx <- lift S.get
-    case ctxIde ctx of
-        Nothing -> lift restartIde >> withIde f
-        Just ide -> liftIO $ f ide
+  ctx <- lift S.get
+  case ctxIde ctx of
+    Nothing -> lift restartIde >> withIde f
+    Just ide -> liftIO $ f ide
 
 getErrors :: IDE -> IO String
 getErrors (hin, hout, _, _) = do
-    liftIO $ hPutStrLn hin "test"
-    return "yolo"
+  liftIO $ hPutStrLn hin "test"
+  return "yolo"
 
 restartIde :: M ()
 restartIde = do
   prevCtx <- S.get
   case prevCtx of
     Ctx Nothing -> startIDE
-    Ctx (Just (_,_,_,procHandle)) -> do
+    Ctx (Just (_, _, _, procHandle)) -> do
       liftIO (terminateProcess procHandle)
       startIDE
 

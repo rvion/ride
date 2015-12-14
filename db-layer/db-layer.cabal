@@ -14,7 +14,6 @@ cabal-version:       >=1.10
 library
   exposed-modules:     Models
   build-depends:       base
-                     -- Type-safe, non-relational, multi-backend persistence
                      , persistent-template
                      , text
                      , bytestring
