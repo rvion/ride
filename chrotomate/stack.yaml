@@ -1,0 +1,8 @@
+flags: {}
+packages:
+- '.'
+extra-deps: []
+resolver: lts-3.0
+# ghc-options:
+    # All packages
+    # "*": "-Wall -Werror"

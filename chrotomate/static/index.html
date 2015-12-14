@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="//cdn.webix.com/edge/webix.js"></script>
+    <link   type="text/css"       href="//cdn.webix.com/edge/webix.css" rel="stylesheet">
+    <!-- <link   type="text/css"       href="//cdn.webix.com/site/skins/material.css" rel="stylesheet"> -->
+    <!-- <link   type="text/css"       href="//webix.com/demos/material/admin-app/assets/theme.siberia.css?1444580384362" rel="stylesheet"> -->
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js "></script>
+</head>
+<body>
+ <script type="text/javascript" charset="utf-8">
+// filesSource = new webix.TreeCollection({ url:"files" });
+// loadFile = function (id) {
+//   $$("ide-editor").setValue(filesSource.getItem(id).content);
+// }
+
+grid_data = [
+    {
+        "id": 1,
+        "title": "The Shawshank Redemption",
+        "year": 1994,
+        "votes": 678790,
+        "rating": 9.2,
+        "rank": 1
+    },
+    {
+        "id": 2,
+        "title": "The Godfather",
+        "year": 1972,
+        "votes": 511495,
+        "rating": 6.2,
+        "rank": 2
+    },
+    {
+        "id": 3,
+        "title": "The Godfather: Part II",
+        "year": 1974,
+        "votes": 319352,
+        "rating": 8,
+        "rank": 3
+    },
+    {
+        "id": 4,
+        "title": "The Good, the Bad and the Ugly",
+        "year": 1966,
+        "votes": 213030,
+        "rating": 7.9,
+        "rank": 4
+    },
+    {
+        "id": 5,
+        "title": "My Fair Lady",
+        "year": 1964,
+        "votes": 533848,
+        "rating": 4.9,
+        "rank": 5
+    },
+    {
+        "id": 6,
+        "title": "12 Angry Men",
+        "year": 1957,
+        "votes": 164558,
+        "rating": 6.9,
+        "rank": 6
+    }
+]
+
+filterList = function(){
+  console.log($$("search").getValue())
+  var l = $$("list");
+  l.filter(function(e){
+    console.log(e.value,e.value.indexOf($$("search").getValue()))
+    if (e.value.indexOf($$("search").getValue()) > (-1)) {
+        return true;
+    } else {
+        console.log(e);
+        return false
+    }
+  })
+}
+webix.ui({
+  rows:[
+    { type:"header", template:"LinkeDig" },
+    { cols:[
+      { maxWidth:250, rows: [
+          { view:"toolbar", cols: [
+              { view:"search", align:"center", placeholder:"Search..", id:"search", width: 300, on: {onChange: filterList} }
+            ]
+          },
+          { view:"tree", url: "/people", gravity:0.4, select:true, id:"list" },
+        ]
+      },
+      { view:"resizer" },
+      { view:"datatable",editable:true, resizeColumn:true,columnWidth:300, autoConfig:true, id:"datatable"} //data:grid_data }
+    ]}
+  ]
+})
+$$("list").attachEvent("onItemClick", function(id, e, node){
+  var item = this.getItem(id);
+  // console.log(item.content)
+  if (item.value == "All"){
+    $$("datatable").clearAll()
+    $$("datatable").load("/allpeople")
+  } else {
+    $$("datatable").clearAll()
+    $$("datatable").parse(item.content)
+  }
+  // alert(JSON.stringify(item));
+});
+//Check the demo - it is not an image!
+// $$('hs_files_tree').data.sync(filesSource);
+// $$("editor").getValue();
+
+// $e = $$("ide-editor").getEditor()
+// $e.setOption("showTrailingSpace", true)
+/*
+
+  $e.on("cursorActivity",function(){
+    selects = $e.listSelections()
+    if (selects.length == 0) {return;}
+    typePos = selects[0]
+    alert("ok");
+  })
+
+*/
+
+</script>
+
+</body>
+</html>

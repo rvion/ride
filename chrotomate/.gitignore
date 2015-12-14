@@ -14,7 +14,3 @@ cabal.sandbox.config
 *.aux
 *.hp
 .stack-work/
-
-.DS_Store
-session.*
-testdb
