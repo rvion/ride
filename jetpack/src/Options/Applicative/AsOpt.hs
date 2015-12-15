@@ -244,6 +244,45 @@ type OptConst a b = I.Const a b
 type OptWrappedArrow a b c = I.WrappedArrow a b c
 type OptWrappedMonad a b = I.WrappedMonad a b
 type OptZipList a = I.ZipList a
+-- opt_empty :: forall a. f a
+opt_empty = I.empty
+
+-- (<|>) :: forall a. f a -> f a -> f a
+(<|>) = (I.<|>)
+
+-- opt_some :: forall a. f a -> f [a]
+opt_some = I.some
+
+-- opt_many :: forall a. f a -> f [a]
+opt_many = I.many
+
+-- opt_pure :: forall a. a -> f a
+opt_pure = I.pure
+
+-- (<*>) :: forall a b. f (a -> b) -> f a -> f b
+(<*>) = (I.<*>)
+
+-- (*>) :: forall a b. f a -> f b -> f b
+(*>) = (I.*>)
+
+-- (<*) :: forall a b. f a -> f b -> f a
+(<*) = (I.<*)
+
+-- opt_fmap :: forall a b. (a -> b) -> f a -> f b
+opt_fmap = I.fmap
+
+-- (<$) :: forall a b. a -> f b -> f a
+(<$) = (I.<$)
+
+-- opt_mempty :: a
+opt_mempty = I.mempty
+
+-- opt_mappend :: a -> a -> a
+opt_mappend = I.mappend
+
+-- opt_mconcat :: [a] -> a
+opt_mconcat = I.mconcat
+
 type OptInfoMod a = I.InfoMod a
 type OptPrefsMod  = I.PrefsMod
 type OptArgumentFields a = I.ArgumentFields a

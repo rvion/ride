@@ -10,6 +10,7 @@ import           BinIface
 import           Control.Monad     (forM)
 import           Data.List         (intersperse)
 import           Data.Map          (Map)
+import Debug.Trace
 import qualified Data.Map          as Map
 import           Data.Maybe
 import           Data.String.Utils
@@ -25,7 +26,7 @@ import           TcRnMonad
 type Renderer = SDoc -> String
 type IfaceDeclMap = Map String IfaceDecl
 
-data DeclLoc = Remote | Local | NotFound deriving (Eq)
+data DeclLoc = Remote FilePath | Local | NotFound deriving (Eq, Show)
 getIface :: String -> Ghc ModIface
 getIface hiFilepath = do
   sess <- getSession
@@ -71,7 +72,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
     declsMap = mkIfaceDeclMap toSDoc iface
     moduleName = toS $ mi_module iface
     _folders = jetpackLibFolder ++ replace "." "/" moduleName
-  -- liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
+  liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
 
   -- find all decls corresponding to names
   declsF <- forM exportedSymbols $ \name -> do
@@ -110,8 +111,8 @@ findReexports (mod, modules) previouslyExportedSymbols =
                 case Map.lookup _name _otherIfaceMap of
                   Just otherIfaceDecl ->
                     if isJust (mi_warn_fn _otherIface name)
-                      then _failDeprecated Remote
-                      else _success otherIfaceDecl Remote
+                      then _failDeprecated (Remote _ifacePath)
+                      else _success otherIfaceDecl (Remote _ifacePath)
                   Nothing -> _fail
 
   -- liftIO $ mapM_ (print) (map (\(a,b,c)->(toS a, maybe "" showIfaceInfo b)) $ declsF)
@@ -135,13 +136,22 @@ findReexports (mod, modules) previouslyExportedSymbols =
           , rType = onOneLine $ toS (ifType _t)
           , rNbTyVars = length (ifTyVars _t)
           }
-      Just (_t@(IfaceClass{})) -> if loc == Remote then Nothing else
-        Just $ RClass
+      Just (_t@(IfaceClass{})) -> case loc of
+        -- Remote x -> traceShow (Remote x, toS _t) Nothing
+        _ -> Just $ RClass
           ( toS n)
           (map
             (\(IfaceClassOp n' _ t') -> RId (toS n') (onOneLine.toS$t'))
             (ifSigs _t)
           )
+          -- FIXME the solution seems to be to reexport class memebres only when
+          -- they are reexported alng the class...
+
+          -- in other situations, we could just export something like that:
+          --   module Options.Applicative.AsOpt
+          --     ( module Options.Applicative.AsOpt
+          --     , I.Applicative
+          --     ) where
 
       Just (IfaceFamily{}) -> Nothing
       Just (IfaceAxiom{}) -> Nothing

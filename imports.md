@@ -49,96 +49,96 @@
 
 ### Modules
 
-_aeson_
+  _aeson_
 
-  - js Data.Aeson
-  - js Data.Aeson.Lens
+    - js Data.Aeson
+    - js Data.Aeson.Lens
   - js Data.Aeson.Types
-  # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
+    # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
-_containers_
+  _containers_
 
-  - map Data.Map.Strict
-  - lmap Data.Map
-  - set Data.Set
-  - hm Data.HashMap.Strict
-  - ne Data.List.NonEmpty
-  - vec Data.Vector
+    - map Data.Map.Strict
+    - lmap Data.Map
+    - set Data.Set
+    - hm Data.HashMap.Strict
+    - ne Data.List.NonEmpty
+    - vec Data.Vector
 
-_text_
+  _text_
 
-  - t Data.Text
-  - t Data.Text.Encoding
-  - t Data.Text.IO
-  - lt Data.Text.Lazy
-  - lt Data.Text.Lazy.Encoding
-  - lt Data.Text.Lazy.IO
+    - t Data.Text
+    - t Data.Text.Encoding
+    - t Data.Text.IO
+    - lt Data.Text.Lazy
+    - lt Data.Text.Lazy.Encoding
+    - lt Data.Text.Lazy.IO
 
-_bytestring_
+  _bytestring_
 
-  - bs Data.ByteString
-  - bs Data.ByteString.Char8
-  - lbs Data.ByteString.Lazy
-  - c8 Data.ByteString.Lazy.Char8
+    - bs Data.ByteString
+    - bs Data.ByteString.Char8
+    - lbs Data.ByteString.Lazy
+    - c8 Data.ByteString.Lazy.Char8
 
-_stm_
+  _stm_
 
-  - stm Control.Concurrent.STM
+    - stm Control.Concurrent.STM
 
-_tar_
+  _tar_
 
-  - tar Codec.Archive.Tar
-  - tar Codec.Archive.Tar.Entry
-  - tar Codec.Archive.Tar.Check
+    - tar Codec.Archive.Tar
+    - tar Codec.Archive.Tar.Entry
+    - tar Codec.Archive.Tar.Check
 
-_zlib_
+  _zlib_
 
-  - gzip Codec.Compression.GZip
+    - gzip Codec.Compression.GZip
 
-_megaparsec_
+  _megaparsec_
 
-  - mp Text.Megaparsec
+    - mp Text.Megaparsec
 
-_ansi_
+  _ansi_
 
-  - ansi System.Console.ANSI
+    - ansi System.Console.ANSI
 
-_optoparse-applicative_
+  _optoparse-applicative_
 
   - opt Options.Applicative
 
-_conduit_
-_conduit-extra_
+  _conduit_
+  _conduit-extra_
 
-  - c Data.Conduit
-  - cl Data.Conduit.List
-  - cb Data.Conduit.Binary
+    - c Data.Conduit
+    - cl Data.Conduit.List
+    - cb Data.Conduit.Binary
 
-_lens_
+  _lens_
 
-  - lens Lens.Micro.Platform
+    - lens Lens.Micro.Platform
 
-_test purpose:_
-  - demo ReexportDemo
-
-
-  - wai Network.Wai
-  - wai Network.Wai.Handler.Warp
-  - wai Network.HTTP.Types.Status
-  - wai Network.Wai.Middleware.RequestLogger
-  - wai Network.Wai.Middleware.Static
-  - ci Data.CaseInsensitive
-
-  - spock Web.Spock.Digestive
-  - spock Web.Spock.Safe
+  _test purpose:_
+    - demo ReexportDemo
 
 
-  - trans Control.Monad.Trans.Class
+    - wai Network.Wai
+    - wai Network.Wai.Handler.Warp
+    - wai Network.HTTP.Types.Status
+    - wai Network.Wai.Middleware.RequestLogger
+    - wai Network.Wai.Middleware.Static
+    - ci Data.CaseInsensitive
+
+    - spock Web.Spock.Digestive
+    - spock Web.Spock.Safe
+
+
+    - trans Control.Monad.Trans.Class
   - trans Control.Monad.IO.Class
-  - trans Control.Monad.Trans.Class
-  - trans Control.Monad.Trans.State.Lazy
+    - trans Control.Monad.Trans.Class
+    - trans Control.Monad.Trans.State.Lazy
 
-  - mtl Control.Monad.State.Lazy
+    - mtl Control.Monad.State.Lazy
 
-  - ws Network.WebSockets
-  - ws Network.WebSockets.Connection
+    - ws Network.WebSockets
+    - ws Network.WebSockets.Connection
