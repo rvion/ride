@@ -3,14 +3,84 @@ module ReexportDemo.AsDemo where
 
 import qualified ReexportDemo as I
 
+-- demo_optional :: forall (f :: * -> *) a. Alternative f => f a -> f (Maybe a)
+demo_optional = I.optional
+
+-- (<$>) :: forall a b (f :: * -> *). Functor f => (a -> b) -> f a -> f b
+(<$>) = (I.<$>)
+
+-- (<**>) :: forall (f :: * -> *) a b. Applicative f => f a -> f (a -> b) -> f b
+(<**>) = (I.<**>)
+
+-- demo_liftA :: forall a b (f :: * -> *). Applicative f => (a -> b) -> f a -> f b
+demo_liftA = I.liftA
+
+-- demo_liftA2 :: forall a b c (f :: * -> *). Applicative f => (a -> b -> c) -> f a -> f b -> f c
+demo_liftA2 = I.liftA2
+
+-- demo_liftA3 :: forall a b c d (f :: * -> *). Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
+demo_liftA3 = I.liftA3
+
 -- demo_a' :: Integer -> Integer -> Integer
 demo_a' = I.a'
 
 -- demo_b :: forall a. Num a => a -> a -> a
 demo_b = I.b
 
+type DemoConst a b = I.Const a b
+-- demo_getConst :: forall a b. Const a b -> a
+demo_getConst = I.getConst
+
+type DemoWrappedArrow a b c = I.WrappedArrow a b c
+-- demo_unwrapArrow :: forall (a :: * -> * -> *) b c. WrappedArrow a b c -> a b c
+demo_unwrapArrow = I.unwrapArrow
+
+type DemoWrappedMonad a b = I.WrappedMonad a b
+-- demo_unwrapMonad :: forall (m :: * -> *) a. WrappedMonad m a -> m a
+demo_unwrapMonad = I.unwrapMonad
+
+type DemoZipList a = I.ZipList a
+-- demo_getZipList :: forall a. ZipList a -> [a]
+demo_getZipList = I.getZipList
+
 type DemoEither a b = I.Either a b
+-- demo_empty :: forall a. f a
+demo_empty = I.empty
+
+-- demo_some :: forall a. f a -> f [a]
+demo_some = I.some
+
+-- demo_many :: forall a. f a -> f [a]
+demo_many = I.many
+
+-- demo_pure :: forall a. a -> f a
+demo_pure = I.pure
+
+-- (<*>) :: forall a b. f (a -> b) -> f a -> f b
+(<*>) = (I.<*>)
+
+-- (*>) :: forall a b. f a -> f b -> f b
+(*>) = (I.*>)
+
+-- (<*) :: forall a b. f a -> f b -> f a
+(<*) = (I.<*)
+
 type DemoAcc a b = I.Acc a b
 type DemoFoo  = I.Foo
+-- demo_bar :: Foo -> String
+demo_bar = I.bar
+
+-- demo_test :: Foo -> Int
+demo_test = I.test
+
 type DemoThisIsAType  = I.ThisIsAType
 type DemoYo a b = I.Yo a b
+-- demo_aa :: forall a b. Yo a b -> a
+demo_aa = I.aa
+
+-- demo_bb :: forall a b. Yo a b -> b
+demo_bb = I.bb
+
+-- demo_cc :: forall a b. Yo a b -> (a, b, b, a)
+demo_cc = I.cc
+

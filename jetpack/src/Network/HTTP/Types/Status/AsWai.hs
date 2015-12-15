@@ -292,3 +292,9 @@ wai_unsupportedMediaType415 = I.unsupportedMediaType415
 wai_useProxy305 = I.useProxy305
 
 type WaiStatus  = I.Status
+-- wai_statusCode :: Status -> Int
+wai_statusCode = I.statusCode
+
+-- wai_statusMessage :: Status -> ByteString
+wai_statusMessage = I.statusMessage
+

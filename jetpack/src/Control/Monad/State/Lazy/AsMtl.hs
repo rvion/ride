@@ -132,5 +132,50 @@ mtl_withState = I.withState
 -- mtl_withStateT :: forall s (m :: * -> *) a. (s -> s) -> StateT s m a -> StateT s m a
 mtl_withStateT = I.withStateT
 
+-- mtl_mfix :: forall a. (a -> m a) -> m a
+mtl_mfix = I.mfix
+
+-- mtl_fmap :: forall a b. (a -> b) -> f a -> f b
+mtl_fmap = I.fmap
+
+-- (<$) :: forall a b. a -> f b -> f a
+-- (<$) = (I.<$)
+
+-- (>>=) :: forall a b. m a -> (a -> m b) -> m b
+(>>=) = (I.>>=)
+
+-- (>>) :: forall a b. m a -> m b -> m b
+(>>) = (I.>>)
+
+-- mtl_return :: forall a. a -> m a
+mtl_return = I.return
+
+-- mtl_fail :: forall a. String -> m a
+mtl_fail = I.fail
+
+-- mtl_mzero :: forall a. m a
+mtl_mzero = I.mzero
+
+-- mtl_mplus :: forall a. m a -> m a -> m a
+mtl_mplus = I.mplus
+
+-- mtl_get :: m s
+mtl_get = I.get
+
+-- mtl_put :: s -> m ()
+mtl_put = I.put
+
+-- mtl_state :: forall a. (s -> (a, s)) -> m a
+mtl_state = I.state
+
+-- mtl_liftIO :: forall a. IO a -> m a
+mtl_liftIO = I.liftIO
+
+-- mtl_lift :: forall (m :: * -> *) a. Monad m => m a -> t m a
+mtl_lift = I.lift
+
 type MtlState a = I.State a
 type MtlStateT a b c = I.StateT a b c
+-- mtl_runStateT :: forall s (m :: * -> *) a. StateT s m a -> s -> m (a, s)
+mtl_runStateT = I.runStateT
+

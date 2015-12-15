@@ -212,7 +212,37 @@ mp_unexpected = I.unexpected
 
 type MpMessage  = I.Message
 type MpParseError  = I.ParseError
+-- mp_errorMessages :: ParseError -> [Message]
+mp_errorMessages = I.errorMessages
+
+-- mp_errorPos :: ParseError -> SourcePos
+mp_errorPos = I.errorPos
+
 type MpSourcePos  = I.SourcePos
+-- mp_sourceColumn :: SourcePos -> Int
+mp_sourceColumn = I.sourceColumn
+
+-- mp_sourceLine :: SourcePos -> Int
+mp_sourceLine = I.sourceLine
+
+-- mp_sourceName :: SourcePos -> String
+mp_sourceName = I.sourceName
+
 type MpParsec a = I.Parsec a
 type MpParsecT a b c = I.ParsecT a b c
 type MpState a = I.State a
+-- mp_stateInput :: forall s. State s -> s
+mp_stateInput = I.stateInput
+
+-- mp_statePos :: forall s. State s -> SourcePos
+mp_statePos = I.statePos
+
+-- mp_stateTabWidth :: forall s. State s -> Int
+mp_stateTabWidth = I.stateTabWidth
+
+-- mp_fromFile :: FilePath -> IO s
+mp_fromFile = I.fromFile
+
+-- mp_uncons :: s -> Maybe (t, s)
+mp_uncons = I.uncons
+

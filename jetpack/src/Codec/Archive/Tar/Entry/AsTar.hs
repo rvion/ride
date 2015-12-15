@@ -56,11 +56,38 @@ tar_toTarPath = I.toTarPath
 
 type TarDevMajor  = I.DevMajor
 type TarDevMinor  = I.DevMinor
+-- tar_entryFormat :: Entry -> Format
+tar_entryFormat = I.entryFormat
+
+-- tar_entryOwnership :: Entry -> Ownership
+tar_entryOwnership = I.entryOwnership
+
+-- tar_entryPermissions :: Entry -> Permissions
+tar_entryPermissions = I.entryPermissions
+
+-- tar_entryTarPath :: Entry -> TarPath
+tar_entryTarPath = I.entryTarPath
+
+-- tar_entryTime :: Entry -> EpochTime
+tar_entryTime = I.entryTime
+
 type TarEpochTime  = I.EpochTime
 type TarFileSize  = I.FileSize
 type TarFormat  = I.Format
 type TarLinkTarget  = I.LinkTarget
 type TarOwnership  = I.Ownership
+-- tar_groupId :: Ownership -> Int
+tar_groupId = I.groupId
+
+-- tar_groupName :: Ownership -> String
+tar_groupName = I.groupName
+
+-- tar_ownerId :: Ownership -> Int
+tar_ownerId = I.ownerId
+
+-- tar_ownerName :: Ownership -> String
+tar_ownerName = I.ownerName
+
 type TarPermissions  = I.Permissions
 type TarTarPath  = I.TarPath
 type TarTypeCode  = I.TypeCode

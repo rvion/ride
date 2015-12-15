@@ -18,4 +18,13 @@ type WaiOutputFormat  = I.OutputFormat
 type WaiOutputFormatter  = I.OutputFormatter
 type WaiOutputFormatterWithDetails  = I.OutputFormatterWithDetails
 type WaiRequestLoggerSettings  = I.RequestLoggerSettings
+-- wai_autoFlush :: RequestLoggerSettings -> Bool
+wai_autoFlush = I.autoFlush
+
+-- wai_destination :: RequestLoggerSettings -> Destination
+wai_destination = I.destination
+
+-- wai_outputFormat :: RequestLoggerSettings -> OutputFormat
+wai_outputFormat = I.outputFormat
+
 type WaiIPAddrSource  = I.IPAddrSource

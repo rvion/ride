@@ -63,6 +63,9 @@ js_withArray = I.withArray
 -- js_withBool :: forall a. String -> (Bool -> Parser a) -> Value -> Parser a
 js_withBool = I.withBool
 
+-- js_withNumber :: forall a. String -> (Number -> Parser a) -> Value -> Parser a
+js_withNumber = I.withNumber
+
 -- js_withObject :: forall a. String -> (Object -> Parser a) -> Value -> Parser a
 js_withObject = I.withObject
 
@@ -75,8 +78,23 @@ js_withText = I.withText
 -- js_object :: [Pair] -> Value
 js_object = I.object
 
+-- js_parseJSON :: Value -> Parser a
+js_parseJSON = I.parseJSON
+
+-- js_gParseJSON :: forall a. Options -> Value -> Parser (f a)
+js_gParseJSON = I.gParseJSON
+
+-- js_gToJSON :: forall a. Options -> f a -> Value
+js_gToJSON = I.gToJSON
+
+-- js_toJSON :: a -> Value
+js_toJSON = I.toJSON
+
 type JsArray  = I.Array
 type JsDotNetTime  = I.DotNetTime
+-- js_fromDotNetTime :: DotNetTime -> UTCTime
+js_fromDotNetTime = I.fromDotNetTime
+
 type JsObject  = I.Object
 type JsResult a = I.Result a
 type JsValue  = I.Value

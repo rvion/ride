@@ -65,3 +65,6 @@ trans_withStateT = I.withStateT
 
 type TransState a = I.State a
 type TransStateT a b c = I.StateT a b c
+-- trans_runStateT :: forall s (m :: * -> *) a. StateT s m a -> s -> m (a, s)
+trans_runStateT = I.runStateT
+

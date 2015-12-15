@@ -10,3 +10,15 @@ ci_map = I.map
 ci_mk = I.mk
 
 type CiCI a = I.CI a
+-- ci_foldedCase :: forall s. CI s -> s
+ci_foldedCase = I.foldedCase
+
+-- ci_original :: forall s. CI s -> s
+ci_original = I.original
+
+-- ci_foldCase :: s -> s
+ci_foldCase = I.foldCase
+
+-- ci_foldCaseList :: [s] -> [s]
+-- ci_foldCaseList = I.foldCaseList
+

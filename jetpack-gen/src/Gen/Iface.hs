@@ -12,6 +12,7 @@ import           Data.List         (intersperse)
 import           Data.Map          (Map)
 import Debug.Trace
 import qualified Data.Map          as Map
+import Data.List
 import           Data.Maybe
 import           Data.String.Utils
 import           DynFlags
@@ -24,9 +25,10 @@ import           Outputable
 import           TcRnMonad
 
 type Renderer = SDoc -> String
-type IfaceDeclMap = Map String IfaceDecl
-
+type IfaceDeclMap = Map OccName IfaceDecl
 data DeclLoc = Remote FilePath | Local | NotFound deriving (Eq, Show)
+type ModuleName = String
+
 getIface :: String -> Ghc ModIface
 getIface hiFilepath = do
   sess <- getSession
@@ -44,7 +46,7 @@ mkIfaceDeclMap toS iface =
   where
     toTupple ifaceDecl = (nameAsString ifaceDecl, ifaceDecl)
     ifaceDecls = map snd $ mi_decls iface
-    nameAsString = toS . ppr . ifName
+    nameAsString = ifName
 
 findReexports :: (String, Modules) -> [String] -> IO [RTerm]
 findReexports (mod, modules) previouslyExportedSymbols =
@@ -62,20 +64,43 @@ findReexports (mod, modules) previouslyExportedSymbols =
     toS = toSDoc . ppr
 
   -- load the initial .hi interface file
-  iface <- getIface (modules Map.! mod)
+  currentIface <- getIface (modules Map.! mod)
 
   let
     -- we want to reexport all IfacesExport,
-    ifaceExports = mi_exports iface
+    ifaceExports :: [AvailInfo]
+    ifaceExports = mi_exports currentIface
     exportedSymbols = concatMap extractAllNames ifaceExports
-    decls = mi_decls iface
-    declsMap = mkIfaceDeclMap toSDoc iface
-    moduleName = toS $ mi_module iface
+    decls = mi_decls currentIface
+    declsMap = mkIfaceDeclMap toSDoc currentIface
+    moduleName = toS $ mi_module currentIface
     _folders = jetpackLibFolder ++ replace "." "/" moduleName
-  liftIO . putStrLn $ concat ["  exports are ",toS exportedSymbols]
+  let
+    allAvailNames = concatMap availNames ifaceExports
+    allAvailNamesAndFP = for allAvailNames (\n -> (n, toS $ nameModule n)) -- nameModule_maybe -- dangerous
+    allNecessaryModules = map toS $ nub $ catMaybes $ map nameModule_maybe (allAvailNames)
+  all_modules <- foldlM (\m x ->
+    case Map.lookup x modules of
+      Just mfp -> do
+        ifa <- getIface mfp
+        return $ Map.insert x (mkIfaceDeclMap toSDoc ifa) m
+      Nothing -> return m) Map.empty allNecessaryModules
+
+  -- liftIO . putStrLn $ concat ["  exports are ", toS (nub $ catMaybes $ map nameModule_maybe (concatMap availNames ifaceExports))]
+  -- liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
+  liftIO . putStrLn $ concat ["\n  Names are ", toS (map nameOccName allAvailNames)]
+  -- liftIO . putStrLn $ concat ["\n  Modules are ", show allNecessaryModules]
+  liftIO . putStrLn $ concat ["\n  names and fp are ", show $ map (\(x,y) -> (toS x,y)) allAvailNamesAndFP]
+  liftIO $ do
+    putStrLn $ concat ["\n  names and fp are \n"]
+    forM (Map.assocs all_modules) $ \(x,y)-> do
+      putStrLn x
+      putStrLn $ toS (Map.keys y)
+
+  -- liftIO . putStrLn $ concat ["  exports are ", show all_modules]
 
   -- find all decls corresponding to names
-  declsF <- forM exportedSymbols $ \name -> do
+  declsF <- forM allAvailNamesAndFP $ \(name, modName) -> do
     -- liftIO$putStrLn("  trying to find "++toS name)
     let
       _name = toS name
@@ -87,33 +112,35 @@ findReexports (mod, modules) previouslyExportedSymbols =
         liftIO.putStrLn.concat$["  warn: impossible to find decl for (",toS name,")"]
         return (name, Nothing, NotFound)
 
-    case Map.lookup _name declsMap of
+    case Map.lookup (nameOccName name) (all_modules Map.! modName) of
       Just ifaceDecl ->
-        if isJust (mi_warn_fn iface name)
+        if isJust (mi_warn_fn currentIface name)
           then _failDeprecated Local
           else _success ifaceDecl Local
-      Nothing ->
-        case nameModule_maybe name of
-          Nothing -> _fail
-          Just nameModule -> do -- eg: Data.Either
-            let nameModuleStr = toS nameModule
-                -- xx= Mod.moduleName nameModule
-                -- nameModuleFS  = moduleNameFS $ Mod.moduleName nameModule
-            -- liftIO $ error $ toS nameModuleFS
-            -- liftIO $ putStrLn ("    - loading "++ nameModuleStr)
-            case Map.lookup nameModuleStr modules of
-              Nothing -> do
-                liftIO $ putStr $ concat ["\n  module (",nameModuleStr,") is really nowhere... :/"]
-                _fail
-              Just _ifacePath -> do
-                _otherIface <- getIface _ifacePath
-                let _otherIfaceMap = mkIfaceDeclMap toSDoc _otherIface
-                case Map.lookup _name _otherIfaceMap of
-                  Just otherIfaceDecl ->
-                    if isJust (mi_warn_fn _otherIface name)
-                      then _failDeprecated (Remote _ifacePath)
-                      else _success otherIfaceDecl (Remote _ifacePath)
-                  Nothing -> _fail
+      Nothing -> do
+        liftIO $ _fail
+      -- Nothing ->
+      --   case nameModule_maybe name of
+      --     Nothing -> _fail
+      --     Just nameModule -> do -- eg: Data.Either
+      --       let nameModuleStr = toS nameModule
+      --           -- xx= Mod.moduleName nameModule
+      --           -- nameModuleFS  = moduleNameFS $ Mod.moduleName nameModule
+      --       -- liftIO $ error $ toS nameModuleFS
+      --       -- liftIO $ putStrLn ("    - loading "++ nameModuleStr)
+      --       case Map.lookup nameModuleStr modules of
+      --         Nothing -> do
+      --           liftIO $ putStr $ concat ["\n  module (",nameModuleStr,") is really nowhere... :/"]
+      --           _fail
+      --         Just _ifacePath -> do
+      --           _otherIface <- getIface _ifacePath
+      --           let _otherIfaceMap = mkIfaceDeclMap toSDoc _otherIface
+      --           case Map.lookup _name _otherIfaceMap of
+      --             Just otherIfaceDecl ->
+      --               if isJust (mi_warn_fn _otherIface name)
+      --                 then _failDeprecated (Remote _ifacePath)
+      --                 else _success otherIfaceDecl (Remote _ifacePath)
+      --             Nothing -> _fail
 
   -- liftIO $ mapM_ (print) (map (\(a,b,c)->(toS a, maybe "" showIfaceInfo b)) $ declsF)
   let onOneLine = unwords . lines
@@ -198,10 +225,15 @@ showIfaceInfo x = case x of
 for :: [a] -> (a->b) -> [b]
 for = flip map
 
+-- showAllNames :: AvailInfo -> [Name]
+-- extractAllNames ai = case ai of
+--  Avail n -> [n]
+--  AvailTC x xs -> (x:xs) -- TODO
+
 extractAllNames :: AvailInfo -> [Name]
 extractAllNames ai = case ai of
  Avail n -> [n]
- AvailTC x xs -> [x] -- :xs -- TODO
+ AvailTC x xs -> (x:xs) -- TODO
 
 
 -- test = printReexports ("lens", "/Users/RemiVion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/microlens-platform-0.1.5.0-GZu1yvU44tYD8BDHxEQWch/Lens/Micro/Platform.hi") []

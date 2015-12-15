@@ -48,7 +48,58 @@ wai_strictRequestBody = I.strictRequestBody
 type WaiApplication  = I.Application
 type WaiMiddleware  = I.Middleware
 type WaiFilePart  = I.FilePart
+-- wai_filePartByteCount :: FilePart -> Integer
+wai_filePartByteCount = I.filePartByteCount
+
+-- wai_filePartFileSize :: FilePart -> Integer
+wai_filePartFileSize = I.filePartFileSize
+
+-- wai_filePartOffset :: FilePart -> Integer
+wai_filePartOffset = I.filePartOffset
+
 type WaiRequest  = I.Request
+-- wai_httpVersion :: Request -> HttpVersion
+wai_httpVersion = I.httpVersion
+
+-- wai_isSecure :: Request -> Bool
+wai_isSecure = I.isSecure
+
+-- wai_pathInfo :: Request -> [Text]
+wai_pathInfo = I.pathInfo
+
+-- wai_queryString :: Request -> Query
+wai_queryString = I.queryString
+
+-- wai_rawPathInfo :: Request -> ByteString
+wai_rawPathInfo = I.rawPathInfo
+
+-- wai_rawQueryString :: Request -> ByteString
+wai_rawQueryString = I.rawQueryString
+
+-- wai_remoteHost :: Request -> SockAddr
+wai_remoteHost = I.remoteHost
+
+-- wai_requestBody :: Request -> IO ByteString
+wai_requestBody = I.requestBody
+
+-- wai_requestBodyLength :: Request -> RequestBodyLength
+wai_requestBodyLength = I.requestBodyLength
+
+-- wai_requestHeaderHost :: Request -> Maybe ByteString
+wai_requestHeaderHost = I.requestHeaderHost
+
+-- wai_requestHeaderRange :: Request -> Maybe ByteString
+wai_requestHeaderRange = I.requestHeaderRange
+
+-- wai_requestHeaders :: Request -> RequestHeaders
+wai_requestHeaders = I.requestHeaders
+
+-- wai_requestMethod :: Request -> Method
+wai_requestMethod = I.requestMethod
+
+-- wai_vault :: Request -> Vault
+wai_vault = I.vault
+
 type WaiRequestBodyLength  = I.RequestBodyLength
 type WaiResponse  = I.Response
 type WaiResponseReceived  = I.ResponseReceived

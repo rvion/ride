@@ -151,5 +151,14 @@ type CResumableSource a b = I.ResumableSource a b
 type CSink a = I.Sink a
 type CSource a b = I.Source a b
 type CZipConduit a b c d = I.ZipConduit a b c d
+-- c_getZipConduit :: forall i o (m :: * -> *) r. ZipConduit i o m r -> ConduitM i o m r
+c_getZipConduit = I.getZipConduit
+
 type CZipSink a b c = I.ZipSink a b c
+-- c_getZipSink :: forall i (m :: * -> *) r. ZipSink i m r -> Sink i m r
+c_getZipSink = I.getZipSink
+
 type CZipSource a b = I.ZipSource a b
+-- c_getZipSource :: forall (m :: * -> *) o. ZipSource m o -> Source m o
+c_getZipSource = I.getZipSource
+

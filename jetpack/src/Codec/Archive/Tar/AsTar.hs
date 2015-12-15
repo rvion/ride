@@ -42,4 +42,7 @@ tar_write = I.write
 type TarFormatError  = I.FormatError
 type TarEntries a = I.Entries a
 type TarEntry  = I.Entry
+-- tar_entryContent :: Entry -> EntryContent
+tar_entryContent = I.entryContent
+
 type TarEntryContent  = I.EntryContent

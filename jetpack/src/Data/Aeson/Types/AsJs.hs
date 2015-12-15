@@ -3,44 +3,8 @@ module Data.Aeson.Types.AsJs where
 
 import qualified Data.Aeson.Types as I
 
--- js_genericParseJSON :: forall a. (Generic a, GFromJSON (Rep a)) => Options -> Value -> Parser a
-js_genericParseJSON = I.genericParseJSON
-
--- js_genericToJSON :: forall a. (Generic a, GToJSON (Rep a)) => Options -> a -> Value
-js_genericToJSON = I.genericToJSON
-
--- (.!=) :: forall a. Parser (Maybe a) -> a -> Parser a
-(.!=) = (I..!=)
-
--- (.:) :: forall a. FromJSON a => Object -> Text -> Parser a
-(.:) = (I..:)
-
--- (.:?) :: forall a. FromJSON a => Object -> Text -> Parser (Maybe a)
-(.:?) = (I..:?)
-
--- (.=) :: forall a. ToJSON a => Text -> a -> Pair
-(.=) = (I..=)
-
--- js_fromJSON :: forall a. FromJSON a => Value -> Result a
-js_fromJSON = I.fromJSON
-
 -- js_typeMismatch :: forall a. String -> Value -> Parser a
 js_typeMismatch = I.typeMismatch
-
--- js_withArray :: forall a. String -> (Array -> Parser a) -> Value -> Parser a
-js_withArray = I.withArray
-
--- js_withBool :: forall a. String -> (Bool -> Parser a) -> Value -> Parser a
-js_withBool = I.withBool
-
--- js_withObject :: forall a. String -> (Object -> Parser a) -> Value -> Parser a
-js_withObject = I.withObject
-
--- js_withScientific :: forall a. String -> (Scientific -> Parser a) -> Value -> Parser a
-js_withScientific = I.withScientific
-
--- js_withText :: forall a. String -> (Text -> Parser a) -> Value -> Parser a
-js_withText = I.withText
 
 -- js_camelTo :: Char -> String -> String
 js_camelTo = I.camelTo
@@ -60,9 +24,6 @@ js_emptyObject = I.emptyObject
 -- js_modifyFailure :: forall a. (String -> String) -> Parser a -> Parser a
 js_modifyFailure = I.modifyFailure
 
--- js_object :: [Pair] -> Value
-js_object = I.object
-
 -- js_parse :: forall a b. (a -> Parser b) -> a -> Result b
 js_parse = I.parse
 
@@ -72,24 +33,28 @@ js_parseEither = I.parseEither
 -- js_parseMaybe :: forall a b. (a -> Parser b) -> a -> Maybe b
 js_parseMaybe = I.parseMaybe
 
--- js_parseJSON :: Value -> Parser a
-js_parseJSON = I.parseJSON
-
--- js_gParseJSON :: forall a. Options -> Value -> Parser (f a)
-js_gParseJSON = I.gParseJSON
-
--- js_gToJSON :: forall a. Options -> f a -> Value
-js_gToJSON = I.gToJSON
-
--- js_toJSON :: a -> Value
-js_toJSON = I.toJSON
-
-type JsArray  = I.Array
-type JsDotNetTime  = I.DotNetTime
-type JsObject  = I.Object
 type JsOptions  = I.Options
+-- js_allNullaryToStringTag :: Options -> Bool
+js_allNullaryToStringTag = I.allNullaryToStringTag
+
+-- js_constructorTagModifier :: Options -> String -> String
+js_constructorTagModifier = I.constructorTagModifier
+
+-- js_fieldLabelModifier :: Options -> String -> String
+js_fieldLabelModifier = I.fieldLabelModifier
+
+-- js_omitNothingFields :: Options -> Bool
+js_omitNothingFields = I.omitNothingFields
+
+-- js_sumEncoding :: Options -> SumEncoding
+js_sumEncoding = I.sumEncoding
+
 type JsPair  = I.Pair
 type JsParser a = I.Parser a
-type JsResult a = I.Result a
 type JsSumEncoding  = I.SumEncoding
-type JsValue  = I.Value
+-- js_contentsFieldName :: SumEncoding -> String
+js_contentsFieldName = I.contentsFieldName
+
+-- js_tagFieldName :: SumEncoding -> String
+js_tagFieldName = I.tagFieldName
+

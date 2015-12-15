@@ -227,22 +227,121 @@ spock_var = I.var
 
 type SpockCookieEOL  = I.CookieEOL
 type SpockCookieSettings  = I.CookieSettings
+-- spock_cs_EOL :: CookieSettings -> CookieEOL
+spock_cs_EOL = I.cs_EOL
+
+-- spock_cs_HTTPOnly :: CookieSettings -> Bool
+spock_cs_HTTPOnly = I.cs_HTTPOnly
+
+-- spock_cs_domain :: CookieSettings -> Maybe ByteString
+spock_cs_domain = I.cs_domain
+
+-- spock_cs_path :: CookieSettings -> Maybe ByteString
+spock_cs_path = I.cs_path
+
+-- spock_cs_secure :: CookieSettings -> Bool
+spock_cs_secure = I.cs_secure
+
 type SpockConnBuilder a = I.ConnBuilder a
+-- spock_cb_createConn :: forall a. ConnBuilder a -> IO a
+spock_cb_createConn = I.cb_createConn
+
+-- spock_cb_destroyConn :: forall a. ConnBuilder a -> a -> IO ()
+spock_cb_destroyConn = I.cb_destroyConn
+
+-- spock_cb_poolConfiguration :: forall a. ConnBuilder a -> PoolCfg
+spock_cb_poolConfiguration = I.cb_poolConfiguration
+
+-- spock_runQuery :: forall a. (SpockConn m -> IO a) -> m a
+spock_runQuery = I.runQuery
+
+-- spock_getState :: m (SpockState m)
+spock_getState = I.getState
+
+-- spock_getSessMgr :: m (SessionManager (SpockConn m) (SpockSession m) (SpockState m))
+-- spock_getSessMgr = I.getSessMgr
+
 type SpockPoolCfg  = I.PoolCfg
+-- spock_pc_keepOpenTime :: PoolCfg -> NominalDiffTime
+spock_pc_keepOpenTime = I.pc_keepOpenTime
+
+-- spock_pc_resPerStripe :: PoolCfg -> Int
+spock_pc_resPerStripe = I.pc_resPerStripe
+
+-- spock_pc_stripes :: PoolCfg -> Int
+spock_pc_stripes = I.pc_stripes
+
 type SpockPoolOrConn a = I.PoolOrConn a
+-- spock_runSafeAction :: a -> SpockAction conn sess st ()
+spock_runSafeAction = I.runSafeAction
+
 type SpockSessionCfg a = I.SessionCfg a
+-- spock_sc_cookieName :: forall a. SessionCfg a -> Text
+spock_sc_cookieName = I.sc_cookieName
+
+-- spock_sc_emptySession :: forall a. SessionCfg a -> a
+spock_sc_emptySession = I.sc_emptySession
+
+-- spock_sc_hooks :: forall a. SessionCfg a -> SessionHooks a
+spock_sc_hooks = I.sc_hooks
+
+-- spock_sc_housekeepingInterval :: forall a. SessionCfg a -> NominalDiffTime
+spock_sc_housekeepingInterval = I.sc_housekeepingInterval
+
+-- spock_sc_persistCfg :: forall a. SessionCfg a -> Maybe (SessionPersistCfg a)
+spock_sc_persistCfg = I.sc_persistCfg
+
+-- spock_sc_sessionExpandTTL :: forall a. SessionCfg a -> Bool
+spock_sc_sessionExpandTTL = I.sc_sessionExpandTTL
+
+-- spock_sc_sessionIdEntropy :: forall a. SessionCfg a -> Int
+spock_sc_sessionIdEntropy = I.sc_sessionIdEntropy
+
+-- spock_sc_sessionTTL :: forall a. SessionCfg a -> NominalDiffTime
+spock_sc_sessionTTL = I.sc_sessionTTL
+
 type SpockSessionHooks a = I.SessionHooks a
+-- spock_sh_removed :: forall a. SessionHooks a -> HashMap SessionId a -> IO ()
+spock_sh_removed = I.sh_removed
+
 type SpockSessionId  = I.SessionId
 type SpockSessionPersistCfg a = I.SessionPersistCfg a
+-- spock_spc_load :: forall a. SessionPersistCfg a -> IO [(SessionId, UTCTime, a)]
+spock_spc_load = I.spc_load
+
+-- spock_spc_store :: forall a. SessionPersistCfg a -> [(SessionId, UTCTime, a)] -> IO ()
+spock_spc_store = I.spc_store
+
 type SpockSpockAction a b c = I.SpockAction a b c
 type SpockSpockActionCtx a b c d = I.SpockActionCtx a b c d
 type SpockSpockCfg a b c = I.SpockCfg a b c
+-- spock_spc_database :: forall conn sess st. SpockCfg conn sess st -> PoolOrConn conn
+spock_spc_database = I.spc_database
+
+-- spock_spc_initialState :: forall conn sess st. SpockCfg conn sess st -> st
+spock_spc_initialState = I.spc_initialState
+
+-- spock_spc_maxRequestSize :: forall conn sess st. SpockCfg conn sess st -> Maybe Word64
+spock_spc_maxRequestSize = I.spc_maxRequestSize
+
+-- spock_spc_sessionCfg :: forall conn sess st. SpockCfg conn sess st -> SessionCfg sess
+spock_spc_sessionCfg = I.spc_sessionCfg
+
 type SpockWebState a b c = I.WebState a b c
 type SpockWebStateM a b c = I.WebStateM a b c
 type SpockClientPreferredFormat  = I.ClientPreferredFormat
 type SpockActionCtxT a b c = I.ActionCtxT a b c
 type SpockActionT  = I.ActionT
 type SpockUploadedFile  = I.UploadedFile
+-- spock_uf_contentType :: UploadedFile -> Text
+spock_uf_contentType = I.uf_contentType
+
+-- spock_uf_name :: UploadedFile -> Text
+spock_uf_name = I.uf_name
+
+-- spock_uf_tempLocation :: UploadedFile -> FilePath
+spock_uf_tempLocation = I.uf_tempLocation
+
 type SpockSpockCtxM a b c d = I.SpockCtxM a b c d
 type SpockSpockCtxT a b c = I.SpockCtxT a b c
 type SpockSpockM a b c = I.SpockM a b c

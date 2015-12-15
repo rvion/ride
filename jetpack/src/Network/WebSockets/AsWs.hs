@@ -77,17 +77,50 @@ ws_runServerWith = I.runServerWith
 
 type WsClientApp a = I.ClientApp a
 type WsAcceptRequest  = I.AcceptRequest
+-- ws_acceptSubprotocol :: AcceptRequest -> Maybe ByteString
+ws_acceptSubprotocol = I.acceptSubprotocol
+
 type WsConnection  = I.Connection
 type WsConnectionOptions  = I.ConnectionOptions
+-- ws_connectionOnPong :: ConnectionOptions -> IO ()
+ws_connectionOnPong = I.connectionOnPong
+
 type WsPendingConnection  = I.PendingConnection
+-- ws_pendingRequest :: PendingConnection -> RequestHead
+ws_pendingRequest = I.pendingRequest
+
 type WsHandshakeException  = I.HandshakeException
 type WsHeaders  = I.Headers
 type WsRequest  = I.Request
 type WsRequestHead  = I.RequestHead
+-- ws_requestHeaders :: RequestHead -> Headers
+ws_requestHeaders = I.requestHeaders
+
+-- ws_requestPath :: RequestHead -> ByteString
+ws_requestPath = I.requestPath
+
+-- ws_requestSecure :: RequestHead -> Bool
+ws_requestSecure = I.requestSecure
+
 type WsResponse  = I.Response
 type WsResponseHead  = I.ResponseHead
+-- ws_responseCode :: ResponseHead -> Int
+ws_responseCode = I.responseCode
+
+-- ws_responseHeaders :: ResponseHead -> Headers
+ws_responseHeaders = I.responseHeaders
+
+-- ws_responseMessage :: ResponseHead -> ByteString
+ws_responseMessage = I.responseMessage
+
 type WsServerApp  = I.ServerApp
 type WsConnectionException  = I.ConnectionException
 type WsControlMessage  = I.ControlMessage
 type WsDataMessage  = I.DataMessage
 type WsMessage  = I.Message
+-- ws_fromLazyByteString :: ByteString -> a
+ws_fromLazyByteString = I.fromLazyByteString
+
+-- ws_toLazyByteString :: a -> ByteString
+ws_toLazyByteString = I.toLazyByteString
+

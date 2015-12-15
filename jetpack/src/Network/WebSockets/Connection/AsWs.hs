@@ -6,3 +6,30 @@ import qualified Network.WebSockets.Connection as I
 -- ws_sendCloseCode :: forall a. WebSocketsData a => Connection -> Word16 -> a -> IO ()
 ws_sendCloseCode = I.sendCloseCode
 
+-- ws_connectionOptions :: Connection -> ConnectionOptions
+ws_connectionOptions = I.connectionOptions
+
+-- ws_connectionParse :: Connection -> IO (Maybe Message)
+ws_connectionParse = I.connectionParse
+
+-- ws_connectionProtocol :: Connection -> Protocol
+ws_connectionProtocol = I.connectionProtocol
+
+-- ws_connectionSentClose :: Connection -> IORef Bool
+ws_connectionSentClose = I.connectionSentClose
+
+-- ws_connectionType :: Connection -> ConnectionType
+ws_connectionType = I.connectionType
+
+-- ws_connectionWrite :: Connection -> Message -> IO ()
+ws_connectionWrite = I.connectionWrite
+
+-- ws_pendingOnAccept :: PendingConnection -> Connection -> IO ()
+ws_pendingOnAccept = I.pendingOnAccept
+
+-- ws_pendingOptions :: PendingConnection -> ConnectionOptions
+ws_pendingOptions = I.pendingOptions
+
+-- ws_pendingStream :: PendingConnection -> Stream
+ws_pendingStream = I.pendingStream
+

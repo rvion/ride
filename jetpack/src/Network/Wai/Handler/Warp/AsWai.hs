@@ -213,6 +213,18 @@ type WaiGMTDate  = I.GMTDate
 type WaiMutableFdCache  = I.MutableFdCache
 type WaiRefresh  = I.Refresh
 type WaiFileInfo  = I.FileInfo
+-- wai_fileInfoDate :: FileInfo -> ByteString
+wai_fileInfoDate = I.fileInfoDate
+
+-- wai_fileInfoName :: FileInfo -> FilePath
+wai_fileInfoName = I.fileInfoName
+
+-- wai_fileInfoSize :: FileInfo -> Integer
+wai_fileInfoSize = I.fileInfoSize
+
+-- wai_fileInfoTime :: FileInfo -> HTTPDate
+wai_fileInfoTime = I.fileInfoTime
+
 type WaiIndexedHeader  = I.IndexedHeader
 type WaiSettings  = I.Settings
 type WaiHandle  = I.Handle
@@ -222,11 +234,68 @@ type WaiTimeoutThread  = I.TimeoutThread
 type WaiBufSize  = I.BufSize
 type WaiBuffer  = I.Buffer
 type WaiConnection  = I.Connection
+-- wai_connBufferSize :: Connection -> BufSize
+wai_connBufferSize = I.connBufferSize
+
+-- wai_connClose :: Connection -> IO ()
+wai_connClose = I.connClose
+
+-- wai_connRecv :: Connection -> Recv
+wai_connRecv = I.connRecv
+
+-- wai_connRecvBuf :: Connection -> RecvBuf
+wai_connRecvBuf = I.connRecvBuf
+
+-- wai_connSendAll :: Connection -> ByteString -> IO ()
+wai_connSendAll = I.connSendAll
+
+-- wai_connSendFile :: Connection -> SendFile
+wai_connSendFile = I.connSendFile
+
+-- wai_connSendMany :: Connection -> [ByteString] -> IO ()
+wai_connSendMany = I.connSendMany
+
+-- wai_connWriteBuffer :: Connection -> Buffer
+wai_connWriteBuffer = I.connWriteBuffer
+
 type WaiFileId  = I.FileId
+-- wai_fileIdFd :: FileId -> Maybe Fd
+wai_fileIdFd = I.fileIdFd
+
+-- wai_fileIdPath :: FileId -> FilePath
+wai_fileIdPath = I.fileIdPath
+
 type WaiHeaderValue  = I.HeaderValue
 type WaiInternalInfo  = I.InternalInfo
+-- wai_dateCacher :: InternalInfo -> DateCache
+wai_dateCacher = I.dateCacher
+
+-- wai_fdCacher :: InternalInfo -> Maybe MutableFdCache
+wai_fdCacher = I.fdCacher
+
+-- wai_fileInfo :: InternalInfo -> FilePath -> IO FileInfo
+wai_fileInfo = I.fileInfo
+
+-- wai_threadHandle :: InternalInfo -> Handle
+wai_threadHandle = I.threadHandle
+
+-- wai_timeoutManager :: InternalInfo -> Manager
+wai_timeoutManager = I.timeoutManager
+
 type WaiInvalidRequest  = I.InvalidRequest
 type WaiPort  = I.Port
 type WaiSendFile  = I.SendFile
 type WaiSource  = I.Source
 type WaiTransport  = I.Transport
+-- wai_tlsChiperID :: Transport -> Word16
+wai_tlsChiperID = I.tlsChiperID
+
+-- wai_tlsMajorVersion :: Transport -> Int
+wai_tlsMajorVersion = I.tlsMajorVersion
+
+-- wai_tlsMinorVersion :: Transport -> Int
+wai_tlsMinorVersion = I.tlsMinorVersion
+
+-- wai_tlsNegotiatedProtocol :: Transport -> Maybe ByteString
+wai_tlsNegotiatedProtocol = I.tlsNegotiatedProtocol
+

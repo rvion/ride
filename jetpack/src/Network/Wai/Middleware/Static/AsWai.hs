@@ -66,4 +66,16 @@ wai_unsafeStaticPolicy' = I.unsafeStaticPolicy'
 type WaiCacheContainer  = I.CacheContainer
 type WaiCachingStrategy  = I.CachingStrategy
 type WaiFileMeta  = I.FileMeta
+-- wai_fm_etag :: FileMeta -> ByteString
+wai_fm_etag = I.fm_etag
+
+-- wai_fm_fileName :: FileMeta -> FilePath
+wai_fm_fileName = I.fm_fileName
+
+-- wai_fm_lastModified :: FileMeta -> ByteString
+wai_fm_lastModified = I.fm_lastModified
+
 type WaiPolicy  = I.Policy
+-- wai_tryPolicy :: Policy -> String -> Maybe String
+wai_tryPolicy = I.tryPolicy
+

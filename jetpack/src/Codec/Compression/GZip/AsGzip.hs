@@ -67,7 +67,37 @@ gzip_noCompression = I.noCompression
 gzip_windowBits = I.windowBits
 
 type GzipCompressParams  = I.CompressParams
+-- gzip_compressBufferSize :: CompressParams -> Int
+gzip_compressBufferSize = I.compressBufferSize
+
+-- gzip_compressDictionary :: CompressParams -> Maybe ByteString
+gzip_compressDictionary = I.compressDictionary
+
+-- gzip_compressLevel :: CompressParams -> CompressionLevel
+gzip_compressLevel = I.compressLevel
+
+-- gzip_compressMemoryLevel :: CompressParams -> MemoryLevel
+gzip_compressMemoryLevel = I.compressMemoryLevel
+
+-- gzip_compressMethod :: CompressParams -> Method
+gzip_compressMethod = I.compressMethod
+
+-- gzip_compressStrategy :: CompressParams -> CompressionStrategy
+gzip_compressStrategy = I.compressStrategy
+
+-- gzip_compressWindowBits :: CompressParams -> WindowBits
+gzip_compressWindowBits = I.compressWindowBits
+
 type GzipDecompressParams  = I.DecompressParams
+-- gzip_decompressBufferSize :: DecompressParams -> Int
+gzip_decompressBufferSize = I.decompressBufferSize
+
+-- gzip_decompressDictionary :: DecompressParams -> Maybe ByteString
+gzip_decompressDictionary = I.decompressDictionary
+
+-- gzip_decompressWindowBits :: DecompressParams -> WindowBits
+gzip_decompressWindowBits = I.decompressWindowBits
+
 type GzipCompressionLevel  = I.CompressionLevel
 type GzipCompressionStrategy  = I.CompressionStrategy
 type GzipMemoryLevel  = I.MemoryLevel
