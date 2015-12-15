@@ -57,7 +57,10 @@ m_deleteFindMax = I.deleteFindMax
 
 some next steps:
   - [ ] remove the need to manually specify packages !
-  - [ ] cache module loading
+  - [ ] remove the need to manually install packages !
+  - [ ] ensure packages are not declared twice with the same reexport name, or it will result in blank file
+  - [X] cache module loading per import
+  - [ ] cache even more module loading (per run)
   - [ ] ensure all necessary packages are installed
   - [ ] export promoted kind aliases
   - [ ] document https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports

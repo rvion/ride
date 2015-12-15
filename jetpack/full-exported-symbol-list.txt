@@ -2150,8 +2150,8 @@ JsOptions
 JsPair
 JsParser
 JsSumEncoding
-trans_lift
 trans_liftIO
+trans_lift
 trans_evalState
 trans_evalStateT
 trans_execState

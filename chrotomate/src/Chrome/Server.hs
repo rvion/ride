@@ -62,8 +62,6 @@ ride = do
           ]
         ]
 
-
-
     spock_get ("hello2" <//> spock_var) $ \name -> do
       (Ctx{ctxDB}) <- trans_lift trans_get
       spock_text $ t_pack . show $ map_find ctxDB name -- ("Hello " <> name <> "!")

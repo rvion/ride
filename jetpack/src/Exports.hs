@@ -8,7 +8,6 @@ import           Codec.Compression.GZip.AsGzip as X
 import           Control.Concurrent.STM.AsStm as X
 import           Control.Monad.IO.Class.AsTrans as X
 import           Control.Monad.Trans.Class.AsTrans as X
-import           Control.Monad.Trans.Class.AsTrans as X
 import           Control.Monad.Trans.State.Lazy.AsTrans as X
 import           Data.Aeson.AsJs as X
 import           Data.Aeson.Lens.AsJs as X

@@ -101,7 +101,6 @@ Reexport {as = "js", mod = "Data.Aeson.Types"}
 
  -- monad transformers (as it's still the main idiom instead of freer monads)
 
-Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
 Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
 Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
 Reexport {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}

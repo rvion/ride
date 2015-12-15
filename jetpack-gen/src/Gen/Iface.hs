@@ -85,7 +85,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
         return $ Map.insert x (mkIfaceDeclMap toSDoc ifa) m
       Nothing -> return m) Map.empty allNecessaryModules
 
-  liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
+  -- liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
 
   -- liftIO . putStrLn $ concat ["  exports are ", toS (nub $ catMaybes $ map nameModule_maybe (concatMap availNames ifaceExports))]
   -- liftIO . putStrLn $ concat ["\n  Names are ", toS (map nameOccName allAvailNames)]
@@ -97,11 +97,11 @@ findReexports (mod, modules) previouslyExportedSymbols =
   --     putStrLn x
   --     putStrLn $ toS (Map.keys y)
 
-  -- liftIO . putStrLn $ concat ["  exports are ", show all_modules]
+  -- liftIO . putStrLn $ concat ["  exports are ", toS ifaceExports]
 
   -- find all decls corresponding to names
   declsF <- forM ifaceExports $ \availInfo -> do
-    -- liftIO$putStrLn("  trying to find "++toS name)
+    -- liftIO$putStrLn("  trying to find "++toS availInfo)
     let
       name = availName availInfo
       moduleName = toS . nameModule . availName $ availInfo
@@ -115,11 +115,13 @@ findReexports (mod, modules) previouslyExportedSymbols =
         liftIO.putStrLn.concat$["  warn: impossible to find decl for (",toS name,")"]
         return (name, Nothing, NotFound)
 
+    -- liftIO$putStrLn("  looking at  "++ show (toS name,moduleName))
     case Map.lookup (nameOccName name) (all_modules Map.! moduleName) of
       Just ifaceDecl ->
         if isJust (mi_warn_fn currentIface name)
           then _failDeprecated Local
-          else
+          else do
+            -- liftIO $ print $ toS (ifaceDecl, availNames availInfo)
             _success (ifaceDecl, availNames availInfo) Local
       Nothing ->
         liftIO _fail
@@ -173,7 +175,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
           ( toS n)
           (mapMaybe
             (\(IfaceClassOp n' _ t') -> if n' `elem` map nameOccName exportedNames
-                then Just $ RId (toS n') (onOneLine.toS$t')
+                then Just $  RId (toS n') (onOneLine.toS$t')
                 else Nothing)
             (ifSigs _t)
           )
