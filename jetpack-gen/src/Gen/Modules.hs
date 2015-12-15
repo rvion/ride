@@ -1,3 +1,4 @@
+{-# LANGUAGE RecordWildCards #-}
 module Gen.Modules where
 
 import           Control.Monad     (forM)
@@ -61,12 +62,12 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
                   return [Nothing]
               | head _name `elem` operators -> do
-                  put ["-- (",_name,") :: ",rType]
-                  put ["(",_name,")", " = (I.", _name,")\n"]
+                  put ["\n-- (",_name,") :: ",rType]
+                  put ["(",_name,")", " = (I.", _name,")"]
                   return [Just _reexported_name]
               | isLower (head _name) || head _name == '_' -> do
-                  put ["-- ",_reexported_name," :: ",rType]
-                  put [_reexported_name, " = I.", _name,"\n"]
+                  put ["\n-- ",_reexported_name," :: ",rType]
+                  put [_reexported_name, " = I.", _name]
                   return [Just _reexported_name]
               | otherwise -> error ("ahaha " ++ _name)
             RData _ rType nbTyVars rDataTyCons
@@ -76,17 +77,19 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
               | otherwise -> do
                   let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
                   -- put ["-- ",_reexported_type," :: ",rType]
-                  put (["type ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
+                  put (["\ntype ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
                   forM rDataTyCons reexportFn
                   return [Just _reexported_type] -- tyvars needed because type synonym must be instanciated
-            RDataCon thename nbTyVars
-              | head thename `elem` operators -> do
-                  putStrLn $ concat ["  warn: (",thename, ") as a type constructor is not yet supported"]
+            RDataCon{..}
+              | head rName `elem` operators -> do
+                  putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
                   return [Nothing]
               | otherwise -> do
-                  let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
-                  put ([_idPrefix,"mk'", thename, " =  I.", thename, "-- constructor"])
-                  put (["pattern ", _typePrefix, thename, " ", tyVars, " <-  I.", thename, " ", tyVars])
+                  let tyVars = intersperse ' ' $ take rNbTyVars ['a'..'z']
+                  let constrType = intercalate " -> " (rTyVars ++ [rName])
+                  put (["\n-- constructor :: ", constrType])
+                  put ([_idPrefix,"mk'", rName, " =  I.", rName])
+                  put (["pattern ", _typePrefix, rName, " ", tyVars, " <-  I.", rName, " ", tyVars])
                   return [Nothing]
             RClass n fns ->
               concat <$> forM fns reexportFn

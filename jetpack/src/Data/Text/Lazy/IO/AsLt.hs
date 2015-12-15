@@ -3,6 +3,7 @@ module Data.Text.Lazy.IO.AsLt where
 
 import qualified Data.Text.Lazy.IO as I
 
+
 -- lt_appendFile :: FilePath -> Text -> IO ()
 lt_appendFile = I.appendFile
 
@@ -38,4 +39,3 @@ lt_readFile = I.readFile
 
 -- lt_writeFile :: FilePath -> Text -> IO ()
 lt_writeFile = I.writeFile
-

@@ -3,6 +3,7 @@ module Network.Wai.AsWai where
 
 import qualified Network.Wai as I
 
+
 -- wai_defaultRequest :: Request
 wai_defaultRequest = I.defaultRequest
 
@@ -46,16 +47,29 @@ wai_responseToStream = I.responseToStream
 wai_strictRequestBody = I.strictRequestBody
 
 type WaiApplication  = I.Application
+
 type WaiMiddleware  = I.Middleware
+
 type WaiFilePart  = I.FilePart
-wai_mk'FilePart =  I.FilePart-- constructor
+
+-- constructor :: Integer -> Integer -> Integer -> FilePart
+wai_mk'FilePart =  I.FilePart
 pattern WaiFilePart a b c <-  I.FilePart a b c
+
 type WaiRequest  = I.Request
+
 type WaiRequestBodyLength  = I.RequestBodyLength
-wai_mk'ChunkedBody =  I.ChunkedBody-- constructor
+
+-- constructor :: ChunkedBody
+wai_mk'ChunkedBody =  I.ChunkedBody
 pattern WaiChunkedBody  <-  I.ChunkedBody 
-wai_mk'KnownLength =  I.KnownLength-- constructor
+
+-- constructor :: Word64 -> KnownLength
+wai_mk'KnownLength =  I.KnownLength
 pattern WaiKnownLength a <-  I.KnownLength a
+
 type WaiResponse  = I.Response
+
 type WaiResponseReceived  = I.ResponseReceived
+
 type WaiStreamingBody  = I.StreamingBody

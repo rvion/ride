@@ -3,6 +3,6 @@ module Web.Spock.Digestive.AsSpock where
 
 import qualified Web.Spock.Digestive as I
 
+
 -- spock_runForm :: forall v ctx (m :: * -> *) a. (Functor m, MonadIO m) => Text -> Form v (ActionCtxT ctx m) a -> ActionCtxT ctx m (View v, Maybe a)
 spock_runForm = I.runForm
-

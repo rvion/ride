@@ -1,12 +1,12 @@
 module ReexportDemo
   ( module ReexportDemo
-  , Either(..)
-  , module Control.Applicative
+  -- , Either(..)
+  -- , module Control.Applicative
   ) where
 import           Control.Applicative
-type ThisIsAType = Int
+-- type ThisIsAType = Int
 
-type Acc a b = Yo a b
+data D a b = DD String String a String b
 
 -- type YoPlop = Acc
 --   reexport-demo/src/ReexportDemo.hs:6:1: KindError:

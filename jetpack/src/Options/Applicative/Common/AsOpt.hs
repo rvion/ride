@@ -3,6 +3,7 @@ module Options.Applicative.Common.AsOpt where
 
 import qualified Options.Applicative.Common as I
 
+
 -- opt_evalParser :: forall a. Parser a -> Maybe a
 opt_evalParser = I.evalParser
 
@@ -31,9 +32,15 @@ opt_showOption = I.showOption
 opt_treeMapParser = I.treeMapParser
 
 type OptParser a = I.Parser a
+
 type OptParserInfo a = I.ParserInfo a
-opt_mk'ParserInfo =  I.ParserInfo-- constructor
+
+-- constructor :: Parser a -> Bool -> Chunk Doc -> Chunk Doc -> Chunk Doc -> Int -> Bool -> ParserInfo
+opt_mk'ParserInfo =  I.ParserInfo
 pattern OptParserInfo a b c d e f g <-  I.ParserInfo a b c d e f g
+
 type OptParserPrefs  = I.ParserPrefs
-opt_mk'ParserPrefs =  I.ParserPrefs-- constructor
+
+-- constructor :: String -> Bool -> Bool -> Bool -> Int -> ParserPrefs
+opt_mk'ParserPrefs =  I.ParserPrefs
 pattern OptParserPrefs a b c d e <-  I.ParserPrefs a b c d e

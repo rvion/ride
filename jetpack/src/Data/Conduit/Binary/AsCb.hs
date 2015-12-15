@@ -3,6 +3,7 @@ module Data.Conduit.Binary.AsCb where
 
 import qualified Data.Conduit.Binary as I
 
+
 -- cb_conduitFile :: forall (m :: * -> *). MonadResource m => FilePath -> Conduit ByteString m ByteString
 cb_conduitFile = I.conduitFile
 
@@ -71,4 +72,3 @@ cb_take = I.take
 
 -- cb_takeWhile :: forall (m :: * -> *). Monad m => (Word8 -> Bool) -> Conduit ByteString m ByteString
 cb_takeWhile = I.takeWhile
-

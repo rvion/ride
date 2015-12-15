@@ -3,6 +3,7 @@ module Control.Monad.Trans.State.Lazy.AsTrans where
 
 import qualified Control.Monad.Trans.State.Lazy as I
 
+
 -- trans_evalState :: forall s a. State s a -> s -> a
 trans_evalState = I.evalState
 
@@ -64,4 +65,5 @@ trans_withState = I.withState
 trans_withStateT = I.withStateT
 
 type TransState a = I.State a
+
 type TransStateT a b c = I.StateT a b c

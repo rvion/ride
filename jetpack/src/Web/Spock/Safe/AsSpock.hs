@@ -3,6 +3,7 @@ module Web.Spock.Safe.AsSpock where
 
 import qualified Web.Spock.Safe as I
 
+
 -- spock_defaultCookieSettings :: CookieSettings
 spock_defaultCookieSettings = I.defaultCookieSettings
 
@@ -226,18 +227,31 @@ spock_static = I.static
 spock_var = I.var
 
 type SpockCookieEOL  = I.CookieEOL
-spock_mk'CookieValidUntil =  I.CookieValidUntil-- constructor
+
+-- constructor :: UTCTime -> CookieValidUntil
+spock_mk'CookieValidUntil =  I.CookieValidUntil
 pattern SpockCookieValidUntil a <-  I.CookieValidUntil a
-spock_mk'CookieValidFor =  I.CookieValidFor-- constructor
+
+-- constructor :: NominalDiffTime -> CookieValidFor
+spock_mk'CookieValidFor =  I.CookieValidFor
 pattern SpockCookieValidFor a <-  I.CookieValidFor a
-spock_mk'CookieValidForSession =  I.CookieValidForSession-- constructor
+
+-- constructor :: CookieValidForSession
+spock_mk'CookieValidForSession =  I.CookieValidForSession
 pattern SpockCookieValidForSession  <-  I.CookieValidForSession 
+
 type SpockCookieSettings  = I.CookieSettings
-spock_mk'CookieSettings =  I.CookieSettings-- constructor
+
+-- constructor :: CookieEOL -> Maybe ByteString -> Maybe ByteString -> Bool -> Bool -> CookieSettings
+spock_mk'CookieSettings =  I.CookieSettings
 pattern SpockCookieSettings a b c d e <-  I.CookieSettings a b c d e
+
 type SpockConnBuilder a = I.ConnBuilder a
-spock_mk'ConnBuilder =  I.ConnBuilder-- constructor
+
+-- constructor :: IO a -> a -> IO () -> PoolCfg -> ConnBuilder
+spock_mk'ConnBuilder =  I.ConnBuilder
 pattern SpockConnBuilder a b c <-  I.ConnBuilder a b c
+
 -- spock_runQuery :: forall a. (SpockConn m -> IO a) -> m a
 spock_runQuery = I.runQuery
 
@@ -245,73 +259,140 @@ spock_runQuery = I.runQuery
 spock_getState = I.getState
 
 type SpockPoolCfg  = I.PoolCfg
-spock_mk'PoolCfg =  I.PoolCfg-- constructor
+
+-- constructor :: Int -> Int -> NominalDiffTime -> PoolCfg
+spock_mk'PoolCfg =  I.PoolCfg
 pattern SpockPoolCfg a b c <-  I.PoolCfg a b c
+
 type SpockPoolOrConn a = I.PoolOrConn a
-spock_mk'PCPool =  I.PCPool-- constructor
+
+-- constructor :: Pool a -> PCPool
+spock_mk'PCPool =  I.PCPool
 pattern SpockPCPool a <-  I.PCPool a
-spock_mk'PCConn =  I.PCConn-- constructor
+
+-- constructor :: ConnBuilder a -> PCConn
+spock_mk'PCConn =  I.PCConn
 pattern SpockPCConn a <-  I.PCConn a
-spock_mk'PCNoDatabase =  I.PCNoDatabase-- constructor
+
+-- constructor :: PCNoDatabase
+spock_mk'PCNoDatabase =  I.PCNoDatabase
 pattern SpockPCNoDatabase  <-  I.PCNoDatabase 
+
 -- spock_runSafeAction :: a -> SpockAction conn sess st ()
 spock_runSafeAction = I.runSafeAction
 
 type SpockSessionCfg a = I.SessionCfg a
-spock_mk'SessionCfg =  I.SessionCfg-- constructor
+
+-- constructor :: Text -> NominalDiffTime -> Int -> Bool -> a -> Maybe (SessionPersistCfg a) -> NominalDiffTime -> SessionHooks a -> SessionCfg
+spock_mk'SessionCfg =  I.SessionCfg
 pattern SpockSessionCfg a b c d e f g h <-  I.SessionCfg a b c d e f g h
+
 type SpockSessionHooks a = I.SessionHooks a
-spock_mk'SessionHooks =  I.SessionHooks-- constructor
+
+-- constructor :: HashMap SessionId a -> IO () -> SessionHooks
+spock_mk'SessionHooks =  I.SessionHooks
 pattern SpockSessionHooks a <-  I.SessionHooks a
+
 type SpockSessionId  = I.SessionId
+
 type SpockSessionPersistCfg a = I.SessionPersistCfg a
-spock_mk'SessionPersistCfg =  I.SessionPersistCfg-- constructor
+
+-- constructor :: IO [(SessionId, UTCTime, a)] -> [(SessionId, UTCTime, a)] -> IO () -> SessionPersistCfg
+spock_mk'SessionPersistCfg =  I.SessionPersistCfg
 pattern SpockSessionPersistCfg a b <-  I.SessionPersistCfg a b
+
 type SpockSpockAction a b c = I.SpockAction a b c
+
 type SpockSpockActionCtx a b c d = I.SpockActionCtx a b c d
+
 type SpockSpockCfg a b c = I.SpockCfg a b c
-spock_mk'SpockCfg =  I.SpockCfg-- constructor
+
+-- constructor :: st -> PoolOrConn conn -> SessionCfg sess -> Maybe Word64 -> SpockCfg
+spock_mk'SpockCfg =  I.SpockCfg
 pattern SpockSpockCfg a b c d <-  I.SpockCfg a b c d
+
 type SpockWebState a b c = I.WebState a b c
+
 type SpockWebStateM a b c = I.WebStateM a b c
+
 type SpockClientPreferredFormat  = I.ClientPreferredFormat
-spock_mk'PrefJSON =  I.PrefJSON-- constructor
+
+-- constructor :: PrefJSON
+spock_mk'PrefJSON =  I.PrefJSON
 pattern SpockPrefJSON  <-  I.PrefJSON 
-spock_mk'PrefXML =  I.PrefXML-- constructor
+
+-- constructor :: PrefXML
+spock_mk'PrefXML =  I.PrefXML
 pattern SpockPrefXML  <-  I.PrefXML 
-spock_mk'PrefHTML =  I.PrefHTML-- constructor
+
+-- constructor :: PrefHTML
+spock_mk'PrefHTML =  I.PrefHTML
 pattern SpockPrefHTML  <-  I.PrefHTML 
-spock_mk'PrefText =  I.PrefText-- constructor
+
+-- constructor :: PrefText
+spock_mk'PrefText =  I.PrefText
 pattern SpockPrefText  <-  I.PrefText 
-spock_mk'PrefUnknown =  I.PrefUnknown-- constructor
+
+-- constructor :: PrefUnknown
+spock_mk'PrefUnknown =  I.PrefUnknown
 pattern SpockPrefUnknown  <-  I.PrefUnknown 
+
 type SpockActionCtxT a b c = I.ActionCtxT a b c
+
 type SpockActionT  = I.ActionT
+
 type SpockUploadedFile  = I.UploadedFile
-spock_mk'UploadedFile =  I.UploadedFile-- constructor
+
+-- constructor :: Text -> Text -> FilePath -> UploadedFile
+spock_mk'UploadedFile =  I.UploadedFile
 pattern SpockUploadedFile a b c <-  I.UploadedFile a b c
+
 type SpockSpockCtxM a b c d = I.SpockCtxM a b c d
+
 type SpockSpockCtxT a b c = I.SpockCtxT a b c
+
 type SpockSpockM a b c = I.SpockM a b c
+
 type SpockSpockT  = I.SpockT
+
 type SpockStdMethod  = I.StdMethod
-spock_mk'GET =  I.GET-- constructor
+
+-- constructor :: GET
+spock_mk'GET =  I.GET
 pattern SpockGET  <-  I.GET 
-spock_mk'POST =  I.POST-- constructor
+
+-- constructor :: POST
+spock_mk'POST =  I.POST
 pattern SpockPOST  <-  I.POST 
-spock_mk'HEAD =  I.HEAD-- constructor
+
+-- constructor :: HEAD
+spock_mk'HEAD =  I.HEAD
 pattern SpockHEAD  <-  I.HEAD 
-spock_mk'PUT =  I.PUT-- constructor
+
+-- constructor :: PUT
+spock_mk'PUT =  I.PUT
 pattern SpockPUT  <-  I.PUT 
-spock_mk'DELETE =  I.DELETE-- constructor
+
+-- constructor :: DELETE
+spock_mk'DELETE =  I.DELETE
 pattern SpockDELETE  <-  I.DELETE 
-spock_mk'TRACE =  I.TRACE-- constructor
+
+-- constructor :: TRACE
+spock_mk'TRACE =  I.TRACE
 pattern SpockTRACE  <-  I.TRACE 
-spock_mk'CONNECT =  I.CONNECT-- constructor
+
+-- constructor :: CONNECT
+spock_mk'CONNECT =  I.CONNECT
 pattern SpockCONNECT  <-  I.CONNECT 
-spock_mk'OPTIONS =  I.OPTIONS-- constructor
+
+-- constructor :: OPTIONS
+spock_mk'OPTIONS =  I.OPTIONS
 pattern SpockOPTIONS  <-  I.OPTIONS 
-spock_mk'PATCH =  I.PATCH-- constructor
+
+-- constructor :: PATCH
+spock_mk'PATCH =  I.PATCH
 pattern SpockPATCH  <-  I.PATCH 
+
 type SpockPath a = I.Path a
+
 type SpockVar a = I.Var a

@@ -3,6 +3,7 @@ module Data.List.NonEmpty.AsNe where
 
 import qualified Data.List.NonEmpty as I
 
+
 -- (!!) :: forall a. NonEmpty a -> Int -> a
 (!!) = (I.!!)
 

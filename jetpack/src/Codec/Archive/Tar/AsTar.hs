@@ -3,6 +3,7 @@ module Codec.Archive.Tar.AsTar where
 
 import qualified Codec.Archive.Tar as I
 
+
 -- tar_append :: FilePath -> FilePath -> [FilePath] -> IO ()
 tar_append = I.append
 
@@ -40,44 +41,85 @@ tar_unpack = I.unpack
 tar_write = I.write
 
 type TarFormatError  = I.FormatError
-tar_mk'TruncatedArchive =  I.TruncatedArchive-- constructor
+
+-- constructor :: TruncatedArchive
+tar_mk'TruncatedArchive =  I.TruncatedArchive
 pattern TarTruncatedArchive  <-  I.TruncatedArchive 
-tar_mk'ShortTrailer =  I.ShortTrailer-- constructor
+
+-- constructor :: ShortTrailer
+tar_mk'ShortTrailer =  I.ShortTrailer
 pattern TarShortTrailer  <-  I.ShortTrailer 
-tar_mk'BadTrailer =  I.BadTrailer-- constructor
+
+-- constructor :: BadTrailer
+tar_mk'BadTrailer =  I.BadTrailer
 pattern TarBadTrailer  <-  I.BadTrailer 
-tar_mk'TrailingJunk =  I.TrailingJunk-- constructor
+
+-- constructor :: TrailingJunk
+tar_mk'TrailingJunk =  I.TrailingJunk
 pattern TarTrailingJunk  <-  I.TrailingJunk 
-tar_mk'ChecksumIncorrect =  I.ChecksumIncorrect-- constructor
+
+-- constructor :: ChecksumIncorrect
+tar_mk'ChecksumIncorrect =  I.ChecksumIncorrect
 pattern TarChecksumIncorrect  <-  I.ChecksumIncorrect 
-tar_mk'NotTarFormat =  I.NotTarFormat-- constructor
+
+-- constructor :: NotTarFormat
+tar_mk'NotTarFormat =  I.NotTarFormat
 pattern TarNotTarFormat  <-  I.NotTarFormat 
-tar_mk'UnrecognisedTarFormat =  I.UnrecognisedTarFormat-- constructor
+
+-- constructor :: UnrecognisedTarFormat
+tar_mk'UnrecognisedTarFormat =  I.UnrecognisedTarFormat
 pattern TarUnrecognisedTarFormat  <-  I.UnrecognisedTarFormat 
-tar_mk'HeaderBadNumericEncoding =  I.HeaderBadNumericEncoding-- constructor
+
+-- constructor :: HeaderBadNumericEncoding
+tar_mk'HeaderBadNumericEncoding =  I.HeaderBadNumericEncoding
 pattern TarHeaderBadNumericEncoding  <-  I.HeaderBadNumericEncoding 
+
 type TarEntries a = I.Entries a
-tar_mk'Next =  I.Next-- constructor
+
+-- constructor :: Entry -> Entries e -> Next
+tar_mk'Next =  I.Next
 pattern TarNext a b <-  I.Next a b
-tar_mk'Done =  I.Done-- constructor
+
+-- constructor :: Done
+tar_mk'Done =  I.Done
 pattern TarDone  <-  I.Done 
-tar_mk'Fail =  I.Fail-- constructor
+
+-- constructor :: e -> Fail
+tar_mk'Fail =  I.Fail
 pattern TarFail a <-  I.Fail a
+
 type TarEntry  = I.Entry
+
 type TarEntryContent  = I.EntryContent
-tar_mk'NormalFile =  I.NormalFile-- constructor
+
+-- constructor :: ByteString -> FileSize -> NormalFile
+tar_mk'NormalFile =  I.NormalFile
 pattern TarNormalFile a b <-  I.NormalFile a b
-tar_mk'Directory =  I.Directory-- constructor
+
+-- constructor :: Directory
+tar_mk'Directory =  I.Directory
 pattern TarDirectory  <-  I.Directory 
-tar_mk'SymbolicLink =  I.SymbolicLink-- constructor
+
+-- constructor :: LinkTarget -> SymbolicLink
+tar_mk'SymbolicLink =  I.SymbolicLink
 pattern TarSymbolicLink a <-  I.SymbolicLink a
-tar_mk'HardLink =  I.HardLink-- constructor
+
+-- constructor :: LinkTarget -> HardLink
+tar_mk'HardLink =  I.HardLink
 pattern TarHardLink a <-  I.HardLink a
-tar_mk'CharacterDevice =  I.CharacterDevice-- constructor
+
+-- constructor :: DevMajor -> DevMinor -> CharacterDevice
+tar_mk'CharacterDevice =  I.CharacterDevice
 pattern TarCharacterDevice a b <-  I.CharacterDevice a b
-tar_mk'BlockDevice =  I.BlockDevice-- constructor
+
+-- constructor :: DevMajor -> DevMinor -> BlockDevice
+tar_mk'BlockDevice =  I.BlockDevice
 pattern TarBlockDevice a b <-  I.BlockDevice a b
-tar_mk'NamedPipe =  I.NamedPipe-- constructor
+
+-- constructor :: NamedPipe
+tar_mk'NamedPipe =  I.NamedPipe
 pattern TarNamedPipe  <-  I.NamedPipe 
-tar_mk'OtherEntryType =  I.OtherEntryType-- constructor
+
+-- constructor :: TypeCode -> ByteString -> FileSize -> OtherEntryType
+tar_mk'OtherEntryType =  I.OtherEntryType
 pattern TarOtherEntryType a b c <-  I.OtherEntryType a b c

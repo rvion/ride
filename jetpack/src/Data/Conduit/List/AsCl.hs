@@ -3,6 +3,7 @@ module Data.Conduit.List.AsCl where
 
 import qualified Data.Conduit.List as I
 
+
 -- cl_catMaybes :: forall a (m :: * -> *). Monad m => Conduit (Maybe a) m a
 cl_catMaybes = I.catMaybes
 
@@ -125,4 +126,3 @@ cl_unfold = I.unfold
 
 -- cl_unfoldM :: forall b (m :: * -> *) a. Monad m => (b -> m (Maybe (a, b))) -> b -> Producer m a
 cl_unfoldM = I.unfoldM
-

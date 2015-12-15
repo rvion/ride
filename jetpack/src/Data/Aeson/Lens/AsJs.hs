@@ -3,6 +3,7 @@ module Data.Aeson.Lens.AsJs where
 
 import qualified Data.Aeson.Lens as I
 
+
 -- js__Integral :: forall t a. (AsNumber t, Integral a) => Prism' t a
 js__Integral = I._Integral
 
@@ -55,11 +56,19 @@ js__Object = I._Object
 js__Array = I._Array
 
 type JsPrimitive  = I.Primitive
-js_mk'StringPrim =  I.StringPrim-- constructor
+
+-- constructor :: Text -> StringPrim
+js_mk'StringPrim =  I.StringPrim
 pattern JsStringPrim a <-  I.StringPrim a
-js_mk'NumberPrim =  I.NumberPrim-- constructor
+
+-- constructor :: Scientific -> NumberPrim
+js_mk'NumberPrim =  I.NumberPrim
 pattern JsNumberPrim a <-  I.NumberPrim a
-js_mk'BoolPrim =  I.BoolPrim-- constructor
+
+-- constructor :: Bool -> BoolPrim
+js_mk'BoolPrim =  I.BoolPrim
 pattern JsBoolPrim a <-  I.BoolPrim a
-js_mk'NullPrim =  I.NullPrim-- constructor
+
+-- constructor :: NullPrim
+js_mk'NullPrim =  I.NullPrim
 pattern JsNullPrim  <-  I.NullPrim 

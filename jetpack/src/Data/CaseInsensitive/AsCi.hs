@@ -3,6 +3,7 @@ module Data.CaseInsensitive.AsCi where
 
 import qualified Data.CaseInsensitive as I
 
+
 -- ci_map :: forall s1 s2. FoldCase s2 => (s1 -> s2) -> CI s1 -> CI s2
 ci_map = I.map
 
@@ -10,6 +11,6 @@ ci_map = I.map
 ci_mk = I.mk
 
 type CiCI a = I.CI a
+
 -- ci_foldCase :: s -> s
 ci_foldCase = I.foldCase
-

@@ -3,6 +3,7 @@ module Data.HashMap.Strict.AsHm where
 
 import qualified Data.HashMap.Strict as I
 
+
 -- hm_delete :: forall k v. (Eq k, Hashable k) => k -> HashMap k v -> HashMap k v
 hm_delete = I.delete
 

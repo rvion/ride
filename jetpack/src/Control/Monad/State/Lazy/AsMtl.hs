@@ -3,6 +3,7 @@ module Control.Monad.State.Lazy.AsMtl where
 
 import qualified Control.Monad.State.Lazy as I
 
+
 -- (<$!>) :: forall a b (m :: * -> *). Monad m => (a -> b) -> m a -> m b
 (<$!>) = (I.<$!>)
 
@@ -178,4 +179,5 @@ mtl_liftIO = I.liftIO
 mtl_lift = I.lift
 
 type MtlState a = I.State a
+
 type MtlStateT a b c = I.StateT a b c

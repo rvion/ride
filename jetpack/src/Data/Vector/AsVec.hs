@@ -3,6 +3,7 @@ module Data.Vector.AsVec where
 
 import qualified Data.Vector as I
 
+
 -- (!?) :: forall a. Vector a -> Int -> Maybe a
 (!?) = (I.!?)
 
@@ -538,4 +539,5 @@ vec_zipWithM_ = I.zipWithM_
 vec_convert = I.convert
 
 type VecVector a = I.Vector a
+
 type VecMVector a b = I.MVector a b

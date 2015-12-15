@@ -3,6 +3,7 @@ module Network.Wai.Middleware.Static.AsWai where
 
 import qualified Network.Wai.Middleware.Static as I
 
+
 -- (>->) :: Policy -> Policy -> Policy
 (>->) = (I.>->)
 
@@ -61,14 +62,25 @@ wai_unsafeStaticPolicy = I.unsafeStaticPolicy
 wai_unsafeStaticPolicy' = I.unsafeStaticPolicy'
 
 type WaiCacheContainer  = I.CacheContainer
+
 type WaiCachingStrategy  = I.CachingStrategy
-wai_mk'NoCaching =  I.NoCaching-- constructor
+
+-- constructor :: NoCaching
+wai_mk'NoCaching =  I.NoCaching
 pattern WaiNoCaching  <-  I.NoCaching 
-wai_mk'PublicStaticCaching =  I.PublicStaticCaching-- constructor
+
+-- constructor :: PublicStaticCaching
+wai_mk'PublicStaticCaching =  I.PublicStaticCaching
 pattern WaiPublicStaticCaching  <-  I.PublicStaticCaching 
-wai_mk'CustomCaching =  I.CustomCaching-- constructor
+
+-- constructor :: FileMeta -> RequestHeaders -> CustomCaching
+wai_mk'CustomCaching =  I.CustomCaching
 pattern WaiCustomCaching a <-  I.CustomCaching a
+
 type WaiFileMeta  = I.FileMeta
-wai_mk'FileMeta =  I.FileMeta-- constructor
+
+-- constructor :: ByteString -> ByteString -> FilePath -> FileMeta
+wai_mk'FileMeta =  I.FileMeta
 pattern WaiFileMeta a b c <-  I.FileMeta a b c
+
 type WaiPolicy  = I.Policy

@@ -3,6 +3,7 @@ module Options.Applicative.Extra.AsOpt where
 
 import qualified Options.Applicative.Extra as I
 
+
 -- opt_customExecParser :: forall a. ParserPrefs -> ParserInfo a -> IO a
 opt_customExecParser = I.customExecParser
 
@@ -34,11 +35,19 @@ opt_renderFailure = I.renderFailure
 opt_overFailure = I.overFailure
 
 type OptCompletionResult  = I.CompletionResult
+
 type OptParserFailure a = I.ParserFailure a
+
 type OptParserResult a = I.ParserResult a
-opt_mk'Success =  I.Success-- constructor
+
+-- constructor :: a -> Success
+opt_mk'Success =  I.Success
 pattern OptSuccess a <-  I.Success a
-opt_mk'Failure =  I.Failure-- constructor
+
+-- constructor :: ParserFailure ParserHelp -> Failure
+opt_mk'Failure =  I.Failure
 pattern OptFailure a <-  I.Failure a
-opt_mk'CompletionInvoked =  I.CompletionInvoked-- constructor
+
+-- constructor :: CompletionResult -> CompletionInvoked
+opt_mk'CompletionInvoked =  I.CompletionInvoked
 pattern OptCompletionInvoked a <-  I.CompletionInvoked a

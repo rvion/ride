@@ -3,6 +3,7 @@ module Control.Concurrent.STM.AsStm where
 
 import qualified Control.Concurrent.STM as I
 
+
 -- stm_registerDelay :: Int -> IO (TVar Bool)
 stm_registerDelay = I.registerDelay
 
@@ -193,9 +194,15 @@ stm_swapTVar = I.swapTVar
 stm_check = I.check
 
 type StmSTM a = I.STM a
+
 type StmTVar a = I.TVar a
+
 type StmTArray a b = I.TArray a b
+
 type StmTBQueue a = I.TBQueue a
+
 type StmTChan a = I.TChan a
+
 type StmTMVar a = I.TMVar a
+
 type StmTQueue a = I.TQueue a

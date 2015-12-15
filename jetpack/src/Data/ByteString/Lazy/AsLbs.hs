@@ -3,6 +3,7 @@ module Data.ByteString.Lazy.AsLbs where
 
 import qualified Data.ByteString.Lazy as I
 
+
 -- lbs_all :: (Word8 -> Bool) -> ByteString -> Bool
 lbs_all = I.all
 

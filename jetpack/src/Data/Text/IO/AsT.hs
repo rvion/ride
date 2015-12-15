@@ -3,6 +3,7 @@ module Data.Text.IO.AsT where
 
 import qualified Data.Text.IO as I
 
+
 -- t_appendFile :: FilePath -> Text -> IO ()
 t_appendFile = I.appendFile
 
@@ -41,4 +42,3 @@ t_readFile = I.readFile
 
 -- t_writeFile :: FilePath -> Text -> IO ()
 t_writeFile = I.writeFile
-

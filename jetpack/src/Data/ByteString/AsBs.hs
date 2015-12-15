@@ -3,6 +3,7 @@ module Data.ByteString.AsBs where
 
 import qualified Data.ByteString as I
 
+
 -- bs_all :: (Word8 -> Bool) -> ByteString -> Bool
 bs_all = I.all
 

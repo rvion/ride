@@ -168,12 +168,12 @@ findReexports (mod, modules) previouslyExportedSymbols =
           , rNbTyVars = length (ifTyVars _t)
           , rDataTyCon = case ifCons _t of
               IfDataTyCon cons -> -- mapMaybe (undefined)
-                catMaybes $ for cons $ \ con -> --error (toS (ifConOcc con) ++ (toSDoc $ pprIfCon con))$
+                catMaybes $ for cons $ \ con -> -- error (toS (ifConOcc con) ++ (toSDoc $ pprIfCon con))$
                   if ((ifConOcc con) `elem` (map nameOccName exportedNames))
                   then Just $
                     RDataCon
                       { rName = toS (ifConOcc con)
-                      -- , rType = toS (ifConArgTys con)
+                      , rTyVars = map toS (ifConArgTys con)
                       , rNbTyVars = (length $ ifConArgTys con)
                     }
                   else Nothing
@@ -196,22 +196,10 @@ findReexports (mod, modules) previouslyExportedSymbols =
                 else Nothing)
             (ifSigs _t)
           )
-          -- FIXME the solution seems to be to reexport class memebres only when
-          -- they are reexported alng the class...
-
-          -- in other situations, we could just export something like that:
-          --   module Options.Applicative.AsOpt
-          --     ( module Options.Applicative.AsOpt
-          --     , I.Applicative
-          --     ) where
 
       Just (IfaceFamily{},_) -> Nothing
       Just (IfaceAxiom{},_) -> Nothing
       Just (IfacePatSyn{},_) -> Nothing
-
-
--- isDeprecated n = mi_warn_fn iface
--- for = flip map
 
 typeSdoc :: IfaceDecl -> SDoc
 typeSdoc x =
@@ -235,7 +223,6 @@ showIfaceKind x = case x of
   IfaceClass{} -> "IfaceClass"
   IfaceAxiom{} -> "IfaceAxiom"
   IfacePatSyn{} -> "IfacePatSyn"
-          -- _ -> "ERROR"
 
 showIfaceInfo :: IfaceDecl -> String
 showIfaceInfo x = case x of

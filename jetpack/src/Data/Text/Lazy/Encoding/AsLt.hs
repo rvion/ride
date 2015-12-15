@@ -3,6 +3,7 @@ module Data.Text.Lazy.Encoding.AsLt where
 
 import qualified Data.Text.Lazy.Encoding as I
 
+
 -- lt_decodeLatin1 :: ByteString -> Text
 lt_decodeLatin1 = I.decodeLatin1
 
@@ -59,4 +60,3 @@ lt_encodeUtf8Builder = I.encodeUtf8Builder
 
 -- lt_encodeUtf8BuilderEscaped :: BoundedPrim Word8 -> Text -> Builder
 lt_encodeUtf8BuilderEscaped = I.encodeUtf8BuilderEscaped
-

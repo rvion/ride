@@ -3,6 +3,7 @@ module Data.Text.Encoding.AsT where
 
 import qualified Data.Text.Encoding as I
 
+
 -- t_decodeLatin1 :: ByteString -> Text
 t_decodeLatin1 = I.decodeLatin1
 
@@ -67,5 +68,7 @@ t_streamDecodeUtf8 = I.streamDecodeUtf8
 t_streamDecodeUtf8With = I.streamDecodeUtf8With
 
 type TDecoding  = I.Decoding
-t_mk'Some =  I.Some-- constructor
+
+-- constructor :: Text -> ByteString -> ByteString -> Decoding -> Some
+t_mk'Some =  I.Some
 pattern TSome a b c <-  I.Some a b c

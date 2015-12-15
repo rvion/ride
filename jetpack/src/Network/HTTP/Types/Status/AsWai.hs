@@ -3,6 +3,7 @@ module Network.HTTP.Types.Status.AsWai where
 
 import qualified Network.HTTP.Types.Status as I
 
+
 -- wai_accepted202 :: Status
 wai_accepted202 = I.accepted202
 
@@ -292,5 +293,7 @@ wai_unsupportedMediaType415 = I.unsupportedMediaType415
 wai_useProxy305 = I.useProxy305
 
 type WaiStatus  = I.Status
-wai_mk'Status =  I.Status-- constructor
+
+-- constructor :: Int -> ByteString -> Status
+wai_mk'Status =  I.Status
 pattern WaiStatus a b <-  I.Status a b

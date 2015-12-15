@@ -3,6 +3,6 @@ module Control.Monad.Trans.Class.AsTrans where
 
 import qualified Control.Monad.Trans.Class as I
 
+
 -- trans_lift :: forall (m :: * -> *) a. Monad m => m a -> t m a
 trans_lift = I.lift
-

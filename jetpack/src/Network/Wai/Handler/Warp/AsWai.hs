@@ -3,6 +3,7 @@ module Network.Wai.Handler.Warp.AsWai where
 
 import qualified Network.Wai.Handler.Warp as I
 
+
 -- wai_getFileInfo :: Request -> FilePath -> IO FileInfo
 wai_getFileInfo = I.getFileInfo
 
@@ -208,53 +209,103 @@ wai_tickle = I.tickle
 wai_withManager = I.withManager
 
 type WaiHostPreference  = I.HostPreference
+
 type WaiDateCache  = I.DateCache
+
 type WaiGMTDate  = I.GMTDate
+
 type WaiMutableFdCache  = I.MutableFdCache
+
 type WaiRefresh  = I.Refresh
+
 type WaiFileInfo  = I.FileInfo
-wai_mk'FileInfo =  I.FileInfo-- constructor
+
+-- constructor :: FilePath -> Integer -> HTTPDate -> ByteString -> FileInfo
+wai_mk'FileInfo =  I.FileInfo
 pattern WaiFileInfo a b c d <-  I.FileInfo a b c d
+
 type WaiIndexedHeader  = I.IndexedHeader
+
 type WaiSettings  = I.Settings
+
 type WaiHandle  = I.Handle
+
 type WaiManager  = I.Manager
+
 type WaiTimeoutAction  = I.TimeoutAction
+
 type WaiTimeoutThread  = I.TimeoutThread
-wai_mk'TimeoutThread =  I.TimeoutThread-- constructor
+
+-- constructor :: TimeoutThread
+wai_mk'TimeoutThread =  I.TimeoutThread
 pattern WaiTimeoutThread  <-  I.TimeoutThread 
+
 type WaiBufSize  = I.BufSize
+
 type WaiBuffer  = I.Buffer
+
 type WaiConnection  = I.Connection
-wai_mk'Connection =  I.Connection-- constructor
+
+-- constructor :: [ByteString] -> IO () -> ByteString -> IO () -> SendFile -> IO () -> Recv -> RecvBuf -> Buffer -> BufSize -> Connection
+wai_mk'Connection =  I.Connection
 pattern WaiConnection a b c d e f g h <-  I.Connection a b c d e f g h
+
 type WaiFileId  = I.FileId
-wai_mk'FileId =  I.FileId-- constructor
+
+-- constructor :: FilePath -> Maybe Fd -> FileId
+wai_mk'FileId =  I.FileId
 pattern WaiFileId a b <-  I.FileId a b
+
 type WaiHeaderValue  = I.HeaderValue
+
 type WaiInternalInfo  = I.InternalInfo
-wai_mk'InternalInfo =  I.InternalInfo-- constructor
+
+-- constructor :: Handle -> Manager -> Maybe MutableFdCache -> FilePath -> IO FileInfo -> DateCache -> InternalInfo
+wai_mk'InternalInfo =  I.InternalInfo
 pattern WaiInternalInfo a b c d e <-  I.InternalInfo a b c d e
+
 type WaiInvalidRequest  = I.InvalidRequest
-wai_mk'NotEnoughLines =  I.NotEnoughLines-- constructor
+
+-- constructor :: [String] -> NotEnoughLines
+wai_mk'NotEnoughLines =  I.NotEnoughLines
 pattern WaiNotEnoughLines a <-  I.NotEnoughLines a
-wai_mk'BadFirstLine =  I.BadFirstLine-- constructor
+
+-- constructor :: String -> BadFirstLine
+wai_mk'BadFirstLine =  I.BadFirstLine
 pattern WaiBadFirstLine a <-  I.BadFirstLine a
-wai_mk'NonHttp =  I.NonHttp-- constructor
+
+-- constructor :: NonHttp
+wai_mk'NonHttp =  I.NonHttp
 pattern WaiNonHttp  <-  I.NonHttp 
-wai_mk'IncompleteHeaders =  I.IncompleteHeaders-- constructor
+
+-- constructor :: IncompleteHeaders
+wai_mk'IncompleteHeaders =  I.IncompleteHeaders
 pattern WaiIncompleteHeaders  <-  I.IncompleteHeaders 
-wai_mk'ConnectionClosedByPeer =  I.ConnectionClosedByPeer-- constructor
+
+-- constructor :: ConnectionClosedByPeer
+wai_mk'ConnectionClosedByPeer =  I.ConnectionClosedByPeer
 pattern WaiConnectionClosedByPeer  <-  I.ConnectionClosedByPeer 
-wai_mk'OverLargeHeader =  I.OverLargeHeader-- constructor
+
+-- constructor :: OverLargeHeader
+wai_mk'OverLargeHeader =  I.OverLargeHeader
 pattern WaiOverLargeHeader  <-  I.OverLargeHeader 
-wai_mk'BadProxyHeader =  I.BadProxyHeader-- constructor
+
+-- constructor :: String -> BadProxyHeader
+wai_mk'BadProxyHeader =  I.BadProxyHeader
 pattern WaiBadProxyHeader a <-  I.BadProxyHeader a
+
 type WaiPort  = I.Port
+
 type WaiSendFile  = I.SendFile
+
 type WaiSource  = I.Source
+
 type WaiTransport  = I.Transport
-wai_mk'TCP =  I.TCP-- constructor
+
+-- constructor :: TCP
+wai_mk'TCP =  I.TCP
 pattern WaiTCP  <-  I.TCP 
-wai_mk'TLS =  I.TLS-- constructor
+
+-- constructor :: Int -> Int -> Maybe ByteString -> Word16 -> TLS
+wai_mk'TLS =  I.TLS
 pattern WaiTLS a b c d <-  I.TLS a b c d

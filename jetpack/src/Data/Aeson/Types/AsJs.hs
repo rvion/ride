@@ -3,6 +3,7 @@ module Data.Aeson.Types.AsJs where
 
 import qualified Data.Aeson.Types as I
 
+
 -- js_typeMismatch :: forall a. String -> Value -> Parser a
 js_typeMismatch = I.typeMismatch
 
@@ -34,14 +35,25 @@ js_parseEither = I.parseEither
 js_parseMaybe = I.parseMaybe
 
 type JsOptions  = I.Options
-js_mk'Options =  I.Options-- constructor
+
+-- constructor :: String -> String -> String -> String -> Bool -> Bool -> SumEncoding -> Options
+js_mk'Options =  I.Options
 pattern JsOptions a b c d e <-  I.Options a b c d e
+
 type JsPair  = I.Pair
+
 type JsParser a = I.Parser a
+
 type JsSumEncoding  = I.SumEncoding
-js_mk'TaggedObject =  I.TaggedObject-- constructor
+
+-- constructor :: String -> String -> TaggedObject
+js_mk'TaggedObject =  I.TaggedObject
 pattern JsTaggedObject a b <-  I.TaggedObject a b
-js_mk'ObjectWithSingleField =  I.ObjectWithSingleField-- constructor
+
+-- constructor :: ObjectWithSingleField
+js_mk'ObjectWithSingleField =  I.ObjectWithSingleField
 pattern JsObjectWithSingleField  <-  I.ObjectWithSingleField 
-js_mk'TwoElemArray =  I.TwoElemArray-- constructor
+
+-- constructor :: TwoElemArray
+js_mk'TwoElemArray =  I.TwoElemArray
 pattern JsTwoElemArray  <-  I.TwoElemArray 

@@ -3,6 +3,7 @@ module Data.ByteString.Char8.AsBs where
 
 import qualified Data.ByteString.Char8 as I
 
+
 -- bs_findSubstring :: ByteString -> ByteString -> Maybe Int
 bs_findSubstring = I.findSubstring
 
@@ -32,4 +33,3 @@ bs_unwords = I.unwords
 
 -- bs_words :: ByteString -> [ByteString]
 bs_words = I.words
-

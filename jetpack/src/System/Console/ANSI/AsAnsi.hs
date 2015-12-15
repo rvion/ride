@@ -3,6 +3,7 @@ module System.Console.ANSI.AsAnsi where
 
 import qualified System.Console.ANSI as I
 
+
 -- ansi_clearFromCursorToLineBeginning :: IO ()
 ansi_clearFromCursorToLineBeginning = I.clearFromCursorToLineBeginning
 
@@ -187,67 +188,131 @@ ansi_showCursor = I.showCursor
 ansi_showCursorCode = I.showCursorCode
 
 type AnsiBlinkSpeed  = I.BlinkSpeed
-ansi_mk'SlowBlink =  I.SlowBlink-- constructor
+
+-- constructor :: SlowBlink
+ansi_mk'SlowBlink =  I.SlowBlink
 pattern AnsiSlowBlink  <-  I.SlowBlink 
-ansi_mk'RapidBlink =  I.RapidBlink-- constructor
+
+-- constructor :: RapidBlink
+ansi_mk'RapidBlink =  I.RapidBlink
 pattern AnsiRapidBlink  <-  I.RapidBlink 
-ansi_mk'NoBlink =  I.NoBlink-- constructor
+
+-- constructor :: NoBlink
+ansi_mk'NoBlink =  I.NoBlink
 pattern AnsiNoBlink  <-  I.NoBlink 
+
 type AnsiColor  = I.Color
-ansi_mk'Black =  I.Black-- constructor
+
+-- constructor :: Black
+ansi_mk'Black =  I.Black
 pattern AnsiBlack  <-  I.Black 
-ansi_mk'Red =  I.Red-- constructor
+
+-- constructor :: Red
+ansi_mk'Red =  I.Red
 pattern AnsiRed  <-  I.Red 
-ansi_mk'Green =  I.Green-- constructor
+
+-- constructor :: Green
+ansi_mk'Green =  I.Green
 pattern AnsiGreen  <-  I.Green 
-ansi_mk'Yellow =  I.Yellow-- constructor
+
+-- constructor :: Yellow
+ansi_mk'Yellow =  I.Yellow
 pattern AnsiYellow  <-  I.Yellow 
-ansi_mk'Blue =  I.Blue-- constructor
+
+-- constructor :: Blue
+ansi_mk'Blue =  I.Blue
 pattern AnsiBlue  <-  I.Blue 
-ansi_mk'Magenta =  I.Magenta-- constructor
+
+-- constructor :: Magenta
+ansi_mk'Magenta =  I.Magenta
 pattern AnsiMagenta  <-  I.Magenta 
-ansi_mk'Cyan =  I.Cyan-- constructor
+
+-- constructor :: Cyan
+ansi_mk'Cyan =  I.Cyan
 pattern AnsiCyan  <-  I.Cyan 
-ansi_mk'White =  I.White-- constructor
+
+-- constructor :: White
+ansi_mk'White =  I.White
 pattern AnsiWhite  <-  I.White 
+
 type AnsiColorIntensity  = I.ColorIntensity
-ansi_mk'Dull =  I.Dull-- constructor
+
+-- constructor :: Dull
+ansi_mk'Dull =  I.Dull
 pattern AnsiDull  <-  I.Dull 
-ansi_mk'Vivid =  I.Vivid-- constructor
+
+-- constructor :: Vivid
+ansi_mk'Vivid =  I.Vivid
 pattern AnsiVivid  <-  I.Vivid 
+
 type AnsiConsoleIntensity  = I.ConsoleIntensity
-ansi_mk'BoldIntensity =  I.BoldIntensity-- constructor
+
+-- constructor :: BoldIntensity
+ansi_mk'BoldIntensity =  I.BoldIntensity
 pattern AnsiBoldIntensity  <-  I.BoldIntensity 
-ansi_mk'FaintIntensity =  I.FaintIntensity-- constructor
+
+-- constructor :: FaintIntensity
+ansi_mk'FaintIntensity =  I.FaintIntensity
 pattern AnsiFaintIntensity  <-  I.FaintIntensity 
-ansi_mk'NormalIntensity =  I.NormalIntensity-- constructor
+
+-- constructor :: NormalIntensity
+ansi_mk'NormalIntensity =  I.NormalIntensity
 pattern AnsiNormalIntensity  <-  I.NormalIntensity 
+
 type AnsiConsoleLayer  = I.ConsoleLayer
-ansi_mk'Foreground =  I.Foreground-- constructor
+
+-- constructor :: Foreground
+ansi_mk'Foreground =  I.Foreground
 pattern AnsiForeground  <-  I.Foreground 
-ansi_mk'Background =  I.Background-- constructor
+
+-- constructor :: Background
+ansi_mk'Background =  I.Background
 pattern AnsiBackground  <-  I.Background 
+
 type AnsiSGR  = I.SGR
-ansi_mk'Reset =  I.Reset-- constructor
+
+-- constructor :: Reset
+ansi_mk'Reset =  I.Reset
 pattern AnsiReset  <-  I.Reset 
-ansi_mk'SetConsoleIntensity =  I.SetConsoleIntensity-- constructor
+
+-- constructor :: ConsoleIntensity -> SetConsoleIntensity
+ansi_mk'SetConsoleIntensity =  I.SetConsoleIntensity
 pattern AnsiSetConsoleIntensity a <-  I.SetConsoleIntensity a
-ansi_mk'SetItalicized =  I.SetItalicized-- constructor
+
+-- constructor :: Bool -> SetItalicized
+ansi_mk'SetItalicized =  I.SetItalicized
 pattern AnsiSetItalicized a <-  I.SetItalicized a
-ansi_mk'SetUnderlining =  I.SetUnderlining-- constructor
+
+-- constructor :: Underlining -> SetUnderlining
+ansi_mk'SetUnderlining =  I.SetUnderlining
 pattern AnsiSetUnderlining a <-  I.SetUnderlining a
-ansi_mk'SetBlinkSpeed =  I.SetBlinkSpeed-- constructor
+
+-- constructor :: BlinkSpeed -> SetBlinkSpeed
+ansi_mk'SetBlinkSpeed =  I.SetBlinkSpeed
 pattern AnsiSetBlinkSpeed a <-  I.SetBlinkSpeed a
-ansi_mk'SetVisible =  I.SetVisible-- constructor
+
+-- constructor :: Bool -> SetVisible
+ansi_mk'SetVisible =  I.SetVisible
 pattern AnsiSetVisible a <-  I.SetVisible a
-ansi_mk'SetSwapForegroundBackground =  I.SetSwapForegroundBackground-- constructor
+
+-- constructor :: Bool -> SetSwapForegroundBackground
+ansi_mk'SetSwapForegroundBackground =  I.SetSwapForegroundBackground
 pattern AnsiSetSwapForegroundBackground a <-  I.SetSwapForegroundBackground a
-ansi_mk'SetColor =  I.SetColor-- constructor
+
+-- constructor :: ConsoleLayer -> ColorIntensity -> Color -> SetColor
+ansi_mk'SetColor =  I.SetColor
 pattern AnsiSetColor a b c <-  I.SetColor a b c
+
 type AnsiUnderlining  = I.Underlining
-ansi_mk'SingleUnderline =  I.SingleUnderline-- constructor
+
+-- constructor :: SingleUnderline
+ansi_mk'SingleUnderline =  I.SingleUnderline
 pattern AnsiSingleUnderline  <-  I.SingleUnderline 
-ansi_mk'DoubleUnderline =  I.DoubleUnderline-- constructor
+
+-- constructor :: DoubleUnderline
+ansi_mk'DoubleUnderline =  I.DoubleUnderline
 pattern AnsiDoubleUnderline  <-  I.DoubleUnderline 
-ansi_mk'NoUnderline =  I.NoUnderline-- constructor
+
+-- constructor :: NoUnderline
+ansi_mk'NoUnderline =  I.NoUnderline
 pattern AnsiNoUnderline  <-  I.NoUnderline 

@@ -3,6 +3,7 @@ module Data.Aeson.AsJs where
 
 import qualified Data.Aeson as I
 
+
 -- js_decode :: forall a. FromJSON a => ByteString -> Maybe a
 js_decode = I.decode
 
@@ -88,23 +89,43 @@ js_gToJSON = I.gToJSON
 js_toJSON = I.toJSON
 
 type JsArray  = I.Array
+
 type JsDotNetTime  = I.DotNetTime
+
 type JsObject  = I.Object
+
 type JsResult a = I.Result a
-js_mk'Error =  I.Error-- constructor
+
+-- constructor :: String -> Error
+js_mk'Error =  I.Error
 pattern JsError a <-  I.Error a
-js_mk'Success =  I.Success-- constructor
+
+-- constructor :: a -> Success
+js_mk'Success =  I.Success
 pattern JsSuccess a <-  I.Success a
+
 type JsValue  = I.Value
-js_mk'Object =  I.Object-- constructor
+
+-- constructor :: Object -> Object
+js_mk'Object =  I.Object
 pattern JsObject a <-  I.Object a
-js_mk'Array =  I.Array-- constructor
+
+-- constructor :: Array -> Array
+js_mk'Array =  I.Array
 pattern JsArray a <-  I.Array a
-js_mk'String =  I.String-- constructor
+
+-- constructor :: Text -> String
+js_mk'String =  I.String
 pattern JsString a <-  I.String a
-js_mk'Number =  I.Number-- constructor
+
+-- constructor :: Scientific -> Number
+js_mk'Number =  I.Number
 pattern JsNumber a <-  I.Number a
-js_mk'Bool =  I.Bool-- constructor
+
+-- constructor :: Bool -> Bool
+js_mk'Bool =  I.Bool
 pattern JsBool a <-  I.Bool a
-js_mk'Null =  I.Null-- constructor
+
+-- constructor :: Null
+js_mk'Null =  I.Null
 pattern JsNull  <-  I.Null 

@@ -3,6 +3,7 @@ module Data.Map.AsLmap where
 
 import qualified Data.Map as I
 
+
 -- lmap_fold :: forall a b k. (a -> b -> b) -> b -> Map k a -> b
 lmap_fold = I.fold
 

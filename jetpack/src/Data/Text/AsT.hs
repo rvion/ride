@@ -3,6 +3,7 @@ module Data.Text.AsT where
 
 import qualified Data.Text as I
 
+
 -- t_all :: (Char -> Bool) -> Text -> Bool
 t_all = I.all
 

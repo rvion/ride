@@ -3,6 +3,7 @@ module Options.Applicative.Builder.Completer.AsOpt where
 
 import qualified Options.Applicative.Builder.Completer as I
 
+
 -- opt_bashCompleter :: String -> Completer
 opt_bashCompleter = I.bashCompleter
 

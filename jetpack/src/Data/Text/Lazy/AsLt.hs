@@ -3,6 +3,7 @@ module Data.Text.Lazy.AsLt where
 
 import qualified Data.Text.Lazy as I
 
+
 -- lt_empty :: Text
 lt_empty = I.empty
 

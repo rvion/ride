@@ -3,6 +3,7 @@ module Data.Conduit.AsC where
 
 import qualified Data.Conduit as I
 
+
 -- c_connect :: forall (m :: * -> *) a b. Monad m => Source m a -> Sink a m b -> m b
 c_connect = I.connect
 
@@ -142,18 +143,33 @@ c_yield = I.yield
 c_yieldOr = I.yieldOr
 
 type CConduit a b c = I.Conduit a b c
+
 type CConduitM a b c d = I.ConduitM a b c d
+
 type CConsumer a b c = I.Consumer a b c
+
 type CFlush a = I.Flush a
-c_mk'Chunk =  I.Chunk-- constructor
+
+-- constructor :: a -> Chunk
+c_mk'Chunk =  I.Chunk
 pattern CChunk a <-  I.Chunk a
-c_mk'Flush =  I.Flush-- constructor
+
+-- constructor :: Flush
+c_mk'Flush =  I.Flush
 pattern CFlush  <-  I.Flush 
+
 type CProducer a b = I.Producer a b
+
 type CResumableConduit a b c = I.ResumableConduit a b c
+
 type CResumableSource a b = I.ResumableSource a b
+
 type CSink a = I.Sink a
+
 type CSource a b = I.Source a b
+
 type CZipConduit a b c d = I.ZipConduit a b c d
+
 type CZipSink a b c = I.ZipSink a b c
+
 type CZipSource a b = I.ZipSource a b

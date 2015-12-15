@@ -3,6 +3,7 @@ module Data.ByteString.Lazy.Char8.AsC8 where
 
 import qualified Data.ByteString.Lazy.Char8 as I
 
+
 -- c8_append :: ByteString -> ByteString -> ByteString
 c8_append = I.append
 

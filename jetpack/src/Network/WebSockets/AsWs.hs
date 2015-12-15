@@ -3,6 +3,7 @@ module Network.WebSockets.AsWs where
 
 import qualified Network.WebSockets as I
 
+
 -- ws_runClient :: forall a. String -> Int -> String -> ClientApp a -> IO a
 ws_runClient = I.runClient
 
@@ -76,66 +77,123 @@ ws_runServer = I.runServer
 ws_runServerWith = I.runServerWith
 
 type WsClientApp a = I.ClientApp a
+
 type WsAcceptRequest  = I.AcceptRequest
-ws_mk'AcceptRequest =  I.AcceptRequest-- constructor
+
+-- constructor :: Maybe ByteString -> AcceptRequest
+ws_mk'AcceptRequest =  I.AcceptRequest
 pattern WsAcceptRequest a <-  I.AcceptRequest a
+
 type WsConnection  = I.Connection
+
 type WsConnectionOptions  = I.ConnectionOptions
-ws_mk'ConnectionOptions =  I.ConnectionOptions-- constructor
+
+-- constructor :: IO () -> ConnectionOptions
+ws_mk'ConnectionOptions =  I.ConnectionOptions
 pattern WsConnectionOptions a <-  I.ConnectionOptions a
+
 type WsPendingConnection  = I.PendingConnection
+
 type WsHandshakeException  = I.HandshakeException
-ws_mk'NotSupported =  I.NotSupported-- constructor
+
+-- constructor :: NotSupported
+ws_mk'NotSupported =  I.NotSupported
 pattern WsNotSupported  <-  I.NotSupported 
-ws_mk'MalformedRequest =  I.MalformedRequest-- constructor
+
+-- constructor :: RequestHead -> String -> MalformedRequest
+ws_mk'MalformedRequest =  I.MalformedRequest
 pattern WsMalformedRequest a b <-  I.MalformedRequest a b
-ws_mk'MalformedResponse =  I.MalformedResponse-- constructor
+
+-- constructor :: ResponseHead -> String -> MalformedResponse
+ws_mk'MalformedResponse =  I.MalformedResponse
 pattern WsMalformedResponse a b <-  I.MalformedResponse a b
-ws_mk'RequestRejected =  I.RequestRejected-- constructor
+
+-- constructor :: Request -> String -> RequestRejected
+ws_mk'RequestRejected =  I.RequestRejected
 pattern WsRequestRejected a b <-  I.RequestRejected a b
-ws_mk'OtherHandshakeException =  I.OtherHandshakeException-- constructor
+
+-- constructor :: String -> OtherHandshakeException
+ws_mk'OtherHandshakeException =  I.OtherHandshakeException
 pattern WsOtherHandshakeException a <-  I.OtherHandshakeException a
+
 type WsHeaders  = I.Headers
+
 type WsRequest  = I.Request
-ws_mk'Request =  I.Request-- constructor
+
+-- constructor :: RequestHead -> ByteString -> Request
+ws_mk'Request =  I.Request
 pattern WsRequest a b <-  I.Request a b
+
 type WsRequestHead  = I.RequestHead
-ws_mk'RequestHead =  I.RequestHead-- constructor
+
+-- constructor :: ByteString -> Headers -> Bool -> RequestHead
+ws_mk'RequestHead =  I.RequestHead
 pattern WsRequestHead a b c <-  I.RequestHead a b c
+
 type WsResponse  = I.Response
-ws_mk'Response =  I.Response-- constructor
+
+-- constructor :: ResponseHead -> ByteString -> Response
+ws_mk'Response =  I.Response
 pattern WsResponse a b <-  I.Response a b
+
 type WsResponseHead  = I.ResponseHead
-ws_mk'ResponseHead =  I.ResponseHead-- constructor
+
+-- constructor :: Int -> ByteString -> Headers -> ResponseHead
+ws_mk'ResponseHead =  I.ResponseHead
 pattern WsResponseHead a b c <-  I.ResponseHead a b c
+
 type WsServerApp  = I.ServerApp
+
 type WsConnectionException  = I.ConnectionException
-ws_mk'CloseRequest =  I.CloseRequest-- constructor
+
+-- constructor :: Word16 -> ByteString -> CloseRequest
+ws_mk'CloseRequest =  I.CloseRequest
 pattern WsCloseRequest a b <-  I.CloseRequest a b
-ws_mk'ConnectionClosed =  I.ConnectionClosed-- constructor
+
+-- constructor :: ConnectionClosed
+ws_mk'ConnectionClosed =  I.ConnectionClosed
 pattern WsConnectionClosed  <-  I.ConnectionClosed 
-ws_mk'ParseException =  I.ParseException-- constructor
+
+-- constructor :: String -> ParseException
+ws_mk'ParseException =  I.ParseException
 pattern WsParseException a <-  I.ParseException a
+
 type WsControlMessage  = I.ControlMessage
-ws_mk'Close =  I.Close-- constructor
+
+-- constructor :: Word16 -> ByteString -> Close
+ws_mk'Close =  I.Close
 pattern WsClose a b <-  I.Close a b
-ws_mk'Ping =  I.Ping-- constructor
+
+-- constructor :: ByteString -> Ping
+ws_mk'Ping =  I.Ping
 pattern WsPing a <-  I.Ping a
-ws_mk'Pong =  I.Pong-- constructor
+
+-- constructor :: ByteString -> Pong
+ws_mk'Pong =  I.Pong
 pattern WsPong a <-  I.Pong a
+
 type WsDataMessage  = I.DataMessage
-ws_mk'Text =  I.Text-- constructor
+
+-- constructor :: ByteString -> Text
+ws_mk'Text =  I.Text
 pattern WsText a <-  I.Text a
-ws_mk'Binary =  I.Binary-- constructor
+
+-- constructor :: ByteString -> Binary
+ws_mk'Binary =  I.Binary
 pattern WsBinary a <-  I.Binary a
+
 type WsMessage  = I.Message
-ws_mk'ControlMessage =  I.ControlMessage-- constructor
+
+-- constructor :: ControlMessage -> ControlMessage
+ws_mk'ControlMessage =  I.ControlMessage
 pattern WsControlMessage a <-  I.ControlMessage a
-ws_mk'DataMessage =  I.DataMessage-- constructor
+
+-- constructor :: DataMessage -> DataMessage
+ws_mk'DataMessage =  I.DataMessage
 pattern WsDataMessage a <-  I.DataMessage a
+
 -- ws_fromLazyByteString :: ByteString -> a
 ws_fromLazyByteString = I.fromLazyByteString
 
 -- ws_toLazyByteString :: a -> ByteString
 ws_toLazyByteString = I.toLazyByteString
-

@@ -3,6 +3,7 @@ module Data.Map.Strict.AsMap where
 
 import qualified Data.Map.Strict as I
 
+
 -- (!) :: forall k a. Ord k => Map k a -> k -> a
 (!) = (I.!)
 

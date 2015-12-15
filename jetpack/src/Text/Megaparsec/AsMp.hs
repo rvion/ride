@@ -3,6 +3,7 @@ module Text.Megaparsec.AsMp where
 
 import qualified Text.Megaparsec as I
 
+
 -- mp_optional :: forall (f :: * -> *) a. Alternative f => f a -> f (Maybe a)
 mp_optional = I.optional
 
@@ -210,6 +211,9 @@ mp_setTabWidth = I.setTabWidth
 -- mp_unexpected :: forall (m :: * -> *) a s t. MonadParsec s m t => String -> m a
 mp_unexpected = I.unexpected
 
+-- (<|>) :: forall a. f a -> f a -> f a
+(<|>) = (I.<|>)
+
 -- mp_some :: forall a. f a -> f [a]
 mp_some = I.some
 
@@ -217,14 +221,23 @@ mp_some = I.some
 mp_many = I.many
 
 type MpMessage  = I.Message
-mp_mk'Unexpected =  I.Unexpected-- constructor
+
+-- constructor :: String -> Unexpected
+mp_mk'Unexpected =  I.Unexpected
 pattern MpUnexpected a <-  I.Unexpected a
-mp_mk'Expected =  I.Expected-- constructor
+
+-- constructor :: String -> Expected
+mp_mk'Expected =  I.Expected
 pattern MpExpected a <-  I.Expected a
-mp_mk'Message =  I.Message-- constructor
+
+-- constructor :: String -> Message
+mp_mk'Message =  I.Message
 pattern MpMessage a <-  I.Message a
+
 type MpParseError  = I.ParseError
+
 type MpSourcePos  = I.SourcePos
+
 -- mp_failure :: forall a. [Message] -> m a
 mp_failure = I.failure
 
@@ -259,13 +272,17 @@ mp_getParserState = I.getParserState
 mp_updateParserState = I.updateParserState
 
 type MpParsec a = I.Parsec a
+
 type MpParsecT a b c = I.ParsecT a b c
+
 type MpState a = I.State a
-mp_mk'State =  I.State-- constructor
+
+-- constructor :: s -> SourcePos -> Int -> State
+mp_mk'State =  I.State
 pattern MpState a b c <-  I.State a b c
+
 -- mp_fromFile :: FilePath -> IO s
 mp_fromFile = I.fromFile
 
 -- mp_uncons :: s -> Maybe (t, s)
 mp_uncons = I.uncons
-

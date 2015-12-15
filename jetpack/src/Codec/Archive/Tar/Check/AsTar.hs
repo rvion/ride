@@ -3,6 +3,7 @@ module Codec.Archive.Tar.Check.AsTar where
 
 import qualified Codec.Archive.Tar.Check as I
 
+
 -- tar_checkPortability :: forall e. Entries e -> Entries (Either e PortabilityError)
 tar_checkPortability = I.checkPortability
 
@@ -13,20 +14,37 @@ tar_checkSecurity = I.checkSecurity
 tar_checkTarbomb = I.checkTarbomb
 
 type TarFileNameError  = I.FileNameError
-tar_mk'InvalidFileName =  I.InvalidFileName-- constructor
+
+-- constructor :: FilePath -> InvalidFileName
+tar_mk'InvalidFileName =  I.InvalidFileName
 pattern TarInvalidFileName a <-  I.InvalidFileName a
-tar_mk'AbsoluteFileName =  I.AbsoluteFileName-- constructor
+
+-- constructor :: FilePath -> AbsoluteFileName
+tar_mk'AbsoluteFileName =  I.AbsoluteFileName
 pattern TarAbsoluteFileName a <-  I.AbsoluteFileName a
+
 type TarPortabilityError  = I.PortabilityError
-tar_mk'NonPortableFormat =  I.NonPortableFormat-- constructor
+
+-- constructor :: Format -> NonPortableFormat
+tar_mk'NonPortableFormat =  I.NonPortableFormat
 pattern TarNonPortableFormat a <-  I.NonPortableFormat a
-tar_mk'NonPortableFileType =  I.NonPortableFileType-- constructor
+
+-- constructor :: NonPortableFileType
+tar_mk'NonPortableFileType =  I.NonPortableFileType
 pattern TarNonPortableFileType  <-  I.NonPortableFileType 
-tar_mk'NonPortableEntryNameChar =  I.NonPortableEntryNameChar-- constructor
+
+-- constructor :: FilePath -> NonPortableEntryNameChar
+tar_mk'NonPortableEntryNameChar =  I.NonPortableEntryNameChar
 pattern TarNonPortableEntryNameChar a <-  I.NonPortableEntryNameChar a
-tar_mk'NonPortableFileName =  I.NonPortableFileName-- constructor
+
+-- constructor :: PortabilityPlatform -> FileNameError -> NonPortableFileName
+tar_mk'NonPortableFileName =  I.NonPortableFileName
 pattern TarNonPortableFileName a b <-  I.NonPortableFileName a b
+
 type TarPortabilityPlatform  = I.PortabilityPlatform
+
 type TarTarBombError  = I.TarBombError
-tar_mk'TarBombError =  I.TarBombError-- constructor
+
+-- constructor :: FilePath -> TarBombError
+tar_mk'TarBombError =  I.TarBombError
 pattern TarTarBombError a <-  I.TarBombError a

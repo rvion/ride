@@ -3,6 +3,7 @@ module Options.Applicative.Builder.AsOpt where
 
 import qualified Options.Applicative.Builder as I
 
+
 -- (<>) :: forall m. Monoid m => m -> m -> m
 (<>) = (I.<>)
 
@@ -157,19 +158,35 @@ opt_readerError = I.readerError
 opt_mappend = I.mappend
 
 type OptInfoMod a = I.InfoMod a
+
 type OptPrefsMod  = I.PrefsMod
+
 type OptArgumentFields a = I.ArgumentFields a
+
 type OptCommandFields a = I.CommandFields a
+
 type OptFlagFields a = I.FlagFields a
+
 type OptMod a b = I.Mod a b
+
 type OptOptionFields a = I.OptionFields a
+
 type OptParseError  = I.ParseError
-opt_mk'ErrorMsg =  I.ErrorMsg-- constructor
+
+-- constructor :: String -> ErrorMsg
+opt_mk'ErrorMsg =  I.ErrorMsg
 pattern OptErrorMsg a <-  I.ErrorMsg a
-opt_mk'InfoMsg =  I.InfoMsg-- constructor
+
+-- constructor :: String -> InfoMsg
+opt_mk'InfoMsg =  I.InfoMsg
 pattern OptInfoMsg a <-  I.InfoMsg a
-opt_mk'ShowHelpText =  I.ShowHelpText-- constructor
+
+-- constructor :: ShowHelpText
+opt_mk'ShowHelpText =  I.ShowHelpText
 pattern OptShowHelpText  <-  I.ShowHelpText 
-opt_mk'UnknownError =  I.UnknownError-- constructor
+
+-- constructor :: UnknownError
+opt_mk'UnknownError =  I.UnknownError
 pattern OptUnknownError  <-  I.UnknownError 
+
 type OptReadM a = I.ReadM a

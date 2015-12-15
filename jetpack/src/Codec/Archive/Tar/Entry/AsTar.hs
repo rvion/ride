@@ -3,6 +3,7 @@ module Codec.Archive.Tar.Entry.AsTar where
 
 import qualified Codec.Archive.Tar.Entry as I
 
+
 -- tar_getDirectoryContentsRecursive :: FilePath -> IO [FilePath]
 tar_getDirectoryContentsRecursive = I.getDirectoryContentsRecursive
 
@@ -55,20 +56,37 @@ tar_toLinkTarget = I.toLinkTarget
 tar_toTarPath = I.toTarPath
 
 type TarDevMajor  = I.DevMajor
+
 type TarDevMinor  = I.DevMinor
+
 type TarEpochTime  = I.EpochTime
+
 type TarFileSize  = I.FileSize
+
 type TarFormat  = I.Format
-tar_mk'V7Format =  I.V7Format-- constructor
-pattern TarV7Format  <-  I.V7Format 
-tar_mk'UstarFormat =  I.UstarFormat-- constructor
-pattern TarUstarFormat  <-  I.UstarFormat 
-tar_mk'GnuFormat =  I.GnuFormat-- constructor
-pattern TarGnuFormat  <-  I.GnuFormat 
+
+-- constructor :: V7Format
+tar_mk'V7Format =  I.V7Format
+pattern TarV7Format  <-  I.V7Format
+
+-- constructor :: UstarFormat
+tar_mk'UstarFormat =  I.UstarFormat
+pattern TarUstarFormat  <-  I.UstarFormat
+
+-- constructor :: GnuFormat
+tar_mk'GnuFormat =  I.GnuFormat
+pattern TarGnuFormat  <-  I.GnuFormat
+
 type TarLinkTarget  = I.LinkTarget
+
 type TarOwnership  = I.Ownership
-tar_mk'Ownership =  I.Ownership-- constructor
+
+-- constructor :: String -> String -> Int -> Int -> Ownership
+tar_mk'Ownership =  I.Ownership
 pattern TarOwnership a b c d <-  I.Ownership a b c d
+
 type TarPermissions  = I.Permissions
+
 type TarTarPath  = I.TarPath
+
 type TarTypeCode  = I.TypeCode

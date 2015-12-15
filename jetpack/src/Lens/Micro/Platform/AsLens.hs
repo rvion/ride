@@ -3,6 +3,7 @@ module Lens.Micro.Platform.AsLens where
 
 import qualified Lens.Micro.Platform as I
 
+
 -- (&) :: forall a b. a -> (a -> b) -> b
 (&) = (I.&)
 
@@ -169,13 +170,21 @@ lens_magnify = I.magnify
 lens_zoom = I.zoom
 
 type LensDefName  = I.DefName
-lens_mk'TopName =  I.TopName-- constructor
+
+-- constructor :: Name -> TopName
+lens_mk'TopName =  I.TopName
 pattern LensTopName a <-  I.TopName a
-lens_mk'MethodName =  I.MethodName-- constructor
+
+-- constructor :: Name -> Name -> MethodName
+lens_mk'MethodName =  I.MethodName
 pattern LensMethodName a b <-  I.MethodName a b
+
 type LensFold a b = I.Fold a b
+
 type LensGetter a b = I.Getter a b
+
 type LensLensRules  = I.LensRules
+
 -- lens_at :: Index m -> Lens' m (Maybe (IxValue m))
 lens_at = I.at
 
@@ -201,11 +210,19 @@ lens__5 = I._5
 lens_ix = I.ix
 
 type LensASetter a b c d = I.ASetter a b c d
+
 type LensASetter' a b = I.ASetter' a b
+
 type LensGetting a b c = I.Getting a b c
+
 type LensLens a b c d = I.Lens a b c d
+
 type LensLens' a b = I.Lens' a b
+
 type LensLensLike a b c d e = I.LensLike a b c d e
+
 type LensLensLike' a b c = I.LensLike' a b c
+
 type LensTraversal a b c d = I.Traversal a b c d
+
 type LensTraversal' a b = I.Traversal' a b

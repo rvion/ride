@@ -3,23 +3,6 @@ module ReexportDemo.AsDemo where
 
 import qualified ReexportDemo as I
 
--- demo_optional :: forall (f :: * -> *) a. Alternative f => f a -> f (Maybe a)
-demo_optional = I.optional
-
--- (<$>) :: forall a b (f :: * -> *). Functor f => (a -> b) -> f a -> f b
-(<$>) = (I.<$>)
-
--- (<**>) :: forall (f :: * -> *) a b. Applicative f => f a -> f (a -> b) -> f b
-(<**>) = (I.<**>)
-
--- demo_liftA :: forall a b (f :: * -> *). Applicative f => (a -> b) -> f a -> f b
-demo_liftA = I.liftA
-
--- demo_liftA2 :: forall a b c (f :: * -> *). Applicative f => (a -> b -> c) -> f a -> f b -> f c
-demo_liftA2 = I.liftA2
-
--- demo_liftA3 :: forall a b c d (f :: * -> *). Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
-demo_liftA3 = I.liftA3
 
 -- demo_a' :: Integer -> Integer -> Integer
 demo_a' = I.a'
@@ -27,49 +10,24 @@ demo_a' = I.a'
 -- demo_b :: forall a. Num a => a -> a -> a
 demo_b = I.b
 
-type DemoConst a b = I.Const a b
-type DemoWrappedArrow a b c = I.WrappedArrow a b c
-type DemoWrappedMonad a b = I.WrappedMonad a b
-type DemoZipList a = I.ZipList a
-type DemoEither a b = I.Either a b
-demo_mk'Left =  I.Left-- constructor
-pattern DemoLeft a <-  I.Left a
-demo_mk'Right =  I.Right-- constructor
-pattern DemoRight a <-  I.Right a
--- demo_empty :: forall a. f a
-demo_empty = I.empty
+type DemoD a b = I.D a b
 
--- (<|>) :: forall a. f a -> f a -> f a
-(<|>) = (I.<|>)
+-- constructor :: String -> String -> a -> String -> b -> DD
+demo_mk'DD =  I.DD
+pattern DemoDD a b c d e <-  I.DD a b c d e
 
--- demo_some :: forall a. f a -> f [a]
-demo_some = I.some
-
--- demo_many :: forall a. f a -> f [a]
-demo_many = I.many
-
--- demo_pure :: forall a. a -> f a
-demo_pure = I.pure
-
--- (<*>) :: forall a b. f (a -> b) -> f a -> f b
-(<*>) = (I.<*>)
-
--- (*>) :: forall a b. f a -> f b -> f b
-(*>) = (I.*>)
-
--- (<*) :: forall a b. f a -> f b -> f a
-(<*) = (I.<*)
-
--- (<$) :: forall a b. a -> f b -> f a
-(<$) = (I.<$)
-
-type DemoAcc a b = I.Acc a b
 type DemoFoo  = I.Foo
-demo_mk'Foo1 =  I.Foo1-- constructor
+
+-- constructor :: Int -> Foo1
+demo_mk'Foo1 =  I.Foo1
 pattern DemoFoo1 a <-  I.Foo1 a
-demo_mk'Foo2 =  I.Foo2-- constructor
+
+-- constructor :: Int -> String -> Foo2
+demo_mk'Foo2 =  I.Foo2
 pattern DemoFoo2 a b <-  I.Foo2 a b
-type DemoThisIsAType  = I.ThisIsAType
+
 type DemoYo a b = I.Yo a b
-demo_mk'Yo =  I.Yo-- constructor
+
+-- constructor :: a -> b -> (a, b, b, a) -> Yo
+demo_mk'Yo =  I.Yo
 pattern DemoYo a b c <-  I.Yo a b c
