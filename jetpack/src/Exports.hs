@@ -13,6 +13,8 @@ import           Control.Monad.Trans.Class.AsTrans as X
 import           Control.Monad.Trans.State.Lazy.AsTrans as X
 import           Data.Aeson.AsJs as X
 import           Data.Aeson.Lens.AsJs as X
+import           Data.Aeson.Types.AsJs as X
+import           Data.Aeson.Types.Class.AsJs as X
 import           Data.ByteString.AsBs as X
 import           Data.ByteString.Char8.AsBs as X
 import           Data.ByteString.Lazy.AsLbs as X

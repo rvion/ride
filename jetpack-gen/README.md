@@ -51,6 +51,7 @@ m_deleteFindMax = I.deleteFindMax
  - FlexibleContexts to be able to handle aliasing [Those kinds of types](http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type)
  - NoMonomorphismRestriction 
 
+:memo: available typeclass export info is really not practical to use! 
 
 -------------
 

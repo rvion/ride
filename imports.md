@@ -53,6 +53,8 @@ _aeson_
 
   - js Data.Aeson
   - js Data.Aeson.Lens
+  - js Data.Aeson.Types
+  # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
 _containers_
 
@@ -137,7 +139,6 @@ _test purpose:_
   - trans Control.Monad.Trans.State.Lazy
 
   - mtl Control.Monad.State.Lazy
-
 
   - ws Network.WebSockets
   - ws Network.WebSockets.Connection

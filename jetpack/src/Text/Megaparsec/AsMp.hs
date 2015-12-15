@@ -210,60 +210,9 @@ mp_setTabWidth = I.setTabWidth
 -- mp_unexpected :: forall (m :: * -> *) a s t. MonadParsec s m t => String -> m a
 mp_unexpected = I.unexpected
 
--- mp_empty :: forall a. f a
-mp_empty = I.empty
-
--- (<|>) :: forall a. f a -> f a -> f a
-(<|>) = (I.<|>)
-
--- mp_some :: forall a. f a -> f [a]
-mp_some = I.some
-
--- mp_many :: forall a. f a -> f [a]
-mp_many = I.many
-
 type MpMessage  = I.Message
 type MpParseError  = I.ParseError
 type MpSourcePos  = I.SourcePos
--- mp_failure :: forall a. [Message] -> m a
-mp_failure = I.failure
-
--- mp_label :: forall a. String -> m a -> m a
-mp_label = I.label
-
--- mp_hidden :: forall a. m a -> m a
-mp_hidden = I.hidden
-
--- mp_try :: forall a. m a -> m a
-mp_try = I.try
-
--- mp_lookAhead :: forall a. m a -> m a
-mp_lookAhead = I.lookAhead
-
--- mp_notFollowedBy :: forall a. m a -> m ()
-mp_notFollowedBy = I.notFollowedBy
-
--- mp_eof :: m ()
-mp_eof = I.eof
-
--- mp_token :: forall a. (Int -> SourcePos -> t -> SourcePos) -> (t -> Either [Message] a) -> m a
-mp_token = I.token
-
--- mp_tokens :: Eq t => (Int -> SourcePos -> [t] -> SourcePos) -> (t -> t -> Bool) -> [t] -> m [t]
-mp_tokens = I.tokens
-
--- mp_getParserState :: m (State s)
-mp_getParserState = I.getParserState
-
--- mp_updateParserState :: (State s -> State s) -> m ()
-mp_updateParserState = I.updateParserState
-
 type MpParsec a = I.Parsec a
 type MpParsecT a b c = I.ParsecT a b c
 type MpState a = I.State a
--- mp_fromFile :: FilePath -> IO s
-mp_fromFile = I.fromFile
-
--- mp_uncons :: s -> Maybe (t, s)
-mp_uncons = I.uncons
-

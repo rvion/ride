@@ -3,6 +3,9 @@ module Network.Wai.Middleware.Static.AsWai where
 
 import qualified Network.Wai.Middleware.Static as I
 
+-- (<|>) :: Policy -> Policy -> Policy
+(<|>) = (I.<|>)
+
 -- (>->) :: Policy -> Policy -> Policy
 (>->) = (I.>->)
 

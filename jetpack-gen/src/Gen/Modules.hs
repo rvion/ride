@@ -79,7 +79,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   put (["type ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
                   return [Just _reexported_type] -- tyvars needed because type synonym must be instanciated
             RClass n fns -> do
-              print (RClass n fns)
+              -- print (n)
               concat <$> forM fns reexportFn
 
       reexportFn rTerm

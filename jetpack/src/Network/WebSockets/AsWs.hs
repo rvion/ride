@@ -91,9 +91,3 @@ type WsConnectionException  = I.ConnectionException
 type WsControlMessage  = I.ControlMessage
 type WsDataMessage  = I.DataMessage
 type WsMessage  = I.Message
--- ws_fromLazyByteString :: ByteString -> a
-ws_fromLazyByteString = I.fromLazyByteString
-
--- ws_toLazyByteString :: a -> ByteString
-ws_toLazyByteString = I.toLazyByteString
-

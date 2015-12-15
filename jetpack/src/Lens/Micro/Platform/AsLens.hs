@@ -159,40 +159,10 @@ lens_sets = I.sets
 -- lens_traversed :: forall (f :: * -> *) a b. Traversable f => Traversal (f a) (f b) a b
 lens_traversed = I.traversed
 
--- lens_magnify :: forall c. LensLike' (Magnified m c) a b -> m c -> n c
-lens_magnify = I.magnify
-
--- lens_zoom :: forall c. LensLike' (Zoomed m c) t s -> m c -> n c
-lens_zoom = I.zoom
-
 type LensDefName  = I.DefName
 type LensFold a b = I.Fold a b
 type LensGetter a b = I.Getter a b
 type LensLensRules  = I.LensRules
--- lens_at :: Index m -> Lens' m (Maybe (IxValue m))
-lens_at = I.at
-
--- lens_each :: Traversal s t a b
-lens_each = I.each
-
--- lens__1 :: Lens s t a b
-lens__1 = I._1
-
--- lens__2 :: Lens s t a b
-lens__2 = I._2
-
--- lens__3 :: Lens s t a b
-lens__3 = I._3
-
--- lens__4 :: Lens s t a b
-lens__4 = I._4
-
--- lens__5 :: Lens s t a b
-lens__5 = I._5
-
--- lens_ix :: Index m -> Traversal' m (IxValue m)
-lens_ix = I.ix
-
 type LensASetter a b c d = I.ASetter a b c d
 type LensASetter' a b = I.ASetter' a b
 type LensGetting a b c = I.Getting a b c

@@ -228,20 +228,8 @@ spock_var = I.var
 type SpockCookieEOL  = I.CookieEOL
 type SpockCookieSettings  = I.CookieSettings
 type SpockConnBuilder a = I.ConnBuilder a
--- spock_runQuery :: forall a. (SpockConn m -> IO a) -> m a
-spock_runQuery = I.runQuery
-
--- spock_getState :: m (SpockState m)
-spock_getState = I.getState
-
--- spock_getSessMgr :: m (SessionManager (SpockConn m) (SpockSession m) (SpockState m))
-spock_getSessMgr = I.getSessMgr
-
 type SpockPoolCfg  = I.PoolCfg
 type SpockPoolOrConn a = I.PoolOrConn a
--- spock_runSafeAction :: a -> SpockAction conn sess st ()
-spock_runSafeAction = I.runSafeAction
-
 type SpockSessionCfg a = I.SessionCfg a
 type SpockSessionHooks a = I.SessionHooks a
 type SpockSessionId  = I.SessionId

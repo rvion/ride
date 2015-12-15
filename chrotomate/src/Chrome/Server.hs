@@ -30,7 +30,7 @@ import JetPack
 data Ctx = Ctx
   { ctxDB     :: DB
   , ctxDbPath :: FilePath
-  , ctxConn   :: WS.Connection
+  , ctxConn   :: WSConnection
   }
 
 type M = TransStateT Ctx IO
@@ -56,7 +56,7 @@ ride = do
     spock_get "people" $ do
       (Ctx{ctxDB}) <- trans_lift trans_get
       js_json [ js_object
-          [ "value" .= ("All" :: T.Text)
+          [ "value" .= ("All" :: TText)
           , "open" .= True
           , "data"  .= map_elems ctxDB
           ]
@@ -64,15 +64,15 @@ ride = do
 
 
 
-    spock_get ("hello2" <//> var) $ \name -> do
-      (Ctx{ctxDB}) <- trnas_lift mtl_get
+    spock_get ("hello2" <//> spock_var) $ \name -> do
+      (Ctx{ctxDB}) <- trans_lift trans_get
       spock_text $ t_pack . show $ ctxDB M.! name -- ("Hello " <> name <> "!")
 
-    spock_get ("search" <//> var) $ \ _name -> do
-      (Ctx{ctxConn}) <- lift S.get
-      liftIO $ do
+    spock_get ("search" <//> spock_var) $ \ _name -> do
+      (Ctx{ctxConn}) <- trans_lift trans_get
+      trans_liftIO $ do
 
-        let ms1 = A.encode $ searchName _name
+        let ms1 = js_encode $ searchName _name
         c8_putStrLn ms1
         ws_sendTextData ctxConn ms1
 

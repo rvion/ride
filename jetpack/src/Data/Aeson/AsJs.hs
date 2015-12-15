@@ -75,18 +75,6 @@ js_withText = I.withText
 -- js_object :: [Pair] -> Value
 js_object = I.object
 
--- js_parseJSON :: Value -> Parser a
-js_parseJSON = I.parseJSON
-
--- js_gParseJSON :: forall a. Options -> Value -> Parser (f a)
-js_gParseJSON = I.gParseJSON
-
--- js_gToJSON :: forall a. Options -> f a -> Value
-js_gToJSON = I.gToJSON
-
--- js_toJSON :: a -> Value
-js_toJSON = I.toJSON
-
 type JsArray  = I.Array
 type JsDotNetTime  = I.DotNetTime
 type JsObject  = I.Object

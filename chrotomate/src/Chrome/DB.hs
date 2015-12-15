@@ -3,7 +3,9 @@ module Chrome.DB where
 
 import JetPack
 -- import           Control.Monad
--- import           Data.Aeson
+-- import           Data.Aeson ()
+-- import Data.Aeson.Types (ToJSON, FromJSON)
+type PLOP = ToJSON
 -- import           Data.Map      (Map)
 -- import           Data.Thyme
 -- import qualified Data.Map as M
