@@ -124,8 +124,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
       Just ifaceDecl ->
         if isJust (mi_warn_fn currentIface name)
           then _failDeprecated Local
-          else do
-            -- liftIO $ print $ toS (ifaceDecl, availNames availInfo)
+          else
             _success (ifaceDecl, availNames availInfo) Local
       Nothing ->
         liftIO _fail
@@ -169,12 +168,12 @@ findReexports (mod, modules) previouslyExportedSymbols =
           , rDataTyCon = case ifCons _t of
               IfDataTyCon cons -> -- mapMaybe (undefined)
                 catMaybes $ for cons $ \ con -> -- error (toS (ifConOcc con) ++ (toSDoc $ pprIfCon con))$
-                  if ((ifConOcc con) `elem` (map nameOccName exportedNames))
-                  then Just $
+                  if ifConOcc con `elem` map nameOccName exportedNames
+                  then Just
                     RDataCon
                       { rName = toS (ifConOcc con)
                       , rTyVars = map toS (ifConArgTys con)
-                      , rNbTyVars = (length $ ifConArgTys con)
+                      , rNbTyVars = length $ ifConArgTys con
                     }
                   else Nothing
               _ -> []

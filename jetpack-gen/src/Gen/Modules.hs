@@ -53,7 +53,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
             _reexported_name =
               if head _name `elem` operators
                 then _name
-                else concat [_idPrefix, _name]
+                else _idPrefix ++ _name
             _reexported_type = _typePrefix ++ _name
             -- _type = typeSdoc decl
           case x of
@@ -79,7 +79,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   -- put ["-- ",_reexported_type," :: ",rType]
                   put (["\ntype ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
                   exportedCons <- concat <$> forM rDataTyCons reexportFn
-                  return ((Just _reexported_type):exportedCons) -- tyvars needed because type synonym must be instanciated
+                  return (Just _reexported_type:exportedCons) -- tyvars needed because type synonym must be instanciated
             RDataCon{..}
               | head rName `elem` operators -> do
                   putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
@@ -88,10 +88,10 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   let tyVars = intersperse ' ' $ take rNbTyVars ['a'..'z']
                   let constrType = intercalate " -> " (rTyVars ++ [rName])
                   let conName = concat [_idPrefix,"mk'", rName]
-                  let patName = concat [_typePrefix, rName]
-                  put (["\n-- constructor :: ", constrType])
-                  put ([conName, " =  I.", rName])
-                  put (["pattern ", patName, " ", tyVars, " <-  I.", rName, " ", tyVars])
+                  let patName = _typePrefix ++ rName
+                  put ["\n-- constructor :: ", constrType]
+                  put [conName, " =  I.", rName]
+                  put ["pattern ", patName, " ", tyVars, " <-  I.", rName, " ", tyVars]
                   return [Just conName, Just ("pattern " ++ patName)]
             RClass n fns ->
               concat <$> forM fns reexportFn
