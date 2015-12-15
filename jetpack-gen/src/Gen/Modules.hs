@@ -78,8 +78,8 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
                   -- put ["-- ",_reexported_type," :: ",rType]
                   put (["\ntype ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
-                  forM rDataTyCons reexportFn
-                  return [Just _reexported_type] -- tyvars needed because type synonym must be instanciated
+                  exportedCons <- concat <$> forM rDataTyCons reexportFn
+                  return ((Just _reexported_type):exportedCons) -- tyvars needed because type synonym must be instanciated
             RDataCon{..}
               | head rName `elem` operators -> do
                   putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
@@ -87,10 +87,12 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
               | otherwise -> do
                   let tyVars = intersperse ' ' $ take rNbTyVars ['a'..'z']
                   let constrType = intercalate " -> " (rTyVars ++ [rName])
+                  let conName = concat [_idPrefix,"mk'", rName]
+                  let patName = concat [_typePrefix, rName]
                   put (["\n-- constructor :: ", constrType])
-                  put ([_idPrefix,"mk'", rName, " =  I.", rName])
-                  put (["pattern ", _typePrefix, rName, " ", tyVars, " <-  I.", rName, " ", tyVars])
-                  return [Nothing]
+                  put ([conName, " =  I.", rName])
+                  put (["pattern ", patName, " ", tyVars, " <-  I.", rName, " ", tyVars])
+                  return [Just conName, Just ("pattern " ++ patName)]
             RClass n fns ->
               concat <$> forM fns reexportFn
 

@@ -19,7 +19,8 @@ jetpackGen :: IO ()
 jetpackGen = do
   dbs       <- trace "loading package DB" getDB
   packages  <- trace "loading packages" (concat <$> mapM getPackageInfos dbs)
-  modules   <- trace "loading modules"  (return $ M.fromList $ concatMap packageModulesIface packages)
+  modules   <- trace "loading modules"
+    (return $ M.fromList $ concatMap packageModulesIface packages)
   reexports <- trace "loading reexports plan" parseReexports
   deps      <- trace "loading cabal deps" parseDeps
 
@@ -33,7 +34,8 @@ jetpackGen = do
   writeCabalFile reexports deps
   writeReexportModule reexports
   asSuccess $ putStrLn "done"
-  writeFile (jetpackFolder ++ "full-exported-symbol-list.txt") (intercalate "\n" allExportsFinal)
+  writeFile (jetpackFolder ++ "full-exported-symbol-list.txt")
+    (intercalate "\n" allExportsFinal) -- it is better not to sort it
   let reexportedPackages = ()
   return ()
 

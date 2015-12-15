@@ -1,8 +1,16 @@
 demo_a'
 demo_b
 DemoD
+demo_mk'DD
+pattern DemoDD
 DemoFoo
+demo_mk'Foo1
+pattern DemoFoo1
+demo_mk'Foo2
+pattern DemoFoo2
 DemoYo
+demo_mk'Yo
+pattern DemoYo
 !
 \\
 map_assocs
@@ -668,6 +676,8 @@ t_encodeUtf8BuilderEscaped
 t_streamDecodeUtf8
 t_streamDecodeUtf8With
 TDecoding
+t_mk'Some
+pattern TSome
 t_appendFile
 t_getContents
 t_getLine
@@ -1310,6 +1320,10 @@ CConduit
 CConduitM
 CConsumer
 CFlush
+c_mk'Chunk
+pattern CChunk
+c_mk'Flush
+pattern CFlush
 CProducer
 CResumableConduit
 CResumableSource
@@ -1455,6 +1469,12 @@ mp_unexpected
 mp_some
 mp_many
 MpMessage
+mp_mk'Unexpected
+pattern MpUnexpected
+mp_mk'Expected
+pattern MpExpected
+mp_mk'Message
+pattern MpMessage
 MpParseError
 MpSourcePos
 mp_failure
@@ -1471,6 +1491,8 @@ mp_updateParserState
 MpParsec
 MpParsecT
 MpState
+mp_mk'State
+pattern MpState
 mp_fromFile
 mp_uncons
 tar_append
@@ -1486,9 +1508,47 @@ tar_unfoldEntries
 tar_unpack
 tar_write
 TarFormatError
+tar_mk'TruncatedArchive
+pattern TarTruncatedArchive
+tar_mk'ShortTrailer
+pattern TarShortTrailer
+tar_mk'BadTrailer
+pattern TarBadTrailer
+tar_mk'TrailingJunk
+pattern TarTrailingJunk
+tar_mk'ChecksumIncorrect
+pattern TarChecksumIncorrect
+tar_mk'NotTarFormat
+pattern TarNotTarFormat
+tar_mk'UnrecognisedTarFormat
+pattern TarUnrecognisedTarFormat
+tar_mk'HeaderBadNumericEncoding
+pattern TarHeaderBadNumericEncoding
 TarEntries
+tar_mk'Next
+pattern TarNext
+tar_mk'Done
+pattern TarDone
+tar_mk'Fail
+pattern TarFail
 TarEntry
 TarEntryContent
+tar_mk'NormalFile
+pattern TarNormalFile
+tar_mk'Directory
+pattern TarDirectory
+tar_mk'SymbolicLink
+pattern TarSymbolicLink
+tar_mk'HardLink
+pattern TarHardLink
+tar_mk'CharacterDevice
+pattern TarCharacterDevice
+tar_mk'BlockDevice
+pattern TarBlockDevice
+tar_mk'NamedPipe
+pattern TarNamedPipe
+tar_mk'OtherEntryType
+pattern TarOtherEntryType
 tar_getDirectoryContentsRecursive
 tar_packDirectoryEntry
 tar_packFileEntry
@@ -1511,8 +1571,16 @@ TarDevMinor
 TarEpochTime
 TarFileSize
 TarFormat
+tar_mk'V7Format
+pattern TarV7Format
+tar_mk'UstarFormat
+pattern TarUstarFormat
+tar_mk'GnuFormat
+pattern TarGnuFormat
 TarLinkTarget
 TarOwnership
+tar_mk'Ownership
+pattern TarOwnership
 TarPermissions
 TarTarPath
 TarTypeCode
@@ -1520,9 +1588,23 @@ tar_checkPortability
 tar_checkSecurity
 tar_checkTarbomb
 TarFileNameError
+tar_mk'InvalidFileName
+pattern TarInvalidFileName
+tar_mk'AbsoluteFileName
+pattern TarAbsoluteFileName
 TarPortabilityError
+tar_mk'NonPortableFormat
+pattern TarNonPortableFormat
+tar_mk'NonPortableFileType
+pattern TarNonPortableFileType
+tar_mk'NonPortableEntryNameChar
+pattern TarNonPortableEntryNameChar
+tar_mk'NonPortableFileName
+pattern TarNonPortableFileName
 TarPortabilityPlatform
 TarTarBombError
+tar_mk'TarBombError
+pattern TarTarBombError
 gzip_compress
 gzip_compressWith
 gzip_decompress
@@ -1545,12 +1627,46 @@ gzip_minMemoryLevel
 gzip_noCompression
 gzip_windowBits
 GzipCompressParams
+gzip_mk'CompressParams
+pattern GzipCompressParams
 GzipDecompressParams
+gzip_mk'DecompressParams
+pattern GzipDecompressParams
 GzipCompressionLevel
+gzip_mk'DefaultCompression
+pattern GzipDefaultCompression
+gzip_mk'NoCompression
+pattern GzipNoCompression
+gzip_mk'BestSpeed
+pattern GzipBestSpeed
+gzip_mk'BestCompression
+pattern GzipBestCompression
+gzip_mk'CompressionLevel
+pattern GzipCompressionLevel
 GzipCompressionStrategy
+gzip_mk'DefaultStrategy
+pattern GzipDefaultStrategy
+gzip_mk'Filtered
+pattern GzipFiltered
+gzip_mk'HuffmanOnly
+pattern GzipHuffmanOnly
 GzipMemoryLevel
+gzip_mk'DefaultMemoryLevel
+pattern GzipDefaultMemoryLevel
+gzip_mk'MinMemoryLevel
+pattern GzipMinMemoryLevel
+gzip_mk'MaxMemoryLevel
+pattern GzipMaxMemoryLevel
+gzip_mk'MemoryLevel
+pattern GzipMemoryLevel
 GzipMethod
+gzip_mk'Deflated
+pattern GzipDeflated
 GzipWindowBits
+gzip_mk'WindowBits
+pattern GzipWindowBits
+gzip_mk'DefaultWindowBits
+pattern GzipDefaultWindowBits
 ansi_clearFromCursorToLineBeginning
 ansi_clearFromCursorToLineBeginningCode
 ansi_clearFromCursorToLineEnd
@@ -1613,12 +1729,70 @@ ansi_setTitleCode
 ansi_showCursor
 ansi_showCursorCode
 AnsiBlinkSpeed
+ansi_mk'SlowBlink
+pattern AnsiSlowBlink
+ansi_mk'RapidBlink
+pattern AnsiRapidBlink
+ansi_mk'NoBlink
+pattern AnsiNoBlink
 AnsiColor
+ansi_mk'Black
+pattern AnsiBlack
+ansi_mk'Red
+pattern AnsiRed
+ansi_mk'Green
+pattern AnsiGreen
+ansi_mk'Yellow
+pattern AnsiYellow
+ansi_mk'Blue
+pattern AnsiBlue
+ansi_mk'Magenta
+pattern AnsiMagenta
+ansi_mk'Cyan
+pattern AnsiCyan
+ansi_mk'White
+pattern AnsiWhite
 AnsiColorIntensity
+ansi_mk'Dull
+pattern AnsiDull
+ansi_mk'Vivid
+pattern AnsiVivid
 AnsiConsoleIntensity
+ansi_mk'BoldIntensity
+pattern AnsiBoldIntensity
+ansi_mk'FaintIntensity
+pattern AnsiFaintIntensity
+ansi_mk'NormalIntensity
+pattern AnsiNormalIntensity
 AnsiConsoleLayer
+ansi_mk'Foreground
+pattern AnsiForeground
+ansi_mk'Background
+pattern AnsiBackground
 AnsiSGR
+ansi_mk'Reset
+pattern AnsiReset
+ansi_mk'SetConsoleIntensity
+pattern AnsiSetConsoleIntensity
+ansi_mk'SetItalicized
+pattern AnsiSetItalicized
+ansi_mk'SetUnderlining
+pattern AnsiSetUnderlining
+ansi_mk'SetBlinkSpeed
+pattern AnsiSetBlinkSpeed
+ansi_mk'SetVisible
+pattern AnsiSetVisible
+ansi_mk'SetSwapForegroundBackground
+pattern AnsiSetSwapForegroundBackground
+ansi_mk'SetColor
+pattern AnsiSetColor
 AnsiUnderlining
+ansi_mk'SingleUnderline
+pattern AnsiSingleUnderline
+ansi_mk'DoubleUnderline
+pattern AnsiDoubleUnderline
+ansi_mk'NoUnderline
+pattern AnsiNoUnderline
 env_getArgs
 env_getEnv
 env_getEnvironment
@@ -1640,7 +1814,11 @@ opt_showOption
 opt_treeMapParser
 OptParser
 OptParserInfo
+opt_mk'ParserInfo
+pattern OptParserInfo
 OptParserPrefs
+opt_mk'ParserPrefs
+pattern OptParserPrefs
 <>
 opt_abortOption
 opt_action
@@ -1700,6 +1878,14 @@ OptFlagFields
 OptMod
 OptOptionFields
 OptParseError
+opt_mk'ErrorMsg
+pattern OptErrorMsg
+opt_mk'InfoMsg
+pattern OptInfoMsg
+opt_mk'ShowHelpText
+pattern OptShowHelpText
+opt_mk'UnknownError
+pattern OptUnknownError
 OptReadM
 opt_bashCompleter
 opt_listCompleter
@@ -1719,6 +1905,12 @@ opt_overFailure
 OptCompletionResult
 OptParserFailure
 OptParserResult
+opt_mk'Success
+pattern OptSuccess
+opt_mk'Failure
+pattern OptFailure
+opt_mk'CompletionInvoked
+pattern OptCompletionInvoked
 &
 %=
 *=
@@ -1775,6 +1967,10 @@ lens_traversed
 lens_magnify
 lens_zoom
 LensDefName
+lens_mk'TopName
+pattern LensTopName
+lens_mk'MethodName
+pattern LensMethodName
 LensFold
 LensGetter
 LensLensRules
@@ -1812,8 +2008,14 @@ wai_strictRequestBody
 WaiApplication
 WaiMiddleware
 WaiFilePart
+wai_mk'FilePart
+pattern WaiFilePart
 WaiRequest
 WaiRequestBodyLength
+wai_mk'ChunkedBody
+pattern WaiChunkedBody
+wai_mk'KnownLength
+pattern WaiKnownLength
 WaiResponse
 WaiResponseReceived
 WaiStreamingBody
@@ -1891,23 +2093,51 @@ WaiGMTDate
 WaiMutableFdCache
 WaiRefresh
 WaiFileInfo
+wai_mk'FileInfo
+pattern WaiFileInfo
 WaiIndexedHeader
 WaiSettings
 WaiHandle
 WaiManager
 WaiTimeoutAction
 WaiTimeoutThread
+wai_mk'TimeoutThread
+pattern WaiTimeoutThread
 WaiBufSize
 WaiBuffer
 WaiConnection
+wai_mk'Connection
+pattern WaiConnection
 WaiFileId
+wai_mk'FileId
+pattern WaiFileId
 WaiHeaderValue
 WaiInternalInfo
+wai_mk'InternalInfo
+pattern WaiInternalInfo
 WaiInvalidRequest
+wai_mk'NotEnoughLines
+pattern WaiNotEnoughLines
+wai_mk'BadFirstLine
+pattern WaiBadFirstLine
+wai_mk'NonHttp
+pattern WaiNonHttp
+wai_mk'IncompleteHeaders
+pattern WaiIncompleteHeaders
+wai_mk'ConnectionClosedByPeer
+pattern WaiConnectionClosedByPeer
+wai_mk'OverLargeHeader
+pattern WaiOverLargeHeader
+wai_mk'BadProxyHeader
+pattern WaiBadProxyHeader
 WaiPort
 WaiSendFile
 WaiSource
 WaiTransport
+wai_mk'TCP
+pattern WaiTCP
+wai_mk'TLS
+pattern WaiTLS
 wai_accepted202
 wai_badGateway502
 wai_badRequest400
@@ -2005,16 +2235,38 @@ wai_unauthorized401
 wai_unsupportedMediaType415
 wai_useProxy305
 WaiStatus
+wai_mk'Status
+pattern WaiStatus
 wai_logStdout
 wai_logStdoutDev
 wai_mkRequestLogger
 WaiCallback
 WaiDestination
+wai_mk'Handle
+pattern WaiHandle
+wai_mk'Logger
+pattern WaiLogger
+wai_mk'Callback
+pattern WaiCallback
 WaiOutputFormat
+wai_mk'Apache
+pattern WaiApache
+wai_mk'Detailed
+pattern WaiDetailed
+wai_mk'CustomOutputFormat
+pattern WaiCustomOutputFormat
+wai_mk'CustomOutputFormatWithDetails
+pattern WaiCustomOutputFormatWithDetails
 WaiOutputFormatter
 WaiOutputFormatterWithDetails
 WaiRequestLoggerSettings
 WaiIPAddrSource
+wai_mk'FromSocket
+pattern WaiFromSocket
+wai_mk'FromHeader
+pattern WaiFromHeader
+wai_mk'FromFallback
+pattern WaiFromFallback
 >->
 wai_addBase
 wai_addSlash
@@ -2036,7 +2288,15 @@ wai_unsafeStaticPolicy
 wai_unsafeStaticPolicy'
 WaiCacheContainer
 WaiCachingStrategy
+wai_mk'NoCaching
+pattern WaiNoCaching
+wai_mk'PublicStaticCaching
+pattern WaiPublicStaticCaching
+wai_mk'CustomCaching
+pattern WaiCustomCaching
 WaiFileMeta
+wai_mk'FileMeta
+pattern WaiFileMeta
 WaiPolicy
 spock_runForm
 spock_defaultCookieSettings
@@ -2114,31 +2374,87 @@ spock_root
 spock_static
 spock_var
 SpockCookieEOL
+spock_mk'CookieValidUntil
+pattern SpockCookieValidUntil
+spock_mk'CookieValidFor
+pattern SpockCookieValidFor
+spock_mk'CookieValidForSession
+pattern SpockCookieValidForSession
 SpockCookieSettings
+spock_mk'CookieSettings
+pattern SpockCookieSettings
 SpockConnBuilder
+spock_mk'ConnBuilder
+pattern SpockConnBuilder
 spock_runQuery
 spock_getState
 SpockPoolCfg
+spock_mk'PoolCfg
+pattern SpockPoolCfg
 SpockPoolOrConn
+spock_mk'PCPool
+pattern SpockPCPool
+spock_mk'PCConn
+pattern SpockPCConn
+spock_mk'PCNoDatabase
+pattern SpockPCNoDatabase
 spock_runSafeAction
 SpockSessionCfg
+spock_mk'SessionCfg
+pattern SpockSessionCfg
 SpockSessionHooks
+spock_mk'SessionHooks
+pattern SpockSessionHooks
 SpockSessionId
 SpockSessionPersistCfg
+spock_mk'SessionPersistCfg
+pattern SpockSessionPersistCfg
 SpockSpockAction
 SpockSpockActionCtx
 SpockSpockCfg
+spock_mk'SpockCfg
+pattern SpockSpockCfg
 SpockWebState
 SpockWebStateM
 SpockClientPreferredFormat
+spock_mk'PrefJSON
+pattern SpockPrefJSON
+spock_mk'PrefXML
+pattern SpockPrefXML
+spock_mk'PrefHTML
+pattern SpockPrefHTML
+spock_mk'PrefText
+pattern SpockPrefText
+spock_mk'PrefUnknown
+pattern SpockPrefUnknown
 SpockActionCtxT
 SpockActionT
 SpockUploadedFile
+spock_mk'UploadedFile
+pattern SpockUploadedFile
 SpockSpockCtxM
 SpockSpockCtxT
 SpockSpockM
 SpockSpockT
 SpockStdMethod
+spock_mk'GET
+pattern SpockGET
+spock_mk'POST
+pattern SpockPOST
+spock_mk'HEAD
+pattern SpockHEAD
+spock_mk'PUT
+pattern SpockPUT
+spock_mk'DELETE
+pattern SpockDELETE
+spock_mk'TRACE
+pattern SpockTRACE
+spock_mk'CONNECT
+pattern SpockCONNECT
+spock_mk'OPTIONS
+pattern SpockOPTIONS
+spock_mk'PATCH
+pattern SpockPATCH
 SpockPath
 SpockVar
 ws_runClient
@@ -2167,20 +2483,62 @@ ws_runServer
 ws_runServerWith
 WsClientApp
 WsAcceptRequest
+ws_mk'AcceptRequest
+pattern WsAcceptRequest
 WsConnection
 WsConnectionOptions
+ws_mk'ConnectionOptions
+pattern WsConnectionOptions
 WsPendingConnection
 WsHandshakeException
+ws_mk'NotSupported
+pattern WsNotSupported
+ws_mk'MalformedRequest
+pattern WsMalformedRequest
+ws_mk'MalformedResponse
+pattern WsMalformedResponse
+ws_mk'RequestRejected
+pattern WsRequestRejected
+ws_mk'OtherHandshakeException
+pattern WsOtherHandshakeException
 WsHeaders
 WsRequest
+ws_mk'Request
+pattern WsRequest
 WsRequestHead
+ws_mk'RequestHead
+pattern WsRequestHead
 WsResponse
+ws_mk'Response
+pattern WsResponse
 WsResponseHead
+ws_mk'ResponseHead
+pattern WsResponseHead
 WsServerApp
 WsConnectionException
+ws_mk'CloseRequest
+pattern WsCloseRequest
+ws_mk'ConnectionClosed
+pattern WsConnectionClosed
+ws_mk'ParseException
+pattern WsParseException
 WsControlMessage
+ws_mk'Close
+pattern WsClose
+ws_mk'Ping
+pattern WsPing
+ws_mk'Pong
+pattern WsPong
 WsDataMessage
+ws_mk'Text
+pattern WsText
+ws_mk'Binary
+pattern WsBinary
 WsMessage
+ws_mk'ControlMessage
+pattern WsControlMessage
+ws_mk'DataMessage
+pattern WsDataMessage
 ws_fromLazyByteString
 ws_toLazyByteString
 ws_sendCloseCode
@@ -2216,7 +2574,23 @@ JsArray
 JsDotNetTime
 JsObject
 JsResult
+js_mk'Error
+pattern JsError
+js_mk'Success
+pattern JsSuccess
 JsValue
+js_mk'Object
+pattern JsObject
+js_mk'Array
+pattern JsArray
+js_mk'String
+pattern JsString
+js_mk'Number
+pattern JsNumber
+js_mk'Bool
+pattern JsBool
+js_mk'Null
+pattern JsNull
 js__Integral
 js_key
 js_members
@@ -2235,6 +2609,14 @@ js__Value
 js__Object
 js__Array
 JsPrimitive
+js_mk'StringPrim
+pattern JsStringPrim
+js_mk'NumberPrim
+pattern JsNumberPrim
+js_mk'BoolPrim
+pattern JsBoolPrim
+js_mk'NullPrim
+pattern JsNullPrim
 js_typeMismatch
 js_camelTo
 js_defaultOptions
@@ -2246,6 +2628,14 @@ js_parse
 js_parseEither
 js_parseMaybe
 JsOptions
+js_mk'Options
+pattern JsOptions
 JsPair
 JsParser
 JsSumEncoding
+js_mk'TaggedObject
+pattern JsTaggedObject
+js_mk'ObjectWithSingleField
+pattern JsObjectWithSingleField
+js_mk'TwoElemArray
+pattern JsTwoElemArray

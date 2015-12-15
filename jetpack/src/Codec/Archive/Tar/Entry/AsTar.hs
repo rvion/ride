@@ -67,15 +67,15 @@ type TarFormat  = I.Format
 
 -- constructor :: V7Format
 tar_mk'V7Format =  I.V7Format
-pattern TarV7Format  <-  I.V7Format
+pattern TarV7Format  <-  I.V7Format 
 
 -- constructor :: UstarFormat
 tar_mk'UstarFormat =  I.UstarFormat
-pattern TarUstarFormat  <-  I.UstarFormat
+pattern TarUstarFormat  <-  I.UstarFormat 
 
 -- constructor :: GnuFormat
 tar_mk'GnuFormat =  I.GnuFormat
-pattern TarGnuFormat  <-  I.GnuFormat
+pattern TarGnuFormat  <-  I.GnuFormat 
 
 type TarLinkTarget  = I.LinkTarget
 
