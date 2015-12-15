@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Chrome.DB where
 
-import JetPack
+import           JetPack
 -- import           Control.Monad
 -- import           Data.Aeson ()
 -- import Data.Aeson.Types (ToJSON, FromJSON)

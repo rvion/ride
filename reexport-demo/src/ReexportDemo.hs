@@ -3,7 +3,7 @@ module ReexportDemo
   , module Control.Applicative
   , Either(..)
   ) where
-import Control.Applicative
+import           Control.Applicative
 type ThisIsAType = Int
 
 type Acc a b = Yo a b

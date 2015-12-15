@@ -8,13 +8,12 @@ module Gen.Iface where
 import           Avail
 import           BinIface
 import           Control.Monad     (forM)
-import           Data.List         (intersperse)
+import           Data.List
 import           Data.Map          (Map)
-import Debug.Trace
 import qualified Data.Map          as Map
-import Data.List
 import           Data.Maybe
 import           Data.String.Utils
+import           Debug.Trace
 import           DynFlags
 import           Gen.Types
 import           GHC
@@ -77,7 +76,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
     _folders = jetpackLibFolder ++ replace "." "/" moduleName
   let
     allAvailNames = map availName ifaceExports
-    allNecessaryModules = map toS $ nub $ catMaybes $ map nameModule_maybe (allAvailNames)
+    allNecessaryModules = map toS $ nub $ mapMaybe nameModule_maybe (allAvailNames)
     -- allAvailNamesAndFP = for ifaceExports (\n -> (n, toS $ nameModule.availName$ n)) -- nameModule_maybe -- dangerous
   all_modules <- foldlM (\m x ->
     case Map.lookup x modules of
@@ -120,10 +119,9 @@ findReexports (mod, modules) previouslyExportedSymbols =
       Just ifaceDecl ->
         if isJust (mi_warn_fn currentIface name)
           then _failDeprecated Local
-          else do
-            -- liftIO $ print $ toS $ (ifaceDecl, nameOccName name)
+          else
             _success (ifaceDecl, availNames availInfo) Local
-      Nothing -> do
+      Nothing ->
         liftIO $ _fail
       -- Nothing ->
       --   case nameModule_maybe name of
@@ -173,7 +171,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
         Remote x -> traceShow (Remote x, toS _t) Nothing
         _ -> Just $ RClass
           ( toS n)
-          (catMaybes $ map
+          (mapMaybe
             (\(IfaceClassOp n' _ t') -> if n' `elem` (map nameOccName exportedNames)
                 then Just $ RId (toS n') (onOneLine.toS$t')
                 else Nothing)
@@ -241,7 +239,7 @@ for = flip map
 extractAllNames :: AvailInfo -> [Name]
 extractAllNames ai = case ai of
  Avail n -> [n]
- AvailTC x xs -> (x:xs) -- TODO
+ AvailTC x xs -> x:xs -- TODO
 
 
 -- test = printReexports ("lens", "/Users/RemiVion/.stack/snapshots/x86_64-osx/nightly-2015-11-29/7.10.2/lib/x86_64-osx-ghc-7.10.2/microlens-platform-0.1.5.0-GZu1yvU44tYD8BDHxEQWch/Lens/Micro/Platform.hi") []

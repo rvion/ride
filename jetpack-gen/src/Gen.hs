@@ -1,20 +1,19 @@
 module Gen where
 
 import           Control.Monad
-import           Data.List     (intercalate, intersperse, isPrefixOf)
+import           Data.Either
+import Data.List (intercalate, intersperse, isPrefixOf, sort)
 import qualified Data.Map      as M
+import           Data.Maybe
 import           Data.Monoid
 import           Gen.Cabal     (writeCabalFile)
 import           Gen.Iface
-import Data.Maybe
-import Text.Read
 import           Gen.Log
 import           Gen.Modules
 import           Gen.Names
 import           Gen.State
-import Data.Either
 import           Gen.Types
-import           Data.List (sort)
+import           Text.Read
 
 jetpackGen :: IO ()
 jetpackGen = do
@@ -39,7 +38,7 @@ jetpackGen = do
   return ()
 
 data Reexport = Reexport
-  { as :: String
+  { as  :: String
   , mod :: String
   } deriving (Eq, Show, Read)
 
@@ -48,7 +47,7 @@ parseReexports = do
   f <- readFile "imports.md"
   x <- mapM myread $ lines f
   print "  parsed:"
-  print $ concat ["total: ", show.length $ catMaybes x]
+  print $ "total: " ++ (show.length $ catMaybes x)
   return $ map (\(Reexport a b) -> (a,b)) (catMaybes x)
   where
     myread :: String -> IO (Maybe Reexport)
@@ -81,5 +80,5 @@ writeReexportModule reexports = writeFile "jetpack/src/Exports.hs" content
     toImport modName = concat ["\nimport           ", modName, " as X"]
     content = concat $
       [ "\nmodule Exports (module X) where"
-      , "\n"] ++  sort ((map (toImport.toN)) reexports) ++
+      , "\n"] ++  sort (map (toImport.toN) reexports) ++
       [ "\n\n"]

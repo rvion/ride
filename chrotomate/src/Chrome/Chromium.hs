@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Chrome.Chromium where
 
-import JetPack
+import           JetPack
 -- import           Control.Concurrent     (ThreadId, forkIO)
 -- import           Control.Monad          (forever, unless)
 -- import           Control.Monad.IO.Class (MonadIO)

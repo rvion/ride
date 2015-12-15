@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Chrome.Command where
-import JetPack
+import           JetPack
 -- import           Data.Aeson
 -- import qualified Data.Aeson           as A
 -- import           Data.ByteString.Lazy (ByteString)

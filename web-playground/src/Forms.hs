@@ -4,12 +4,12 @@ module Forms
   ) where
 
 import           ClassyPrelude
-import qualified Data.Text           as T
+import qualified Data.Text                  as T
+import           Text.Digestive             as X hiding (Path, file, text)
+import           Text.Digestive             as X (text)
 import           Text.Digestive.Lucid.Html5 as X (errorList, inputText, label)
-import           Text.Digestive      as X hiding (Path, file, text)
-import           Text.Digestive      as X (text)
-import           Util                hiding (text)
-import           Web.Spock.Digestive as X (runForm)
+import           Util                       hiding (text)
+import           Web.Spock.Digestive        as X (runForm)
 
 checkEmail :: Monad m => Form HTML m Text  -> Form HTML m Text
 checkEmail = check "Not a valid email address"
