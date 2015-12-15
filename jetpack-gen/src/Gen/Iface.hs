@@ -76,9 +76,9 @@ findReexports (mod, modules) previouslyExportedSymbols =
     moduleName = toS $ mi_module currentIface
     _folders = jetpackLibFolder ++ replace "." "/" moduleName
   let
-    allAvailNames = concatMap availNames ifaceExports
-    allAvailNamesAndFP = for allAvailNames (\n -> (n, toS $ nameModule n)) -- nameModule_maybe -- dangerous
+    allAvailNames = map availName ifaceExports
     allNecessaryModules = map toS $ nub $ catMaybes $ map nameModule_maybe (allAvailNames)
+    -- allAvailNamesAndFP = for ifaceExports (\n -> (n, toS $ nameModule.availName$ n)) -- nameModule_maybe -- dangerous
   all_modules <- foldlM (\m x ->
     case Map.lookup x modules of
       Just mfp -> do
@@ -87,24 +87,27 @@ findReexports (mod, modules) previouslyExportedSymbols =
       Nothing -> return m) Map.empty allNecessaryModules
 
   -- liftIO . putStrLn $ concat ["  exports are ", toS (nub $ catMaybes $ map nameModule_maybe (concatMap availNames ifaceExports))]
-  -- liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
-  liftIO . putStrLn $ concat ["\n  Names are ", toS (map nameOccName allAvailNames)]
+  liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
+  -- liftIO . putStrLn $ concat ["\n  Names are ", toS (map nameOccName allAvailNames)]
   -- liftIO . putStrLn $ concat ["\n  Modules are ", show allNecessaryModules]
-  liftIO . putStrLn $ concat ["\n  names and fp are ", show $ map (\(x,y) -> (toS x,y)) allAvailNamesAndFP]
-  liftIO $ do
-    putStrLn $ concat ["\n  names and fp are \n"]
-    forM (Map.assocs all_modules) $ \(x,y)-> do
-      putStrLn x
-      putStrLn $ toS (Map.keys y)
+  -- liftIO . putStrLn $ concat ["\n  names and fp are ", show $ map (\(x,y) -> (toS x,y)) allAvailNamesAndFP]
+  -- liftIO $ do
+  --   putStrLn $ concat ["\n  names and fp are \n"]
+  --   forM (Map.assocs all_modules) $ \(x,y)-> do
+  --     putStrLn x
+  --     putStrLn $ toS (Map.keys y)
 
   -- liftIO . putStrLn $ concat ["  exports are ", show all_modules]
 
   -- find all decls corresponding to names
-  declsF <- forM allAvailNamesAndFP $ \(name, modName) -> do
+  declsF <- forM ifaceExports $ \availInfo -> do
     -- liftIO$putStrLn("  trying to find "++toS name)
     let
-      _name = toS name
-      _success ifaceDecl loc = return (name, Just ifaceDecl, loc)
+      name = availName availInfo
+      moduleName = toS . nameModule . availName $ availInfo
+      -- _name = toS name
+
+      _success x loc = return (name, Just x, loc)
       _failDeprecated loc = do
         liftIO.putStrLn.concat$["  info: (",toS name,") is not reexported because it is deprecated."]
         return (name, Nothing, loc)
@@ -112,11 +115,13 @@ findReexports (mod, modules) previouslyExportedSymbols =
         liftIO.putStrLn.concat$["  warn: impossible to find decl for (",toS name,")"]
         return (name, Nothing, NotFound)
 
-    case Map.lookup (nameOccName name) (all_modules Map.! modName) of
+    case Map.lookup (nameOccName name) (all_modules Map.! moduleName) of
       Just ifaceDecl ->
         if isJust (mi_warn_fn currentIface name)
           then _failDeprecated Local
-          else _success ifaceDecl Local
+          else do
+            -- liftIO $ print $ toS $ (ifaceDecl, nameOccName name)
+            _success (ifaceDecl, availNames availInfo) Local
       Nothing -> do
         liftIO $ _fail
       -- Nothing ->
@@ -147,28 +152,30 @@ findReexports (mod, modules) previouslyExportedSymbols =
   return $ catMaybes <$> for declsF $ \(n, decl, loc) ->
     case decl of
       Nothing -> Nothing
-      Just (_t@(IfaceId{})) -> Just $
+      Just (_t@(IfaceId{}), exportedNames) -> Just $
         RId
           (toS n)
           (onOneLine $ toS (ifType _t))
-      Just (_t@(IfaceData{})) -> Just
+      Just (_t@(IfaceData{}), exportedNames) -> Just
         RData
           { rName = toS n
           , rType = onOneLine $ toS (ifType _t)
           , rNbTyVars = length (ifTyVars _t)
           }
-      Just (_t@(IfaceSynonym{})) -> Just
+      Just (_t@(IfaceSynonym{}), exportedNames) -> Just
         RData
           { rName = toS n
           , rType = onOneLine $ toS (ifType _t)
           , rNbTyVars = length (ifTyVars _t)
           }
-      Just (_t@(IfaceClass{})) -> case loc of
-        -- Remote x -> traceShow (Remote x, toS _t) Nothing
+      Just (_t@(IfaceClass{}), exportedNames) -> case loc of
+        Remote x -> traceShow (Remote x, toS _t) Nothing
         _ -> Just $ RClass
           ( toS n)
-          (map
-            (\(IfaceClassOp n' _ t') -> RId (toS n') (onOneLine.toS$t'))
+          (catMaybes $ map
+            (\(IfaceClassOp n' _ t') -> if n' `elem` (map nameOccName exportedNames)
+                then Just $ RId (toS n') (onOneLine.toS$t')
+                else Nothing)
             (ifSigs _t)
           )
           -- FIXME the solution seems to be to reexport class memebres only when
@@ -180,9 +187,9 @@ findReexports (mod, modules) previouslyExportedSymbols =
           --     , I.Applicative
           --     ) where
 
-      Just (IfaceFamily{}) -> Nothing
-      Just (IfaceAxiom{}) -> Nothing
-      Just (IfacePatSyn{}) -> Nothing
+      Just (IfaceFamily{},_) -> Nothing
+      Just (IfaceAxiom{},_) -> Nothing
+      Just (IfacePatSyn{},_) -> Nothing
 
 
 -- isDeprecated n = mi_warn_fn iface
