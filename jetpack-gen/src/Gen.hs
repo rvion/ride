@@ -35,6 +35,11 @@ jetpackGen = do
   let reexportedPackages = ()
   return ()
 
+data Reexport = Reexport
+  { reexportPrefix :: String
+  , reexportModule :: String
+  } deriving (Eq, Show, Read)
+
 parseReexports :: IO [(String, String)]
 parseReexports = do
   f <- readFile "imports.md"
