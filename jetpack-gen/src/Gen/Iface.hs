@@ -85,7 +85,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
         return $ Map.insert x (mkIfaceDeclMap toSDoc ifa) m
       Nothing -> return m) Map.empty allNecessaryModules
 
-  -- liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
+  liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
 
   -- liftIO . putStrLn $ concat ["  exports are ", toS (nub $ catMaybes $ map nameModule_maybe (concatMap availNames ifaceExports))]
   -- liftIO . putStrLn $ concat ["\n  Names are ", toS (map nameOccName allAvailNames)]

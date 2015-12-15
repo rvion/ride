@@ -3,3 +3,6 @@ module Control.Monad.IO.Class.AsTrans where
 
 import qualified Control.Monad.IO.Class as I
 
+-- trans_liftIO :: forall a. IO a -> m a
+trans_liftIO = I.liftIO
+

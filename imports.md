@@ -12,6 +12,108 @@
   3. I built the list of reexport below from experience and by looking
      at github search result of popular projects such as `stack`.
 
+### Modules
+
+```haskell
+
+-- containers
+
+Reexport {as = "map", mod = "Data.Map.Strict"}
+Reexport {as = "lmap", mod = "Data.Map"}
+Reexport {as = "set", mod = "Data.Set"}
+Reexport {as = "ci", mod = "Data.CaseInsensitive"}
+Reexport {as = "hm", mod = "Data.HashMap.Strict"}
+Reexport {as = "ne", mod = "Data.List.NonEmpty"}
+Reexport {as = "vec", mod = "Data.Vector"}
+
+-- text
+
+Reexport {as = "t", mod = "Data.Text"}
+Reexport {as = "t", mod = "Data.Text.Encoding"}
+Reexport {as = "t", mod = "Data.Text.IO"}
+Reexport {as = "lt", mod = "Data.Text.Lazy"}
+Reexport {as = "lt", mod = "Data.Text.Lazy.Encoding"}
+Reexport {as = "lt", mod = "Data.Text.Lazy.IO"}
+
+-- bytestring
+
+Reexport {as = "bs", mod = "Data.ByteString"}
+Reexport {as = "bs", mod = "Data.ByteString.Char8"}
+Reexport {as = "lbs", mod = "Data.ByteString.Lazy"}
+Reexport {as = "c8", mod = "Data.ByteString.Lazy.Char8"}
+
+-- stm
+
+Reexport {as = "stm", mod = "Control.Concurrent.STM"}
+
+-- compression
+
+Reexport {as = "tar", mod="Codec.Archive.Tar"}
+Reexport {as = "tar", mod="Codec.Archive.Tar.Entry"}
+Reexport {as = "tar", mod="Codec.Archive.Tar.Check"}
+Reexport {as = "gzip", mod = "Codec.Compression.GZip"}
+
+-- megaparsec
+
+Reexport {as = "mp", mod = "Text.Megaparsec"}
+
+-- cmd line tools: ansi colors, optoparse-applicative
+
+Reexport {as = "ansi", mod = "System.Console.ANSI"}
+Reexport {as = "opt", mod = "Options.Applicative.Common"}
+Reexport {as = "opt", mod = "Options.Applicative.Builder"}
+Reexport {as = "opt", mod = "Options.Applicative.Builder.Completer"}
+Reexport {as = "opt", mod = "Options.Applicative.Extra"}
+-- | Options.Applicative.Common:            Parser type and low-level parsing functionality.
+-- | Options.Applicative.Builder:           Utilities to build parsers out of basic primitives.
+-- | Options.Applicative.Builder.Completer: Common completion functions.
+-- | Options.Applicative.Extra:             Utilities to run parsers and display a help text.
+
+
+-- streaming: conduit, conduit-extra
+
+Reexport {as = "c", mod = "Data.Conduit"}
+Reexport {as = "cl", mod = "Data.Conduit.List"}
+Reexport {as = "cb", mod = "Data.Conduit.Binary"}
+
+-- lens
+
+Reexport {as = "lens", mod = "Lens.Micro.Platform"}
+
+-- web: wai, aeson, spock
+
+Reexport {as = "wai", mod = "Network.Wai"}
+Reexport {as = "wai", mod = "Network.Wai.Handler.Warp"}
+Reexport {as = "wai", mod = "Network.HTTP.Types.Status"}
+Reexport {as = "wai", mod = "Network.Wai.Middleware.RequestLogger"}
+Reexport {as = "wai", mod = "Network.Wai.Middleware.Static"}
+
+Reexport {as = "spock", mod = "Web.Spock.Digestive"}
+Reexport {as = "spock", mod = "Web.Spock.Safe"}
+
+Reexport {as = "ws", mod = "Network.WebSockets"}
+Reexport {as = "ws", mod = "Network.WebSockets.Connection"}
+
+Reexport {as = "js", mod = "Data.Aeson"}
+Reexport {as = "js", mod = "Data.Aeson.Lens"}
+Reexport {as = "js", mod = "Data.Aeson.Types"}
+# js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
+
+ -- monad transformers (as it's still the main idiom instead of freer monads)
+
+Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
+Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
+Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
+Reexport {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}
+
+-- Reexport {as = "mtl", mod = "Control.Monad.State.Lazy"}
+-- 
+-- -- test purpose
+-- 
+-- Reexport {as = "demo", mod = "ReexportDemo"}
+
+```
+
 
 ### Packages
 
@@ -46,114 +148,3 @@
   * wai-extra
   * wai-middleware-static
   * vector
-
-### Modules
-
-```haskell
--- aeson
-
-Reexport {as = "js", mod = "Data.Aeson"}
-Reexport {as = "js", mod = "Data.Aeson.Lens"}
-Reexport {as = "js", mod = "Data.Aeson.Types"}
-# js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
-
--- containers
-
-Reexport {as = "map", mod = "Data.Map.Strict"}
-Reexport {as = "lmap", mod = "Data.Map"}
-Reexport {as = "set", mod = "Data.Set"}
-Reexport {as = "hm", mod = "Data.HashMap.Strict"}
-Reexport {as = "ne", mod = "Data.List.NonEmpty"}
-Reexport {as = "vec", mod = "Data.Vector"}
-
--- text
-
-Reexport {as = "t", mod = "Data.Text"}
-Reexport {as = "t", mod = "Data.Text.Encoding"}
-Reexport {as = "t", mod = "Data.Text.IO"}
-Reexport {as = "lt", mod = "Data.Text.Lazy"}
-Reexport {as = "lt", mod = "Data.Text.Lazy.Encoding"}
-Reexport {as = "lt", mod = "Data.Text.Lazy.IO"}
-
--- bytestring
-
-Reexport {as = "bs", mod = "Data.ByteString"}
-Reexport {as = "bs", mod = "Data.ByteString.Char8"}
-Reexport {as = "lbs", mod = "Data.ByteString.Lazy"}
-Reexport {as = "c8", mod = "Data.ByteString.Lazy.Char8"}
-
--- stm
-
-Reexport {as = "stm", mod = "Control.Concurrent.STM"}
-
--- tar
-
-Reexport {as = "tar", mod="Codec.Archive.Tar"}
-Reexport {as = "tar", mod="Codec.Archive.Tar.Entry"}
-Reexport {as = "tar", mod="Codec.Archive.Tar.Check"}
-
--- zlib
-
-Reexport {as = "gzip", mod = "Codec.Compression.GZip"}
-
--- megaparsec
-
-Reexport {as = "mp", mod = "Text.Megaparsec"}
-
--- ansi
-
-Reexport {as = "ansi", mod = "System.Console.ANSI"}
-
--- optoparse-applicative
-
--- not opt Options.Applicative because it reexport too many things
--- | Parser type and low-level parsing functionality.
-Reexport {as = "opt", mod = "Options.Applicative.Common"}
--- | Utilities to build parsers out of basic primitives.
-Reexport {as = "opt", mod = "Options.Applicative.Builder"}
--- | Common completion functions.
-Reexport {as = "opt", mod = "Options.Applicative.Builder.Completer"}
--- | Utilities to run parsers and display a help text.
-Reexport {as = "opt", mod = "Options.Applicative.Extra"}
-
-
--- conduit
--- conduit-extra
-
-Reexport {as = "c", mod = "Data.Conduit"}
-Reexport {as = "cl", mod = "Data.Conduit.List"}
-Reexport {as = "cb", mod = "Data.Conduit.Binary"}
-
--- lens
-
-Reexport {as = "lens", mod = "Lens.Micro.Platform"}
-
--- misc
-
-Reexport {as = "wai", mod = "Network.Wai"}
-Reexport {as = "wai", mod = "Network.Wai.Handler.Warp"}
-Reexport {as = "wai", mod = "Network.HTTP.Types.Status"}
-Reexport {as = "wai", mod = "Network.Wai.Middleware.RequestLogger"}
-Reexport {as = "wai", mod = "Network.Wai.Middleware.Static"}
-Reexport {as = "ci", mod = "Data.CaseInsensitive"}
-
-Reexport {as = "spock", mod = "Web.Spock.Digestive"}
-Reexport {as = "spock", mod = "Web.Spock.Safe"}
-
-
-Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
-Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
-Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
-Reexport {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}
-
-Reexport {as = "mtl", mod = "Control.Monad.State.Lazy"}
-
-Reexport {as = "ws", mod = "Network.WebSockets"}
-Reexport {as = "ws", mod = "Network.WebSockets.Connection"}
-
--- test purpose
-
-Reexport {as = "demo", mod = "ReexportDemo"}
-Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
-
-```

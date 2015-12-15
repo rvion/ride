@@ -51,9 +51,6 @@ js_genericToJSON = I.genericToJSON
 -- (.:?) :: forall a. FromJSON a => Object -> Text -> Parser (Maybe a)
 (.:?) = (I..:?)
 
--- (.=) :: forall a. ToJSON a => Text -> a -> Pair
-(.=) = (I..=)
-
 -- js_fromJSON :: forall a. FromJSON a => Value -> Result a
 js_fromJSON = I.fromJSON
 
