@@ -45,6 +45,7 @@ import           Options.Applicative.Builder.Completer.AsOpt as X
 import           Options.Applicative.Common.AsOpt as X
 import           Options.Applicative.Extra.AsOpt as X
 import           System.Console.ANSI.AsAnsi as X
+import           System.Environment.AsEnv as X
 import           Text.Megaparsec.AsMp as X
 import           Web.Spock.Digestive.AsSpock as X
 import           Web.Spock.Safe.AsSpock as X
