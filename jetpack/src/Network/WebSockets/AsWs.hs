@@ -77,20 +77,62 @@ ws_runServerWith = I.runServerWith
 
 type WsClientApp a = I.ClientApp a
 type WsAcceptRequest  = I.AcceptRequest
+ws__mkAcceptRequest =  I.AcceptRequest-- constructor
+pattern WsAcceptRequest a <-  I.AcceptRequest a
 type WsConnection  = I.Connection
 type WsConnectionOptions  = I.ConnectionOptions
+ws__mkConnectionOptions =  I.ConnectionOptions-- constructor
+pattern WsConnectionOptions a <-  I.ConnectionOptions a
 type WsPendingConnection  = I.PendingConnection
 type WsHandshakeException  = I.HandshakeException
+ws__mkNotSupported =  I.NotSupported-- constructor
+pattern WsNotSupported  <-  I.NotSupported 
+ws__mkMalformedRequest =  I.MalformedRequest-- constructor
+pattern WsMalformedRequest a b <-  I.MalformedRequest a b
+ws__mkMalformedResponse =  I.MalformedResponse-- constructor
+pattern WsMalformedResponse a b <-  I.MalformedResponse a b
+ws__mkRequestRejected =  I.RequestRejected-- constructor
+pattern WsRequestRejected a b <-  I.RequestRejected a b
+ws__mkOtherHandshakeException =  I.OtherHandshakeException-- constructor
+pattern WsOtherHandshakeException a <-  I.OtherHandshakeException a
 type WsHeaders  = I.Headers
 type WsRequest  = I.Request
+ws__mkRequest =  I.Request-- constructor
+pattern WsRequest a b <-  I.Request a b
 type WsRequestHead  = I.RequestHead
+ws__mkRequestHead =  I.RequestHead-- constructor
+pattern WsRequestHead a b c <-  I.RequestHead a b c
 type WsResponse  = I.Response
+ws__mkResponse =  I.Response-- constructor
+pattern WsResponse a b <-  I.Response a b
 type WsResponseHead  = I.ResponseHead
+ws__mkResponseHead =  I.ResponseHead-- constructor
+pattern WsResponseHead a b c <-  I.ResponseHead a b c
 type WsServerApp  = I.ServerApp
 type WsConnectionException  = I.ConnectionException
+ws__mkCloseRequest =  I.CloseRequest-- constructor
+pattern WsCloseRequest a b <-  I.CloseRequest a b
+ws__mkConnectionClosed =  I.ConnectionClosed-- constructor
+pattern WsConnectionClosed  <-  I.ConnectionClosed 
+ws__mkParseException =  I.ParseException-- constructor
+pattern WsParseException a <-  I.ParseException a
 type WsControlMessage  = I.ControlMessage
+ws__mkClose =  I.Close-- constructor
+pattern WsClose a b <-  I.Close a b
+ws__mkPing =  I.Ping-- constructor
+pattern WsPing a <-  I.Ping a
+ws__mkPong =  I.Pong-- constructor
+pattern WsPong a <-  I.Pong a
 type WsDataMessage  = I.DataMessage
+ws__mkText =  I.Text-- constructor
+pattern WsText a <-  I.Text a
+ws__mkBinary =  I.Binary-- constructor
+pattern WsBinary a <-  I.Binary a
 type WsMessage  = I.Message
+ws__mkControlMessage =  I.ControlMessage-- constructor
+pattern WsControlMessage a <-  I.ControlMessage a
+ws__mkDataMessage =  I.DataMessage-- constructor
+pattern WsDataMessage a <-  I.DataMessage a
 -- ws_fromLazyByteString :: ByteString -> a
 ws_fromLazyByteString = I.fromLazyByteString
 

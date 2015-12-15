@@ -36,3 +36,9 @@ opt_overFailure = I.overFailure
 type OptCompletionResult  = I.CompletionResult
 type OptParserFailure a = I.ParserFailure a
 type OptParserResult a = I.ParserResult a
+opt__mkSuccess =  I.Success-- constructor
+pattern OptSuccess a <-  I.Success a
+opt__mkFailure =  I.Failure-- constructor
+pattern OptFailure a <-  I.Failure a
+opt__mkCompletionInvoked =  I.CompletionInvoked-- constructor
+pattern OptCompletionInvoked a <-  I.CompletionInvoked a

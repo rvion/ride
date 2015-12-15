@@ -26,7 +26,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
       -- in (concat$ intersperse "/" (init parts), last parts)
     (p:ps) = prefix
     sep = "_"
-    _idPrefix = toLower p : ps
+    _idPrefix = (toLower p : ps) ++ sep
     _typePrefix = toUpper p : ps
     _fileName = "As" ++ _typePrefix
     _filePath = _folders ++ "/" ++ _fileName ++ ".hs"
@@ -52,7 +52,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
             _reexported_name =
               if head _name `elem` operators
                 then _name
-                else concat [_idPrefix, sep, _name]
+                else concat [_idPrefix, _name]
             _reexported_type = _typePrefix ++ _name
             -- _type = typeSdoc decl
           case x of
@@ -69,7 +69,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   put [_reexported_name, " = I.", _name,"\n"]
                   return [Just _reexported_name]
               | otherwise -> error ("ahaha " ++ _name)
-            RData _ rType nbTyVars
+            RData _ rType nbTyVars rDataTyCons
               | _reexported_type `elem` previouslyExportedSymbols -> do
                   putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
                   return [Nothing]
@@ -77,7 +77,17 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
                   -- put ["-- ",_reexported_type," :: ",rType]
                   put (["type ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
+                  forM rDataTyCons reexportFn
                   return [Just _reexported_type] -- tyvars needed because type synonym must be instanciated
+            RDataCon thename nbTyVars
+              | head thename `elem` operators -> do
+                  putStrLn $ concat ["  warn: (",thename, ") as a type constructor is not yet supported"]
+                  return [Nothing]
+              | otherwise -> do
+                  let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
+                  put ([_idPrefix,"_mk", thename, " =  I.", thename, "-- constructor"])
+                  put (["pattern ", _typePrefix, thename, " ", tyVars, " <-  I.", thename, " ", tyVars])
+                  return [Nothing]
             RClass n fns ->
               concat <$> forM fns reexportFn
 
@@ -96,3 +106,6 @@ operators = ['!','#','$','%','&','*','+','.','/','<','=','>','?','@','\\','^','|
 
 -- liftIO $ mapM_ (putStrLn.(" -> "++).toS) declsF
 
+-- data G = G1 Int
+-- pattern JsG1 <- G1
+-- mkG1 = G1

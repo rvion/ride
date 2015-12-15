@@ -27,7 +27,7 @@ writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
       ++ intersperse ", " (map toN reexports) ++
       [ "\n  build-depends:       "] ++ intersperse ", " deps ++
       [ "\n  ghc-options:         -Wall -fno-warn-missing-signatures"
-      , "\n  default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds, RankNTypes"
+      , "\n  default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds, RankNTypes, PatternSynonyms, TypeFamilies"
       , "\n  default-language:    Haskell2010"
       , "\n"
       , "\nsource-repository head"

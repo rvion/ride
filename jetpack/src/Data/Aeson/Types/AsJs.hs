@@ -34,6 +34,14 @@ js_parseEither = I.parseEither
 js_parseMaybe = I.parseMaybe
 
 type JsOptions  = I.Options
+js__mkOptions =  I.Options-- constructor
+pattern JsOptions a b c d e <-  I.Options a b c d e
 type JsPair  = I.Pair
 type JsParser a = I.Parser a
 type JsSumEncoding  = I.SumEncoding
+js__mkTaggedObject =  I.TaggedObject-- constructor
+pattern JsTaggedObject a b <-  I.TaggedObject a b
+js__mkObjectWithSingleField =  I.ObjectWithSingleField-- constructor
+pattern JsObjectWithSingleField  <-  I.ObjectWithSingleField 
+js__mkTwoElemArray =  I.TwoElemArray-- constructor
+pattern JsTwoElemArray  <-  I.TwoElemArray 

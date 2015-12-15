@@ -210,9 +210,6 @@ mp_setTabWidth = I.setTabWidth
 -- mp_unexpected :: forall (m :: * -> *) a s t. MonadParsec s m t => String -> m a
 mp_unexpected = I.unexpected
 
--- (<|>) :: forall a. f a -> f a -> f a
-(<|>) = (I.<|>)
-
 -- mp_some :: forall a. f a -> f [a]
 mp_some = I.some
 
@@ -220,6 +217,12 @@ mp_some = I.some
 mp_many = I.many
 
 type MpMessage  = I.Message
+mp__mkUnexpected =  I.Unexpected-- constructor
+pattern MpUnexpected a <-  I.Unexpected a
+mp__mkExpected =  I.Expected-- constructor
+pattern MpExpected a <-  I.Expected a
+mp__mkMessage =  I.Message-- constructor
+pattern MpMessage a <-  I.Message a
 type MpParseError  = I.ParseError
 type MpSourcePos  = I.SourcePos
 -- mp_failure :: forall a. [Message] -> m a
@@ -258,6 +261,8 @@ mp_updateParserState = I.updateParserState
 type MpParsec a = I.Parsec a
 type MpParsecT a b c = I.ParsecT a b c
 type MpState a = I.State a
+mp__mkState =  I.State-- constructor
+pattern MpState a b c <-  I.State a b c
 -- mp_fromFile :: FilePath -> IO s
 mp_fromFile = I.fromFile
 

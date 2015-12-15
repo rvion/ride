@@ -187,9 +187,67 @@ ansi_showCursor = I.showCursor
 ansi_showCursorCode = I.showCursorCode
 
 type AnsiBlinkSpeed  = I.BlinkSpeed
+ansi__mkSlowBlink =  I.SlowBlink-- constructor
+pattern AnsiSlowBlink  <-  I.SlowBlink 
+ansi__mkRapidBlink =  I.RapidBlink-- constructor
+pattern AnsiRapidBlink  <-  I.RapidBlink 
+ansi__mkNoBlink =  I.NoBlink-- constructor
+pattern AnsiNoBlink  <-  I.NoBlink 
 type AnsiColor  = I.Color
+ansi__mkBlack =  I.Black-- constructor
+pattern AnsiBlack  <-  I.Black 
+ansi__mkRed =  I.Red-- constructor
+pattern AnsiRed  <-  I.Red 
+ansi__mkGreen =  I.Green-- constructor
+pattern AnsiGreen  <-  I.Green 
+ansi__mkYellow =  I.Yellow-- constructor
+pattern AnsiYellow  <-  I.Yellow 
+ansi__mkBlue =  I.Blue-- constructor
+pattern AnsiBlue  <-  I.Blue 
+ansi__mkMagenta =  I.Magenta-- constructor
+pattern AnsiMagenta  <-  I.Magenta 
+ansi__mkCyan =  I.Cyan-- constructor
+pattern AnsiCyan  <-  I.Cyan 
+ansi__mkWhite =  I.White-- constructor
+pattern AnsiWhite  <-  I.White 
 type AnsiColorIntensity  = I.ColorIntensity
+ansi__mkDull =  I.Dull-- constructor
+pattern AnsiDull  <-  I.Dull 
+ansi__mkVivid =  I.Vivid-- constructor
+pattern AnsiVivid  <-  I.Vivid 
 type AnsiConsoleIntensity  = I.ConsoleIntensity
+ansi__mkBoldIntensity =  I.BoldIntensity-- constructor
+pattern AnsiBoldIntensity  <-  I.BoldIntensity 
+ansi__mkFaintIntensity =  I.FaintIntensity-- constructor
+pattern AnsiFaintIntensity  <-  I.FaintIntensity 
+ansi__mkNormalIntensity =  I.NormalIntensity-- constructor
+pattern AnsiNormalIntensity  <-  I.NormalIntensity 
 type AnsiConsoleLayer  = I.ConsoleLayer
+ansi__mkForeground =  I.Foreground-- constructor
+pattern AnsiForeground  <-  I.Foreground 
+ansi__mkBackground =  I.Background-- constructor
+pattern AnsiBackground  <-  I.Background 
 type AnsiSGR  = I.SGR
+ansi__mkReset =  I.Reset-- constructor
+pattern AnsiReset  <-  I.Reset 
+ansi__mkSetConsoleIntensity =  I.SetConsoleIntensity-- constructor
+pattern AnsiSetConsoleIntensity a <-  I.SetConsoleIntensity a
+ansi__mkSetItalicized =  I.SetItalicized-- constructor
+pattern AnsiSetItalicized a <-  I.SetItalicized a
+ansi__mkSetUnderlining =  I.SetUnderlining-- constructor
+pattern AnsiSetUnderlining a <-  I.SetUnderlining a
+ansi__mkSetBlinkSpeed =  I.SetBlinkSpeed-- constructor
+pattern AnsiSetBlinkSpeed a <-  I.SetBlinkSpeed a
+ansi__mkSetVisible =  I.SetVisible-- constructor
+pattern AnsiSetVisible a <-  I.SetVisible a
+ansi__mkSetSwapForegroundBackground =  I.SetSwapForegroundBackground-- constructor
+pattern AnsiSetSwapForegroundBackground a <-  I.SetSwapForegroundBackground a
+ansi__mkSetColor =  I.SetColor-- constructor
+pattern AnsiSetColor a b c <-  I.SetColor a b c
 type AnsiUnderlining  = I.Underlining
+ansi__mkSingleUnderline =  I.SingleUnderline-- constructor
+pattern AnsiSingleUnderline  <-  I.SingleUnderline 
+ansi__mkDoubleUnderline =  I.DoubleUnderline-- constructor
+pattern AnsiDoubleUnderline  <-  I.DoubleUnderline 
+ansi__mkNoUnderline =  I.NoUnderline-- constructor
+pattern AnsiNoUnderline  <-  I.NoUnderline 

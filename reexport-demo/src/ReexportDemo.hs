@@ -1,7 +1,7 @@
 module ReexportDemo
   ( module ReexportDemo
-  , module Control.Applicative
   , Either(..)
+  , module Control.Applicative
   ) where
 import           Control.Applicative
 type ThisIsAType = Int

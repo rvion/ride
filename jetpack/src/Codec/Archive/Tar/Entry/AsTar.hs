@@ -59,8 +59,16 @@ type TarDevMinor  = I.DevMinor
 type TarEpochTime  = I.EpochTime
 type TarFileSize  = I.FileSize
 type TarFormat  = I.Format
+tar__mkV7Format =  I.V7Format-- constructor
+pattern TarV7Format  <-  I.V7Format 
+tar__mkUstarFormat =  I.UstarFormat-- constructor
+pattern TarUstarFormat  <-  I.UstarFormat 
+tar__mkGnuFormat =  I.GnuFormat-- constructor
+pattern TarGnuFormat  <-  I.GnuFormat 
 type TarLinkTarget  = I.LinkTarget
 type TarOwnership  = I.Ownership
+tar__mkOwnership =  I.Ownership-- constructor
+pattern TarOwnership a b c d <-  I.Ownership a b c d
 type TarPermissions  = I.Permissions
 type TarTarPath  = I.TarPath
 type TarTypeCode  = I.TypeCode

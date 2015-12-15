@@ -48,8 +48,14 @@ wai_strictRequestBody = I.strictRequestBody
 type WaiApplication  = I.Application
 type WaiMiddleware  = I.Middleware
 type WaiFilePart  = I.FilePart
+wai__mkFilePart =  I.FilePart-- constructor
+pattern WaiFilePart a b c <-  I.FilePart a b c
 type WaiRequest  = I.Request
 type WaiRequestBodyLength  = I.RequestBodyLength
+wai__mkChunkedBody =  I.ChunkedBody-- constructor
+pattern WaiChunkedBody  <-  I.ChunkedBody 
+wai__mkKnownLength =  I.KnownLength-- constructor
+pattern WaiKnownLength a <-  I.KnownLength a
 type WaiResponse  = I.Response
 type WaiResponseReceived  = I.ResponseReceived
 type WaiStreamingBody  = I.StreamingBody

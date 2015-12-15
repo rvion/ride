@@ -169,6 +169,10 @@ lens_magnify = I.magnify
 lens_zoom = I.zoom
 
 type LensDefName  = I.DefName
+lens__mkTopName =  I.TopName-- constructor
+pattern LensTopName a <-  I.TopName a
+lens__mkMethodName =  I.MethodName-- constructor
+pattern LensMethodName a b <-  I.MethodName a b
 type LensFold a b = I.Fold a b
 type LensGetter a b = I.Getter a b
 type LensLensRules  = I.LensRules

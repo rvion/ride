@@ -28,6 +28,10 @@ type IfaceDeclMap = Map OccName IfaceDecl
 data DeclLoc = Remote FilePath | Local | NotFound deriving (Eq, Show)
 type ModuleName = String
 
+-- data G = G1 Int
+-- pattern JsG1 <- G1
+-- mkG1 = G1
+
 getIface :: String -> Ghc ModIface
 getIface hiFilepath = do
   sess <- getSession
@@ -162,12 +166,25 @@ findReexports (mod, modules) previouslyExportedSymbols =
           { rName = toS n
           , rType = onOneLine $ toS (ifType _t)
           , rNbTyVars = length (ifTyVars _t)
+          , rDataTyCon = case ifCons _t of
+              IfDataTyCon cons -> -- mapMaybe (undefined)
+                catMaybes $ for cons $ \ con -> --error (toS (ifConOcc con) ++ (toSDoc $ pprIfCon con))$
+                  if ((ifConOcc con) `elem` (map nameOccName exportedNames))
+                  then Just $
+                    RDataCon
+                      { rName = toS (ifConOcc con)
+                      -- , rType = toS (ifConArgTys con)
+                      , rNbTyVars = (length $ ifConArgTys con)
+                    }
+                  else Nothing
+              _ -> []
           }
       Just (_t@(IfaceSynonym{}), exportedNames) -> Just
         RData
           { rName = toS n
           , rType = onOneLine $ toS (ifType _t)
           , rNbTyVars = length (ifTyVars _t)
+          , rDataTyCon = []
           }
       Just (_t@(IfaceClass{}), exportedNames) -> case loc of
         Remote x -> traceShow (Remote x, toS _t) Nothing
@@ -260,3 +277,15 @@ extractAllNames ai = case ai of
 -- are they working as of now anyway ?
 -- liftIO $ writeFile _filePath ""
 -- liftIO $ print (_folders,_file)
+
+pprIfCon x = vcat
+  [ ppr (ifConOcc x)
+  , ppr (ifConWrapper x)
+  , ppr (ifConInfix x)
+  , ppr (ifConExTvs x)
+  , ppr (ifConEqSpec x)
+  , ppr (ifConCtxt x)
+  , ppr (ifConArgTys x)
+  , ppr (ifConFields x)
+  -- , ppr (ifConStricts x)
+  ]

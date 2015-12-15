@@ -32,4 +32,8 @@ opt_treeMapParser = I.treeMapParser
 
 type OptParser a = I.Parser a
 type OptParserInfo a = I.ParserInfo a
+opt__mkParserInfo =  I.ParserInfo-- constructor
+pattern OptParserInfo a b c d e f g <-  I.ParserInfo a b c d e f g
 type OptParserPrefs  = I.ParserPrefs
+opt__mkParserPrefs =  I.ParserPrefs-- constructor
+pattern OptParserPrefs a b c d e <-  I.ParserPrefs a b c d e

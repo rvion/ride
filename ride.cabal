@@ -19,6 +19,8 @@ Library
                      , MagicHash
                      , DataKinds
                      , RankNTypes
+                     , PatternSynonyms
+                     , TypeFamilies
   ghc-options:         -fdefer-type-errors
   build-depends:       base
                     -- , jetpack-gen

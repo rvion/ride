@@ -55,3 +55,11 @@ js__Object = I._Object
 js__Array = I._Array
 
 type JsPrimitive  = I.Primitive
+js__mkStringPrim =  I.StringPrim-- constructor
+pattern JsStringPrim a <-  I.StringPrim a
+js__mkNumberPrim =  I.NumberPrim-- constructor
+pattern JsNumberPrim a <-  I.NumberPrim a
+js__mkBoolPrim =  I.BoolPrim-- constructor
+pattern JsBoolPrim a <-  I.BoolPrim a
+js__mkNullPrim =  I.NullPrim-- constructor
+pattern JsNullPrim  <-  I.NullPrim 

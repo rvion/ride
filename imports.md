@@ -10,6 +10,12 @@
 
 ### Modules
 
+### test purpose
+
+```haskell
+Reexport {as = "demo", mod = "ReexportDemo"}
+```
+
 ### Containers
 
 ```haskell
@@ -113,11 +119,6 @@ Reexport {as = "js", mod = "Data.Aeson.Types"}
 ```
 # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
-### test purpose
-
-```haskell
-Reexport {as = "demo", mod = "ReexportDemo"}
-```
 
 
 ### Packages

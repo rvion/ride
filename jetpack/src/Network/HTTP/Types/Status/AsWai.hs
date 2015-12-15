@@ -292,3 +292,5 @@ wai_unsupportedMediaType415 = I.unsupportedMediaType415
 wai_useProxy305 = I.useProxy305
 
 type WaiStatus  = I.Status
+wai__mkStatus =  I.Status-- constructor
+pattern WaiStatus a b <-  I.Status a b

@@ -6,6 +6,7 @@ Please, __don't post anything on reddit for now__.
 
 PatternSynonyms https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/syntax-extns.html
 Pattern synonyms are enabled by the flag -XPatternSynonyms, which is required for defining them, but not for using them
+see also https://mpickering.github.io/posts/2015-12-12-pattern-synonyms-8.html
 
 ### Input
 

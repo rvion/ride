@@ -213,20 +213,48 @@ type WaiGMTDate  = I.GMTDate
 type WaiMutableFdCache  = I.MutableFdCache
 type WaiRefresh  = I.Refresh
 type WaiFileInfo  = I.FileInfo
+wai__mkFileInfo =  I.FileInfo-- constructor
+pattern WaiFileInfo a b c d <-  I.FileInfo a b c d
 type WaiIndexedHeader  = I.IndexedHeader
 type WaiSettings  = I.Settings
 type WaiHandle  = I.Handle
 type WaiManager  = I.Manager
 type WaiTimeoutAction  = I.TimeoutAction
 type WaiTimeoutThread  = I.TimeoutThread
+wai__mkTimeoutThread =  I.TimeoutThread-- constructor
+pattern WaiTimeoutThread  <-  I.TimeoutThread 
 type WaiBufSize  = I.BufSize
 type WaiBuffer  = I.Buffer
 type WaiConnection  = I.Connection
+wai__mkConnection =  I.Connection-- constructor
+pattern WaiConnection a b c d e f g h <-  I.Connection a b c d e f g h
 type WaiFileId  = I.FileId
+wai__mkFileId =  I.FileId-- constructor
+pattern WaiFileId a b <-  I.FileId a b
 type WaiHeaderValue  = I.HeaderValue
 type WaiInternalInfo  = I.InternalInfo
+wai__mkInternalInfo =  I.InternalInfo-- constructor
+pattern WaiInternalInfo a b c d e <-  I.InternalInfo a b c d e
 type WaiInvalidRequest  = I.InvalidRequest
+wai__mkNotEnoughLines =  I.NotEnoughLines-- constructor
+pattern WaiNotEnoughLines a <-  I.NotEnoughLines a
+wai__mkBadFirstLine =  I.BadFirstLine-- constructor
+pattern WaiBadFirstLine a <-  I.BadFirstLine a
+wai__mkNonHttp =  I.NonHttp-- constructor
+pattern WaiNonHttp  <-  I.NonHttp 
+wai__mkIncompleteHeaders =  I.IncompleteHeaders-- constructor
+pattern WaiIncompleteHeaders  <-  I.IncompleteHeaders 
+wai__mkConnectionClosedByPeer =  I.ConnectionClosedByPeer-- constructor
+pattern WaiConnectionClosedByPeer  <-  I.ConnectionClosedByPeer 
+wai__mkOverLargeHeader =  I.OverLargeHeader-- constructor
+pattern WaiOverLargeHeader  <-  I.OverLargeHeader 
+wai__mkBadProxyHeader =  I.BadProxyHeader-- constructor
+pattern WaiBadProxyHeader a <-  I.BadProxyHeader a
 type WaiPort  = I.Port
 type WaiSendFile  = I.SendFile
 type WaiSource  = I.Source
 type WaiTransport  = I.Transport
+wai__mkTCP =  I.TCP-- constructor
+pattern WaiTCP  <-  I.TCP 
+wai__mkTLS =  I.TLS-- constructor
+pattern WaiTLS a b c d <-  I.TLS a b c d

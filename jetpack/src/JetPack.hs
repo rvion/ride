@@ -7,6 +7,6 @@ module JetPack
   ( module X
   ) where
 
-import           BasePrelude as X
+-- import           BasePrelude as X
 import           Exports as X hiding (yield, (!!), (&), (++), (<$!>), (<$>), (<**>), (<=<), (<>), (<|>), (=<<), (>=>),
                                (\\))

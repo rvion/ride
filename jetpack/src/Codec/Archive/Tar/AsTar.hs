@@ -40,6 +40,44 @@ tar_unpack = I.unpack
 tar_write = I.write
 
 type TarFormatError  = I.FormatError
+tar__mkTruncatedArchive =  I.TruncatedArchive-- constructor
+pattern TarTruncatedArchive  <-  I.TruncatedArchive 
+tar__mkShortTrailer =  I.ShortTrailer-- constructor
+pattern TarShortTrailer  <-  I.ShortTrailer 
+tar__mkBadTrailer =  I.BadTrailer-- constructor
+pattern TarBadTrailer  <-  I.BadTrailer 
+tar__mkTrailingJunk =  I.TrailingJunk-- constructor
+pattern TarTrailingJunk  <-  I.TrailingJunk 
+tar__mkChecksumIncorrect =  I.ChecksumIncorrect-- constructor
+pattern TarChecksumIncorrect  <-  I.ChecksumIncorrect 
+tar__mkNotTarFormat =  I.NotTarFormat-- constructor
+pattern TarNotTarFormat  <-  I.NotTarFormat 
+tar__mkUnrecognisedTarFormat =  I.UnrecognisedTarFormat-- constructor
+pattern TarUnrecognisedTarFormat  <-  I.UnrecognisedTarFormat 
+tar__mkHeaderBadNumericEncoding =  I.HeaderBadNumericEncoding-- constructor
+pattern TarHeaderBadNumericEncoding  <-  I.HeaderBadNumericEncoding 
 type TarEntries a = I.Entries a
+tar__mkNext =  I.Next-- constructor
+pattern TarNext a b <-  I.Next a b
+tar__mkDone =  I.Done-- constructor
+pattern TarDone  <-  I.Done 
+tar__mkFail =  I.Fail-- constructor
+pattern TarFail a <-  I.Fail a
 type TarEntry  = I.Entry
 type TarEntryContent  = I.EntryContent
+tar__mkNormalFile =  I.NormalFile-- constructor
+pattern TarNormalFile a b <-  I.NormalFile a b
+tar__mkDirectory =  I.Directory-- constructor
+pattern TarDirectory  <-  I.Directory 
+tar__mkSymbolicLink =  I.SymbolicLink-- constructor
+pattern TarSymbolicLink a <-  I.SymbolicLink a
+tar__mkHardLink =  I.HardLink-- constructor
+pattern TarHardLink a <-  I.HardLink a
+tar__mkCharacterDevice =  I.CharacterDevice-- constructor
+pattern TarCharacterDevice a b <-  I.CharacterDevice a b
+tar__mkBlockDevice =  I.BlockDevice-- constructor
+pattern TarBlockDevice a b <-  I.BlockDevice a b
+tar__mkNamedPipe =  I.NamedPipe-- constructor
+pattern TarNamedPipe  <-  I.NamedPipe 
+tar__mkOtherEntryType =  I.OtherEntryType-- constructor
+pattern TarOtherEntryType a b c <-  I.OtherEntryType a b c
