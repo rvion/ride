@@ -2,7 +2,7 @@ module Gen where
 
 import           Control.Monad
 import           Data.Either
-import Data.List (intercalate, intersperse, isPrefixOf, sort)
+import           Data.List     (intercalate, intersperse, isPrefixOf, sort)
 import qualified Data.Map      as M
 import           Data.Maybe
 import           Data.Monoid

@@ -76,7 +76,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
     _folders = jetpackLibFolder ++ replace "." "/" moduleName
   let
     allAvailNames = map availName ifaceExports
-    allNecessaryModules = map toS $ nub $ mapMaybe nameModule_maybe (allAvailNames)
+    allNecessaryModules = map toS $ nub $ mapMaybe nameModule_maybe allAvailNames
     -- allAvailNamesAndFP = for ifaceExports (\n -> (n, toS $ nameModule.availName$ n)) -- nameModule_maybe -- dangerous
   all_modules <- foldlM (\m x ->
     case Map.lookup x modules of
@@ -122,7 +122,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
           else
             _success (ifaceDecl, availNames availInfo) Local
       Nothing ->
-        liftIO $ _fail
+        liftIO _fail
       -- Nothing ->
       --   case nameModule_maybe name of
       --     Nothing -> _fail
@@ -172,7 +172,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
         _ -> Just $ RClass
           ( toS n)
           (mapMaybe
-            (\(IfaceClassOp n' _ t') -> if n' `elem` (map nameOccName exportedNames)
+            (\(IfaceClassOp n' _ t') -> if n' `elem` map nameOccName exportedNames
                 then Just $ RId (toS n') (onOneLine.toS$t')
                 else Nothing)
             (ifSigs _t)
