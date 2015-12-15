@@ -55,8 +55,8 @@ parseReexports = do
     myread line = do
       let mbr = readMaybe line
       case (mbr::Maybe Reexport) of
-        Just r -> asSuccess (putStrLn line)
-        Nothing -> asError (putStrLn line)
+        Just r  -> putStr "  ok   : " >> asSuccess (putStrLn line)
+        Nothing -> putStr "  warn : " >> asError (putStrLn line)
       return mbr
 
 parseDeps :: IO [String]
