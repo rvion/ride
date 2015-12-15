@@ -3,21 +3,16 @@
 :memo:
 
   1. this file is parsed by jetpack-gen.
-      - All lines starting with  `  - ` will generate a qualified reexport
-      - All lines starting with  `  * ` will generate a package dependency
-
   2. one can look at modules listing on
       [stackage website](https://www.stackage.org/nightly-2015-12-10/docs)
-
   3. I built the list of reexport below from experience and by looking
      at github search result of popular projects such as `stack`.
 
 ### Modules
 
+### Containers
+
 ```haskell
-
--- containers
-
 Reexport {as = "map", mod = "Data.Map.Strict"}
 Reexport {as = "lmap", mod = "Data.Map"}
 Reexport {as = "set", mod = "Data.Set"}
@@ -25,29 +20,43 @@ Reexport {as = "ci", mod = "Data.CaseInsensitive"}
 Reexport {as = "hm", mod = "Data.HashMap.Strict"}
 Reexport {as = "ne", mod = "Data.List.NonEmpty"}
 Reexport {as = "vec", mod = "Data.Vector"}
+```
 
--- text
+### Text manipulation (text, bytestring)
 
+```haskell
 Reexport {as = "t", mod = "Data.Text"}
 Reexport {as = "t", mod = "Data.Text.Encoding"}
 Reexport {as = "t", mod = "Data.Text.IO"}
 Reexport {as = "lt", mod = "Data.Text.Lazy"}
 Reexport {as = "lt", mod = "Data.Text.Lazy.Encoding"}
 Reexport {as = "lt", mod = "Data.Text.Lazy.IO"}
-
--- bytestring
-
 Reexport {as = "bs", mod = "Data.ByteString"}
 Reexport {as = "bs", mod = "Data.ByteString.Char8"}
 Reexport {as = "lbs", mod = "Data.ByteString.Lazy"}
 Reexport {as = "c8", mod = "Data.ByteString.Lazy.Char8"}
+```
 
--- stm
+### Software Architecture (stm, conduit)
 
+```haskell
 Reexport {as = "stm", mod = "Control.Concurrent.STM"}
+Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
+Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
+Reexport {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}
+```
 
--- compression
+### Streaming
 
+```haskell
+Reexport {as = "c", mod = "Data.Conduit"}
+Reexport {as = "cl", mod = "Data.Conduit.List"}
+Reexport {as = "cb", mod = "Data.Conduit.Binary"}
+```
+
+### compression
+
+```haskell
 Reexport {as = "tar", mod="Codec.Archive.Tar"}
 Reexport {as = "tar", mod="Codec.Archive.Tar.Entry"}
 Reexport {as = "tar", mod="Codec.Archive.Tar.Check"}
@@ -60,6 +69,7 @@ Reexport {as = "mp", mod = "Text.Megaparsec"}
 -- cmd line tools: ansi colors, optoparse-applicative
 
 Reexport {as = "ansi", mod = "System.Console.ANSI"}
+Reexport {as = "env", mod = "System.Environment"}
 Reexport {as = "opt", mod = "Options.Applicative.Common"}
 Reexport {as = "opt", mod = "Options.Applicative.Builder"}
 Reexport {as = "opt", mod = "Options.Applicative.Builder.Completer"}
@@ -69,12 +79,6 @@ Reexport {as = "opt", mod = "Options.Applicative.Extra"}
 -- | Options.Applicative.Builder.Completer: Common completion functions.
 -- | Options.Applicative.Extra:             Utilities to run parsers and display a help text.
 
-
--- streaming: conduit, conduit-extra
-
-Reexport {as = "c", mod = "Data.Conduit"}
-Reexport {as = "cl", mod = "Data.Conduit.List"}
-Reexport {as = "cb", mod = "Data.Conduit.Binary"}
 
 -- lens
 
@@ -100,10 +104,6 @@ Reexport {as = "js", mod = "Data.Aeson.Types"}
 # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
  -- monad transformers (as it's still the main idiom instead of freer monads)
-
-Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
-Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
-Reexport {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}
 
 -- Reexport {as = "mtl", mod = "Control.Monad.State.Lazy"}
 -- 
