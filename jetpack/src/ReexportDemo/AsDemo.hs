@@ -35,9 +35,6 @@ type DemoEither a b = I.Either a b
 -- demo_empty :: forall a. f a
 demo_empty = I.empty
 
--- (<|>) :: forall a. f a -> f a -> f a
-(<|>) = (I.<|>)
-
 -- demo_some :: forall a. f a -> f [a]
 demo_some = I.some
 

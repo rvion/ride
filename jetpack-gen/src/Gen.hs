@@ -6,10 +6,13 @@ import qualified Data.Map      as M
 import           Data.Monoid
 import           Gen.Cabal     (writeCabalFile)
 import           Gen.Iface
+import Data.Maybe
+import Text.Read
 import           Gen.Log
 import           Gen.Modules
 import           Gen.Names
 import           Gen.State
+import Data.Either
 import           Gen.Types
 import           Data.List (sort)
 
@@ -36,14 +39,25 @@ jetpackGen = do
   return ()
 
 data Reexport = Reexport
-  { reexportPrefix :: String
-  , reexportModule :: String
+  { as :: String
+  , mod :: String
   } deriving (Eq, Show, Read)
 
 parseReexports :: IO [(String, String)]
 parseReexports = do
   f <- readFile "imports.md"
-  return $ map ((\(x:y:_) -> (x,y)). words . drop 4) $ filter (isPrefixOf "  - ") $ lines f
+  x <- mapM myread $ lines f
+  print "  parsed:"
+  print $ concat ["total: ", show.length $ catMaybes x]
+  return $ map (\(Reexport a b) -> (a,b)) (catMaybes x)
+  where
+    myread :: String -> IO (Maybe Reexport)
+    myread line = do
+      let mbr = readMaybe line
+      case (mbr::Maybe Reexport) of
+        Just r -> asSuccess (putStrLn line)
+        Nothing -> asError (putStrLn line)
+      return mbr
 
 parseDeps :: IO [String]
 parseDeps = do
