@@ -12,6 +12,8 @@
 
 ### test purpose
 
+-- ReexportUnqualified {mod = "ReexportDemo"}
+
 ```haskell
 Reexport {as = "demo", mod = "ReexportDemo"}
 ```

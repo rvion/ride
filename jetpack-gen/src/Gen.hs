@@ -37,10 +37,15 @@ jetpackGen = do
   let reexportedPackages = ()
   return ()
 
-data Reexport = Reexport
-  { as  :: String
-  , mod :: String
-  } deriving (Eq, Show, Read)
+data Reexport
+  = Reexport
+    { as  :: String
+    , mod :: String
+    }
+  | ReexportUnqualified
+    { mod :: String
+    }
+  deriving (Eq, Show, Read)
 
 parseReexports :: IO [(String, String)]
 parseReexports = do
