@@ -7,6 +7,7 @@ import           Codec.Archive.Tar.Entry.AsTar as X
 import           Codec.Compression.GZip.AsGzip as X
 import           Control.Concurrent.STM.AsStm as X
 import           Control.Monad.IO.Class.AsTrans as X
+import           Control.Monad.State.Lazy.AsMtl as X
 import           Control.Monad.Trans.Class.AsTrans as X
 import           Control.Monad.Trans.State.Lazy.AsTrans as X
 import           Data.Aeson.AsJs as X
@@ -44,6 +45,7 @@ import           Options.Applicative.Builder.AsOpt as X
 import           Options.Applicative.Builder.Completer.AsOpt as X
 import           Options.Applicative.Common.AsOpt as X
 import           Options.Applicative.Extra.AsOpt as X
+import           ReexportDemo.AsDemo as X
 import           System.Console.ANSI.AsAnsi as X
 import           System.Environment.AsEnv as X
 import           Text.Megaparsec.AsMp as X

@@ -3,6 +3,10 @@
 :warning: WIP
 Please, __don't post anything on reddit for now__.
 
+
+PatternSynonyms https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/syntax-extns.html
+Pattern synonyms are enabled by the flag -XPatternSynonyms, which is required for defining them, but not for using them
+
 ### Input
 
 ```

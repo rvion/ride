@@ -37,7 +37,7 @@ type M = TransStateT Ctx IO
 
 webserver ::Ctx -> IO ()
 webserver _ctx = do
-  port <- maybe 3000 read <$> lookupEnv "PORT"
+  port <- maybe 3000 read <$> env_lookupEnv "PORT"
   spock_runSpock port $ spock_spockT (runM _ctx) ride
 
 runM :: Ctx -> M a -> IO a
@@ -64,7 +64,7 @@ ride = do
 
     spock_get ("hello2" <//> spock_var) $ \name -> do
       (Ctx{ctxDB}) <- trans_lift trans_get
-      spock_text $ t_pack . show $ map_find ctxDB name -- ("Hello " <> name <> "!")
+      spock_text $ t_pack . show $ map_findWithDefault "ok" ctxDB name -- ("Hello " <> name <> "!")
 
     spock_get ("search" <//> spock_var) $ \ _name -> do
       (Ctx{ctxConn}) <- trans_lift trans_get

@@ -44,6 +44,7 @@ Reexport {as = "stm", mod = "Control.Concurrent.STM"}
 Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
 Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
 Reexport {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}
+Reexport {as = "mtl", mod = "Control.Monad.State.Lazy"}
 ```
 
 ### Streaming
@@ -54,6 +55,12 @@ Reexport {as = "cl", mod = "Data.Conduit.List"}
 Reexport {as = "cb", mod = "Data.Conduit.Binary"}
 ```
 
+### Parsing (megaparsec)
+
+```haskell
+Reexport {as = "mp", mod = "Text.Megaparsec"}
+```
+
 ### compression
 
 ```haskell
@@ -61,31 +68,33 @@ Reexport {as = "tar", mod="Codec.Archive.Tar"}
 Reexport {as = "tar", mod="Codec.Archive.Tar.Entry"}
 Reexport {as = "tar", mod="Codec.Archive.Tar.Check"}
 Reexport {as = "gzip", mod = "Codec.Compression.GZip"}
+```
 
--- megaparsec
+### Cmd-line tools: (ansi colors, optoparse-applicative)
 
-Reexport {as = "mp", mod = "Text.Megaparsec"}
+  - Options.Applicative.Common:            Parser type and low-level parsing functionality.
+  - Options.Applicative.Builder:           Utilities to build parsers out of basic primitives.
+  - Options.Applicative.Builder.Completer: Common completion functions.
+  - Options.Applicative.Extra:             Utilities to run parsers and display a help text.
 
--- cmd line tools: ansi colors, optoparse-applicative
-
+```haskell
 Reexport {as = "ansi", mod = "System.Console.ANSI"}
 Reexport {as = "env", mod = "System.Environment"}
 Reexport {as = "opt", mod = "Options.Applicative.Common"}
 Reexport {as = "opt", mod = "Options.Applicative.Builder"}
 Reexport {as = "opt", mod = "Options.Applicative.Builder.Completer"}
 Reexport {as = "opt", mod = "Options.Applicative.Extra"}
--- | Options.Applicative.Common:            Parser type and low-level parsing functionality.
--- | Options.Applicative.Builder:           Utilities to build parsers out of basic primitives.
--- | Options.Applicative.Builder.Completer: Common completion functions.
--- | Options.Applicative.Extra:             Utilities to run parsers and display a help text.
+```
 
+### Lens (lens)
 
--- lens
-
+```haskell
 Reexport {as = "lens", mod = "Lens.Micro.Platform"}
+```
 
--- web: wai, aeson, spock
+### Web: (wai, aeson, spock)
 
+```haskell
 Reexport {as = "wai", mod = "Network.Wai"}
 Reexport {as = "wai", mod = "Network.Wai.Handler.Warp"}
 Reexport {as = "wai", mod = "Network.HTTP.Types.Status"}
@@ -101,16 +110,13 @@ Reexport {as = "ws", mod = "Network.WebSockets.Connection"}
 Reexport {as = "js", mod = "Data.Aeson"}
 Reexport {as = "js", mod = "Data.Aeson.Lens"}
 Reexport {as = "js", mod = "Data.Aeson.Types"}
+```
 # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
- -- monad transformers (as it's still the main idiom instead of freer monads)
+### test purpose
 
--- Reexport {as = "mtl", mod = "Control.Monad.State.Lazy"}
--- 
--- -- test purpose
--- 
--- Reexport {as = "demo", mod = "ReexportDemo"}
-
+```haskell
+Reexport {as = "demo", mod = "ReexportDemo"}
 ```
 
 

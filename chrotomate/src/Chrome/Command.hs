@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
 module Chrome.Command where
 import           JetPack
--- import           Data.Aeson
+import           Data.Aeson (ToJSON, FromJSON, toJSON, parseJSON, Value(..))
 -- import qualified Data.Aeson           as A
 -- import           Data.ByteString.Lazy (ByteString)
 -- import qualified Data.ByteString.Lazy as LBS
@@ -13,34 +14,38 @@ import           JetPack
 
 data Command = Command
   { commandId     :: Int
-  , commandMethod :: Text
-  , commandParams :: [(Text, Value)]
+  , commandMethod :: TText
+  , commandParams :: [(TText, JsValue)]
   } deriving (Show)
 
 instance ToJSON Command where
-  toJSON cmd = A.object
+  toJSON cmd = js_object
     [ "id"     .= commandId cmd
     , "method" .= commandMethod cmd
-    , "params" .= M.fromList (commandParams cmd)
+    , "params" .= map_fromList (commandParams cmd)
     ]
 
 data CommandResult = CommandResult
   { resultId    :: Int
-  , resultValue :: Value
+  , resultValue :: JsValue
   } deriving (Show)
 
+-- obj = Object
+pattern JsObject a <- Object a
+jsString = String
+
 instance FromJSON CommandResult where
-  parseJSON (Object v) = CommandResult
+  parseJSON (JsObject v) = CommandResult
     <$> v .: "id"
     <*> (v .: "result" >>= (.: "result") >>= (.: "value"))-- .: "result" .: "value"
 
 
 -- Chrome Remote actions
-goToPage :: Text ->  Command
+goToPage :: TText ->  Command
 goToPage page = Command
   { commandId     = 1
   , commandMethod = "Page.navigate"
-  , commandParams = [("url", A.String page)]
+  , commandParams = [("url", jsString page)]
   }
 
 searchName :: Text ->  Command
