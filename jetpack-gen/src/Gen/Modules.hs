@@ -85,7 +85,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   return [Nothing]
               | otherwise -> do
                   let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
-                  put ([_idPrefix,"mk", thename, " =  I.", thename, "-- constructor"])
+                  put ([_idPrefix,"mk'", thename, " =  I.", thename, "-- constructor"])
                   put (["pattern ", _typePrefix, thename, " ", tyVars, " <-  I.", thename, " ", tyVars])
                   return [Nothing]
             RClass n fns ->

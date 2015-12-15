@@ -67,43 +67,43 @@ gzip_noCompression = I.noCompression
 gzip_windowBits = I.windowBits
 
 type GzipCompressParams  = I.CompressParams
-gzip__mkCompressParams =  I.CompressParams-- constructor
+gzip_mk'CompressParams =  I.CompressParams-- constructor
 pattern GzipCompressParams a b c d e f g <-  I.CompressParams a b c d e f g
 type GzipDecompressParams  = I.DecompressParams
-gzip__mkDecompressParams =  I.DecompressParams-- constructor
+gzip_mk'DecompressParams =  I.DecompressParams-- constructor
 pattern GzipDecompressParams a b c <-  I.DecompressParams a b c
 type GzipCompressionLevel  = I.CompressionLevel
-gzip__mkDefaultCompression =  I.DefaultCompression-- constructor
+gzip_mk'DefaultCompression =  I.DefaultCompression-- constructor
 pattern GzipDefaultCompression  <-  I.DefaultCompression 
-gzip__mkNoCompression =  I.NoCompression-- constructor
+gzip_mk'NoCompression =  I.NoCompression-- constructor
 pattern GzipNoCompression  <-  I.NoCompression 
-gzip__mkBestSpeed =  I.BestSpeed-- constructor
+gzip_mk'BestSpeed =  I.BestSpeed-- constructor
 pattern GzipBestSpeed  <-  I.BestSpeed 
-gzip__mkBestCompression =  I.BestCompression-- constructor
+gzip_mk'BestCompression =  I.BestCompression-- constructor
 pattern GzipBestCompression  <-  I.BestCompression 
-gzip__mkCompressionLevel =  I.CompressionLevel-- constructor
+gzip_mk'CompressionLevel =  I.CompressionLevel-- constructor
 pattern GzipCompressionLevel a <-  I.CompressionLevel a
 type GzipCompressionStrategy  = I.CompressionStrategy
-gzip__mkDefaultStrategy =  I.DefaultStrategy-- constructor
+gzip_mk'DefaultStrategy =  I.DefaultStrategy-- constructor
 pattern GzipDefaultStrategy  <-  I.DefaultStrategy 
-gzip__mkFiltered =  I.Filtered-- constructor
+gzip_mk'Filtered =  I.Filtered-- constructor
 pattern GzipFiltered  <-  I.Filtered 
-gzip__mkHuffmanOnly =  I.HuffmanOnly-- constructor
+gzip_mk'HuffmanOnly =  I.HuffmanOnly-- constructor
 pattern GzipHuffmanOnly  <-  I.HuffmanOnly 
 type GzipMemoryLevel  = I.MemoryLevel
-gzip__mkDefaultMemoryLevel =  I.DefaultMemoryLevel-- constructor
+gzip_mk'DefaultMemoryLevel =  I.DefaultMemoryLevel-- constructor
 pattern GzipDefaultMemoryLevel  <-  I.DefaultMemoryLevel 
-gzip__mkMinMemoryLevel =  I.MinMemoryLevel-- constructor
+gzip_mk'MinMemoryLevel =  I.MinMemoryLevel-- constructor
 pattern GzipMinMemoryLevel  <-  I.MinMemoryLevel 
-gzip__mkMaxMemoryLevel =  I.MaxMemoryLevel-- constructor
+gzip_mk'MaxMemoryLevel =  I.MaxMemoryLevel-- constructor
 pattern GzipMaxMemoryLevel  <-  I.MaxMemoryLevel 
-gzip__mkMemoryLevel =  I.MemoryLevel-- constructor
+gzip_mk'MemoryLevel =  I.MemoryLevel-- constructor
 pattern GzipMemoryLevel a <-  I.MemoryLevel a
 type GzipMethod  = I.Method
-gzip__mkDeflated =  I.Deflated-- constructor
+gzip_mk'Deflated =  I.Deflated-- constructor
 pattern GzipDeflated  <-  I.Deflated 
 type GzipWindowBits  = I.WindowBits
-gzip__mkWindowBits =  I.WindowBits-- constructor
+gzip_mk'WindowBits =  I.WindowBits-- constructor
 pattern GzipWindowBits a <-  I.WindowBits a
-gzip__mkDefaultWindowBits =  I.DefaultWindowBits-- constructor
+gzip_mk'DefaultWindowBits =  I.DefaultWindowBits-- constructor
 pattern GzipDefaultWindowBits  <-  I.DefaultWindowBits 

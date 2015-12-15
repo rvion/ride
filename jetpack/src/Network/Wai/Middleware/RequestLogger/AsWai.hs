@@ -14,28 +14,28 @@ wai_mkRequestLogger = I.mkRequestLogger
 
 type WaiCallback  = I.Callback
 type WaiDestination  = I.Destination
-wai__mkHandle =  I.Handle-- constructor
+wai_mk'Handle =  I.Handle-- constructor
 pattern WaiHandle a <-  I.Handle a
-wai__mkLogger =  I.Logger-- constructor
+wai_mk'Logger =  I.Logger-- constructor
 pattern WaiLogger a <-  I.Logger a
-wai__mkCallback =  I.Callback-- constructor
+wai_mk'Callback =  I.Callback-- constructor
 pattern WaiCallback a <-  I.Callback a
 type WaiOutputFormat  = I.OutputFormat
-wai__mkApache =  I.Apache-- constructor
+wai_mk'Apache =  I.Apache-- constructor
 pattern WaiApache a <-  I.Apache a
-wai__mkDetailed =  I.Detailed-- constructor
+wai_mk'Detailed =  I.Detailed-- constructor
 pattern WaiDetailed a <-  I.Detailed a
-wai__mkCustomOutputFormat =  I.CustomOutputFormat-- constructor
+wai_mk'CustomOutputFormat =  I.CustomOutputFormat-- constructor
 pattern WaiCustomOutputFormat a <-  I.CustomOutputFormat a
-wai__mkCustomOutputFormatWithDetails =  I.CustomOutputFormatWithDetails-- constructor
+wai_mk'CustomOutputFormatWithDetails =  I.CustomOutputFormatWithDetails-- constructor
 pattern WaiCustomOutputFormatWithDetails a <-  I.CustomOutputFormatWithDetails a
 type WaiOutputFormatter  = I.OutputFormatter
 type WaiOutputFormatterWithDetails  = I.OutputFormatterWithDetails
 type WaiRequestLoggerSettings  = I.RequestLoggerSettings
 type WaiIPAddrSource  = I.IPAddrSource
-wai__mkFromSocket =  I.FromSocket-- constructor
+wai_mk'FromSocket =  I.FromSocket-- constructor
 pattern WaiFromSocket  <-  I.FromSocket 
-wai__mkFromHeader =  I.FromHeader-- constructor
+wai_mk'FromHeader =  I.FromHeader-- constructor
 pattern WaiFromHeader  <-  I.FromHeader 
-wai__mkFromFallback =  I.FromFallback-- constructor
+wai_mk'FromFallback =  I.FromFallback-- constructor
 pattern WaiFromFallback  <-  I.FromFallback 

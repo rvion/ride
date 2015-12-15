@@ -32,9 +32,9 @@ type DemoWrappedArrow a b c = I.WrappedArrow a b c
 type DemoWrappedMonad a b = I.WrappedMonad a b
 type DemoZipList a = I.ZipList a
 type DemoEither a b = I.Either a b
-demo__mkLeft =  I.Left-- constructor
+demo_mk'Left =  I.Left-- constructor
 pattern DemoLeft a <-  I.Left a
-demo__mkRight =  I.Right-- constructor
+demo_mk'Right =  I.Right-- constructor
 pattern DemoRight a <-  I.Right a
 -- demo_empty :: forall a. f a
 demo_empty = I.empty
@@ -65,11 +65,11 @@ demo_pure = I.pure
 
 type DemoAcc a b = I.Acc a b
 type DemoFoo  = I.Foo
-demo__mkFoo1 =  I.Foo1-- constructor
+demo_mk'Foo1 =  I.Foo1-- constructor
 pattern DemoFoo1 a <-  I.Foo1 a
-demo__mkFoo2 =  I.Foo2-- constructor
+demo_mk'Foo2 =  I.Foo2-- constructor
 pattern DemoFoo2 a b <-  I.Foo2 a b
 type DemoThisIsAType  = I.ThisIsAType
 type DemoYo a b = I.Yo a b
-demo__mkYo =  I.Yo-- constructor
+demo_mk'Yo =  I.Yo-- constructor
 pattern DemoYo a b c <-  I.Yo a b c

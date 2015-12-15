@@ -67,5 +67,5 @@ t_streamDecodeUtf8 = I.streamDecodeUtf8
 t_streamDecodeUtf8With = I.streamDecodeUtf8With
 
 type TDecoding  = I.Decoding
-t__mkSome =  I.Some-- constructor
+t_mk'Some =  I.Some-- constructor
 pattern TSome a b c <-  I.Some a b c

@@ -62,13 +62,13 @@ wai_unsafeStaticPolicy' = I.unsafeStaticPolicy'
 
 type WaiCacheContainer  = I.CacheContainer
 type WaiCachingStrategy  = I.CachingStrategy
-wai__mkNoCaching =  I.NoCaching-- constructor
+wai_mk'NoCaching =  I.NoCaching-- constructor
 pattern WaiNoCaching  <-  I.NoCaching 
-wai__mkPublicStaticCaching =  I.PublicStaticCaching-- constructor
+wai_mk'PublicStaticCaching =  I.PublicStaticCaching-- constructor
 pattern WaiPublicStaticCaching  <-  I.PublicStaticCaching 
-wai__mkCustomCaching =  I.CustomCaching-- constructor
+wai_mk'CustomCaching =  I.CustomCaching-- constructor
 pattern WaiCustomCaching a <-  I.CustomCaching a
 type WaiFileMeta  = I.FileMeta
-wai__mkFileMeta =  I.FileMeta-- constructor
+wai_mk'FileMeta =  I.FileMeta-- constructor
 pattern WaiFileMeta a b c <-  I.FileMeta a b c
 type WaiPolicy  = I.Policy

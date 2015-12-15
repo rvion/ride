@@ -164,12 +164,12 @@ type OptFlagFields a = I.FlagFields a
 type OptMod a b = I.Mod a b
 type OptOptionFields a = I.OptionFields a
 type OptParseError  = I.ParseError
-opt__mkErrorMsg =  I.ErrorMsg-- constructor
+opt_mk'ErrorMsg =  I.ErrorMsg-- constructor
 pattern OptErrorMsg a <-  I.ErrorMsg a
-opt__mkInfoMsg =  I.InfoMsg-- constructor
+opt_mk'InfoMsg =  I.InfoMsg-- constructor
 pattern OptInfoMsg a <-  I.InfoMsg a
-opt__mkShowHelpText =  I.ShowHelpText-- constructor
+opt_mk'ShowHelpText =  I.ShowHelpText-- constructor
 pattern OptShowHelpText  <-  I.ShowHelpText 
-opt__mkUnknownError =  I.UnknownError-- constructor
+opt_mk'UnknownError =  I.UnknownError-- constructor
 pattern OptUnknownError  <-  I.UnknownError 
 type OptReadM a = I.ReadM a

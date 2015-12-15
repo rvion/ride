@@ -13,20 +13,20 @@ tar_checkSecurity = I.checkSecurity
 tar_checkTarbomb = I.checkTarbomb
 
 type TarFileNameError  = I.FileNameError
-tar__mkInvalidFileName =  I.InvalidFileName-- constructor
+tar_mk'InvalidFileName =  I.InvalidFileName-- constructor
 pattern TarInvalidFileName a <-  I.InvalidFileName a
-tar__mkAbsoluteFileName =  I.AbsoluteFileName-- constructor
+tar_mk'AbsoluteFileName =  I.AbsoluteFileName-- constructor
 pattern TarAbsoluteFileName a <-  I.AbsoluteFileName a
 type TarPortabilityError  = I.PortabilityError
-tar__mkNonPortableFormat =  I.NonPortableFormat-- constructor
+tar_mk'NonPortableFormat =  I.NonPortableFormat-- constructor
 pattern TarNonPortableFormat a <-  I.NonPortableFormat a
-tar__mkNonPortableFileType =  I.NonPortableFileType-- constructor
+tar_mk'NonPortableFileType =  I.NonPortableFileType-- constructor
 pattern TarNonPortableFileType  <-  I.NonPortableFileType 
-tar__mkNonPortableEntryNameChar =  I.NonPortableEntryNameChar-- constructor
+tar_mk'NonPortableEntryNameChar =  I.NonPortableEntryNameChar-- constructor
 pattern TarNonPortableEntryNameChar a <-  I.NonPortableEntryNameChar a
-tar__mkNonPortableFileName =  I.NonPortableFileName-- constructor
+tar_mk'NonPortableFileName =  I.NonPortableFileName-- constructor
 pattern TarNonPortableFileName a b <-  I.NonPortableFileName a b
 type TarPortabilityPlatform  = I.PortabilityPlatform
 type TarTarBombError  = I.TarBombError
-tar__mkTarBombError =  I.TarBombError-- constructor
+tar_mk'TarBombError =  I.TarBombError-- constructor
 pattern TarTarBombError a <-  I.TarBombError a

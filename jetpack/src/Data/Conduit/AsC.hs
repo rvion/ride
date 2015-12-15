@@ -145,9 +145,9 @@ type CConduit a b c = I.Conduit a b c
 type CConduitM a b c d = I.ConduitM a b c d
 type CConsumer a b c = I.Consumer a b c
 type CFlush a = I.Flush a
-c__mkChunk =  I.Chunk-- constructor
+c_mk'Chunk =  I.Chunk-- constructor
 pattern CChunk a <-  I.Chunk a
-c__mkFlush =  I.Flush-- constructor
+c_mk'Flush =  I.Flush-- constructor
 pattern CFlush  <-  I.Flush 
 type CProducer a b = I.Producer a b
 type CResumableConduit a b c = I.ResumableConduit a b c

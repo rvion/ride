@@ -40,44 +40,44 @@ tar_unpack = I.unpack
 tar_write = I.write
 
 type TarFormatError  = I.FormatError
-tar__mkTruncatedArchive =  I.TruncatedArchive-- constructor
+tar_mk'TruncatedArchive =  I.TruncatedArchive-- constructor
 pattern TarTruncatedArchive  <-  I.TruncatedArchive 
-tar__mkShortTrailer =  I.ShortTrailer-- constructor
+tar_mk'ShortTrailer =  I.ShortTrailer-- constructor
 pattern TarShortTrailer  <-  I.ShortTrailer 
-tar__mkBadTrailer =  I.BadTrailer-- constructor
+tar_mk'BadTrailer =  I.BadTrailer-- constructor
 pattern TarBadTrailer  <-  I.BadTrailer 
-tar__mkTrailingJunk =  I.TrailingJunk-- constructor
+tar_mk'TrailingJunk =  I.TrailingJunk-- constructor
 pattern TarTrailingJunk  <-  I.TrailingJunk 
-tar__mkChecksumIncorrect =  I.ChecksumIncorrect-- constructor
+tar_mk'ChecksumIncorrect =  I.ChecksumIncorrect-- constructor
 pattern TarChecksumIncorrect  <-  I.ChecksumIncorrect 
-tar__mkNotTarFormat =  I.NotTarFormat-- constructor
+tar_mk'NotTarFormat =  I.NotTarFormat-- constructor
 pattern TarNotTarFormat  <-  I.NotTarFormat 
-tar__mkUnrecognisedTarFormat =  I.UnrecognisedTarFormat-- constructor
+tar_mk'UnrecognisedTarFormat =  I.UnrecognisedTarFormat-- constructor
 pattern TarUnrecognisedTarFormat  <-  I.UnrecognisedTarFormat 
-tar__mkHeaderBadNumericEncoding =  I.HeaderBadNumericEncoding-- constructor
+tar_mk'HeaderBadNumericEncoding =  I.HeaderBadNumericEncoding-- constructor
 pattern TarHeaderBadNumericEncoding  <-  I.HeaderBadNumericEncoding 
 type TarEntries a = I.Entries a
-tar__mkNext =  I.Next-- constructor
+tar_mk'Next =  I.Next-- constructor
 pattern TarNext a b <-  I.Next a b
-tar__mkDone =  I.Done-- constructor
+tar_mk'Done =  I.Done-- constructor
 pattern TarDone  <-  I.Done 
-tar__mkFail =  I.Fail-- constructor
+tar_mk'Fail =  I.Fail-- constructor
 pattern TarFail a <-  I.Fail a
 type TarEntry  = I.Entry
 type TarEntryContent  = I.EntryContent
-tar__mkNormalFile =  I.NormalFile-- constructor
+tar_mk'NormalFile =  I.NormalFile-- constructor
 pattern TarNormalFile a b <-  I.NormalFile a b
-tar__mkDirectory =  I.Directory-- constructor
+tar_mk'Directory =  I.Directory-- constructor
 pattern TarDirectory  <-  I.Directory 
-tar__mkSymbolicLink =  I.SymbolicLink-- constructor
+tar_mk'SymbolicLink =  I.SymbolicLink-- constructor
 pattern TarSymbolicLink a <-  I.SymbolicLink a
-tar__mkHardLink =  I.HardLink-- constructor
+tar_mk'HardLink =  I.HardLink-- constructor
 pattern TarHardLink a <-  I.HardLink a
-tar__mkCharacterDevice =  I.CharacterDevice-- constructor
+tar_mk'CharacterDevice =  I.CharacterDevice-- constructor
 pattern TarCharacterDevice a b <-  I.CharacterDevice a b
-tar__mkBlockDevice =  I.BlockDevice-- constructor
+tar_mk'BlockDevice =  I.BlockDevice-- constructor
 pattern TarBlockDevice a b <-  I.BlockDevice a b
-tar__mkNamedPipe =  I.NamedPipe-- constructor
+tar_mk'NamedPipe =  I.NamedPipe-- constructor
 pattern TarNamedPipe  <-  I.NamedPipe 
-tar__mkOtherEntryType =  I.OtherEntryType-- constructor
+tar_mk'OtherEntryType =  I.OtherEntryType-- constructor
 pattern TarOtherEntryType a b c <-  I.OtherEntryType a b c

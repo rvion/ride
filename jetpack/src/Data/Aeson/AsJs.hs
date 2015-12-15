@@ -91,20 +91,20 @@ type JsArray  = I.Array
 type JsDotNetTime  = I.DotNetTime
 type JsObject  = I.Object
 type JsResult a = I.Result a
-js__mkError =  I.Error-- constructor
+js_mk'Error =  I.Error-- constructor
 pattern JsError a <-  I.Error a
-js__mkSuccess =  I.Success-- constructor
+js_mk'Success =  I.Success-- constructor
 pattern JsSuccess a <-  I.Success a
 type JsValue  = I.Value
-js__mkObject =  I.Object-- constructor
+js_mk'Object =  I.Object-- constructor
 pattern JsObject a <-  I.Object a
-js__mkArray =  I.Array-- constructor
+js_mk'Array =  I.Array-- constructor
 pattern JsArray a <-  I.Array a
-js__mkString =  I.String-- constructor
+js_mk'String =  I.String-- constructor
 pattern JsString a <-  I.String a
-js__mkNumber =  I.Number-- constructor
+js_mk'Number =  I.Number-- constructor
 pattern JsNumber a <-  I.Number a
-js__mkBool =  I.Bool-- constructor
+js_mk'Bool =  I.Bool-- constructor
 pattern JsBool a <-  I.Bool a
-js__mkNull =  I.Null-- constructor
+js_mk'Null =  I.Null-- constructor
 pattern JsNull  <-  I.Null 
