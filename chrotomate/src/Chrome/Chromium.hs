@@ -48,16 +48,3 @@ jsEval code = js_encode $ js_object ["command" .= ("evaluate_javascript"::String
 -- Helpers
 str :: String -> String
 str a = concat ["\"", a, "\""]
-
-
-
-
-
-(&) = flip ($)
-
-
-
-
-
-
-

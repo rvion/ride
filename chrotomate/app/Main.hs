@@ -31,7 +31,7 @@ getChromiumPageInfo port = do
 main :: IO ()
 main = do
   Opts _dbpath <- opt_execParser fullopts
-  hSetBuffering stdin NoBuffering
+  env_hSetBuffering env_stdin EnvNoBuffering
 
   _dbExists <- doesFileExist _dbpath
   _db <- if _dbExists then read <$> SIO.readFile _dbpath else return (map_fromList [])

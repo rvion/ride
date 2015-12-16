@@ -88,6 +88,8 @@ Reexport {as = "gzip", mod = "Codec.Compression.GZip"}
 
 ```haskell
 Reexport {as = "ansi", mod = "System.Console.ANSI"}
+Reexport {as = "env", mod = "System.IO"}
+Reexport {as = "env", mod = "System.Directory"}
 Reexport {as = "env", mod = "System.Environment"}
 Reexport {as = "env", mod = "System.Exit"}
 Reexport {as = "env", mod = "System.Process"}
@@ -164,3 +166,4 @@ Reexport {as = "lens", mod = "Lens.Micro.Platform"}
   * process
   * http-conduit
   * network-uri
+  * directory

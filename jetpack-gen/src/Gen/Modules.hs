@@ -80,7 +80,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                 asWarning $ putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
                 return [Nothing]
             | otherwise -> do
-                print (rName, zip rConFields rTyVars)
+                -- print (rName, zip rConFields rTyVars)
                 let tyVars = intersperse ' ' $ take rNbTyVars ['a'..'z']
                 let constrType = intercalate " -> " (rTyVars ++ [rName])
                 let conName = concat [_idPrefix,"mk'", rName]
