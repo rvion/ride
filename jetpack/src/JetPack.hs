@@ -10,3 +10,6 @@ module JetPack
 -- import           BasePrelude as X
 import           Exports as X hiding (yield, (!!), (&), (++), (<$!>), (<$>), (<**>), (<=<), (<>), (<|>), (=<<), (>=>),
                                (\\))
+
+(&) = flip ($)
+

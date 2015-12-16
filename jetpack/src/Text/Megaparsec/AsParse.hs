@@ -230,14 +230,30 @@ parse_mk'Message =  I.Message
 pattern ParseMessage a <-  I.Message a
 
 type ParseParseError  = I.ParseError
+get_parse_errorPos o = I.errorPos o
+set_parse_errorPos x o = o { I.errorPos = x}
+get_parse_errorMessages o = I.errorMessages o
+set_parse_errorMessages x o = o { I.errorMessages = x}
 
 type ParseSourcePos  = I.SourcePos
+get_parse_sourceName o = I.sourceName o
+set_parse_sourceName x o = o { I.sourceName = x}
+get_parse_sourceLine o = I.sourceLine o
+set_parse_sourceLine x o = o { I.sourceLine = x}
+get_parse_sourceColumn o = I.sourceColumn o
+set_parse_sourceColumn x o = o { I.sourceColumn = x}
 
 type ParseParsec a = I.Parsec a
 
 type ParseParsecT a b c = I.ParsecT a b c
 
 type ParseState a = I.State a
+get_parse_stateInput o = I.stateInput o
+set_parse_stateInput x o = o { I.stateInput = x}
+get_parse_statePos o = I.statePos o
+set_parse_statePos x o = o { I.statePos = x}
+get_parse_stateTabWidth o = I.stateTabWidth o
+set_parse_stateTabWidth x o = o { I.stateTabWidth = x}
 
 -- constructor :: s -> SourcePos -> Int -> State
 parse_mk'State =  I.State

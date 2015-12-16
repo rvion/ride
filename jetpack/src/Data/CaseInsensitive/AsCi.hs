@@ -15,3 +15,7 @@ ci_map = I.map
 ci_mk = I.mk
 
 type CiCI a = I.CI a
+get_ci_original o = I.original o
+set_ci_original x o = o { I.original = x}
+get_ci_foldedCase o = I.foldedCase o
+set_ci_foldedCase x o = o { I.foldedCase = x}

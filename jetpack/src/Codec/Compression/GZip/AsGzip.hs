@@ -70,12 +70,32 @@ gzip_noCompression = I.noCompression
 gzip_windowBits = I.windowBits
 
 type GzipCompressParams  = I.CompressParams
+get_gzip_compressLevel o = I.compressLevel o
+set_gzip_compressLevel x o = o { I.compressLevel = x}
+get_gzip_compressMethod o = I.compressMethod o
+set_gzip_compressMethod x o = o { I.compressMethod = x}
+get_gzip_compressWindowBits o = I.compressWindowBits o
+set_gzip_compressWindowBits x o = o { I.compressWindowBits = x}
+get_gzip_compressMemoryLevel o = I.compressMemoryLevel o
+set_gzip_compressMemoryLevel x o = o { I.compressMemoryLevel = x}
+get_gzip_compressStrategy o = I.compressStrategy o
+set_gzip_compressStrategy x o = o { I.compressStrategy = x}
+get_gzip_compressBufferSize o = I.compressBufferSize o
+set_gzip_compressBufferSize x o = o { I.compressBufferSize = x}
+get_gzip_compressDictionary o = I.compressDictionary o
+set_gzip_compressDictionary x o = o { I.compressDictionary = x}
 
 -- constructor :: CompressionLevel -> Method -> WindowBits -> MemoryLevel -> CompressionStrategy -> Int -> Maybe ByteString -> CompressParams
 gzip_mk'CompressParams =  I.CompressParams
 pattern GzipCompressParams a b c d e f g <-  I.CompressParams a b c d e f g
 
 type GzipDecompressParams  = I.DecompressParams
+get_gzip_decompressWindowBits o = I.decompressWindowBits o
+set_gzip_decompressWindowBits x o = o { I.decompressWindowBits = x}
+get_gzip_decompressBufferSize o = I.decompressBufferSize o
+set_gzip_decompressBufferSize x o = o { I.decompressBufferSize = x}
+get_gzip_decompressDictionary o = I.decompressDictionary o
+set_gzip_decompressDictionary x o = o { I.decompressDictionary = x}
 
 -- constructor :: WindowBits -> Int -> Maybe ByteString -> DecompressParams
 gzip_mk'DecompressParams =  I.DecompressParams

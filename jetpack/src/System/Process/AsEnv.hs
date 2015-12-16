@@ -89,6 +89,24 @@ env_mk'RawCommand =  I.RawCommand
 pattern EnvRawCommand a b <-  I.RawCommand a b
 
 type EnvCreateProcess  = I.CreateProcess
+get_env_cmdspec o = I.cmdspec o
+set_env_cmdspec x o = o { I.cmdspec = x}
+get_env_cwd o = I.cwd o
+set_env_cwd x o = o { I.cwd = x}
+get_env_env o = I.env o
+set_env_env x o = o { I.env = x}
+get_env_std_in o = I.std_in o
+set_env_std_in x o = o { I.std_in = x}
+get_env_std_out o = I.std_out o
+set_env_std_out x o = o { I.std_out = x}
+get_env_std_err o = I.std_err o
+set_env_std_err x o = o { I.std_err = x}
+get_env_close_fds o = I.close_fds o
+set_env_close_fds x o = o { I.close_fds = x}
+get_env_create_group o = I.create_group o
+set_env_create_group x o = o { I.create_group = x}
+get_env_delegate_ctlc o = I.delegate_ctlc o
+set_env_delegate_ctlc x o = o { I.delegate_ctlc = x}
 
 -- constructor :: CmdSpec -> Maybe FilePath -> Maybe [(String, String)] -> StdStream -> StdStream -> StdStream -> Bool -> Bool -> Bool -> CreateProcess
 env_mk'CreateProcess =  I.CreateProcess

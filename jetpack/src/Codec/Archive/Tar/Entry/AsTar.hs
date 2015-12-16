@@ -82,6 +82,14 @@ pattern TarGnuFormat  <-  I.GnuFormat
 type TarLinkTarget  = I.LinkTarget
 
 type TarOwnership  = I.Ownership
+get_tar_ownerName o = I.ownerName o
+set_tar_ownerName x o = o { I.ownerName = x}
+get_tar_groupName o = I.groupName o
+set_tar_groupName x o = o { I.groupName = x}
+get_tar_ownerId o = I.ownerId o
+set_tar_ownerId x o = o { I.ownerId = x}
+get_tar_groupId o = I.groupId o
+set_tar_groupId x o = o { I.groupId = x}
 
 -- constructor :: String -> String -> Int -> Int -> Ownership
 tar_mk'Ownership =  I.Ownership

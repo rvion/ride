@@ -89,7 +89,8 @@ findReexports (mod, modules) previouslyExportedSymbols =
         return $ Map.insert x (mkIfaceDeclMap toSDoc ifa) m
       Nothing -> return m) Map.empty allNecessaryModules
 
-  -- liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
+  liftIO . putStrLn $ concat ["\n  Exports are ", toS ifaceExports]
+  -- error "ok"
 
   -- liftIO . putStrLn $ concat ["  exports are ", toS (nub $ catMaybes $ map nameModule_maybe (concatMap availNames ifaceExports))]
   -- liftIO . putStrLn $ concat ["\n  Names are ", toS (map nameOccName allAvailNames)]
@@ -163,23 +164,31 @@ findReexports (mod, modules) previouslyExportedSymbols =
         RId
           (toS n)
           (onOneLine $ toS (ifType _t))
-      Just (_t@(IfaceData{}), exportedNames) -> Just
+      Just (_t@(IfaceData{}), exportedNames) -> -- if (toS n /= "Request") then Nothing else
+       Just
         RData
           { rName = toS n
           , rType = onOneLine $ toS (ifType _t)
           , rNbTyVars = length (ifTyVars _t)
           , rDataTyCon = case ifCons _t of
               IfDataTyCon cons -> -- mapMaybe (undefined)
-                catMaybes $ for cons $ \ con -> -- error (toS (ifConOcc con) ++ (toSDoc $ pprIfCon con))$
-                  if ifConOcc con `elem` map nameOccName exportedNames
-                  then Just
+                catMaybes $ for cons $ \ con -> Just -- error (toS (ifConOcc con) ++ (toSDoc $ pprIfCon con))$
+                  -- if ifConOcc con `elem` map nameOccName exportedNames
+                  -- then traceShow ("exported", toS (ifConOcc con)) $ Just
                     RDataCon
                       { rName = toS (ifConOcc con)
-                      , rTyVars = map toS (ifConArgTys con)
-                      , rNbTyVars = length $ ifConArgTys con
-                    }
-                  else Nothing
-              _ -> []
+                      , rTyVars = map toS   (ifConArgTys con)
+                      , rNbTyVars = length $ ifConArgTys con -- duplicata
+                      , rConFields = map toS $ filter (\x -> x `elem` map nameOccName exportedNames) (ifConFields con)
+                      , rConIsReexported = (ifConOcc con) `elem` (map nameOccName exportedNames)
+                      }
+                  -- else traceShow (
+                  --   "not exported"
+                  --   , toS$ifConOcc con
+                  --   , toS$map nameOccName exportedNames
+                  --   , for (ifConFields con) $ \x -> x `elem` map nameOccName exportedNames
+                  --   ) Nothing
+              x -> [] -- error (toS x)
           }
       Just (_t@(IfaceSynonym{}), exportedNames) -> Just
         RData
@@ -279,4 +288,17 @@ pprIfCon x = vcat
   , ppr (ifConArgTys x)
   , ppr (ifConFields x)
   -- , ppr (ifConStricts x)
+  ]
+
+pprIfaceData x = vcat
+  [ ppr (ifName x)
+  , ppr (ifCType x)
+  , ppr (ifTyVars x)
+  , ppr (ifRoles x)
+  , ppr (ifCtxt x)
+  -- , ppr (ifCons x)
+  , ppr (ifRec x)
+  , ppr (ifPromotable x)
+  , ppr (ifGadtSyntax x)
+  , ppr (ifParent x)
   ]

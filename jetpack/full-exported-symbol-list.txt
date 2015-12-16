@@ -6,11 +6,23 @@ pattern DemoDD
 DemoFoo
 demo_mk'Foo1
 pattern DemoFoo1
+get_demo_test
+set_demo_test
 demo_mk'Foo2
 pattern DemoFoo2
+get_demo_test
+set_demo_test
+get_demo_bar
+set_demo_bar
 DemoYo
 demo_mk'Yo
 pattern DemoYo
+get_demo_aa
+set_demo_aa
+get_demo_bb
+set_demo_bb
+get_demo_cc
+set_demo_cc
 !
 \\
 map_assocs
@@ -288,6 +300,10 @@ foldCase
 ci_map
 ci_mk
 CiCI
+get_ci_original
+set_ci_original
+get_ci_foldedCase
+set_ci_foldedCase
 hm_delete
 hm_difference
 hm_elems
@@ -1557,12 +1573,28 @@ pattern ParseExpected
 parse_mk'Message
 pattern ParseMessage
 ParseParseError
+get_parse_errorPos
+set_parse_errorPos
+get_parse_errorMessages
+set_parse_errorMessages
 ParseSourcePos
+get_parse_sourceName
+set_parse_sourceName
+get_parse_sourceLine
+set_parse_sourceLine
+get_parse_sourceColumn
+set_parse_sourceColumn
 ParseParsec
 ParseParsecT
 ParseState
 parse_mk'State
 pattern ParseState
+get_parse_stateInput
+set_parse_stateInput
+get_parse_statePos
+set_parse_statePos
+get_parse_stateTabWidth
+set_parse_stateTabWidth
 tar_append
 tar_create
 tar_extract
@@ -1600,6 +1632,8 @@ pattern TarDone
 tar_mk'Fail
 pattern TarFail
 TarEntry
+get_tar_entryContent
+set_tar_entryContent
 TarEntryContent
 tar_mk'NormalFile
 pattern TarNormalFile
@@ -1649,6 +1683,14 @@ TarLinkTarget
 TarOwnership
 tar_mk'Ownership
 pattern TarOwnership
+get_tar_ownerName
+set_tar_ownerName
+get_tar_groupName
+set_tar_groupName
+get_tar_ownerId
+set_tar_ownerId
+get_tar_groupId
+set_tar_groupId
 TarPermissions
 TarTarPath
 TarTypeCode
@@ -1697,9 +1739,29 @@ gzip_windowBits
 GzipCompressParams
 gzip_mk'CompressParams
 pattern GzipCompressParams
+get_gzip_compressLevel
+set_gzip_compressLevel
+get_gzip_compressMethod
+set_gzip_compressMethod
+get_gzip_compressWindowBits
+set_gzip_compressWindowBits
+get_gzip_compressMemoryLevel
+set_gzip_compressMemoryLevel
+get_gzip_compressStrategy
+set_gzip_compressStrategy
+get_gzip_compressBufferSize
+set_gzip_compressBufferSize
+get_gzip_compressDictionary
+set_gzip_compressDictionary
 GzipDecompressParams
 gzip_mk'DecompressParams
 pattern GzipDecompressParams
+get_gzip_decompressWindowBits
+set_gzip_decompressWindowBits
+get_gzip_decompressBufferSize
+set_gzip_decompressBufferSize
+get_gzip_decompressDictionary
+set_gzip_decompressDictionary
 GzipCompressionLevel
 gzip_mk'DefaultCompression
 pattern GzipDefaultCompression
@@ -1912,6 +1974,24 @@ pattern EnvRawCommand
 EnvCreateProcess
 env_mk'CreateProcess
 pattern EnvCreateProcess
+get_env_cmdspec
+set_env_cmdspec
+get_env_cwd
+set_env_cwd
+get_env_env
+set_env_env
+get_env_std_in
+set_env_std_in
+get_env_std_out
+set_env_std_out
+get_env_std_err
+set_env_std_err
+get_env_close_fds
+set_env_close_fds
+get_env_create_group
+set_env_create_group
+get_env_delegate_ctlc
+set_env_delegate_ctlc
 EnvProcessHandle
 EnvStdStream
 env_mk'Inherit
@@ -1933,9 +2013,33 @@ OptParser
 OptParserInfo
 opt_mk'ParserInfo
 pattern OptParserInfo
+get_opt_infoParser
+set_opt_infoParser
+get_opt_infoFullDesc
+set_opt_infoFullDesc
+get_opt_infoProgDesc
+set_opt_infoProgDesc
+get_opt_infoHeader
+set_opt_infoHeader
+get_opt_infoFooter
+set_opt_infoFooter
+get_opt_infoFailureCode
+set_opt_infoFailureCode
+get_opt_infoIntersperse
+set_opt_infoIntersperse
 OptParserPrefs
 opt_mk'ParserPrefs
 pattern OptParserPrefs
+get_opt_prefMultiSuffix
+set_opt_prefMultiSuffix
+get_opt_prefDisambiguate
+set_opt_prefDisambiguate
+get_opt_prefShowHelpOnError
+set_opt_prefShowHelpOnError
+get_opt_prefBacktrack
+set_opt_prefBacktrack
+get_opt_prefColumns
+set_opt_prefColumns
 mappend
 <>
 opt_abortOption
@@ -2047,7 +2151,41 @@ WaiMiddleware
 WaiFilePart
 wai_mk'FilePart
 pattern WaiFilePart
+get_wai_filePartOffset
+set_wai_filePartOffset
+get_wai_filePartByteCount
+set_wai_filePartByteCount
+get_wai_filePartFileSize
+set_wai_filePartFileSize
 WaiRequest
+get_wai_requestMethod
+set_wai_requestMethod
+get_wai_httpVersion
+set_wai_httpVersion
+get_wai_rawPathInfo
+set_wai_rawPathInfo
+get_wai_rawQueryString
+set_wai_rawQueryString
+get_wai_requestHeaders
+set_wai_requestHeaders
+get_wai_isSecure
+set_wai_isSecure
+get_wai_remoteHost
+set_wai_remoteHost
+get_wai_pathInfo
+set_wai_pathInfo
+get_wai_queryString
+set_wai_queryString
+get_wai_requestBody
+set_wai_requestBody
+get_wai_vault
+set_wai_vault
+get_wai_requestBodyLength
+set_wai_requestBodyLength
+get_wai_requestHeaderHost
+set_wai_requestHeaderHost
+get_wai_requestHeaderRange
+set_wai_requestHeaderRange
 WaiRequestBodyLength
 wai_mk'ChunkedBody
 pattern WaiChunkedBody
@@ -2132,6 +2270,14 @@ WaiRefresh
 WaiFileInfo
 wai_mk'FileInfo
 pattern WaiFileInfo
+get_wai_fileInfoName
+set_wai_fileInfoName
+get_wai_fileInfoSize
+set_wai_fileInfoSize
+get_wai_fileInfoTime
+set_wai_fileInfoTime
+get_wai_fileInfoDate
+set_wai_fileInfoDate
 WaiIndexedHeader
 WaiSettings
 WaiHandle
@@ -2145,13 +2291,43 @@ WaiBuffer
 WaiConnection
 wai_mk'Connection
 pattern WaiConnection
+get_wai_connSendMany
+set_wai_connSendMany
+get_wai_connSendAll
+set_wai_connSendAll
+get_wai_connSendFile
+set_wai_connSendFile
+get_wai_connClose
+set_wai_connClose
+get_wai_connRecv
+set_wai_connRecv
+get_wai_connRecvBuf
+set_wai_connRecvBuf
+get_wai_connWriteBuffer
+set_wai_connWriteBuffer
+get_wai_connBufferSize
+set_wai_connBufferSize
 WaiFileId
 wai_mk'FileId
 pattern WaiFileId
+get_wai_fileIdPath
+set_wai_fileIdPath
+get_wai_fileIdFd
+set_wai_fileIdFd
 WaiHeaderValue
 WaiInternalInfo
 wai_mk'InternalInfo
 pattern WaiInternalInfo
+get_wai_threadHandle
+set_wai_threadHandle
+get_wai_timeoutManager
+set_wai_timeoutManager
+get_wai_fdCacher
+set_wai_fdCacher
+get_wai_fileInfo
+set_wai_fileInfo
+get_wai_dateCacher
+set_wai_dateCacher
 WaiInvalidRequest
 wai_mk'NotEnoughLines
 pattern WaiNotEnoughLines
@@ -2175,6 +2351,14 @@ wai_mk'TCP
 pattern WaiTCP
 wai_mk'TLS
 pattern WaiTLS
+get_wai_tlsMajorVersion
+set_wai_tlsMajorVersion
+get_wai_tlsMinorVersion
+set_wai_tlsMinorVersion
+get_wai_tlsNegotiatedProtocol
+set_wai_tlsNegotiatedProtocol
+get_wai_tlsChiperID
+set_wai_tlsChiperID
 wai_accepted202
 wai_badGateway502
 wai_badRequest400
@@ -2274,6 +2458,10 @@ wai_useProxy305
 WaiStatus
 wai_mk'Status
 pattern WaiStatus
+get_wai_statusCode
+set_wai_statusCode
+get_wai_statusMessage
+set_wai_statusMessage
 wai_logStdout
 wai_logStdoutDev
 wai_mkRequestLogger
@@ -2297,6 +2485,12 @@ pattern WaiCustomOutputFormatWithDetails
 WaiOutputFormatter
 WaiOutputFormatterWithDetails
 WaiRequestLoggerSettings
+get_wai_outputFormat
+set_wai_outputFormat
+get_wai_autoFlush
+set_wai_autoFlush
+get_wai_destination
+set_wai_destination
 WaiIPAddrSource
 wai_mk'FromSocket
 pattern WaiFromSocket
@@ -2334,6 +2528,12 @@ pattern WaiCustomCaching
 WaiFileMeta
 wai_mk'FileMeta
 pattern WaiFileMeta
+get_wai_fm_lastModified
+set_wai_fm_lastModified
+get_wai_fm_etag
+set_wai_fm_etag
+get_wai_fm_fileName
+set_wai_fm_fileName
 WaiPolicy
 spock_runForm
 HasSpock
@@ -2425,12 +2625,34 @@ pattern SpockCookieValidForSession
 SpockCookieSettings
 spock_mk'CookieSettings
 pattern SpockCookieSettings
+get_spock_cs_EOL
+set_spock_cs_EOL
+get_spock_cs_path
+set_spock_cs_path
+get_spock_cs_domain
+set_spock_cs_domain
+get_spock_cs_HTTPOnly
+set_spock_cs_HTTPOnly
+get_spock_cs_secure
+set_spock_cs_secure
 SpockConnBuilder
 spock_mk'ConnBuilder
 pattern SpockConnBuilder
+get_spock_cb_createConn
+set_spock_cb_createConn
+get_spock_cb_destroyConn
+set_spock_cb_destroyConn
+get_spock_cb_poolConfiguration
+set_spock_cb_poolConfiguration
 SpockPoolCfg
 spock_mk'PoolCfg
 pattern SpockPoolCfg
+get_spock_pc_stripes
+set_spock_pc_stripes
+get_spock_pc_resPerStripe
+set_spock_pc_resPerStripe
+get_spock_pc_keepOpenTime
+set_spock_pc_keepOpenTime
 SpockPoolOrConn
 spock_mk'PCPool
 pattern SpockPCPool
@@ -2441,18 +2663,48 @@ pattern SpockPCNoDatabase
 SpockSessionCfg
 spock_mk'SessionCfg
 pattern SpockSessionCfg
+get_spock_sc_cookieName
+set_spock_sc_cookieName
+get_spock_sc_sessionTTL
+set_spock_sc_sessionTTL
+get_spock_sc_sessionIdEntropy
+set_spock_sc_sessionIdEntropy
+get_spock_sc_sessionExpandTTL
+set_spock_sc_sessionExpandTTL
+get_spock_sc_emptySession
+set_spock_sc_emptySession
+get_spock_sc_persistCfg
+set_spock_sc_persistCfg
+get_spock_sc_housekeepingInterval
+set_spock_sc_housekeepingInterval
+get_spock_sc_hooks
+set_spock_sc_hooks
 SpockSessionHooks
 spock_mk'SessionHooks
 pattern SpockSessionHooks
+get_spock_sh_removed
+set_spock_sh_removed
 SpockSessionId
 SpockSessionPersistCfg
 spock_mk'SessionPersistCfg
 pattern SpockSessionPersistCfg
+get_spock_spc_load
+set_spock_spc_load
+get_spock_spc_store
+set_spock_spc_store
 SpockSpockAction
 SpockSpockActionCtx
 SpockSpockCfg
 spock_mk'SpockCfg
 pattern SpockSpockCfg
+get_spock_spc_initialState
+set_spock_spc_initialState
+get_spock_spc_database
+set_spock_spc_database
+get_spock_spc_sessionCfg
+set_spock_spc_sessionCfg
+get_spock_spc_maxRequestSize
+set_spock_spc_maxRequestSize
 SpockWebState
 SpockWebStateM
 SpockClientPreferredFormat
@@ -2471,6 +2723,12 @@ SpockActionT
 SpockUploadedFile
 spock_mk'UploadedFile
 pattern SpockUploadedFile
+get_spock_uf_name
+set_spock_uf_name
+get_spock_uf_contentType
+set_spock_uf_contentType
+get_spock_uf_tempLocation
+set_spock_uf_tempLocation
 SpockSpockCtxM
 SpockSpockCtxT
 SpockSpockM
@@ -2527,11 +2785,17 @@ WsClientApp
 WsAcceptRequest
 ws_mk'AcceptRequest
 pattern WsAcceptRequest
+get_ws_acceptSubprotocol
+set_ws_acceptSubprotocol
 WsConnection
 WsConnectionOptions
 ws_mk'ConnectionOptions
 pattern WsConnectionOptions
+get_ws_connectionOnPong
+set_ws_connectionOnPong
 WsPendingConnection
+get_ws_pendingRequest
+set_ws_pendingRequest
 WsHandshakeException
 ws_mk'NotSupported
 pattern WsNotSupported
@@ -2550,12 +2814,24 @@ pattern WsRequest
 WsRequestHead
 ws_mk'RequestHead
 pattern WsRequestHead
+get_ws_requestPath
+set_ws_requestPath
+get_ws_requestHeaders
+set_ws_requestHeaders
+get_ws_requestSecure
+set_ws_requestSecure
 WsResponse
 ws_mk'Response
 pattern WsResponse
 WsResponseHead
 ws_mk'ResponseHead
 pattern WsResponseHead
+get_ws_responseCode
+set_ws_responseCode
+get_ws_responseMessage
+set_ws_responseMessage
+get_ws_responseHeaders
+set_ws_responseHeaders
 WsServerApp
 WsConnectionException
 ws_mk'CloseRequest
@@ -2582,112 +2858,6 @@ pattern WsControlMessage
 ws_mk'DataMessage
 pattern WsDataMessage
 ws_sendCloseCode
-FromJSON
-parseJSON
-GFromJSON
-gParseJSON
-GToJSON
-gToJSON
-ToJSON
-toJSON
-js_decode
-js_decode'
-js_decodeStrict
-js_decodeStrict'
-js_eitherDecode
-js_eitherDecode'
-js_eitherDecodeStrict
-js_eitherDecodeStrict'
-js_encode
-js_json
-js_json'
-js_genericParseJSON
-js_genericToJSON
-.!=
-.:
-.:?
-.=
-js_fromJSON
-js_withArray
-js_withBool
-js_withNumber
-js_withObject
-js_withScientific
-js_withText
-js_object
-JsArray
-JsDotNetTime
-JsObject
-JsResult
-js_mk'Error
-pattern JsError
-js_mk'Success
-pattern JsSuccess
-JsValue
-js_mk'Object
-pattern JsObject
-js_mk'Array
-pattern JsArray
-js_mk'String
-pattern JsString
-js_mk'Number
-pattern JsNumber
-js_mk'Bool
-pattern JsBool
-js_mk'Null
-pattern JsNull
-AsJSON
-_JSON
-AsNumber
-_Number
-_Double
-_Integer
-AsPrimitive
-_Primitive
-_String
-_Bool
-_Null
-AsValue
-_Value
-_Object
-_Array
-js__Integral
-js_key
-js_members
-js_nonNull
-js_nth
-js_values
-JsPrimitive
-js_mk'StringPrim
-pattern JsStringPrim
-js_mk'NumberPrim
-pattern JsNumberPrim
-js_mk'BoolPrim
-pattern JsBoolPrim
-js_mk'NullPrim
-pattern JsNullPrim
-js_typeMismatch
-js_camelTo
-js_defaultOptions
-js_defaultTaggedObject
-js_emptyArray
-js_emptyObject
-js_modifyFailure
-js_parse
-js_parseEither
-js_parseMaybe
-JsOptions
-js_mk'Options
-pattern JsOptions
-JsPair
-JsParser
-JsSumEncoding
-js_mk'TaggedObject
-pattern JsTaggedObject
-js_mk'ObjectWithSingleField
-pattern JsObjectWithSingleField
-js_mk'TwoElemArray
-pattern JsTwoElemArray
 http_http
 http_httpLbs
 http_lbsResponse
@@ -2713,6 +2883,28 @@ http_getRedirectedRequest
 HttpCookie
 http_mk'Cookie
 pattern HttpCookie
+get_http_cookie_name
+set_http_cookie_name
+get_http_cookie_value
+set_http_cookie_value
+get_http_cookie_expiry_time
+set_http_cookie_expiry_time
+get_http_cookie_domain
+set_http_cookie_domain
+get_http_cookie_path
+set_http_cookie_path
+get_http_cookie_creation_time
+set_http_cookie_creation_time
+get_http_cookie_last_access_time
+set_http_cookie_last_access_time
+get_http_cookie_persistent
+set_http_cookie_persistent
+get_http_cookie_host_only
+set_http_cookie_host_only
+get_http_cookie_secure_only
+set_http_cookie_secure_only
+get_http_cookie_http_only
+set_http_cookie_http_only
 HttpCookieJar
 HttpHttpException
 http_mk'StatusCodeException
@@ -2771,10 +2963,56 @@ http_mk'TlsExceptionHostPort
 pattern HttpTlsExceptionHostPort
 HttpManager
 HttpManagerSettings
+get_http_managerConnCount
+set_http_managerConnCount
+get_http_managerTlsConnection
+set_http_managerTlsConnection
+get_http_managerResponseTimeout
+set_http_managerResponseTimeout
 HttpProxy
 http_mk'Proxy
 pattern HttpProxy
+get_http_proxyHost
+set_http_proxyHost
+get_http_proxyPort
+set_http_proxyPort
 HttpRequest
+get_http_method
+set_http_method
+get_http_secure
+set_http_secure
+get_http_host
+set_http_host
+get_http_port
+set_http_port
+get_http_path
+set_http_path
+get_http_queryString
+set_http_queryString
+get_http_requestHeaders
+set_http_requestHeaders
+get_http_requestBody
+set_http_requestBody
+get_http_proxy
+set_http_proxy
+get_http_hostAddress
+set_http_hostAddress
+get_http_rawBody
+set_http_rawBody
+get_http_decompress
+set_http_decompress
+get_http_redirectCount
+set_http_redirectCount
+get_http_checkStatus
+set_http_checkStatus
+get_http_responseTimeout
+set_http_responseTimeout
+get_http_getConnectionWrapper
+set_http_getConnectionWrapper
+get_http_cookieJar
+set_http_cookieJar
+get_http_requestVersion
+set_http_requestVersion
 HttpRequestBody
 http_mk'RequestBodyLBS
 pattern HttpRequestBodyLBS
@@ -2787,6 +3025,136 @@ pattern HttpRequestBodyStream
 http_mk'RequestBodyStreamChunked
 pattern HttpRequestBodyStreamChunked
 HttpResponse
+get_http_responseStatus
+set_http_responseStatus
+get_http_responseVersion
+set_http_responseVersion
+get_http_responseHeaders
+set_http_responseHeaders
+get_http_responseBody
+set_http_responseBody
+get_http_responseCookieJar
+set_http_responseCookieJar
+FromJSON
+parseJSON
+GFromJSON
+gParseJSON
+GToJSON
+gToJSON
+ToJSON
+toJSON
+js_decode
+js_decode'
+js_decodeStrict
+js_decodeStrict'
+js_eitherDecode
+js_eitherDecode'
+js_eitherDecodeStrict
+js_eitherDecodeStrict'
+js_encode
+js_json
+js_json'
+js_genericParseJSON
+js_genericToJSON
+.!=
+.:
+.:?
+.=
+js_fromJSON
+js_withArray
+js_withBool
+js_withNumber
+js_withObject
+js_withScientific
+js_withText
+js_object
+JsArray
+JsDotNetTime
+JsObject
+JsResult
+js_mk'Error
+pattern JsError
+js_mk'Success
+pattern JsSuccess
+JsValue
+js_mk'Object
+pattern JsObject
+js_mk'Array
+pattern JsArray
+js_mk'String
+pattern JsString
+js_mk'Number
+pattern JsNumber
+js_mk'Bool
+pattern JsBool
+js_mk'Null
+pattern JsNull
+js_typeMismatch
+js_camelTo
+js_defaultOptions
+js_defaultTaggedObject
+js_emptyArray
+js_emptyObject
+js_modifyFailure
+js_parse
+js_parseEither
+js_parseMaybe
+JsOptions
+js_mk'Options
+pattern JsOptions
+get_js_fieldLabelModifier
+set_js_fieldLabelModifier
+get_js_constructorTagModifier
+set_js_constructorTagModifier
+get_js_allNullaryToStringTag
+set_js_allNullaryToStringTag
+get_js_omitNothingFields
+set_js_omitNothingFields
+get_js_sumEncoding
+set_js_sumEncoding
+JsPair
+JsParser
+JsSumEncoding
+js_mk'TaggedObject
+pattern JsTaggedObject
+get_js_tagFieldName
+set_js_tagFieldName
+get_js_contentsFieldName
+set_js_contentsFieldName
+js_mk'ObjectWithSingleField
+pattern JsObjectWithSingleField
+js_mk'TwoElemArray
+pattern JsTwoElemArray
+AsJSON
+_JSON
+AsNumber
+_Number
+_Double
+_Integer
+AsPrimitive
+_Primitive
+_String
+_Bool
+_Null
+AsValue
+_Value
+_Object
+_Array
+js__Integral
+js_key
+js_members
+js_nonNull
+js_nth
+js_values
+JsPrimitive
+js_mk'StringPrim
+pattern JsStringPrim
+js_mk'NumberPrim
+pattern JsNumberPrim
+js_mk'BoolPrim
+pattern JsBoolPrim
+js_mk'NullPrim
+pattern JsNullPrim
 magnify
 zoom
 at

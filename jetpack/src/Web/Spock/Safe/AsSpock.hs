@@ -245,18 +245,40 @@ spock_mk'CookieValidForSession =  I.CookieValidForSession
 pattern SpockCookieValidForSession  <-  I.CookieValidForSession 
 
 type SpockCookieSettings  = I.CookieSettings
+get_spock_cs_EOL o = I.cs_EOL o
+set_spock_cs_EOL x o = o { I.cs_EOL = x}
+get_spock_cs_path o = I.cs_path o
+set_spock_cs_path x o = o { I.cs_path = x}
+get_spock_cs_domain o = I.cs_domain o
+set_spock_cs_domain x o = o { I.cs_domain = x}
+get_spock_cs_HTTPOnly o = I.cs_HTTPOnly o
+set_spock_cs_HTTPOnly x o = o { I.cs_HTTPOnly = x}
+get_spock_cs_secure o = I.cs_secure o
+set_spock_cs_secure x o = o { I.cs_secure = x}
 
 -- constructor :: CookieEOL -> Maybe ByteString -> Maybe ByteString -> Bool -> Bool -> CookieSettings
 spock_mk'CookieSettings =  I.CookieSettings
 pattern SpockCookieSettings a b c d e <-  I.CookieSettings a b c d e
 
 type SpockConnBuilder a = I.ConnBuilder a
+get_spock_cb_createConn o = I.cb_createConn o
+set_spock_cb_createConn x o = o { I.cb_createConn = x}
+get_spock_cb_destroyConn o = I.cb_destroyConn o
+set_spock_cb_destroyConn x o = o { I.cb_destroyConn = x}
+get_spock_cb_poolConfiguration o = I.cb_poolConfiguration o
+set_spock_cb_poolConfiguration x o = o { I.cb_poolConfiguration = x}
 
 -- constructor :: IO a -> a -> IO () -> PoolCfg -> ConnBuilder
 spock_mk'ConnBuilder =  I.ConnBuilder
 pattern SpockConnBuilder a b c <-  I.ConnBuilder a b c
 
 type SpockPoolCfg  = I.PoolCfg
+get_spock_pc_stripes o = I.pc_stripes o
+set_spock_pc_stripes x o = o { I.pc_stripes = x}
+get_spock_pc_resPerStripe o = I.pc_resPerStripe o
+set_spock_pc_resPerStripe x o = o { I.pc_resPerStripe = x}
+get_spock_pc_keepOpenTime o = I.pc_keepOpenTime o
+set_spock_pc_keepOpenTime x o = o { I.pc_keepOpenTime = x}
 
 -- constructor :: Int -> Int -> NominalDiffTime -> PoolCfg
 spock_mk'PoolCfg =  I.PoolCfg
@@ -277,12 +299,30 @@ spock_mk'PCNoDatabase =  I.PCNoDatabase
 pattern SpockPCNoDatabase  <-  I.PCNoDatabase 
 
 type SpockSessionCfg a = I.SessionCfg a
+get_spock_sc_cookieName o = I.sc_cookieName o
+set_spock_sc_cookieName x o = o { I.sc_cookieName = x}
+get_spock_sc_sessionTTL o = I.sc_sessionTTL o
+set_spock_sc_sessionTTL x o = o { I.sc_sessionTTL = x}
+get_spock_sc_sessionIdEntropy o = I.sc_sessionIdEntropy o
+set_spock_sc_sessionIdEntropy x o = o { I.sc_sessionIdEntropy = x}
+get_spock_sc_sessionExpandTTL o = I.sc_sessionExpandTTL o
+set_spock_sc_sessionExpandTTL x o = o { I.sc_sessionExpandTTL = x}
+get_spock_sc_emptySession o = I.sc_emptySession o
+set_spock_sc_emptySession x o = o { I.sc_emptySession = x}
+get_spock_sc_persistCfg o = I.sc_persistCfg o
+set_spock_sc_persistCfg x o = o { I.sc_persistCfg = x}
+get_spock_sc_housekeepingInterval o = I.sc_housekeepingInterval o
+set_spock_sc_housekeepingInterval x o = o { I.sc_housekeepingInterval = x}
+get_spock_sc_hooks o = I.sc_hooks o
+set_spock_sc_hooks x o = o { I.sc_hooks = x}
 
 -- constructor :: Text -> NominalDiffTime -> Int -> Bool -> a -> Maybe (SessionPersistCfg a) -> NominalDiffTime -> SessionHooks a -> SessionCfg
 spock_mk'SessionCfg =  I.SessionCfg
 pattern SpockSessionCfg a b c d e f g h <-  I.SessionCfg a b c d e f g h
 
 type SpockSessionHooks a = I.SessionHooks a
+get_spock_sh_removed o = I.sh_removed o
+set_spock_sh_removed x o = o { I.sh_removed = x}
 
 -- constructor :: HashMap SessionId a -> IO () -> SessionHooks
 spock_mk'SessionHooks =  I.SessionHooks
@@ -291,6 +331,10 @@ pattern SpockSessionHooks a <-  I.SessionHooks a
 type SpockSessionId  = I.SessionId
 
 type SpockSessionPersistCfg a = I.SessionPersistCfg a
+get_spock_spc_load o = I.spc_load o
+set_spock_spc_load x o = o { I.spc_load = x}
+get_spock_spc_store o = I.spc_store o
+set_spock_spc_store x o = o { I.spc_store = x}
 
 -- constructor :: IO [(SessionId, UTCTime, a)] -> [(SessionId, UTCTime, a)] -> IO () -> SessionPersistCfg
 spock_mk'SessionPersistCfg =  I.SessionPersistCfg
@@ -301,6 +345,14 @@ type SpockSpockAction a b c = I.SpockAction a b c
 type SpockSpockActionCtx a b c d = I.SpockActionCtx a b c d
 
 type SpockSpockCfg a b c = I.SpockCfg a b c
+get_spock_spc_initialState o = I.spc_initialState o
+set_spock_spc_initialState x o = o { I.spc_initialState = x}
+get_spock_spc_database o = I.spc_database o
+set_spock_spc_database x o = o { I.spc_database = x}
+get_spock_spc_sessionCfg o = I.spc_sessionCfg o
+set_spock_spc_sessionCfg x o = o { I.spc_sessionCfg = x}
+get_spock_spc_maxRequestSize o = I.spc_maxRequestSize o
+set_spock_spc_maxRequestSize x o = o { I.spc_maxRequestSize = x}
 
 -- constructor :: st -> PoolOrConn conn -> SessionCfg sess -> Maybe Word64 -> SpockCfg
 spock_mk'SpockCfg =  I.SpockCfg
@@ -337,6 +389,12 @@ type SpockActionCtxT a b c = I.ActionCtxT a b c
 type SpockActionT  = I.ActionT
 
 type SpockUploadedFile  = I.UploadedFile
+get_spock_uf_name o = I.uf_name o
+set_spock_uf_name x o = o { I.uf_name = x}
+get_spock_uf_contentType o = I.uf_contentType o
+set_spock_uf_contentType x o = o { I.uf_contentType = x}
+get_spock_uf_tempLocation o = I.uf_tempLocation o
+set_spock_uf_tempLocation x o = o { I.uf_tempLocation = x}
 
 -- constructor :: Text -> Text -> FilePath -> UploadedFile
 spock_mk'UploadedFile =  I.UploadedFile

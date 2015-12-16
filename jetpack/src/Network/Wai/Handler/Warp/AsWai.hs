@@ -221,6 +221,14 @@ type WaiMutableFdCache  = I.MutableFdCache
 type WaiRefresh  = I.Refresh
 
 type WaiFileInfo  = I.FileInfo
+get_wai_fileInfoName o = I.fileInfoName o
+set_wai_fileInfoName x o = o { I.fileInfoName = x}
+get_wai_fileInfoSize o = I.fileInfoSize o
+set_wai_fileInfoSize x o = o { I.fileInfoSize = x}
+get_wai_fileInfoTime o = I.fileInfoTime o
+set_wai_fileInfoTime x o = o { I.fileInfoTime = x}
+get_wai_fileInfoDate o = I.fileInfoDate o
+set_wai_fileInfoDate x o = o { I.fileInfoDate = x}
 
 -- constructor :: FilePath -> Integer -> HTTPDate -> ByteString -> FileInfo
 wai_mk'FileInfo =  I.FileInfo
@@ -247,12 +255,32 @@ type WaiBufSize  = I.BufSize
 type WaiBuffer  = I.Buffer
 
 type WaiConnection  = I.Connection
+get_wai_connSendMany o = I.connSendMany o
+set_wai_connSendMany x o = o { I.connSendMany = x}
+get_wai_connSendAll o = I.connSendAll o
+set_wai_connSendAll x o = o { I.connSendAll = x}
+get_wai_connSendFile o = I.connSendFile o
+set_wai_connSendFile x o = o { I.connSendFile = x}
+get_wai_connClose o = I.connClose o
+set_wai_connClose x o = o { I.connClose = x}
+get_wai_connRecv o = I.connRecv o
+set_wai_connRecv x o = o { I.connRecv = x}
+get_wai_connRecvBuf o = I.connRecvBuf o
+set_wai_connRecvBuf x o = o { I.connRecvBuf = x}
+get_wai_connWriteBuffer o = I.connWriteBuffer o
+set_wai_connWriteBuffer x o = o { I.connWriteBuffer = x}
+get_wai_connBufferSize o = I.connBufferSize o
+set_wai_connBufferSize x o = o { I.connBufferSize = x}
 
 -- constructor :: [ByteString] -> IO () -> ByteString -> IO () -> SendFile -> IO () -> Recv -> RecvBuf -> Buffer -> BufSize -> Connection
 wai_mk'Connection =  I.Connection
 pattern WaiConnection a b c d e f g h <-  I.Connection a b c d e f g h
 
 type WaiFileId  = I.FileId
+get_wai_fileIdPath o = I.fileIdPath o
+set_wai_fileIdPath x o = o { I.fileIdPath = x}
+get_wai_fileIdFd o = I.fileIdFd o
+set_wai_fileIdFd x o = o { I.fileIdFd = x}
 
 -- constructor :: FilePath -> Maybe Fd -> FileId
 wai_mk'FileId =  I.FileId
@@ -261,6 +289,16 @@ pattern WaiFileId a b <-  I.FileId a b
 type WaiHeaderValue  = I.HeaderValue
 
 type WaiInternalInfo  = I.InternalInfo
+get_wai_threadHandle o = I.threadHandle o
+set_wai_threadHandle x o = o { I.threadHandle = x}
+get_wai_timeoutManager o = I.timeoutManager o
+set_wai_timeoutManager x o = o { I.timeoutManager = x}
+get_wai_fdCacher o = I.fdCacher o
+set_wai_fdCacher x o = o { I.fdCacher = x}
+get_wai_fileInfo o = I.fileInfo o
+set_wai_fileInfo x o = o { I.fileInfo = x}
+get_wai_dateCacher o = I.dateCacher o
+set_wai_dateCacher x o = o { I.dateCacher = x}
 
 -- constructor :: Handle -> Manager -> Maybe MutableFdCache -> FilePath -> IO FileInfo -> DateCache -> InternalInfo
 wai_mk'InternalInfo =  I.InternalInfo
@@ -307,6 +345,14 @@ type WaiTransport  = I.Transport
 -- constructor :: TCP
 wai_mk'TCP =  I.TCP
 pattern WaiTCP  <-  I.TCP 
+get_wai_tlsMajorVersion o = I.tlsMajorVersion o
+set_wai_tlsMajorVersion x o = o { I.tlsMajorVersion = x}
+get_wai_tlsMinorVersion o = I.tlsMinorVersion o
+set_wai_tlsMinorVersion x o = o { I.tlsMinorVersion = x}
+get_wai_tlsNegotiatedProtocol o = I.tlsNegotiatedProtocol o
+set_wai_tlsNegotiatedProtocol x o = o { I.tlsNegotiatedProtocol = x}
+get_wai_tlsChiperID o = I.tlsChiperID o
+set_wai_tlsChiperID x o = o { I.tlsChiperID = x}
 
 -- constructor :: Int -> Int -> Maybe ByteString -> Word16 -> TLS
 wai_mk'TLS =  I.TLS

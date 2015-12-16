@@ -91,6 +91,8 @@ tar_mk'Fail =  I.Fail
 pattern TarFail a <-  I.Fail a
 
 type TarEntry  = I.Entry
+get_tar_entryContent o = I.entryContent o
+set_tar_entryContent x o = o { I.entryContent = x}
 
 type TarEntryContent  = I.EntryContent
 

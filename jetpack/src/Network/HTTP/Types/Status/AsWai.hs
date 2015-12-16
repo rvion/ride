@@ -295,6 +295,10 @@ wai_unsupportedMediaType415 = I.unsupportedMediaType415
 wai_useProxy305 = I.useProxy305
 
 type WaiStatus  = I.Status
+get_wai_statusCode o = I.statusCode o
+set_wai_statusCode x o = o { I.statusCode = x}
+get_wai_statusMessage o = I.statusMessage o
+set_wai_statusMessage x o = o { I.statusMessage = x}
 
 -- constructor :: Int -> ByteString -> Status
 wai_mk'Status =  I.Status

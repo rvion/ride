@@ -19,16 +19,28 @@ demo_mk'DD =  I.DD
 pattern DemoDD a b c d e <-  I.DD a b c d e
 
 type DemoFoo  = I.Foo
+get_demo_test o = I.test o
+set_demo_test x o = o { I.test = x}
 
 -- constructor :: Int -> Foo1
 demo_mk'Foo1 =  I.Foo1
 pattern DemoFoo1 a <-  I.Foo1 a
+-- get_demo_test o = I.test o
+-- set_demo_test x o = o { I.test = x}
+get_demo_bar o = I.bar o
+set_demo_bar x o = o { I.bar = x}
 
 -- constructor :: Int -> String -> Foo2
 demo_mk'Foo2 =  I.Foo2
 pattern DemoFoo2 a b <-  I.Foo2 a b
 
 type DemoYo a b = I.Yo a b
+get_demo_aa o = I.aa o
+set_demo_aa x o = o { I.aa = x}
+get_demo_bb o = I.bb o
+set_demo_bb x o = o { I.bb = x}
+get_demo_cc o = I.cc o
+set_demo_cc x o = o { I.cc = x}
 
 -- constructor :: a -> b -> (a, b, b, a) -> Yo
 demo_mk'Yo =  I.Yo

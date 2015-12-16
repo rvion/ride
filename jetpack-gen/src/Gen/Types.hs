@@ -10,7 +10,7 @@ type Modules = Map String FilePath
 data RTerm
   = RId { rName, rType :: String }
   | RData { rName, rType :: String, rNbTyVars :: Int, rDataTyCon:: [RTerm] }
-  | RDataCon { rName :: String, rTyVars::[String], rNbTyVars :: Int}
+  | RDataCon { rName :: String, rTyVars::[String], rNbTyVars :: Int, rConFields :: [String], rConIsReexported:: Bool}
   | RClass { rName :: String, rNameExported :: Bool, rAssos :: [RTerm]}
   deriving Show
 

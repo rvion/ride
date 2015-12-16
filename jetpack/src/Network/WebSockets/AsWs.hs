@@ -83,6 +83,8 @@ ws_runServerWith = I.runServerWith
 type WsClientApp a = I.ClientApp a
 
 type WsAcceptRequest  = I.AcceptRequest
+get_ws_acceptSubprotocol o = I.acceptSubprotocol o
+set_ws_acceptSubprotocol x o = o { I.acceptSubprotocol = x}
 
 -- constructor :: Maybe ByteString -> AcceptRequest
 ws_mk'AcceptRequest =  I.AcceptRequest
@@ -91,12 +93,16 @@ pattern WsAcceptRequest a <-  I.AcceptRequest a
 type WsConnection  = I.Connection
 
 type WsConnectionOptions  = I.ConnectionOptions
+get_ws_connectionOnPong o = I.connectionOnPong o
+set_ws_connectionOnPong x o = o { I.connectionOnPong = x}
 
 -- constructor :: IO () -> ConnectionOptions
 ws_mk'ConnectionOptions =  I.ConnectionOptions
 pattern WsConnectionOptions a <-  I.ConnectionOptions a
 
 type WsPendingConnection  = I.PendingConnection
+get_ws_pendingRequest o = I.pendingRequest o
+set_ws_pendingRequest x o = o { I.pendingRequest = x}
 
 type WsHandshakeException  = I.HandshakeException
 
@@ -129,6 +135,12 @@ ws_mk'Request =  I.Request
 pattern WsRequest a b <-  I.Request a b
 
 type WsRequestHead  = I.RequestHead
+get_ws_requestPath o = I.requestPath o
+set_ws_requestPath x o = o { I.requestPath = x}
+get_ws_requestHeaders o = I.requestHeaders o
+set_ws_requestHeaders x o = o { I.requestHeaders = x}
+get_ws_requestSecure o = I.requestSecure o
+set_ws_requestSecure x o = o { I.requestSecure = x}
 
 -- constructor :: ByteString -> Headers -> Bool -> RequestHead
 ws_mk'RequestHead =  I.RequestHead
@@ -141,6 +153,12 @@ ws_mk'Response =  I.Response
 pattern WsResponse a b <-  I.Response a b
 
 type WsResponseHead  = I.ResponseHead
+get_ws_responseCode o = I.responseCode o
+set_ws_responseCode x o = o { I.responseCode = x}
+get_ws_responseMessage o = I.responseMessage o
+set_ws_responseMessage x o = o { I.responseMessage = x}
+get_ws_responseHeaders o = I.responseHeaders o
+set_ws_responseHeaders x o = o { I.responseHeaders = x}
 
 -- constructor :: Int -> ByteString -> Headers -> ResponseHead
 ws_mk'ResponseHead =  I.ResponseHead

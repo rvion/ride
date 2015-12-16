@@ -73,6 +73,28 @@ http_urlEncodedBody = I.urlEncodedBody
 http_getRedirectedRequest = I.getRedirectedRequest
 
 type HttpCookie  = I.Cookie
+get_http_cookie_name o = I.cookie_name o
+set_http_cookie_name x o = o { I.cookie_name = x}
+get_http_cookie_value o = I.cookie_value o
+set_http_cookie_value x o = o { I.cookie_value = x}
+get_http_cookie_expiry_time o = I.cookie_expiry_time o
+set_http_cookie_expiry_time x o = o { I.cookie_expiry_time = x}
+get_http_cookie_domain o = I.cookie_domain o
+set_http_cookie_domain x o = o { I.cookie_domain = x}
+get_http_cookie_path o = I.cookie_path o
+set_http_cookie_path x o = o { I.cookie_path = x}
+get_http_cookie_creation_time o = I.cookie_creation_time o
+set_http_cookie_creation_time x o = o { I.cookie_creation_time = x}
+get_http_cookie_last_access_time o = I.cookie_last_access_time o
+set_http_cookie_last_access_time x o = o { I.cookie_last_access_time = x}
+get_http_cookie_persistent o = I.cookie_persistent o
+set_http_cookie_persistent x o = o { I.cookie_persistent = x}
+get_http_cookie_host_only o = I.cookie_host_only o
+set_http_cookie_host_only x o = o { I.cookie_host_only = x}
+get_http_cookie_secure_only o = I.cookie_secure_only o
+set_http_cookie_secure_only x o = o { I.cookie_secure_only = x}
+get_http_cookie_http_only o = I.cookie_http_only o
+set_http_cookie_http_only x o = o { I.cookie_http_only = x}
 
 -- constructor :: ByteString -> ByteString -> UTCTime -> ByteString -> ByteString -> UTCTime -> UTCTime -> Bool -> Bool -> Bool -> Bool -> Cookie
 http_mk'Cookie =  I.Cookie
@@ -193,14 +215,60 @@ pattern HttpTlsExceptionHostPort a b c <-  I.TlsExceptionHostPort a b c
 type HttpManager  = I.Manager
 
 type HttpManagerSettings  = I.ManagerSettings
+get_http_managerConnCount o = I.managerConnCount o
+set_http_managerConnCount x o = o { I.managerConnCount = x}
+get_http_managerTlsConnection o = I.managerTlsConnection o
+set_http_managerTlsConnection x o = o { I.managerTlsConnection = x}
+get_http_managerResponseTimeout o = I.managerResponseTimeout o
+set_http_managerResponseTimeout x o = o { I.managerResponseTimeout = x}
 
 type HttpProxy  = I.Proxy
+get_http_proxyHost o = I.proxyHost o
+set_http_proxyHost x o = o { I.proxyHost = x}
+get_http_proxyPort o = I.proxyPort o
+set_http_proxyPort x o = o { I.proxyPort = x}
 
 -- constructor :: ByteString -> Int -> Proxy
 http_mk'Proxy =  I.Proxy
 pattern HttpProxy a b <-  I.Proxy a b
 
 type HttpRequest  = I.Request
+get_http_method o = I.method o
+set_http_method x o = o { I.method = x}
+get_http_secure o = I.secure o
+set_http_secure x o = o { I.secure = x}
+get_http_host o = I.host o
+set_http_host x o = o { I.host = x}
+get_http_port o = I.port o
+set_http_port x o = o { I.port = x}
+get_http_path o = I.path o
+set_http_path x o = o { I.path = x}
+get_http_queryString o = I.queryString o
+set_http_queryString x o = o { I.queryString = x}
+get_http_requestHeaders o = I.requestHeaders o
+set_http_requestHeaders x o = o { I.requestHeaders = x}
+get_http_requestBody o = I.requestBody o
+set_http_requestBody x o = o { I.requestBody = x}
+get_http_proxy o = I.proxy o
+set_http_proxy x o = o { I.proxy = x}
+get_http_hostAddress o = I.hostAddress o
+set_http_hostAddress x o = o { I.hostAddress = x}
+get_http_rawBody o = I.rawBody o
+set_http_rawBody x o = o { I.rawBody = x}
+get_http_decompress o = I.decompress o
+set_http_decompress x o = o { I.decompress = x}
+get_http_redirectCount o = I.redirectCount o
+set_http_redirectCount x o = o { I.redirectCount = x}
+get_http_checkStatus o = I.checkStatus o
+set_http_checkStatus x o = o { I.checkStatus = x}
+get_http_responseTimeout o = I.responseTimeout o
+set_http_responseTimeout x o = o { I.responseTimeout = x}
+get_http_getConnectionWrapper o = I.getConnectionWrapper o
+set_http_getConnectionWrapper x o = o { I.getConnectionWrapper = x}
+get_http_cookieJar o = I.cookieJar o
+set_http_cookieJar x o = o { I.cookieJar = x}
+get_http_requestVersion o = I.requestVersion o
+set_http_requestVersion x o = o { I.requestVersion = x}
 
 type HttpRequestBody  = I.RequestBody
 
@@ -225,3 +293,13 @@ http_mk'RequestBodyStreamChunked =  I.RequestBodyStreamChunked
 pattern HttpRequestBodyStreamChunked a <-  I.RequestBodyStreamChunked a
 
 type HttpResponse a = I.Response a
+get_http_responseStatus o = I.responseStatus o
+set_http_responseStatus x o = o { I.responseStatus = x}
+get_http_responseVersion o = I.responseVersion o
+set_http_responseVersion x o = o { I.responseVersion = x}
+get_http_responseHeaders o = I.responseHeaders o
+set_http_responseHeaders x o = o { I.responseHeaders = x}
+get_http_responseBody o = I.responseBody o
+set_http_responseBody x o = o { I.responseBody = x}
+get_http_responseCookieJar o = I.responseCookieJar o
+set_http_responseCookieJar x o = o { I.responseCookieJar = x}

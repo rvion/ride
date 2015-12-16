@@ -80,6 +80,12 @@ wai_mk'CustomCaching =  I.CustomCaching
 pattern WaiCustomCaching a <-  I.CustomCaching a
 
 type WaiFileMeta  = I.FileMeta
+get_wai_fm_lastModified o = I.fm_lastModified o
+set_wai_fm_lastModified x o = o { I.fm_lastModified = x}
+get_wai_fm_etag o = I.fm_etag o
+set_wai_fm_etag x o = o { I.fm_etag = x}
+get_wai_fm_fileName o = I.fm_fileName o
+set_wai_fm_fileName x o = o { I.fm_fileName = x}
 
 -- constructor :: ByteString -> ByteString -> FilePath -> FileMeta
 wai_mk'FileMeta =  I.FileMeta

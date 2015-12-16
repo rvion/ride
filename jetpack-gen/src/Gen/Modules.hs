@@ -6,6 +6,7 @@ import           Data.Char         (isLower, toLower, toUpper)
 import           Data.List
 import           Debug.Trace
 import           Data.Maybe
+import           Control.Monad
 import           Data.String.Utils
 import           Gen.Types
 import           Gen.Log
@@ -68,6 +69,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                 asWarning $ putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
                 return [Nothing]
             | otherwise -> do
+                -- print
                 let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
                 -- put ["-- ",_reexported_type," :: ",rType]
                 put (["\ntype ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
@@ -78,14 +80,26 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                 asWarning $ putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
                 return [Nothing]
             | otherwise -> do
+                print (rName, zip rConFields rTyVars)
                 let tyVars = intersperse ' ' $ take rNbTyVars ['a'..'z']
                 let constrType = intercalate " -> " (rTyVars ++ [rName])
                 let conName = concat [_idPrefix,"mk'", rName]
                 let patName = _typePrefix ++ rName
-                put ["\n-- constructor :: ", constrType]
-                put [conName, " =  I.", rName]
-                put ["pattern ", patName, " ", tyVars, " <-  I.", rName, " ", tyVars]
-                return [Just conName, Just ("pattern " ++ patName)]
+                getsets <- forM rConFields $ \confield -> do
+                  let
+                    _getter = concat ["get_", _idPrefix, confield]
+                    _setter = concat ["set_", _idPrefix, confield]
+                  put [_getter, " o = I.", confield, " o"]
+                  put [_setter, " x o = o { I.", confield, " = x}"]
+                  return [Just _getter, Just _setter]
+                conss <- if rConIsReexported
+                  then do
+                    put ["\n-- constructor :: ", constrType]
+                    put [conName, " =  I.", rName]
+                    put ["pattern ", patName, " ", tyVars, " <-  I.", rName, " ", tyVars]
+                    return [Just conName, Just ("pattern " ++ patName)]
+                  else return []
+                return (conss ++ (concat getsets))
           RClass n nexpo fns -> do
             print ("oksssssssss", RClass n nexpo fns)
             return [Nothing]

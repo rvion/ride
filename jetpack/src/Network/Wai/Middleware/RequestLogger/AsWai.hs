@@ -54,6 +54,12 @@ type WaiOutputFormatter  = I.OutputFormatter
 type WaiOutputFormatterWithDetails  = I.OutputFormatterWithDetails
 
 type WaiRequestLoggerSettings  = I.RequestLoggerSettings
+get_wai_outputFormat o = I.outputFormat o
+set_wai_outputFormat x o = o { I.outputFormat = x}
+get_wai_autoFlush o = I.autoFlush o
+set_wai_autoFlush x o = o { I.autoFlush = x}
+get_wai_destination o = I.destination o
+set_wai_destination x o = o { I.destination = x}
 
 type WaiIPAddrSource  = I.IPAddrSource
 

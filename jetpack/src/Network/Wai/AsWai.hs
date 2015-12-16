@@ -53,12 +53,46 @@ type WaiApplication  = I.Application
 type WaiMiddleware  = I.Middleware
 
 type WaiFilePart  = I.FilePart
+get_wai_filePartOffset o = I.filePartOffset o
+set_wai_filePartOffset x o = o { I.filePartOffset = x}
+get_wai_filePartByteCount o = I.filePartByteCount o
+set_wai_filePartByteCount x o = o { I.filePartByteCount = x}
+get_wai_filePartFileSize o = I.filePartFileSize o
+set_wai_filePartFileSize x o = o { I.filePartFileSize = x}
 
 -- constructor :: Integer -> Integer -> Integer -> FilePart
 wai_mk'FilePart =  I.FilePart
 pattern WaiFilePart a b c <-  I.FilePart a b c
 
 type WaiRequest  = I.Request
+get_wai_requestMethod o = I.requestMethod o
+set_wai_requestMethod x o = o { I.requestMethod = x}
+get_wai_httpVersion o = I.httpVersion o
+set_wai_httpVersion x o = o { I.httpVersion = x}
+get_wai_rawPathInfo o = I.rawPathInfo o
+set_wai_rawPathInfo x o = o { I.rawPathInfo = x}
+get_wai_rawQueryString o = I.rawQueryString o
+set_wai_rawQueryString x o = o { I.rawQueryString = x}
+get_wai_requestHeaders o = I.requestHeaders o
+set_wai_requestHeaders x o = o { I.requestHeaders = x}
+get_wai_isSecure o = I.isSecure o
+set_wai_isSecure x o = o { I.isSecure = x}
+get_wai_remoteHost o = I.remoteHost o
+set_wai_remoteHost x o = o { I.remoteHost = x}
+get_wai_pathInfo o = I.pathInfo o
+set_wai_pathInfo x o = o { I.pathInfo = x}
+get_wai_queryString o = I.queryString o
+set_wai_queryString x o = o { I.queryString = x}
+get_wai_requestBody o = I.requestBody o
+set_wai_requestBody x o = o { I.requestBody = x}
+get_wai_vault o = I.vault o
+set_wai_vault x o = o { I.vault = x}
+get_wai_requestBodyLength o = I.requestBodyLength o
+set_wai_requestBodyLength x o = o { I.requestBodyLength = x}
+get_wai_requestHeaderHost o = I.requestHeaderHost o
+set_wai_requestHeaderHost x o = o { I.requestHeaderHost = x}
+get_wai_requestHeaderRange o = I.requestHeaderRange o
+set_wai_requestHeaderRange x o = o { I.requestHeaderRange = x}
 
 type WaiRequestBodyLength  = I.RequestBodyLength
 

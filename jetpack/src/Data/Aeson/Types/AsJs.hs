@@ -37,6 +37,16 @@ js_parseEither = I.parseEither
 js_parseMaybe = I.parseMaybe
 
 type JsOptions  = I.Options
+get_js_fieldLabelModifier o = I.fieldLabelModifier o
+set_js_fieldLabelModifier x o = o { I.fieldLabelModifier = x}
+get_js_constructorTagModifier o = I.constructorTagModifier o
+set_js_constructorTagModifier x o = o { I.constructorTagModifier = x}
+get_js_allNullaryToStringTag o = I.allNullaryToStringTag o
+set_js_allNullaryToStringTag x o = o { I.allNullaryToStringTag = x}
+get_js_omitNothingFields o = I.omitNothingFields o
+set_js_omitNothingFields x o = o { I.omitNothingFields = x}
+get_js_sumEncoding o = I.sumEncoding o
+set_js_sumEncoding x o = o { I.sumEncoding = x}
 
 -- constructor :: String -> String -> String -> String -> Bool -> Bool -> SumEncoding -> Options
 js_mk'Options =  I.Options
@@ -47,6 +57,10 @@ type JsPair  = I.Pair
 type JsParser a = I.Parser a
 
 type JsSumEncoding  = I.SumEncoding
+get_js_tagFieldName o = I.tagFieldName o
+set_js_tagFieldName x o = o { I.tagFieldName = x}
+get_js_contentsFieldName o = I.contentsFieldName o
+set_js_contentsFieldName x o = o { I.contentsFieldName = x}
 
 -- constructor :: String -> String -> TaggedObject
 js_mk'TaggedObject =  I.TaggedObject

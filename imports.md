@@ -113,11 +113,11 @@ Reexport {as = "spock", mod = "Web.Spock.Safe"}
 Reexport {as = "ws", mod = "Network.WebSockets"}
 Reexport {as = "ws", mod = "Network.WebSockets.Connection"}
 
-Reexport {as = "js", mod = "Data.Aeson"}
-Reexport {as = "js", mod = "Data.Aeson.Lens"}
-Reexport {as = "js", mod = "Data.Aeson.Types"}
-
 Reexport {as = "http", mod = "Network.HTTP.Conduit"}
+
+Reexport {as = "js", mod = "Data.Aeson"}
+Reexport {as = "js", mod = "Data.Aeson.Types"}
+Reexport {as = "js", mod = "Data.Aeson.Lens"}
 ```
 # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
@@ -162,3 +162,4 @@ Reexport {as = "lens", mod = "Lens.Micro.Platform"}
   * wai-middleware-static
   * vector
   * process
+  * http-conduit
