@@ -95,11 +95,6 @@ Reexport {as = "opt", mod = "Options.Applicative.Builder.Completer"}
 Reexport {as = "opt", mod = "Options.Applicative.Extra"}
 ```
 
-### Lens (lens)
-
-```haskell
-Reexport {as = "lens", mod = "Lens.Micro.Platform"}
-```
 
 ### Web: (wai, aeson, spock)
 
@@ -122,6 +117,11 @@ Reexport {as = "js", mod = "Data.Aeson.Types"}
 ```
 # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
+### Lens (lens)
+
+```haskell
+Reexport {as = "lens", mod = "Lens.Micro.Platform"}
+```
 
 
 ### Packages
