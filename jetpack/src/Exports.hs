@@ -35,6 +35,7 @@ import           Data.Text.Lazy.Encoding.AsLt as X
 import           Data.Text.Lazy.IO.AsLt as X
 import           Data.Vector.AsVec as X
 import           Lens.Micro.Platform.AsLens as X
+import           Network.HTTP.Conduit.AsHttp as X
 import           Network.HTTP.Types.Status.AsWai as X
 import           Network.Wai.AsWai as X
 import           Network.Wai.Handler.Warp.AsWai as X
@@ -49,7 +50,9 @@ import           Options.Applicative.Extra.AsOpt as X
 import           ReexportDemo.AsDemo as X
 import           System.Console.ANSI.AsAnsi as X
 import           System.Environment.AsEnv as X
-import           Text.Megaparsec.AsMp as X
+import           System.Exit.AsEnv as X
+import           System.Process.AsEnv as X
+import           Text.Megaparsec.AsParse as X
 import           Web.Spock.Digestive.AsSpock as X
 import           Web.Spock.Safe.AsSpock as X
 

@@ -67,7 +67,7 @@ Reexport {as = "cb", mod = "Data.Conduit.Binary"}
 ### Parsing (megaparsec)
 
 ```haskell
-Reexport {as = "mp", mod = "Text.Megaparsec"}
+Reexport {as = "parse", mod = "Text.Megaparsec"}
 ```
 
 ### compression
@@ -89,6 +89,8 @@ Reexport {as = "gzip", mod = "Codec.Compression.GZip"}
 ```haskell
 Reexport {as = "ansi", mod = "System.Console.ANSI"}
 Reexport {as = "env", mod = "System.Environment"}
+Reexport {as = "env", mod = "System.Exit"}
+Reexport {as = "env", mod = "System.Process"}
 Reexport {as = "opt", mod = "Options.Applicative.Common"}
 Reexport {as = "opt", mod = "Options.Applicative.Builder"}
 Reexport {as = "opt", mod = "Options.Applicative.Builder.Completer"}
@@ -114,6 +116,8 @@ Reexport {as = "ws", mod = "Network.WebSockets.Connection"}
 Reexport {as = "js", mod = "Data.Aeson"}
 Reexport {as = "js", mod = "Data.Aeson.Lens"}
 Reexport {as = "js", mod = "Data.Aeson.Types"}
+
+Reexport {as = "http", mod = "Network.HTTP.Conduit"}
 ```
 # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
@@ -157,3 +161,4 @@ Reexport {as = "lens", mod = "Lens.Micro.Platform"}
   * wai-extra
   * wai-middleware-static
   * vector
+  * process

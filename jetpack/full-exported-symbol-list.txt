@@ -1480,89 +1480,89 @@ StorableStream
 fromFile
 Stream
 uncons
-mp_optional
-mp_alphaNumChar
-mp_anyChar
-mp_asciiChar
-mp_char
-mp_char'
-mp_charCategory
-mp_controlChar
-mp_crlf
-mp_digitChar
-mp_eol
-mp_hexDigitChar
-mp_latin1Char
-mp_letterChar
-mp_lowerChar
-mp_markChar
-mp_newline
-mp_noneOf
-mp_noneOf'
-mp_numberChar
-mp_octDigitChar
-mp_oneOf
-mp_oneOf'
-mp_printChar
-mp_punctuationChar
-mp_satisfy
-mp_separatorChar
-mp_space
-mp_spaceChar
-mp_string
-mp_string'
-mp_symbolChar
-mp_tab
-mp_upperChar
-mp_between
-mp_choice
-mp_count
-mp_count'
-mp_endBy
-mp_endBy1
-mp_manyTill
-mp_option
-mp_sepBy
-mp_sepBy1
-mp_sepEndBy
-mp_sepEndBy1
-mp_skipMany
-mp_skipSome
-mp_someTill
-mp_badMessage
-mp_errorIsUnknown
-mp_messageString
+parse_optional
+parse_alphaNumChar
+parse_anyChar
+parse_asciiChar
+parse_char
+parse_char'
+parse_charCategory
+parse_controlChar
+parse_crlf
+parse_digitChar
+parse_eol
+parse_hexDigitChar
+parse_latin1Char
+parse_letterChar
+parse_lowerChar
+parse_markChar
+parse_newline
+parse_noneOf
+parse_noneOf'
+parse_numberChar
+parse_octDigitChar
+parse_oneOf
+parse_oneOf'
+parse_printChar
+parse_punctuationChar
+parse_satisfy
+parse_separatorChar
+parse_space
+parse_spaceChar
+parse_string
+parse_string'
+parse_symbolChar
+parse_tab
+parse_upperChar
+parse_between
+parse_choice
+parse_count
+parse_count'
+parse_endBy
+parse_endBy1
+parse_manyTill
+parse_option
+parse_sepBy
+parse_sepBy1
+parse_sepEndBy
+parse_sepEndBy1
+parse_skipMany
+parse_skipSome
+parse_someTill
+parse_badMessage
+parse_errorIsUnknown
+parse_messageString
 <?>
-mp_getInput
-mp_getPosition
-mp_getTabWidth
-mp_parse
-mp_parseFromFile
-mp_parseMaybe
-mp_parseTest
-mp_runParser
-mp_runParser'
-mp_runParserT
-mp_runParserT'
-mp_setInput
-mp_setParserState
-mp_setPosition
-mp_setTabWidth
-mp_unexpected
-MpMessage
-mp_mk'Unexpected
-pattern MpUnexpected
-mp_mk'Expected
-pattern MpExpected
-mp_mk'Message
-pattern MpMessage
-MpParseError
-MpSourcePos
-MpParsec
-MpParsecT
-MpState
-mp_mk'State
-pattern MpState
+parse_getInput
+parse_getPosition
+parse_getTabWidth
+parse_parse
+parse_parseFromFile
+parse_parseMaybe
+parse_parseTest
+parse_runParser
+parse_runParser'
+parse_runParserT
+parse_runParserT'
+parse_setInput
+parse_setParserState
+parse_setPosition
+parse_setTabWidth
+parse_unexpected
+ParseMessage
+parse_mk'Unexpected
+pattern ParseUnexpected
+parse_mk'Expected
+pattern ParseExpected
+parse_mk'Message
+pattern ParseMessage
+ParseParseError
+ParseSourcePos
+ParseParsec
+ParseParsecT
+ParseState
+parse_mk'State
+pattern ParseState
 tar_append
 tar_create
 tar_extract
@@ -1871,6 +1871,55 @@ env_unsetEnv
 env_withArgs
 env_withProgName
 env_getExecutablePath
+env_die
+env_exitFailure
+env_exitSuccess
+env_exitWith
+EnvExitCode
+env_mk'ExitSuccess
+pattern EnvExitSuccess
+env_mk'ExitFailure
+pattern EnvExitFailure
+env_callCommand
+env_callProcess
+env_createPipe
+env_createProcess
+env_getProcessExitCode
+env_interruptProcessGroupOf
+env_proc
+env_rawSystem
+env_readCreateProcess
+env_readCreateProcessWithExitCode
+env_readProcess
+env_readProcessWithExitCode
+env_runCommand
+env_runInteractiveCommand
+env_runInteractiveProcess
+env_runProcess
+env_shell
+env_showCommandForUser
+env_spawnCommand
+env_spawnProcess
+env_system
+env_terminateProcess
+env_waitForProcess
+env_createProcess_
+EnvCmdSpec
+env_mk'ShellCommand
+pattern EnvShellCommand
+env_mk'RawCommand
+pattern EnvRawCommand
+EnvCreateProcess
+env_mk'CreateProcess
+pattern EnvCreateProcess
+EnvProcessHandle
+EnvStdStream
+env_mk'Inherit
+pattern EnvInherit
+env_mk'UseHandle
+pattern EnvUseHandle
+env_mk'CreatePipe
+pattern EnvCreatePipe
 opt_evalParser
 opt_liftOpt
 opt_mapParser
@@ -2639,6 +2688,105 @@ js_mk'ObjectWithSingleField
 pattern JsObjectWithSingleField
 js_mk'TwoElemArray
 pattern JsTwoElemArray
+http_http
+http_httpLbs
+http_lbsResponse
+http_requestBodySource
+http_requestBodySourceChunked
+http_requestBodySourceChunkedIO
+http_requestBodySourceIO
+http_simpleHttp
+http_mkManagerSettings
+http_tlsManagerSettings
+http_createCookieJar
+http_destroyCookieJar
+http_closeManager
+http_newManager
+http_addProxy
+http_alwaysDecompress
+http_applyBasicAuth
+http_browserDecompress
+http_parseUrl
+http_setQueryString
+http_urlEncodedBody
+http_getRedirectedRequest
+HttpCookie
+http_mk'Cookie
+pattern HttpCookie
+HttpCookieJar
+HttpHttpException
+http_mk'StatusCodeException
+pattern HttpStatusCodeException
+http_mk'InvalidUrlException
+pattern HttpInvalidUrlException
+http_mk'TooManyRedirects
+pattern HttpTooManyRedirects
+http_mk'UnparseableRedirect
+pattern HttpUnparseableRedirect
+http_mk'TooManyRetries
+pattern HttpTooManyRetries
+http_mk'HttpParserException
+pattern HttpHttpParserException
+http_mk'HandshakeFailed
+pattern HttpHandshakeFailed
+http_mk'OverlongHeaders
+pattern HttpOverlongHeaders
+http_mk'ResponseTimeout
+pattern HttpResponseTimeout
+http_mk'FailedConnectionException
+pattern HttpFailedConnectionException
+http_mk'FailedConnectionException2
+pattern HttpFailedConnectionException2
+http_mk'ExpectedBlankAfter100Continue
+pattern HttpExpectedBlankAfter100Continue
+http_mk'InvalidStatusLine
+pattern HttpInvalidStatusLine
+http_mk'InvalidHeader
+pattern HttpInvalidHeader
+http_mk'InternalIOException
+pattern HttpInternalIOException
+http_mk'ProxyConnectException
+pattern HttpProxyConnectException
+http_mk'NoResponseDataReceived
+pattern HttpNoResponseDataReceived
+http_mk'TlsException
+pattern HttpTlsException
+http_mk'TlsNotSupported
+pattern HttpTlsNotSupported
+http_mk'ResponseBodyTooShort
+pattern HttpResponseBodyTooShort
+http_mk'InvalidChunkHeaders
+pattern HttpInvalidChunkHeaders
+http_mk'IncompleteHeaders
+pattern HttpIncompleteHeaders
+http_mk'InvalidDestinationHost
+pattern HttpInvalidDestinationHost
+http_mk'HttpZlibException
+pattern HttpHttpZlibException
+http_mk'InvalidProxyEnvironmentVariable
+pattern HttpInvalidProxyEnvironmentVariable
+http_mk'ResponseLengthAndChunkingBothUsed
+pattern HttpResponseLengthAndChunkingBothUsed
+http_mk'TlsExceptionHostPort
+pattern HttpTlsExceptionHostPort
+HttpManager
+HttpManagerSettings
+HttpProxy
+http_mk'Proxy
+pattern HttpProxy
+HttpRequest
+HttpRequestBody
+http_mk'RequestBodyLBS
+pattern HttpRequestBodyLBS
+http_mk'RequestBodyBS
+pattern HttpRequestBodyBS
+http_mk'RequestBodyBuilder
+pattern HttpRequestBodyBuilder
+http_mk'RequestBodyStream
+pattern HttpRequestBodyStream
+http_mk'RequestBodyStreamChunked
+pattern HttpRequestBodyStreamChunked
+HttpResponse
 magnify
 zoom
 at
