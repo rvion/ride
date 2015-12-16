@@ -283,10 +283,11 @@ set_union
 set_unions
 set_valid
 SetSet
+FoldCase
+foldCase
 ci_map
 ci_mk
 CiCI
-ci_foldCase
 hm_delete
 hm_difference
 hm_elems
@@ -1186,8 +1187,10 @@ StmTBQueue
 StmTChan
 StmTMVar
 StmTQueue
-trans_liftIO
-trans_lift
+MonadIO
+liftIO
+MonadTrans
+lift
 trans_evalState
 trans_evalStateT
 trans_execState
@@ -1210,6 +1213,24 @@ trans_withState
 trans_withStateT
 TransState
 TransStateT
+MonadFix
+mfix
+mapM
+sequence
+Functor
+fmap
+Monad
+>>=
+>>
+return
+fail
+MonadPlus
+mzero
+mplus
+MonadState
+get
+put
+state
 <$!>
 <=<
 >=>
@@ -1253,21 +1274,6 @@ mtl_mapStateT
 mtl_runState
 mtl_withState
 mtl_withStateT
-mtl_mfix
-mtl_mapM
-mtl_sequence
-mtl_fmap
->>=
->>
-mtl_return
-mtl_fail
-mtl_mzero
-mtl_mplus
-mtl_get
-mtl_put
-mtl_state
-mtl_liftIO
-mtl_lift
 MtlState
 MtlStateT
 c_connect
@@ -1396,6 +1402,24 @@ cb_sourceIOHandle
 cb_sourceLbs
 cb_take
 cb_takeWhile
+<|>
+some
+many
+failure
+label
+hidden
+try
+lookAhead
+notFollowedBy
+eof
+token
+tokens
+getParserState
+updateParserState
+StorableStream
+fromFile
+Stream
+uncons
 mp_optional
 mp_alphaNumChar
 mp_anyChar
@@ -1465,9 +1489,6 @@ mp_setParserState
 mp_setPosition
 mp_setTabWidth
 mp_unexpected
-<|>
-mp_some
-mp_many
 MpMessage
 mp_mk'Unexpected
 pattern MpUnexpected
@@ -1477,24 +1498,11 @@ mp_mk'Message
 pattern MpMessage
 MpParseError
 MpSourcePos
-mp_failure
-mp_label
-mp_hidden
-mp_try
-mp_lookAhead
-mp_notFollowedBy
-mp_eof
-mp_token
-mp_tokens
-mp_getParserState
-mp_updateParserState
 MpParsec
 MpParsecT
 MpState
 mp_mk'State
 pattern MpState
-mp_fromFile
-mp_uncons
 tar_append
 tar_create
 tar_extract
@@ -1819,6 +1827,7 @@ pattern OptParserInfo
 OptParserPrefs
 opt_mk'ParserPrefs
 pattern OptParserPrefs
+mappend
 <>
 opt_abortOption
 opt_action
@@ -1869,7 +1878,6 @@ opt_value
 opt_internal
 opt_readerAbort
 opt_readerError
-opt_mappend
 OptInfoMod
 OptPrefsMod
 OptArgumentFields
@@ -1911,6 +1919,16 @@ opt_mk'Failure
 pattern OptFailure
 opt_mk'CompletionInvoked
 pattern OptCompletionInvoked
+magnify
+zoom
+at
+each
+_1
+_2
+_3
+_4
+_5
+ix
 &
 %=
 *=
@@ -1964,8 +1982,6 @@ lens_toListOf
 lens_folded
 lens_sets
 lens_traversed
-lens_magnify
-lens_zoom
 LensDefName
 lens_mk'TopName
 pattern LensTopName
@@ -1974,14 +1990,6 @@ pattern LensMethodName
 LensFold
 LensGetter
 LensLensRules
-lens_at
-lens_each
-lens__1
-lens__2
-lens__3
-lens__4
-lens__5
-lens_ix
 LensASetter
 LensASetter'
 LensGetting
@@ -2299,6 +2307,11 @@ wai_mk'FileMeta
 pattern WaiFileMeta
 WaiPolicy
 spock_runForm
+HasSpock
+runQuery
+getState
+SafeAction
+runSafeAction
 spock_defaultCookieSettings
 spock_body
 spock_bytes
@@ -2386,8 +2399,6 @@ pattern SpockCookieSettings
 SpockConnBuilder
 spock_mk'ConnBuilder
 pattern SpockConnBuilder
-spock_runQuery
-spock_getState
 SpockPoolCfg
 spock_mk'PoolCfg
 pattern SpockPoolCfg
@@ -2398,7 +2409,6 @@ spock_mk'PCConn
 pattern SpockPCConn
 spock_mk'PCNoDatabase
 pattern SpockPCNoDatabase
-spock_runSafeAction
 SpockSessionCfg
 spock_mk'SessionCfg
 pattern SpockSessionCfg
@@ -2457,6 +2467,9 @@ spock_mk'PATCH
 pattern SpockPATCH
 SpockPath
 SpockVar
+WebSocketsData
+fromLazyByteString
+toLazyByteString
 ws_runClient
 ws_runClientWith
 ws_runClientWithSocket
@@ -2539,9 +2552,15 @@ ws_mk'ControlMessage
 pattern WsControlMessage
 ws_mk'DataMessage
 pattern WsDataMessage
-ws_fromLazyByteString
-ws_toLazyByteString
 ws_sendCloseCode
+FromJSON
+parseJSON
+GFromJSON
+gParseJSON
+GToJSON
+gToJSON
+ToJSON
+toJSON
 js_decode
 js_decode'
 js_decodeStrict
@@ -2566,10 +2585,6 @@ js_withObject
 js_withScientific
 js_withText
 js_object
-js_parseJSON
-js_gParseJSON
-js_gToJSON
-js_toJSON
 JsArray
 JsDotNetTime
 JsObject
@@ -2591,23 +2606,27 @@ js_mk'Bool
 pattern JsBool
 js_mk'Null
 pattern JsNull
+AsJSON
+_JSON
+AsNumber
+_Number
+_Double
+_Integer
+AsPrimitive
+_Primitive
+_String
+_Bool
+_Null
+AsValue
+_Value
+_Object
+_Array
 js__Integral
 js_key
 js_members
 js_nonNull
 js_nth
 js_values
-js__JSON
-js__Number
-js__Double
-js__Integer
-js__Primitive
-js__String
-js__Bool
-js__Null
-js__Value
-js__Object
-js__Array
 JsPrimitive
 js_mk'StringPrim
 pattern JsStringPrim

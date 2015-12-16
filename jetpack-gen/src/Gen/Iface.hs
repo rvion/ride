@@ -128,6 +128,8 @@ findReexports (mod, modules) previouslyExportedSymbols =
             _success (ifaceDecl, availNames availInfo) Local
       Nothing ->
         liftIO _fail
+  -- liftIO . putStrLn $ concat ["  exports are ", toS (map (\(a,xx,_) -> (a, case xx of {Just (aaa,bbb) -> showIfaceInfo aaa; _ -> ""})) declsF)]
+
       -- Nothing ->
       --   case nameModule_maybe name of
       --     Nothing -> _fail
@@ -150,8 +152,9 @@ findReexports (mod, modules) previouslyExportedSymbols =
       --                 then _failDeprecated (Remote _ifacePath)
       --                 else _success otherIfaceDecl (Remote _ifacePath)
       --             Nothing -> _fail
-
+  -- liftIO $ print $ toS exportedNames
   -- liftIO $ mapM_ (print) (map (\(a,b,c)->(toS a, maybe "" showIfaceInfo b)) $ declsF)
+
   let onOneLine = unwords . lines
   return $ catMaybes <$> for declsF $ \(n, decl, loc) ->
     case decl of
@@ -185,10 +188,12 @@ findReexports (mod, modules) previouslyExportedSymbols =
           , rNbTyVars = length (ifTyVars _t)
           , rDataTyCon = []
           }
-      Just (_t@(IfaceClass{}), exportedNames) -> case loc of
-        Remote x -> traceShow (Remote x, toS _t) Nothing
+      Just (_t@(IfaceClass{ifName}), exportedNames) -> case loc of
+        Remote x -> error (show (Remote x, toS _t))
+        -- if toS n == "FromJSON" then error (show (toS n, toS decl, loc)) else
         _ -> Just $ RClass
-          ( toS n)
+          ( toS ifName ) -- ARGH, don't do (toS n) here...
+          (ifName `elem` (map nameOccName exportedNames))
           (mapMaybe
             (\(IfaceClassOp n' _ t') -> if n' `elem` map nameOccName exportedNames
                 then Just $  RId (toS n') (onOneLine.toS$t')
