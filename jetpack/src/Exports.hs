@@ -5,6 +5,7 @@ import           Codec.Archive.Tar.AsTar as X
 import           Codec.Archive.Tar.Check.AsTar as X
 import           Codec.Archive.Tar.Entry.AsTar as X
 import           Codec.Compression.GZip.AsGzip as X
+import           Control.Concurrent.AsCtrl as X
 import           Control.Concurrent.STM.AsStm as X
 import           Control.Monad.IO.Class.AsTrans as X
 import           Control.Monad.State.Lazy.AsMtl as X

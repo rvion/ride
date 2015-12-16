@@ -48,6 +48,7 @@ Reexport {as = "c8", mod = "Data.ByteString.Lazy.Char8"}
 ### Software Architecture (stm, conduit)
 
 ```haskell
+Reexport {as = "ctrl", mod = "Control.Concurrent"}
 Reexport {as = "stm", mod = "Control.Concurrent.STM"}
 Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
 Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
