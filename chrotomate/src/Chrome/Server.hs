@@ -1,6 +1,11 @@
+{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE KindSignatures #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Chrome.Server where
 
@@ -13,8 +18,8 @@ data Ctx = Ctx
   , ctxDbPath :: FilePath
   , ctxConn   :: WsConnection
   }
-
-type M a = TransStateT Ctx IO a
+newtype M a = M { unM :: TransStateT Ctx IO a } deriving (Functor, Applicative, Monad, MonadIO)
+-- newtype M a = M {unM :: TransStateT Ctx IO a} derving (Monad, MonadIO)
 
 webserver ::Ctx -> IO ()
 webserver _ctx = do
@@ -22,51 +27,58 @@ webserver _ctx = do
   spock_runSpock port $ spock_spockT (runM _ctx) ride
 
 runM :: Ctx -> M a -> IO a
-runM _ctx = flip trans_evalStateT _ctx
+runM _ctx m = flip trans_evalStateT _ctx (unM m)
 
--- ride :: SpockSpockT (StateT Ctx IO) ()
-ride = undefined
--- ride = do
---     spock_middleware $ wai_staticPolicy (wai_addBase "static")
---     spock_middleware wai_logStdoutDev
---     spock_get spock_root $ spock_file "test" "static/index.html"
+a = spock_var
+b = (<//>)
 
---     spock_get "allpeople" $ do
---       (Ctx{ctxDB}) <- lift trans_get
---       js_json $ concatMap events (map_elems ctxDB)
+-- newtpe
+-- ride = undefined
+ride :: SpockSpockT M ()
+ride = do
+    spock_middleware $ wai_staticPolicy (wai_addBase "static")
+    spock_middleware wai_logStdoutDev
+    spock_get spock_root $ spock_file "test" "static/index.html"
 
---     spock_get "people" $ do
---       (Ctx{ctxDB}) <- lift trans_get
---       js_json
---         [ js_object
---           [ "value" .= ("All" :: TText)
---           , "open"  .= True
---           , "data"  .= map_elems ctxDB
---           ]
---         ]
+    spock_get "allpeople" $ do
+      let a  = lift
+      (Ctx{ctxDB}) <- lift (M trans_get)
+      spock_json $ concatMap events (map_elems ctxDB)
 
---     spock_get ("hello2" <//> spock_var) $ \name -> do
---       (Ctx{ctxDB}) <- lift trans_get
---       spock_text $ t_pack . show $ map_findWithDefault "ok" ctxDB name -- ("Hello " <> name <> "!")
+    spock_get "people" $ do
+      (Ctx{ctxDB}) <- lift (M trans_get)
+      spock_json
+        [ js_object
+          [ "value" .= ("All" :: TText)
+          , "open"  .= True
+          , "data"  .= map_elems ctxDB
+          ]
+        ]
 
---     spock_get ("search" <//> spock_var) $ \ _name -> do
---       (Ctx{ctxConn}) <- lift trans_get
---       liftIO $ do
+    spock_get ("hello2" <//> spock_var) $ \(name :: String) -> do
+      (Ctx{ctxDB}) <- lift $ M trans_get
+      spock_text $ case map_lookup name ctxDB of
+          Just a -> t_pack . show $ a -- ("Hello " <> name <> "!")
+          Nothing -> "not found"
 
---         let ms1 = js_encode $ searchName _name
---         c8_putStrLn ms1
---         ws_sendTextData ctxConn ms1
+    spock_get ("search" <//> spock_var) $ \ _name -> do
+      (Ctx{ctxConn}) <- lift $ M trans_get
+      liftIO $ do
 
---         ctrl_threadDelay 5000000
+        let ms1 = js_encode $ searchName _name
+        c8_putStrLn ms1
+        ws_sendTextData ctxConn ms1
 
---         let ms2 = js_encode clickOnFirstResult
---         c8_putStrLn ms2
---         ws_sendTextData ctxConn ms2
+        ctrl_threadDelay 5000000
 
---         ctrl_threadDelay 5000000
+        let ms2 = js_encode clickOnFirstResult
+        c8_putStrLn ms2
+        ws_sendTextData ctxConn ms2
 
---         let ms3 = js_encode getExperiences
---         c8_putStrLn ms3
---         ws_sendTextData ctxConn ms3
+        ctrl_threadDelay 5000000
 
---       spock_text _name
+        let ms3 = js_encode getExperiences
+        c8_putStrLn ms3
+        ws_sendTextData ctxConn ms3
+
+      spock_text _name

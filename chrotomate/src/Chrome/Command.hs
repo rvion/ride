@@ -11,7 +11,6 @@ import           JetPack
 -- import qualified Data.Text            as T
 -- type LBS = ByteString
 
-
 data Command = Command
   { commandId     :: Int
   , commandMethod :: TText

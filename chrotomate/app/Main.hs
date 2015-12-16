@@ -1,4 +1,5 @@
 {-# LANGUAGE NamedFieldPuns    #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Main ( main ) where
@@ -31,10 +32,10 @@ getChromiumPageInfo port = do
 main :: IO ()
 main = do
   Opts _dbpath <- opt_execParser fullopts
-  env_hSetBuffering env_stdin EnvNoBuffering
+  env_hSetBuffering env_stdin env_mk'NoBuffering
 
-  _dbExists <- doesFileExist _dbpath
-  _db <- if _dbExists then read <$> SIO.readFile _dbpath else return (map_fromList [])
+  _dbExists <- env_doesFileExist _dbpath
+  _db <- if _dbExists then read <$> sio_readFile _dbpath else return (map_fromList [])
   startTool _db _dbpath
   return ()
   where
@@ -67,8 +68,8 @@ startTool _db _dbpath = do
 
 loopAnalyse :: Ctx -> IO ()
 loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
-  msg <- ws_receiveData _conn
-  putStrLn "-----" >> putStrLn msg >> putStrLn "-----"
+  msg <- ws_receiveData _conn -- :: IO LbsByteString
+  putStrLn "-----" >> c8_putStrLn msg >> putStrLn "-----"
   let mbres = js_decode msg :: Maybe CommandResult
       mbLifeS = mbres >>= \res -> Just (js_fromJSON (resultValue res))
       mbLife = mbLifeS >>= \lifeS -> case lifeS of {JsSuccess m -> m; JsError a -> traceShow a Nothing}
@@ -95,8 +96,8 @@ loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
 parseUri :: String -> (String, Int, String)
 parseUri uri = fromMaybe (error "parseUri: Invalid URI") $ do
   _u    <- uri_parseURI uri
-  _auth <- uri_uriAuthority _u
-  let _port = case Uri.uriPort _auth of (':' : _str) -> read _str; _ -> 80
-  return (Uri.uriRegName _auth, _port, Uri.uriPath _u)
+  _auth <- get_uri_uriAuthority _u
+  let _port = case get_uri_uriPort _auth of (':' : _str) -> read _str; _ -> 80
+  return (get_uri_uriRegName _auth, _port, get_uri_uriPath _u)
 
 
