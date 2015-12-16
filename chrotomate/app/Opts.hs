@@ -1,13 +1,13 @@
 module Opts where
-import           Options.Applicative
-
+-- import           Options.Applicative
+import JetPack
 data Opts = Opts { db :: FilePath }
 
-opts :: Parser Opts
-opts = Opts <$> strOption
-  ( long "db"
-    <> help "file to use as DB"
-    <> value defaultDB
+opts :: OptParser Opts
+opts = Opts <$> opt_strOption
+    ( opt_long "db"
+   <> opt_help "file to use as DB"
+   <> opt_value defaultDB
     )
 
 

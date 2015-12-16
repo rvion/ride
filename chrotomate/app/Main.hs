@@ -2,39 +2,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Main ( main ) where
-import           Control.Monad              (forever, mzero)
-import           Control.Monad.Trans        (liftIO)
-import           Data.Aeson                 (FromJSON (..), (.:))
-
-import           Chrome.DB
-import qualified Data.Aeson                 as A
-import qualified Data.ByteString.Lazy.Char8 as LBS
-import           Data.List                  (isPrefixOf)
-import qualified Data.Map                   as M
-import           Data.Maybe                 (fromMaybe)
-import           Data.Monoid                ((<>))
-import qualified Data.Text.IO               as T
-import           Debug.Trace
-import           Options.Applicative
-import           Opts
-import           System.IO
-import           System.IO.Strict           as SIO
-
-import qualified Data.ByteString.Lazy.Char8 as C8
-import qualified Network.HTTP.Conduit       as Http
-
-import qualified Network.URI                as Uri
-import qualified Network.WebSockets         as WS
 
 import           Chrome.Command
+import           Chrome.DB
 import           Chrome.Server
--- import           System.Exit                (ExitCode)
-import           Control.Concurrent
-import           System.Directory           (doesFileExist)
-
-import           Control.Concurrent.STM
-import           System.Process             (system)
-
+import           Opts
+import JetPack
 
 -- 2: Get the list of pages
 data ChromiumPageInfo = ChromiumPageInfo
@@ -43,42 +16,42 @@ data ChromiumPageInfo = ChromiumPageInfo
   } deriving (Show)
 
 instance FromJSON ChromiumPageInfo where
-  parseJSON (A.Object obj) = ChromiumPageInfo
+  parseJSON (JsObject obj) = ChromiumPageInfo
     <$> obj .: "webSocketDebuggerUrl"
     <*> obj .: "url"
   parseJSON _ = mzero
 
 getChromiumPageInfo :: Int -> IO (Maybe [ChromiumPageInfo])
 getChromiumPageInfo port = do
-  request <- Http.parseUrl ("http://localhost:" ++ show port ++ "/json")
-  manager <- Http.newManager Http.tlsManagerSettings
-  response <- Http.httpLbs request manager
-  return $ A.decode (Http.responseBody response)
+  request <- http_parseUrl ("http://localhost:" ++ show port ++ "/json")
+  manager <- http_newManager http_tlsManagerSettings
+  response <- http_httpLbs request manager
+  return $ js_decode (get_http_responseBody response)
 
 main :: IO ()
 main = do
-  Opts _dbpath <- execParser fullopts
+  Opts _dbpath <- opt_execParser fullopts
   hSetBuffering stdin NoBuffering
 
   _dbExists <- doesFileExist _dbpath
-  _db <- if _dbExists then read <$> SIO.readFile _dbpath else return (M.fromList [])
+  _db <- if _dbExists then read <$> SIO.readFile _dbpath else return (map_fromList [])
   startTool _db _dbpath
   return ()
   where
-    fullopts = info (helper <*> opts)
-      ( fullDesc
-      <> progDesc "Print a greeting for TARGET"
-      <> header "hello - a test for optparse-applicative" )
+    fullopts = opt_info (opt_helper <*> opts)
+      (  opt_fullDesc
+      <> opt_progDesc "Print a greeting for TARGET"
+      <> opt_header "hello - a test for optparse-applicative" )
 
 tryUntilItIsWorking :: String -> IO (Maybe a) -> IO a
 tryUntilItIsWorking errMsg action =
   action >>= \mbres -> case mbres of
     Just a -> return a
-    Nothing -> print errMsg >> threadDelay 1000000 >> print "retrying.." >> tryUntilItIsWorking errMsg action
+    Nothing -> print errMsg >> ctrl_threadDelay 1000000 >> print "retrying.." >> tryUntilItIsWorking errMsg action
 
 startTool :: DB -> FilePath -> IO ()
 startTool _db _dbpath = do
-  shared <- atomically $ newTVar 0
+  shared <- stm_atomically $ stm_newTVar 0
   pages <- tryUntilItIsWorking "please, close chrome debugger and press enter on this terminal" (getChromiumPageInfo 9160)
   let
     (host, port, path) = parseUri linkedinWS
@@ -87,18 +60,18 @@ startTool _db _dbpath = do
       [] -> error "open linkedin page and login before running this program"
       (linkedinPage : _) -> linkedinPage
 
-  WS.runClient host port path $ \_conn -> do
+  ws_runClient host port path $ \_conn -> do
     let ctx = Ctx _db _dbpath _conn
-    _ <- forkIO (webserver ctx)
+    _ <- ctrl_forkIO (webserver ctx)
     loopAnalyse ctx
 
 loopAnalyse :: Ctx -> IO ()
 loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
-  msg <- WS.receiveData _conn
-  putStrLn "-----" >> ws_putStrLn msg >> putStrLn "-----"
-  let mbres = A.decode msg :: Maybe CommandResult
-      mbLifeS = mbres >>= \res -> Just (A.fromJSON (resultValue res))
-      mbLife = mbLifeS >>= \lifeS -> case lifeS of {A.Success m -> m; A.Error a -> traceShow a Nothing}
+  msg <- ws_receiveData _conn
+  putStrLn "-----" >> putStrLn msg >> putStrLn "-----"
+  let mbres = js_decode msg :: Maybe CommandResult
+      mbLifeS = mbres >>= \res -> Just (js_fromJSON (resultValue res))
+      mbLife = mbLifeS >>= \lifeS -> case lifeS of {JsSuccess m -> m; JsError a -> traceShow a Nothing}
 
   print mbres
 
@@ -107,7 +80,7 @@ loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
       loopAnalyse ctx
     Just life -> do
       putStrLn "------- LIFE --------"
-      let newDB = M.insert (name life) life (ctxDB ctx)
+      let newDB = map_insert (name life) life (ctxDB ctx)
       let ctx' = ctx{ ctxDB = newDB }
       writeFile _dbpath (show newDB)
       print "written:"
@@ -121,8 +94,8 @@ loopAnalyse ctx@(Ctx _db _dbpath _conn) = do
 
 parseUri :: String -> (String, Int, String)
 parseUri uri = fromMaybe (error "parseUri: Invalid URI") $ do
-  _u    <- Uri.parseURI uri
-  _auth <- Uri.uriAuthority _u
+  _u    <- uri_parseURI uri
+  _auth <- uri_uriAuthority _u
   let _port = case Uri.uriPort _auth of (':' : _str) -> read _str; _ -> 80
   return (Uri.uriRegName _auth, _port, Uri.uriPath _u)
 

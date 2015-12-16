@@ -5,13 +5,13 @@ import           JetPack
 -- import           Control.Monad
 -- import           Data.Aeson ()
 -- import Data.Aeson.Types (ToJSON, FromJSON)
-type PLOP = ToJSON
+-- type PLOP = ToJSON
 -- import           Data.Map      (Map)
 -- import           Data.Thyme
 -- import qualified Data.Map as M
 
 type Name = String
-type DB = Map Name Life
+type DB = MapMap Name Life
 
 data Position = Position
   { title     :: String
@@ -21,7 +21,7 @@ data Position = Position
   } deriving (Show, Read)
 
 instance ToJSON Position where
-  toJSON pos = object
+  toJSON pos = js_object
     [ "title"     .= title pos
     , "company"   .= company pos
     , "starttime" .= starttime pos
@@ -29,7 +29,7 @@ instance ToJSON Position where
     ]
 
 instance FromJSON Position where
-  parseJSON (Object v) = Position
+  parseJSON (JsObject v) = Position
     <$> v .: "title"
     <*> v .: "company"
     <*> v .: "starttime"
@@ -42,13 +42,13 @@ data Life = Life
   } deriving (Show, Read)
 
 instance ToJSON Life where
-  toJSON life = object
+  toJSON life = js_object
     [ "value"     .= name life
     , "content"   .= events life
     ]
 
 instance FromJSON Life where
-  parseJSON (Object v) = Life
+  parseJSON (JsObject v) = Life
     <$> v .: "name"
     <*> v .: "life"
   parseJSON _ = mzero

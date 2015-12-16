@@ -2,7 +2,7 @@
 {-# LANGUAGE PatternSynonyms #-}
 module Chrome.Command where
 import           JetPack
-import           Data.Aeson (ToJSON, FromJSON, toJSON, parseJSON, Value(..))
+-- import           Data.Aeson (ToJSON, FromJSON, toJSON, parseJSON, Value(..))
 -- import qualified Data.Aeson           as A
 -- import           Data.ByteString.Lazy (ByteString)
 -- import qualified Data.ByteString.Lazy as LBS
@@ -30,10 +30,6 @@ data CommandResult = CommandResult
   , resultValue :: JsValue
   } deriving (Show)
 
--- obj = Object
-pattern JsObject a <- Object a
-jsString = String
-
 instance FromJSON CommandResult where
   parseJSON (JsObject v) = CommandResult
     <$> v .: "id"
@@ -45,14 +41,14 @@ goToPage :: TText ->  Command
 goToPage page = Command
   { commandId     = 1
   , commandMethod = "Page.navigate"
-  , commandParams = [("url", jsString page)]
+  , commandParams = [("url", js_mk'String page)]
   }
 
-searchName :: Text ->  Command
+searchName :: TText ->  Command
 searchName name = jsEval (go "#main-search-box" name)
   where
-    go :: Text -> Text -> Text
-    go inpt txt = T.concat ["$(\"", inpt,"\").val(\"", txt,"\");$(\"#global-search\").submit()"]
+    go :: TText -> TText -> TText
+    go inpt txt = t_concat ["$(\"", inpt,"\").val(\"", txt,"\");$(\"#global-search\").submit()"]
 
 clickOnFirstResult :: Command
 clickOnFirstResult = jsEval
@@ -61,8 +57,8 @@ clickOnFirstResult = jsEval
 getExperiences :: Command
 getExperiences = jsEval getExperiences'
 
-getExperiences'  :: Text
-getExperiences' = T.concat
+getExperiences'  :: TText
+getExperiences' = t_concat
   [ "result={"
   , "  name: $('#name .full-name').text(),"
   , "  life: $.map($('#background #background-experience-container .editable-item.section-item'),function(e){"
@@ -80,12 +76,12 @@ getExperiences' = T.concat
 
 -- [Object, Object, Object, Object]
 
-jsEval :: Text -> Command
+jsEval :: TText -> Command
 jsEval code = Command
   { commandId     = 1
   , commandMethod = "Runtime.evaluate"
   , commandParams =
-      [ ("expression", A.String code)
-      , ("returnByValue", A.Bool True)
+      [ ("expression", js_mk'String code)
+      , ("returnByValue", js_mk'Bool True)
       ]
   }
