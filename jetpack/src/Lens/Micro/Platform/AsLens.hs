@@ -23,9 +23,6 @@ import qualified Lens.Micro.Platform as I
 -- (-=) :: forall s a (m :: * -> *). (MonadState s m, Num a) => ASetter s s a a -> a -> m ()
 (-=) = (I.-=)
 
--- (.=) :: forall s a b (m :: * -> *). MonadState s m => ASetter s s a b -> b -> m ()
-(.=) = (I..=)
-
 -- (//=) :: forall s a (m :: * -> *). (MonadState s m, Fractional a) => ASetter s s a a -> a -> m ()
 (//=) = (I.//=)
 
