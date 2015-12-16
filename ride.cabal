@@ -21,6 +21,7 @@ Library
                      , RankNTypes
                      , PatternSynonyms
                      , TypeFamilies
+                     , NamedFieldPuns
   ghc-options:         -fdefer-type-errors
   build-depends:       base
                     -- , jetpack-gen

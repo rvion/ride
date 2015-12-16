@@ -37,6 +37,7 @@ import           Data.Vector.AsVec as X
 import           Lens.Micro.Platform.AsLens as X
 import           Network.HTTP.Conduit.AsHttp as X
 import           Network.HTTP.Types.Status.AsWai as X
+import           Network.URI.AsUri as X
 import           Network.Wai.AsWai as X
 import           Network.Wai.Handler.Warp.AsWai as X
 import           Network.Wai.Middleware.RequestLogger.AsWai as X

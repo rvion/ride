@@ -17,6 +17,9 @@ LiberalTypeSynonyms is needed for partial types synonim such as
 type M = TransStateT Ctx IO
 ```
 
+getters and setters
+
+draback: used as a library might be annoying because jetpack are more likely not to compile when deps change
 
 ### Input
 
@@ -72,14 +75,16 @@ m_deleteFindMax = I.deleteFindMax
 
 some next steps:
   - [ ] remove the need to manually specify packages !
+  - [ ] don't warn when reexport same occName, because it only means it is the same symbol. better would be to warn when same name for other occName 
   - [ ] remove the need to manually install packages !
   - [ ] ensure packages are not declared twice with the same reexport name, or it will result in blank file
-  - [X] cache module loading per import
   - [ ] cache even more module loading (per run)
   - [ ] ensure all necessary packages are installed
   - [ ] export promoted kind aliases
+  - [ ] ensure we don't reexport twice the same getter or setter
   - [ ] document https://ghc.haskell.org/trac/ghc/wiki/ModuleReexports
   - [ ] document backpack
+  - [X] cache module loading per import
   - [X] re-handle deprecated types
   - [x] show commented types above each definitions
   - [x] check how to deal with http://stackoverflow.com/questions/27895196/haskell-illegal-polymorphic-type makes it hard

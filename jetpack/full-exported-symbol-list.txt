@@ -3155,6 +3155,56 @@ js_mk'BoolPrim
 pattern JsBoolPrim
 js_mk'NullPrim
 pattern JsNullPrim
+uri_escapeURIChar
+uri_escapeURIString
+uri_isAbsoluteURI
+uri_isAllowedInURI
+uri_isIPv4address
+uri_isIPv6address
+uri_isRelativeReference
+uri_isReserved
+uri_isURI
+uri_isURIReference
+uri_isUnescapedInURI
+uri_isUnescapedInURIComponent
+uri_isUnreserved
+uri_nonStrictRelativeTo
+uri_normalizeCase
+uri_normalizeEscape
+uri_normalizePathSegments
+uri_nullURI
+uri_parseAbsoluteURI
+uri_parseRelativeReference
+uri_parseURI
+uri_parseURIReference
+uri_relativeFrom
+uri_relativeTo
+uri_unEscapeString
+uri_uriIsAbsolute
+uri_uriIsRelative
+uri_uriToString
+UriURI
+uri_mk'URI
+pattern UriURI
+get_uri_uriScheme
+set_uri_uriScheme
+get_uri_uriAuthority
+set_uri_uriAuthority
+get_uri_uriPath
+set_uri_uriPath
+get_uri_uriQuery
+set_uri_uriQuery
+get_uri_uriFragment
+set_uri_uriFragment
+UriURIAuth
+uri_mk'URIAuth
+pattern UriURIAuth
+get_uri_uriUserInfo
+set_uri_uriUserInfo
+get_uri_uriRegName
+set_uri_uriRegName
+get_uri_uriPort
+set_uri_uriPort
 magnify
 zoom
 at

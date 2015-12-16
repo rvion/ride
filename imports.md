@@ -97,7 +97,6 @@ Reexport {as = "opt", mod = "Options.Applicative.Builder.Completer"}
 Reexport {as = "opt", mod = "Options.Applicative.Extra"}
 ```
 
-
 ### Web: (wai, aeson, spock)
 
 ```haskell
@@ -118,6 +117,8 @@ Reexport {as = "http", mod = "Network.HTTP.Conduit"}
 Reexport {as = "js", mod = "Data.Aeson"}
 Reexport {as = "js", mod = "Data.Aeson.Types"}
 Reexport {as = "js", mod = "Data.Aeson.Lens"}
+
+Reexport {as = "uri", mod = "Network.URI"}
 ```
 # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
@@ -126,7 +127,6 @@ Reexport {as = "js", mod = "Data.Aeson.Lens"}
 ```haskell
 Reexport {as = "lens", mod = "Lens.Micro.Platform"}
 ```
-
 
 ### Packages
 
@@ -163,3 +163,4 @@ Reexport {as = "lens", mod = "Lens.Micro.Platform"}
   * vector
   * process
   * http-conduit
+  * network-uri
