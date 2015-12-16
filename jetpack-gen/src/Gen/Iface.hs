@@ -32,6 +32,21 @@ type ModuleName = String
 -- pattern JsG1 <- G1
 -- mkG1 = G1
 
+allexports :: (String, Modules) -> IO [String]
+allexports (mod, modules) =
+  defaultErrorHandler defaultFatalMessager defaultFlushOut $
+    runGhc (Just libdir) $ do
+      dflags <- getSessionDynFlags
+      pkgs   <- setSessionDynFlags dflags
+      sess   <- getSession
+      iface  <- getIface (modules Map.! mod)
+      let
+        toS x = showSDoc dflags (ppr x)
+        _allexports = concatMap (map toS.availNames) $ mi_exports iface
+      liftIO $ print _allexports
+      return _allexports
+
+
 getIface :: String -> Ghc ModIface
 getIface hiFilepath = do
   sess <- getSession

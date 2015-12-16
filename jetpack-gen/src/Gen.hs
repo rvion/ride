@@ -30,7 +30,9 @@ jetpackGen = do
         reexports <- findReexports (mod, modules) previouslyExportedSymbols
         printReexports (mod, prefix) reexports previouslyExportedSymbols
 
-  allExportsFinal <- foldM reexportModule [] reexports
+  initialImport <- allexports ("BasePrelude", modules)
+  -- error "done"
+  allExportsFinal <- foldM reexportModule initialImport reexports
   writeCabalFile reexports deps
   writeReexportModule reexports
   asSuccess $ putStrLn "done"
