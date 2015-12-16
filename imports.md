@@ -15,7 +15,7 @@
 -- ReexportUnqualified {mod = "ReexportDemo"}
 
 ```haskell
-Reexport {as = "demo", mod = "ReexportDemo"}
+-- Reexport {as = "demo", mod = "ReexportDemo"}
 ```
 
 ### Containers

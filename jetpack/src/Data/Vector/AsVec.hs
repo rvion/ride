@@ -9,9 +9,6 @@ import qualified Data.Vector as I
 -- (!?) :: forall a. Vector a -> Int -> Maybe a
 (!?) = (I.!?)
 
--- (++) :: forall a. Vector a -> Vector a -> Vector a
-(++) = (I.++)
-
 -- (//) :: forall a. Vector a -> [(Int, a)] -> Vector a
 (//) = (I.//)
 

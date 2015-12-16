@@ -48,7 +48,6 @@ import           Options.Applicative.Builder.AsOpt as X
 import           Options.Applicative.Builder.Completer.AsOpt as X
 import           Options.Applicative.Common.AsOpt as X
 import           Options.Applicative.Extra.AsOpt as X
-import           ReexportDemo.AsDemo as X
 import           System.Console.ANSI.AsAnsi as X
 import           System.Environment.AsEnv as X
 import           System.Exit.AsEnv as X

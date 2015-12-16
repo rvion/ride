@@ -6,9 +6,6 @@ module Data.List.NonEmpty.AsNe
 import qualified Data.List.NonEmpty as I
 
 
--- (!!) :: forall a. NonEmpty a -> Int -> a
-(!!) = (I.!!)
-
 -- (<|) :: forall a. a -> NonEmpty a -> NonEmpty a
 (<|) = (I.<|)
 

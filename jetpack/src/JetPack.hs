@@ -7,10 +7,5 @@ module JetPack
   ( module X
   ) where
 
-import Debug.Trace as X
-import           BasePrelude as X ((<>))
-import           Exports as X hiding (yield, (!!), (&), (++), (<$!>), (<$>), (<**>), (<=<), (<>), (<|>), (=<<), (>=>),
-                               (\\))
-
-(&) = flip ($)
-
+import           BasePrelude as X
+import           Exports as X hiding (try,uncons)

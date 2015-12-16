@@ -8,9 +8,6 @@ module Lens.Micro.Platform.AsLens
 import qualified Lens.Micro.Platform as I
 
 
--- (&) :: forall a b. a -> (a -> b) -> b
-(&) = (I.&)
-
 -- (%=) :: forall s a b (m :: * -> *). MonadState s m => ASetter s s a b -> (a -> b) -> m ()
 (%=) = (I.%=)
 

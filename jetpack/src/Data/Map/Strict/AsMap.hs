@@ -9,9 +9,6 @@ import qualified Data.Map.Strict as I
 -- (!) :: forall k a. Ord k => Map k a -> k -> a
 (!) = (I.!)
 
--- (\\) :: forall k a b. Ord k => Map k a -> Map k b -> Map k a
-(\\) = (I.\\)
-
 -- map_assocs :: forall k a. Map k a -> [(k, a)]
 map_assocs = I.assocs
 
