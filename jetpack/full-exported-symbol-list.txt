@@ -2964,6 +2964,10 @@ ansi_mk'DoubleUnderline
 pattern AnsiDoubleUnderline
 ansi_mk'NoUnderline
 pattern AnsiNoUnderline
+sio_getContents
+sio_hGetContents
+sio_interact
+sio_readFile
 env_char8
 env_latin1
 env_mkTextEncoding

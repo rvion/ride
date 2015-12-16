@@ -21,6 +21,15 @@ getters and setters
 
 draback: used as a library might be annoying because jetpack are more likely not to compile when deps change
 
+
+trick to avoid error on `type  M = TransStateT Ctx IO`
+newtype M a = M { unM :: TransStateT Ctx IO a } deriving (Functor, Applicative, Monad, MonadIO)
+-- newtype M a = M {unM :: TransStateT Ctx IO a} derving (Monad, MonadIO)
+see https://prime.haskell.org/wiki/NewtypeDeriving, totally our case
+see http://jozefg.bitbucket.org/posts/2014-12-23-impredicative.html
+or http://conscientiousprogrammer.com/blog/2015/12/13/24-days-of-hackage-2015-day-13-hint-runtime-eval-for-haskell/ (paragraph "A necessary type wrapper")
+
+
 ### Input
 
 ```

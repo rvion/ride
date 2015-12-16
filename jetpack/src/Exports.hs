@@ -53,6 +53,7 @@ import           System.Directory.AsEnv as X
 import           System.Environment.AsEnv as X
 import           System.Exit.AsEnv as X
 import           System.IO.AsEnv as X
+import           System.IO.Strict.AsSio as X
 import           System.Process.AsEnv as X
 import           Text.Megaparsec.AsParse as X
 import           Web.Spock.Digestive.AsSpock as X
