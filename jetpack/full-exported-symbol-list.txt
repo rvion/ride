@@ -2327,6 +2327,41 @@ StmTMVar
 StmTQueue
 MonadIO
 liftIO
+MonadThrow
+throwM
+MonadBaseControl
+MonadResource
+liftResourceT
+trans_allocate
+trans_closeInternalState
+trans_createInternalState
+trans_getInternalState
+trans_joinResourceT
+trans_monadThrow
+trans_register
+trans_release
+trans_resourceForkIO
+trans_resourceMask
+trans_runException
+trans_runExceptionT
+trans_runExceptionT_
+trans_runException_
+trans_runInternalState
+trans_runResourceT
+trans_unprotect
+trans_withInternalState
+trans_transResourceT
+TransExceptionT
+TransInternalState
+TransMonadResourceBase
+TransInvalidAccess
+trans_mk'InvalidAccess
+pattern TransInvalidAccess
+get_trans_functionName
+set_trans_functionName
+TransReleaseKey
+TransResIO
+TransResourceT
 MonadTrans
 lift
 trans_evalState
@@ -2351,51 +2386,6 @@ trans_withState
 trans_withStateT
 TransState
 TransStateT
-MonadState
-get
-put
-state
-mtl_filterM
-mtl_foldM
-mtl_foldM_
-mtl_forever
-mtl_guard
-mtl_mapAndUnzipM
-mtl_mfilter
-mtl_replicateM
-mtl_replicateM_
-mtl_unless
-mtl_zipWithM
-mtl_zipWithM_
-mtl_forM_
-mtl_mapM_
-mtl_msum
-mtl_sequence_
-mtl_fix
-mtl_void
-mtl_forM
-mtl_ap
-mtl_join
-mtl_liftM
-mtl_liftM2
-mtl_liftM3
-mtl_liftM4
-mtl_liftM5
-mtl_when
-mtl_gets
-mtl_modify
-mtl_modify'
-mtl_evalState
-mtl_evalStateT
-mtl_execState
-mtl_execStateT
-mtl_mapState
-mtl_mapStateT
-mtl_runState
-mtl_withState
-mtl_withStateT
-MtlState
-MtlStateT
 $$
 $$+
 $$++
@@ -3566,109 +3556,6 @@ get_wai_tlsNegotiatedProtocol
 set_wai_tlsNegotiatedProtocol
 get_wai_tlsChiperID
 set_wai_tlsChiperID
-wai_accepted202
-wai_badGateway502
-wai_badRequest400
-wai_conflict409
-wai_continue100
-wai_created201
-wai_expectationFailed417
-wai_forbidden403
-wai_found302
-wai_gatewayTimeout504
-wai_gone410
-wai_httpVersionNotSupported505
-wai_imATeaPot418
-wai_internalServerError500
-wai_lengthRequired411
-wai_methodNotAllowed405
-wai_mkStatus
-wai_movedPermanently301
-wai_multipleChoices300
-wai_networkAuthenticationRequired511
-wai_noContent204
-wai_nonAuthoritative203
-wai_notAcceptable406
-wai_notFound404
-wai_notImplemented501
-wai_notModified304
-wai_ok200
-wai_partialContent206
-wai_paymentRequired402
-wai_preconditionFailed412
-wai_preconditionRequired428
-wai_proxyAuthenticationRequired407
-wai_requestEntityTooLarge413
-wai_requestHeaderFieldsTooLarge431
-wai_requestTimeout408
-wai_requestURITooLong414
-wai_requestedRangeNotSatisfiable416
-wai_resetContent205
-wai_seeOther303
-wai_serviceUnavailable503
-wai_status100
-wai_status101
-wai_status200
-wai_status201
-wai_status202
-wai_status203
-wai_status204
-wai_status205
-wai_status206
-wai_status300
-wai_status301
-wai_status302
-wai_status303
-wai_status304
-wai_status305
-wai_status307
-wai_status400
-wai_status401
-wai_status402
-wai_status403
-wai_status404
-wai_status405
-wai_status406
-wai_status407
-wai_status408
-wai_status409
-wai_status410
-wai_status411
-wai_status412
-wai_status413
-wai_status414
-wai_status415
-wai_status416
-wai_status417
-wai_status418
-wai_status428
-wai_status429
-wai_status431
-wai_status500
-wai_status501
-wai_status502
-wai_status503
-wai_status504
-wai_status505
-wai_status511
-wai_statusIsClientError
-wai_statusIsInformational
-wai_statusIsRedirection
-wai_statusIsServerError
-wai_statusIsSuccessful
-wai_switchingProtocols101
-wai_temporaryRedirect307
-wai_tooManyRequests429
-wai_unauthorized401
-wai_unsupportedMediaType415
-wai_useProxy305
-WaiStatus
-wai_mk'Status
-pattern WaiStatus
-get_wai_statusCode
-set_wai_statusCode
-get_wai_statusMessage
-set_wai_statusMessage
 wai_logStdout
 wai_logStdoutDev
 wai_mkRequestLogger
@@ -3742,6 +3629,389 @@ set_wai_fm_etag
 get_wai_fm_fileName
 set_wai_fm_fileName
 WaiPolicy
+QueryLike
+toQuery
+http_hAccept
+http_hAcceptLanguage
+http_hAuthorization
+http_hCacheControl
+http_hConnection
+http_hContentEncoding
+http_hContentLength
+http_hContentMD5
+http_hContentType
+http_hCookie
+http_hDate
+http_hIfModifiedSince
+http_hIfRange
+http_hLastModified
+http_hLocation
+http_hRange
+http_hReferer
+http_hServer
+http_hUserAgent
+http_renderByteRange
+http_renderByteRangeBuilder
+http_renderByteRanges
+http_renderByteRangesBuilder
+http_methodConnect
+http_methodDelete
+http_methodGet
+http_methodHead
+http_methodOptions
+http_methodPatch
+http_methodPost
+http_methodPut
+http_methodTrace
+http_parseMethod
+http_renderMethod
+http_renderStdMethod
+http_accepted202
+http_badGateway502
+http_badRequest400
+http_conflict409
+http_continue100
+http_created201
+http_expectationFailed417
+http_forbidden403
+http_found302
+http_gatewayTimeout504
+http_gone410
+http_httpVersionNotSupported505
+http_imATeaPot418
+http_internalServerError500
+http_lengthRequired411
+http_methodNotAllowed405
+http_mkStatus
+http_movedPermanently301
+http_multipleChoices300
+http_noContent204
+http_nonAuthoritative203
+http_notAcceptable406
+http_notFound404
+http_notImplemented501
+http_notModified304
+http_ok200
+http_partialContent206
+http_paymentRequired402
+http_preconditionFailed412
+http_proxyAuthenticationRequired407
+http_requestEntityTooLarge413
+http_requestTimeout408
+http_requestURITooLong414
+http_requestedRangeNotSatisfiable416
+http_resetContent205
+http_seeOther303
+http_serviceUnavailable503
+http_status100
+http_status101
+http_status200
+http_status201
+http_status202
+http_status203
+http_status204
+http_status205
+http_status206
+http_status300
+http_status301
+http_status302
+http_status303
+http_status304
+http_status305
+http_status307
+http_status400
+http_status401
+http_status402
+http_status403
+http_status404
+http_status405
+http_status406
+http_status407
+http_status408
+http_status409
+http_status410
+http_status411
+http_status412
+http_status413
+http_status414
+http_status415
+http_status416
+http_status417
+http_status418
+http_status500
+http_status501
+http_status502
+http_status503
+http_status504
+http_status505
+http_statusIsClientError
+http_statusIsInformational
+http_statusIsRedirection
+http_statusIsServerError
+http_statusIsSuccessful
+http_switchingProtocols101
+http_temporaryRedirect307
+http_unauthorized401
+http_unsupportedMediaType415
+http_useProxy305
+http_decodePath
+http_decodePathSegments
+http_encodePath
+http_encodePathSegments
+http_encodePathSegmentsRelative
+http_extractPath
+http_parseQuery
+http_parseQueryText
+http_parseSimpleQuery
+http_queryTextToQuery
+http_queryToQueryText
+http_renderQuery
+http_renderQueryBuilder
+http_renderQueryText
+http_renderSimpleQuery
+http_simpleQueryToQuery
+http_urlDecode
+http_urlEncode
+http_urlEncodeBuilder
+http_http09
+http_http10
+http_http11
+HttpByteRange
+http_mk'ByteRangeFrom
+pattern HttpByteRangeFrom
+http_mk'ByteRangeFromTo
+pattern HttpByteRangeFromTo
+http_mk'ByteRangeSuffix
+pattern HttpByteRangeSuffix
+HttpByteRanges
+HttpHeader
+HttpHeaderName
+HttpRequestHeaders
+HttpResponseHeaders
+HttpMethod
+HttpStdMethod
+http_mk'GET
+pattern HttpGET
+http_mk'POST
+pattern HttpPOST
+http_mk'HEAD
+pattern HttpHEAD
+http_mk'PUT
+pattern HttpPUT
+http_mk'DELETE
+pattern HttpDELETE
+http_mk'TRACE
+pattern HttpTRACE
+http_mk'CONNECT
+pattern HttpCONNECT
+http_mk'OPTIONS
+pattern HttpOPTIONS
+http_mk'PATCH
+pattern HttpPATCH
+HttpStatus
+http_mk'Status
+pattern HttpStatus
+get_http_statusCode
+set_http_statusCode
+get_http_statusMessage
+set_http_statusMessage
+HttpQuery
+HttpQueryItem
+HttpQueryText
+HttpSimpleQuery
+HttpSimpleQueryItem
+HttpHttpVersion
+http_mk'HttpVersion
+pattern HttpHttpVersion
+get_http_httpMajor
+set_http_httpMajor
+get_http_httpMinor
+set_http_httpMinor
+http_networkAuthenticationRequired511
+http_preconditionRequired428
+http_requestHeaderFieldsTooLarge431
+http_status428
+http_status429
+http_status431
+http_status511
+http_tooManyRequests429
+http_http
+http_httpLbs
+http_lbsResponse
+http_requestBodySource
+http_requestBodySourceChunked
+http_requestBodySourceChunkedIO
+http_requestBodySourceIO
+http_simpleHttp
+http_mkManagerSettings
+http_tlsManagerSettings
+http_createCookieJar
+http_destroyCookieJar
+http_closeManager
+http_newManager
+http_addProxy
+http_alwaysDecompress
+http_applyBasicAuth
+http_browserDecompress
+http_parseUrl
+http_setQueryString
+http_urlEncodedBody
+http_getRedirectedRequest
+HttpCookie
+http_mk'Cookie
+pattern HttpCookie
+get_http_cookie_name
+set_http_cookie_name
+get_http_cookie_value
+set_http_cookie_value
+get_http_cookie_expiry_time
+set_http_cookie_expiry_time
+get_http_cookie_domain
+set_http_cookie_domain
+get_http_cookie_path
+set_http_cookie_path
+get_http_cookie_creation_time
+set_http_cookie_creation_time
+get_http_cookie_last_access_time
+set_http_cookie_last_access_time
+get_http_cookie_persistent
+set_http_cookie_persistent
+get_http_cookie_host_only
+set_http_cookie_host_only
+get_http_cookie_secure_only
+set_http_cookie_secure_only
+get_http_cookie_http_only
+set_http_cookie_http_only
+HttpCookieJar
+HttpHttpException
+http_mk'StatusCodeException
+pattern HttpStatusCodeException
+http_mk'InvalidUrlException
+pattern HttpInvalidUrlException
+http_mk'TooManyRedirects
+pattern HttpTooManyRedirects
+http_mk'UnparseableRedirect
+pattern HttpUnparseableRedirect
+http_mk'TooManyRetries
+pattern HttpTooManyRetries
+http_mk'HttpParserException
+pattern HttpHttpParserException
+http_mk'HandshakeFailed
+pattern HttpHandshakeFailed
+http_mk'OverlongHeaders
+pattern HttpOverlongHeaders
+http_mk'ResponseTimeout
+pattern HttpResponseTimeout
+http_mk'FailedConnectionException
+pattern HttpFailedConnectionException
+http_mk'FailedConnectionException2
+pattern HttpFailedConnectionException2
+http_mk'ExpectedBlankAfter100Continue
+pattern HttpExpectedBlankAfter100Continue
+http_mk'InvalidStatusLine
+pattern HttpInvalidStatusLine
+http_mk'InvalidHeader
+pattern HttpInvalidHeader
+http_mk'InternalIOException
+pattern HttpInternalIOException
+http_mk'ProxyConnectException
+pattern HttpProxyConnectException
+http_mk'NoResponseDataReceived
+pattern HttpNoResponseDataReceived
+http_mk'TlsException
+pattern HttpTlsException
+http_mk'TlsNotSupported
+pattern HttpTlsNotSupported
+http_mk'ResponseBodyTooShort
+pattern HttpResponseBodyTooShort
+http_mk'InvalidChunkHeaders
+pattern HttpInvalidChunkHeaders
+http_mk'IncompleteHeaders
+pattern HttpIncompleteHeaders
+http_mk'InvalidDestinationHost
+pattern HttpInvalidDestinationHost
+http_mk'HttpZlibException
+pattern HttpHttpZlibException
+http_mk'InvalidProxyEnvironmentVariable
+pattern HttpInvalidProxyEnvironmentVariable
+http_mk'ResponseLengthAndChunkingBothUsed
+pattern HttpResponseLengthAndChunkingBothUsed
+http_mk'TlsExceptionHostPort
+pattern HttpTlsExceptionHostPort
+HttpManager
+HttpManagerSettings
+get_http_managerConnCount
+set_http_managerConnCount
+get_http_managerTlsConnection
+set_http_managerTlsConnection
+get_http_managerResponseTimeout
+set_http_managerResponseTimeout
+HttpProxy
+http_mk'Proxy
+pattern HttpProxy
+get_http_proxyHost
+set_http_proxyHost
+get_http_proxyPort
+set_http_proxyPort
+HttpRequest
+get_http_method
+set_http_method
+get_http_secure
+set_http_secure
+get_http_host
+set_http_host
+get_http_port
+set_http_port
+get_http_path
+set_http_path
+get_http_queryString
+set_http_queryString
+get_http_requestHeaders
+set_http_requestHeaders
+get_http_requestBody
+set_http_requestBody
+get_http_proxy
+set_http_proxy
+get_http_hostAddress
+set_http_hostAddress
+get_http_rawBody
+set_http_rawBody
+get_http_decompress
+set_http_decompress
+get_http_redirectCount
+set_http_redirectCount
+get_http_checkStatus
+set_http_checkStatus
+get_http_responseTimeout
+set_http_responseTimeout
+get_http_getConnectionWrapper
+set_http_getConnectionWrapper
+get_http_cookieJar
+set_http_cookieJar
+get_http_requestVersion
+set_http_requestVersion
+HttpRequestBody
+http_mk'RequestBodyLBS
+pattern HttpRequestBodyLBS
+http_mk'RequestBodyBS
+pattern HttpRequestBodyBS
+http_mk'RequestBodyBuilder
+pattern HttpRequestBodyBuilder
+http_mk'RequestBodyStream
+pattern HttpRequestBodyStream
+http_mk'RequestBodyStreamChunked
+pattern HttpRequestBodyStreamChunked
+HttpResponse
+get_http_responseStatus
+set_http_responseStatus
+get_http_responseVersion
+set_http_responseVersion
+get_http_responseHeaders
+set_http_responseHeaders
+get_http_responseBody
+set_http_responseBody
+get_http_responseCookieJar
+set_http_responseCookieJar
 spock_runForm
 HasSpock
 runQuery
@@ -4065,183 +4335,6 @@ pattern WsControlMessage
 ws_mk'DataMessage
 pattern WsDataMessage
 ws_sendCloseCode
-http_http
-http_httpLbs
-http_lbsResponse
-http_requestBodySource
-http_requestBodySourceChunked
-http_requestBodySourceChunkedIO
-http_requestBodySourceIO
-http_simpleHttp
-http_mkManagerSettings
-http_tlsManagerSettings
-http_createCookieJar
-http_destroyCookieJar
-http_closeManager
-http_newManager
-http_addProxy
-http_alwaysDecompress
-http_applyBasicAuth
-http_browserDecompress
-http_parseUrl
-http_setQueryString
-http_urlEncodedBody
-http_getRedirectedRequest
-HttpCookie
-http_mk'Cookie
-pattern HttpCookie
-get_http_cookie_name
-set_http_cookie_name
-get_http_cookie_value
-set_http_cookie_value
-get_http_cookie_expiry_time
-set_http_cookie_expiry_time
-get_http_cookie_domain
-set_http_cookie_domain
-get_http_cookie_path
-set_http_cookie_path
-get_http_cookie_creation_time
-set_http_cookie_creation_time
-get_http_cookie_last_access_time
-set_http_cookie_last_access_time
-get_http_cookie_persistent
-set_http_cookie_persistent
-get_http_cookie_host_only
-set_http_cookie_host_only
-get_http_cookie_secure_only
-set_http_cookie_secure_only
-get_http_cookie_http_only
-set_http_cookie_http_only
-HttpCookieJar
-HttpHttpException
-http_mk'StatusCodeException
-pattern HttpStatusCodeException
-http_mk'InvalidUrlException
-pattern HttpInvalidUrlException
-http_mk'TooManyRedirects
-pattern HttpTooManyRedirects
-http_mk'UnparseableRedirect
-pattern HttpUnparseableRedirect
-http_mk'TooManyRetries
-pattern HttpTooManyRetries
-http_mk'HttpParserException
-pattern HttpHttpParserException
-http_mk'HandshakeFailed
-pattern HttpHandshakeFailed
-http_mk'OverlongHeaders
-pattern HttpOverlongHeaders
-http_mk'ResponseTimeout
-pattern HttpResponseTimeout
-http_mk'FailedConnectionException
-pattern HttpFailedConnectionException
-http_mk'FailedConnectionException2
-pattern HttpFailedConnectionException2
-http_mk'ExpectedBlankAfter100Continue
-pattern HttpExpectedBlankAfter100Continue
-http_mk'InvalidStatusLine
-pattern HttpInvalidStatusLine
-http_mk'InvalidHeader
-pattern HttpInvalidHeader
-http_mk'InternalIOException
-pattern HttpInternalIOException
-http_mk'ProxyConnectException
-pattern HttpProxyConnectException
-http_mk'NoResponseDataReceived
-pattern HttpNoResponseDataReceived
-http_mk'TlsException
-pattern HttpTlsException
-http_mk'TlsNotSupported
-pattern HttpTlsNotSupported
-http_mk'ResponseBodyTooShort
-pattern HttpResponseBodyTooShort
-http_mk'InvalidChunkHeaders
-pattern HttpInvalidChunkHeaders
-http_mk'IncompleteHeaders
-pattern HttpIncompleteHeaders
-http_mk'InvalidDestinationHost
-pattern HttpInvalidDestinationHost
-http_mk'HttpZlibException
-pattern HttpHttpZlibException
-http_mk'InvalidProxyEnvironmentVariable
-pattern HttpInvalidProxyEnvironmentVariable
-http_mk'ResponseLengthAndChunkingBothUsed
-pattern HttpResponseLengthAndChunkingBothUsed
-http_mk'TlsExceptionHostPort
-pattern HttpTlsExceptionHostPort
-HttpManager
-HttpManagerSettings
-get_http_managerConnCount
-set_http_managerConnCount
-get_http_managerTlsConnection
-set_http_managerTlsConnection
-get_http_managerResponseTimeout
-set_http_managerResponseTimeout
-HttpProxy
-http_mk'Proxy
-pattern HttpProxy
-get_http_proxyHost
-set_http_proxyHost
-get_http_proxyPort
-set_http_proxyPort
-HttpRequest
-get_http_method
-set_http_method
-get_http_secure
-set_http_secure
-get_http_host
-set_http_host
-get_http_port
-set_http_port
-get_http_path
-set_http_path
-get_http_queryString
-set_http_queryString
-get_http_requestHeaders
-set_http_requestHeaders
-get_http_requestBody
-set_http_requestBody
-get_http_proxy
-set_http_proxy
-get_http_hostAddress
-set_http_hostAddress
-get_http_rawBody
-set_http_rawBody
-get_http_decompress
-set_http_decompress
-get_http_redirectCount
-set_http_redirectCount
-get_http_checkStatus
-set_http_checkStatus
-get_http_responseTimeout
-set_http_responseTimeout
-get_http_getConnectionWrapper
-set_http_getConnectionWrapper
-get_http_cookieJar
-set_http_cookieJar
-get_http_requestVersion
-set_http_requestVersion
-HttpRequestBody
-http_mk'RequestBodyLBS
-pattern HttpRequestBodyLBS
-http_mk'RequestBodyBS
-pattern HttpRequestBodyBS
-http_mk'RequestBodyBuilder
-pattern HttpRequestBodyBuilder
-http_mk'RequestBodyStream
-pattern HttpRequestBodyStream
-http_mk'RequestBodyStreamChunked
-pattern HttpRequestBodyStreamChunked
-HttpResponse
-get_http_responseStatus
-set_http_responseStatus
-get_http_responseVersion
-set_http_responseVersion
-get_http_responseHeaders
-set_http_responseHeaders
-get_http_responseBody
-set_http_responseBody
-get_http_responseCookieJar
-set_http_responseCookieJar
 FromJSON
 parseJSON
 GFromJSON

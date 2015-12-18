@@ -51,9 +51,10 @@ Qualified {as = "c8", mod = "Data.ByteString.Lazy.Char8"}
 Qualified {as = "ctrl", mod = "Control.Concurrent"}
 Qualified {as = "stm", mod = "Control.Concurrent.STM"}
 Qualified {as = "trans", mod = "Control.Monad.IO.Class"}
+Qualified {as = "trans", mod = "Control.Monad.Trans.Resource"}
 Qualified {as = "trans", mod = "Control.Monad.Trans.Class"}
 Qualified {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}
-Qualified {as = "mtl", mod = "Control.Monad.State.Lazy"}
+-- Qualified {as = "mtl", mod = "Control.Monad.State.Lazy"}
 ```
 
 ### Streaming
@@ -106,17 +107,20 @@ Qualified {as = "opt", mod = "Options.Applicative.Extra"}
 ```haskell
 Qualified {as = "wai", mod = "Network.Wai"}
 Qualified {as = "wai", mod = "Network.Wai.Handler.Warp"}
-Qualified {as = "wai", mod = "Network.HTTP.Types.Status"}
 Qualified {as = "wai", mod = "Network.Wai.Middleware.RequestLogger"}
 Qualified {as = "wai", mod = "Network.Wai.Middleware.Static"}
+
+Qualified {as = "http", mod = "Network.HTTP.Client"}
+Qualified {as = "http", mod = "Network.HTTP.Types"}
+Qualified {as = "http", mod = "Network.HTTP.Types.Status"}
+Qualified {as = "http", mod = "Network.HTTP.Types.Header"}
+Qualified {as = "http", mod = "Network.HTTP.Conduit"}
 
 Qualified {as = "spock", mod = "Web.Spock.Digestive"}
 Qualified {as = "spock", mod = "Web.Spock.Safe"}
 
 Qualified {as = "ws", mod = "Network.WebSockets"}
 Qualified {as = "ws", mod = "Network.WebSockets.Connection"}
-
-Qualified {as = "http", mod = "Network.HTTP.Conduit"}
 
 Qualified {as = "js", mod = "Data.Aeson"}
 Qualified {as = "js", mod = "Data.Aeson.Types"}
@@ -170,3 +174,4 @@ Qualified {as = "lens", mod = "Lens.Micro.Platform"}
   * network-uri
   * directory
   * strict
+  * resourcet
