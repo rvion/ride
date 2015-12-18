@@ -4,6 +4,7 @@ packages:
 - 'jetpack'
 - 'reexport-demo'
 - 'db-layer'
+- 'fastci'
 # Libraries + executables
 - 'haskell-web-ide'
 - 'jetpack-gen'
