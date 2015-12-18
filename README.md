@@ -11,20 +11,13 @@ Ride is a big project aiming to provide
       - see an exemple input file: [imports.md](/imports.md)
       - see [the corresponding generated prelude](/jetpack/src)
         and [the full list of exported symbols](/jetpack/full-exported-symbol-list.txt)
- 2. A full featured prelude exposing all necessary features for most project.
-
-
-### hack on this:
-
-Those 2 commands should help
-```shell
-stack ghci repl
-stack build --fast --file-watch
-```
+ 3. A full featured prelude exposing all necessary features for most project.
+ 4. ... #COMPLETEME
 
 ### packages: 
 
-- '.' (ride) only usefull for playground. 
+![Alt text](/doc/doc/packages-deps-tree.png "packages dependencies")
+
 - 'haskell-web-ide'
 - 'jetpack'
 - 'jetpack-gen'
