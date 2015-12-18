@@ -15,68 +15,68 @@
 -- ReexportUnqualified {mod = "ReexportDemo"}
 
 ```haskell
--- Reexport {as = "demo", mod = "ReexportDemo"}
+-- Qualified {as = "demo", mod = "ReexportDemo"}
 ```
 
 ### Containers
 
 ```haskell
-Reexport {as = "map", mod = "Data.Map.Strict"}
-Reexport {as = "lmap", mod = "Data.Map"}
-Reexport {as = "set", mod = "Data.Set"}
-Reexport {as = "ci", mod = "Data.CaseInsensitive"}
-Reexport {as = "hm", mod = "Data.HashMap.Strict"}
-Reexport {as = "ne", mod = "Data.List.NonEmpty"}
-Reexport {as = "vec", mod = "Data.Vector"}
+Qualified {as = "map", mod = "Data.Map.Strict"}
+Qualified {as = "lmap", mod = "Data.Map"}
+Qualified {as = "set", mod = "Data.Set"}
+Qualified {as = "ci", mod = "Data.CaseInsensitive"}
+Qualified {as = "hm", mod = "Data.HashMap.Strict"}
+Qualified {as = "ne", mod = "Data.List.NonEmpty"}
+Qualified {as = "vec", mod = "Data.Vector"}
 ```
 
 ### Text manipulation (text, bytestring)
 
 ```haskell
-Reexport {as = "t", mod = "Data.Text"}
-Reexport {as = "t", mod = "Data.Text.Encoding"}
-Reexport {as = "t", mod = "Data.Text.IO"}
-Reexport {as = "lt", mod = "Data.Text.Lazy"}
-Reexport {as = "lt", mod = "Data.Text.Lazy.Encoding"}
-Reexport {as = "lt", mod = "Data.Text.Lazy.IO"}
-Reexport {as = "bs", mod = "Data.ByteString"}
-Reexport {as = "bs", mod = "Data.ByteString.Char8"}
-Reexport {as = "lbs", mod = "Data.ByteString.Lazy"}
-Reexport {as = "c8", mod = "Data.ByteString.Lazy.Char8"}
+Qualified {as = "t", mod = "Data.Text"}
+Qualified {as = "t", mod = "Data.Text.Encoding"}
+Qualified {as = "t", mod = "Data.Text.IO"}
+Qualified {as = "lt", mod = "Data.Text.Lazy"}
+Qualified {as = "lt", mod = "Data.Text.Lazy.Encoding"}
+Qualified {as = "lt", mod = "Data.Text.Lazy.IO"}
+Qualified {as = "bs", mod = "Data.ByteString"}
+Qualified {as = "bs", mod = "Data.ByteString.Char8"}
+Qualified {as = "lbs", mod = "Data.ByteString.Lazy"}
+Qualified {as = "c8", mod = "Data.ByteString.Lazy.Char8"}
 ```
 
 ### Software Architecture (stm, conduit)
 
 ```haskell
-Reexport {as = "ctrl", mod = "Control.Concurrent"}
-Reexport {as = "stm", mod = "Control.Concurrent.STM"}
-Reexport {as = "trans", mod = "Control.Monad.IO.Class"}
-Reexport {as = "trans", mod = "Control.Monad.Trans.Class"}
-Reexport {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}
-Reexport {as = "mtl", mod = "Control.Monad.State.Lazy"}
+Qualified {as = "ctrl", mod = "Control.Concurrent"}
+Qualified {as = "stm", mod = "Control.Concurrent.STM"}
+Qualified {as = "trans", mod = "Control.Monad.IO.Class"}
+Qualified {as = "trans", mod = "Control.Monad.Trans.Class"}
+Qualified {as = "trans", mod = "Control.Monad.Trans.State.Lazy"}
+Qualified {as = "mtl", mod = "Control.Monad.State.Lazy"}
 ```
 
 ### Streaming
 
 ```haskell
-Reexport {as = "c", mod = "Data.Conduit"}
-Reexport {as = "cl", mod = "Data.Conduit.List"}
-Reexport {as = "cb", mod = "Data.Conduit.Binary"}
+Qualified {as = "c", mod = "Data.Conduit"}
+Qualified {as = "cl", mod = "Data.Conduit.List"}
+Qualified {as = "cb", mod = "Data.Conduit.Binary"}
 ```
 
 ### Parsing (megaparsec)
 
 ```haskell
-Reexport {as = "parse", mod = "Text.Megaparsec"}
+Qualified {as = "parse", mod = "Text.Megaparsec"}
 ```
 
 ### compression
 
 ```haskell
-Reexport {as = "tar", mod="Codec.Archive.Tar"}
-Reexport {as = "tar", mod="Codec.Archive.Tar.Entry"}
-Reexport {as = "tar", mod="Codec.Archive.Tar.Check"}
-Reexport {as = "gzip", mod = "Codec.Compression.GZip"}
+Qualified {as = "tar", mod="Codec.Archive.Tar"}
+Qualified {as = "tar", mod="Codec.Archive.Tar.Entry"}
+Qualified {as = "tar", mod="Codec.Archive.Tar.Check"}
+Qualified {as = "gzip", mod = "Codec.Compression.GZip"}
 ```
 
 ### Cmd-line tools: (ansi colors, optoparse-applicative)
@@ -87,49 +87,49 @@ Reexport {as = "gzip", mod = "Codec.Compression.GZip"}
   - Options.Applicative.Extra:             Utilities to run parsers and display a help text.
 
 ```haskell
-Reexport {as = "ansi", mod = "System.Console.ANSI"}
-Reexport {as = "sio", mod = "System.IO.Strict"}
+Qualified {as = "ansi", mod = "System.Console.ANSI"}
+Qualified {as = "sio", mod = "System.IO.Strict"}
 
-Reexport {as = "env", mod = "System.IO"}
-Reexport {as = "env", mod = "System.Directory"}
-Reexport {as = "env", mod = "System.Environment"}
-Reexport {as = "env", mod = "System.Exit"}
-Reexport {as = "env", mod = "System.Process"}
-Reexport {as = "opt", mod = "Options.Applicative.Common"}
-Reexport {as = "opt", mod = "Options.Applicative.Builder"}
-Reexport {as = "opt", mod = "Options.Applicative.Builder.Completer"}
-Reexport {as = "opt", mod = "Options.Applicative.Extra"}
+Qualified {as = "env", mod = "System.IO"}
+Qualified {as = "env", mod = "System.Directory"}
+Qualified {as = "env", mod = "System.Environment"}
+Qualified {as = "env", mod = "System.Exit"}
+Qualified {as = "env", mod = "System.Process"}
+Qualified {as = "opt", mod = "Options.Applicative.Common"}
+Qualified {as = "opt", mod = "Options.Applicative.Builder"}
+Qualified {as = "opt", mod = "Options.Applicative.Builder.Completer"}
+Qualified {as = "opt", mod = "Options.Applicative.Extra"}
 ```
 
 ### Web: (wai, aeson, spock)
 
 ```haskell
-Reexport {as = "wai", mod = "Network.Wai"}
-Reexport {as = "wai", mod = "Network.Wai.Handler.Warp"}
-Reexport {as = "wai", mod = "Network.HTTP.Types.Status"}
-Reexport {as = "wai", mod = "Network.Wai.Middleware.RequestLogger"}
-Reexport {as = "wai", mod = "Network.Wai.Middleware.Static"}
+Qualified {as = "wai", mod = "Network.Wai"}
+Qualified {as = "wai", mod = "Network.Wai.Handler.Warp"}
+Qualified {as = "wai", mod = "Network.HTTP.Types.Status"}
+Qualified {as = "wai", mod = "Network.Wai.Middleware.RequestLogger"}
+Qualified {as = "wai", mod = "Network.Wai.Middleware.Static"}
 
-Reexport {as = "spock", mod = "Web.Spock.Digestive"}
-Reexport {as = "spock", mod = "Web.Spock.Safe"}
+Qualified {as = "spock", mod = "Web.Spock.Digestive"}
+Qualified {as = "spock", mod = "Web.Spock.Safe"}
 
-Reexport {as = "ws", mod = "Network.WebSockets"}
-Reexport {as = "ws", mod = "Network.WebSockets.Connection"}
+Qualified {as = "ws", mod = "Network.WebSockets"}
+Qualified {as = "ws", mod = "Network.WebSockets.Connection"}
 
-Reexport {as = "http", mod = "Network.HTTP.Conduit"}
+Qualified {as = "http", mod = "Network.HTTP.Conduit"}
 
-Reexport {as = "js", mod = "Data.Aeson"}
-Reexport {as = "js", mod = "Data.Aeson.Types"}
-Reexport {as = "js", mod = "Data.Aeson.Lens"}
+Qualified {as = "js", mod = "Data.Aeson"}
+Qualified {as = "js", mod = "Data.Aeson.Types"}
+Qualified {as = "js", mod = "Data.Aeson.Lens"}
 
-Reexport {as = "uri", mod = "Network.URI"}
+Qualified {as = "uri", mod = "Network.URI"}
 ```
 # js Data.Aeson.Types.Class not working because not exported, but I need the instances... !
 
 ### Lens (lens)
 
 ```haskell
-Reexport {as = "lens", mod = "Lens.Micro.Platform"}
+Qualified {as = "lens", mod = "Lens.Micro.Platform"}
 ```
 
 ### Packages
