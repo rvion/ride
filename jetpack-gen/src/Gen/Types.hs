@@ -28,7 +28,7 @@ isRClass x = case x of
 
 
 jetpackFolder :: String
-jetpackFolder = "jetpack/"
+jetpackFolder = "../jetpack/"
 
 jetpackLibFolder :: String
 jetpackLibFolder = jetpackFolder ++ "src/"
