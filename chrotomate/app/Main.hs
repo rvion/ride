@@ -7,7 +7,7 @@ module Main ( main ) where
 import           Chrome.Command
 import           Chrome.DB
 import           Chrome.Server
-import           JetPack
+import           Jetpack
 import           Opts
 
 -- 2: Get the list of pages

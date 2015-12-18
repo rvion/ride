@@ -9,9 +9,9 @@
 
 module Chrome.Server where
 
+import           Jetpack
 import           Chrome.Command
 import           Chrome.DB
-import           JetPack
 -- import Control.Monad.Trans.State (StateT)
 data Ctx = Ctx
   { ctxDB     :: DB

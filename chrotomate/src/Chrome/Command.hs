@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms   #-}
 module Chrome.Command where
-import           JetPack
+import           Jetpack
 -- import           Data.Aeson (ToJSON, FromJSON, toJSON, parseJSON, Value(..))
 -- import qualified Data.Aeson           as A
 -- import           Data.ByteString.Lazy (ByteString)

@@ -3,7 +3,7 @@
 -- which are meant to be imported unqualified.
 --
 -- For details check out the source.
-module JetPack
+module Jetpack
   ( module X
   ) where
 

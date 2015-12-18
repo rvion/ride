@@ -1,6 +1,6 @@
 module Opts where
 -- import           Options.Applicative
-import           JetPack
+import           Jetpack
 data Opts = Opts { db :: FilePath }
 
 opts :: OptParser Opts

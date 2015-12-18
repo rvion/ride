@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Chrome.Chromium where
 
-import           JetPack
+import           Jetpack
 
 -- 1: Start Chrome with Remote debugging protocol enabled
 -- see (https://developer.chrome.com/devtools/docs/debugger-protocol) for doc
