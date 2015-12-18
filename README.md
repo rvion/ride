@@ -1,25 +1,17 @@
-# RIDE project : Ride Haskell like a Pro
+# RIDE : Haskell for Entreprise
 
 :warning: This is WIP. 
 Please, __don't post anything on reddit for now__.
 
-Ride is a big project aiming to provide 
+`Ride` aim to provide project teams all of the necessary tools for happy haskell hacking. It build on other components like [stack](https://github.com/commercialhaskell/stack) or [haskell-ide-engine](https://github.com/haskell/haskell-ide-engine)
 
- 1. A full feature web-based IDE, fast and as complete as possible.
-      - [see planned features](/haskell-web-ide#haskell-web-ide)
- 2. A tool `jetpack-gen` able to generate full-featured preludes with "prefixed" names
-      - see an exemple input file: [imports.md](/imports.md)
-      - see [the corresponding generated prelude](/jetpack/src)
-        and [the full list of exported symbols](/jetpack/full-exported-symbol-list.txt)
- 3. A full featured prelude exposing all necessary features for most project.
- 4. ... #COMPLETEME
+### Components
 
-### packages: 
+ 1. `haskell-web-ide` : A full feature collaborative web-based haskell IDE, fast, complete, but opinionated ([features](/haskell-web-ide#haskell-web-ide))
+ 2. `jetpack-gen` : A tool generating large and complete prelude alternatives, with all possible functions possibly needed in your project. (names are prefixed to avoid name clashes.)
+ 3. `jetpack` : An example prelude with batteries included, suitable for most projects. Never bother with imports and package anymore
+ 4. `web playground` : A simple webframework
+ 5. `chrotomate` : A simple chrome automation library
 
 ![Alt text](/doc/packages-deps-tree.png "packages dependencies")
-
-- 'haskell-web-ide'
-- 'jetpack'
-- 'jetpack-gen'
-- 'reexport-demo'
 
