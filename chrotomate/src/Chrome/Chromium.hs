@@ -28,11 +28,11 @@ getWebsitePageId website = do
             & set_http_method "POST"
             & set_http_requestHeaders [ ("Accept", "application/json")]
     resp <- liftIO $ get_http_responseBody <$> http_httpLbs req manager
-    -- let s1 = resp ^. lens__Array ^.. lens_folded . filtered (\o -> T.isPrefixOf website $ fromJust (o ^? key "url" . _String))
-    --     s2 = s1 ^. lens_to head ^? js_key "id"
+    let s1 = resp ^. _Array ^.. lens_folded . lens_filtered (\o -> t_isPrefixOf website $ fromJust (o ^? js_key "url" . _String))
+        s2 = s1 ^. lens_to head ^? js_key "id"
     -- liftIO $ print s1
-    -- return s2
-    return undefined
+    return s2
+    -- return undefined
 
 -- connectPage :: String -> IO ()
 -- connectPage pageID = withSocketsDo $ WS.runClient "localhost" 9222 ("/devtools/page/" <> pageID) linkedinScript
