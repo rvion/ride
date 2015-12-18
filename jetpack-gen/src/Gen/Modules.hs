@@ -11,14 +11,6 @@ import           Gen.Types
 import           System.Directory  (createDirectoryIfMissing)
 import           System.IO
 
-
-whenValid "" = error "prefix can't be empty"
-whenValid x =
-  if all (`elem` ('_':['a'..'z']++['A'..'Z'])) x
-    then id
-    else error "invalid chars"
-
--- printReexports
 printReexports :: (String, String) -> [RTerm] -> [String] -> IO [String]
 printReexports (mod, prefix) reexports previouslyExportedSymbols = do
   let
@@ -63,18 +55,22 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
             | otherwise -> error ("ahaha " ++ _name)
           RData _ rType nbTyVars rDataTyCons
             | _reexported_type `elem` previouslyExportedSymbols -> do
-                asWarning $ putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
+                asWarning $ putStrLn $ concat
+                  ["  warn: (",_reexported_name, ") previously exported"]
                 return [Nothing]
             | otherwise -> do
                 -- print
                 let tyVars = intersperse ' ' $ take nbTyVars ['a'..'z']
                 -- put ["-- ",_reexported_type," :: ",rType]
-                put (["\ntype ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
+                put (["\ntype ", _reexported_type," ",tyVars, " = I.", _name] ++
+                  (if nbTyVars > 0 then [" ",tyVars] else []))
                 exportedCons <- concat <$> forM rDataTyCons reexportFn
-                return (Just _reexported_type:exportedCons) -- tyvars needed because type synonym must be instanciated
+                -- tyvars needed because type synonym must be instanciated
+                return (Just _reexported_type:exportedCons)
           RDataCon{..} -- -> do
             | head rName `elem` operators -> do
-                asWarning $ putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
+                asWarning $ putStrLn $ concat
+                  ["  warn: (",rName, ") as a type constructor is not yet supported"]
                 return [Nothing]
             | otherwise -> do
                 -- print (rName, zip rConFields rTyVars)
@@ -107,11 +103,15 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
     -- print $map (rName) reexports
     -- print "------------"
 
-    let (allClassesRTerm, otherRTermsWithSymbols) = partition isRClass reexports
-    let (allSymbols, otherRTerms) = partition (\x-> head (rName x) `elem` operators) otherRTermsWithSymbols
-    let (classesRTerm, alreadyExportedClassesRTerm) = partition (\x -> notElem (rName x) previouslyExportedSymbols) allClassesRTerm
+    let
+      (allClassesRTerm, otherRTermsWithSymbols) = partition isRClass reexports
+      (allSymbols, otherRTerms) =
+        partition (\x-> head (rName x) `elem` operators) otherRTermsWithSymbols
+      (classesRTerm, alreadyExportedClassesRTerm) =
+        partition (\x -> notElem (rName x) previouslyExportedSymbols) allClassesRTerm
     -- let allSymbolsNotPreviouslyExported = filter allSymbols ()
-    forM_ alreadyExportedClassesRTerm $ \x -> asWarning $ putStrLn $ concat ["  warn: name of class member(",rName x, ") previously exported"]
+    forM_ alreadyExportedClassesRTerm $ \x -> asWarning $ putStrLn $ concat
+      ["  warn: name of class member(",rName x, ") previously exported"]
     -- print "rv"
     -- print ("classes: ", map (rName) classesRTerm)
     -- print ("func & types: ", map (rName) otherRTerms)
@@ -134,7 +134,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
       ]
 
     let newClassDecls = concatMap getAllClassesNames classesRTerm
-    newDecl <- forM otherRTerms $ \rTerm -> 
+    newDecl <- forM otherRTerms $ \rTerm ->
       reexportFn rTerm
 
     -- print (previouslyExportedSymbols)
@@ -142,14 +142,18 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
 
 -- handleDeprecated :: RTerm -> IO (Maybe String)
 -- handleDeprecated rTerm = do
---   putStrLn $ concat ["  warn: (",_reexported_name,") not exported because it is deprecated"]
+--   putStrLn $ concat
+--     ["  warn: (",_reexported_name,") not exported because it is deprecated"]
 --   return Nothing
 
-operators :: String
+operators :: [Char]
 operators = ['!','#','$','%','&','*','+','.','/','<','=','>','?','@','\\','^','|','-','~',':']
 
 getAllClassesNames :: RTerm -> [String]
-getAllClassesNames x = if rNameExported x then (rName x):(map rName (rAssos x)) else map rName (rAssos x)
+getAllClassesNames x =
+  if rNameExported x
+    then (rName x):(map rName (rAssos x))
+    else map rName (rAssos x)
 
 rNameClever x =
   let _name = rName x
@@ -159,15 +163,17 @@ rNameClever x =
 
 toClassExp :: RTerm -> String
 toClassExp (RClass s nexpo t) = if nexpo
-  then concat $["I.", s,"("] ++ intersperse ", " (map rNameClever t) ++ [")"] -- Typeclass itself is not exported http://stackoverflow.com/questions/17849870/closed-type-classes
+  then concat $["I.", s,"("] ++ intersperse ", " (map rNameClever t) ++ [")"]
+    -- Typeclass itself is not exported http://stackoverflow.com/questions/17849870/closed-type-classes
   else intercalate ", " (map rNameClever t)
 
 toOpExt :: RTerm -> Maybe String
 toOpExt (RId n t) = Just $ concat ["(I.", n,")"]
 toOpExt o = error $ show (shoCon o, rName o) -- (RDataCon{..}) = Nothing
 
-  -- asWarning $ putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
-  -- return Nothing
+-- asWarning $ putStrLn $ concat
+--   ["  warn: (",rName, ") as a type constructor is not yet supported"]
+-- return Nothing
 
 
 
@@ -176,3 +182,9 @@ toOpExt o = error $ show (shoCon o, rName o) -- (RDataCon{..}) = Nothing
 -- data G = G1 Int
 -- pattern JsG1 <- G1
 -- mkG1 = G1
+
+-- whenValid "" = error "prefix can't be empty"
+-- whenValid x =
+--   if all (`elem` ('_':['a'..'z']++['A'..'Z'])) x
+--     then id
+--     else error "invalid chars"
