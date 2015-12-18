@@ -53,7 +53,8 @@ data Reexport
 
 parseReexports :: IO [(String, String)]
 parseReexports = do
-  f <- readFile "imports.md"
+  print (jetpackFolder ++ "imports.md")
+  f <- readFile (jetpackFolder ++ "imports.md")
   x <- mapM myread $ lines f
   print "  parsed:"
   print $ "total: " ++ (show.length $ catMaybes x)
@@ -69,7 +70,7 @@ parseReexports = do
 
 parseDeps :: IO [String]
 parseDeps = do
-  f <- readFile "imports.md"
+  f <- readFile (jetpackFolder ++ "imports.md")
   return $ map (drop 4) $ filter (isPrefixOf "  * ") $ lines f
 
 -- IDEA (add benchmark data .)
@@ -84,7 +85,7 @@ for :: [a] -> (a->b) -> [b]
 for = flip map
 
 writeReexportModule :: [(String, String)] -> IO ()
-writeReexportModule reexports = writeFile "jetpack/src/Exports.hs" content
+writeReexportModule reexports = writeFile (jetpackLibFolder ++ "Exports.hs") content
   where
     toImport modName = concat ["\nimport           ", modName, " as X"]
     content = concat $

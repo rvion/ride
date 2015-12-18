@@ -2,9 +2,10 @@ module Gen.Cabal where
 
 import           Data.List
 import           Gen.Names
+import Gen.Types
 
 writeCabalFile :: [(String, String)] -> [String] -> IO ()
-writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
+writeCabalFile reexports deps = writeFile (jetpackFolder ++ "jetpack.cabal") content
   where
     content = concat $
       [ "\nname:                jetpack"
