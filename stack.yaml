@@ -1,7 +1,6 @@
 flags: {}
 packages:
 # Libraries
-- '.'
 - 'jetpack'
 - 'reexport-demo'
 - 'db-layer'
