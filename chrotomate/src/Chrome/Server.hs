@@ -2,7 +2,6 @@
 
 {-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE NamedFieldPuns             #-}
-{-# LANGUAGE NoImplicitPrelude          #-}
 {-# LANGUAGE NoMonomorphismRestriction  #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
@@ -29,8 +28,8 @@ webserver _ctx = do
 runM :: Ctx -> M a -> IO a
 runM _ctx m = trans_evalStateT (unM m) _ctx
 
-a = spock_var
-b = (<//>)
+-- a = spock_var
+-- b = (<//>)
 
 -- newtpe
 -- ride = undefined

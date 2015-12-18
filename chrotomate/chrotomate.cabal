@@ -21,7 +21,6 @@ executable chrotomate
                      , OverloadedStrings
                      , ScopedTypeVariables
                      , LiberalTypeSynonyms
-                     , NoImplicitPrelude
                      , RankNTypes
                      , NamedFieldPuns
   build-depends:       base
