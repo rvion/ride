@@ -8,7 +8,7 @@ writeCabalFile reexports deps = writeFile "jetpack/jetpack.cabal" content
   where
     content = concat $
       [ "\nname:                jetpack"
-      , "\nversion:             0.2.0.0"
+      , "\nversion:             0.3.0.0"
       , "\nsynopsis:            Initial project template from stack"
       , "\ndescription:         Please see README.md"
       , "\nhomepage:            http://github.com/githubuser/jetpack#readme"
