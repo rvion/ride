@@ -1,0 +1,7 @@
+flags: {}
+packages:
+- '.'
+- '../db-layer'
+extra-deps:
+- 'hashids-1.0.2.1'
+resolver: nightly-2015-12-14

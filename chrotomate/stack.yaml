@@ -1,0 +1,6 @@
+flags: {}
+packages:
+- '.'
+- '../jetpack'
+- '../reexport-demo'
+resolver: nightly-2015-12-14
