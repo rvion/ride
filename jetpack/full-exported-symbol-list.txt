@@ -1088,7 +1088,6 @@ Double
 Float
 Int
 Word
-!
 map_assocs
 map_delete
 map_deleteAt
@@ -1400,7 +1399,6 @@ hm_mapWithKey
 hm_singleton
 hm_unionWith
 HmHashMap
-<|
 ne_break
 ne_cons
 ne_cycle
@@ -1460,8 +1458,6 @@ ne_xor
 ne_zip
 ne_zipWith
 NeNonEmpty
-!?
-//
 vec_accum
 vec_accumulate
 vec_accumulate_
@@ -2398,17 +2394,6 @@ MtlState
 MtlStateT
 c_connect
 c_fuse
-$$
-$$+
-$$++
-$$+-
-$=
-$=+
-=$
-=$$+
-=$$++
-=$$+-
-=$=
 c_addCleanup
 c_await
 c_awaitForever
@@ -2589,7 +2574,6 @@ parse_someTill
 parse_badMessage
 parse_errorIsUnknown
 parse_messageString
-<?>
 parse_getInput
 parse_getPosition
 parse_getTabWidth
@@ -3705,7 +3689,6 @@ wai_mk'FromHeader
 pattern WaiFromHeader
 wai_mk'FromFallback
 pattern WaiFromFallback
->->
 wai_addBase
 wai_addSlash
 wai_contains
@@ -3788,7 +3771,6 @@ spock_runSpockIO
 spock_defaultSessionCfg
 spock_defaultSessionHooks
 spock_defaultSpockCfg
-<//>
 spock_delete
 spock_get
 spock_getpost
@@ -4263,10 +4245,6 @@ js_json
 js_json'
 js_genericParseJSON
 js_genericToJSON
-.!=
-.:
-.:?
-.=
 js_fromJSON
 js_withArray
 js_withBool
@@ -4422,11 +4400,6 @@ _3
 _4
 _5
 ix
-%=
-*=
-+=
--=
-//=
 lens_preview
 lens_use
 lens_view
@@ -4442,15 +4415,6 @@ lens_makeLenses
 lens_makeLensesFor
 lens_makeLensesWith
 lens_simpleLenses
-%~
-.~
-<%~
-<<%~
-<<.~
-^.
-^..
-^?
-^?!
 lens__Just
 lens__Left
 lens__Nothing

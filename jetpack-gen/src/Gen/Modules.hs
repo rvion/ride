@@ -55,10 +55,10 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
             | _reexported_name `elem` previouslyExportedSymbols -> do
                 -- putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
                 return [Nothing]
-            | head _name `elem` operators -> do
-                put ["\n-- (",_name,") :: ",rType]
-                put ["(",_name,")", " = (I.", _name,")"]
-                return [Just _reexported_name]
+            -- | head _name `elem` operators -> do
+            --     put ["\n-- (",_name,") :: ",rType]
+            --     put ["(",_name,")", " = (I.", _name,")"]
+            --     return [Just _reexported_name]
             | isLower (head _name) || head _name == '_' -> do
                 put ["\n-- ",_reexported_name," :: ",rType]
                 put [_reexported_name, " = I.", _name]
@@ -75,7 +75,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                 put (["\ntype ", _reexported_type," ",tyVars, " = I.", _name] ++ (if nbTyVars > 0 then [" ",tyVars] else []))
                 exportedCons <- concat <$> forM rDataTyCons reexportFn
                 return (Just _reexported_type:exportedCons) -- tyvars needed because type synonym must be instanciated
-          RDataCon{..}
+          RDataCon{..} -- -> do
             | head rName `elem` operators -> do
                 asWarning $ putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
                 return [Nothing]
@@ -110,8 +110,10 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
     -- print $map (rName) reexports
     -- print "------------"
 
-    let (allClassesRTerm, otherRTerms) = partition isRClass reexports
+    let (allClassesRTerm, otherRTermsWithSymbols) = partition isRClass reexports
+    let (allSymbols, otherRTerms) = partition (\x-> head (rName x) `elem` operators) otherRTermsWithSymbols
     let (classesRTerm, alreadyExportedClassesRTerm) = partition (\x -> not $ (rName x) `elem` previouslyExportedSymbols) allClassesRTerm
+    -- let allSymbolsNotPreviouslyExported = filter allSymbols ()
     forM alreadyExportedClassesRTerm $ \x -> asWarning $ putStrLn $ concat ["  warn: name of class member(",rName x, ") previously exported"]
     -- print "rv"
     -- print ("classes: ", map (rName) classesRTerm)
@@ -120,7 +122,12 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
       [ "module ",moduleName,".", _fileName
       , "\n  ( "
       ,  if (not . null $ classesRTerm)
-          then "-- unqualified class re-export\n  " ++ (intercalate ", " (map toClassExp classesRTerm)) ++ "\n  , "
+          then "-- unqualified class re-export\n  " ++
+            (intercalate ", " (map toClassExp classesRTerm)) ++ "\n  , "
+          else ""
+      ,  if (not . null $ allSymbols)
+          then "-- unqualified operators re-export\n  " ++
+            (intercalate ", " (catMaybes $ map toOpExt allSymbols)) ++ "\n  , "
           else ""
       , "module ",moduleName,".", _fileName
       , "\n  ) where"
@@ -157,6 +164,15 @@ toClassExp :: RTerm -> String
 toClassExp (RClass s nexpo t) = if nexpo
   then concat $["I.", s,"("] ++ (intersperse ", " (map rNameClever t)) ++ [")"] -- Typeclass itself is not exported http://stackoverflow.com/questions/17849870/closed-type-classes
   else concat $ (intersperse ", " (map rNameClever t))
+
+toOpExt :: RTerm -> Maybe String
+toOpExt (RId n t) = Just $ concat $ ["(I.", n,")"]
+toOpExt o = error $ show (shoCon o, rName o) -- (RDataCon{..}) = Nothing
+
+  -- asWarning $ putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]
+  -- return Nothing
+
+
 
 -- liftIO $ mapM_ (putStrLn.(" -> "++).toS) declsF
 
