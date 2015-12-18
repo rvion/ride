@@ -11,6 +11,28 @@ import           Gen.Types
 import           System.Directory  (createDirectoryIfMissing)
 import           System.IO
 
+-- reexportedNameFor :: Reexport -> RTerm -> String
+-- reexportedNameFor r t = case r of
+--   Qualified{..}
+--     | isOperator t -> rName t
+--     | otherwise ->
+--       let
+--         (p:ps) = as
+--         sep = "_"
+--         pref = (toLower p : ps) ++ sep
+--         tpref = toUpper p : ps
+--       in case t of
+--         RId{..} -> concat [pref, sep, rName]
+--         RData{..} -> concat [tpref, rName]
+--         RDataCon{..} -> rName
+--         RClass{..} -> rName
+--   Unqualified{..} -> case t of
+--     RId{..} -> "RId"
+--     RData{..} -> "RData"
+--     RDataCon{..} -> "RDataCon"
+--     RClass{..} -> "RClass"
+
+
 printReexports :: (String, String) -> [RTerm] -> [String] -> IO [String]
 printReexports (mod, prefix) reexports previouslyExportedSymbols = do
   let
@@ -108,8 +130,9 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
       (allSymbols, otherRTerms) =
         partition (\x-> head (rName x) `elem` operators) otherRTermsWithSymbols
       (classesRTerm, alreadyExportedClassesRTerm) =
-        partition (\x -> notElem (rName x) previouslyExportedSymbols) allClassesRTerm
-    -- let allSymbolsNotPreviouslyExported = filter allSymbols ()
+        partition (\x -> notElem (rName x) previouslyExportedSymbols)
+          allClassesRTerm
+    let allSymbolsNotPreviouslyExported = filter (\sym -> not $ (rName sym) `elem` previouslyExportedSymbols) allSymbols
     forM_ alreadyExportedClassesRTerm $ \x -> asWarning $ putStrLn $ concat
       ["  warn: name of class member(",rName x, ") previously exported"]
     -- print "rv"
@@ -122,9 +145,9 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
           then "-- unqualified class re-export\n  " ++
             intercalate ", " (map toClassExp classesRTerm) ++ "\n  , "
           else ""
-      ,  if not . null $ allSymbols
+      ,  if not . null $ allSymbolsNotPreviouslyExported
           then "-- unqualified operators re-export\n  " ++
-            intercalate ", " (catMaybes $ map toOpExt allSymbols) ++ "\n  , "
+            intercalate ", " (catMaybes $ map toOpExt allSymbolsNotPreviouslyExported) ++ "\n  , "
           else ""
       , "module ",moduleName,".", _fileName
       , "\n  ) where"
@@ -133,12 +156,18 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
       , "\n"
       ]
 
+    let newOperatorDecl = map rName allSymbolsNotPreviouslyExported
     let newClassDecls = concatMap getAllClassesNames classesRTerm
     newDecl <- forM otherRTerms $ \rTerm ->
       reexportFn rTerm
 
     -- print (previouslyExportedSymbols)
-    return (previouslyExportedSymbols ++ newClassDecls ++ catMaybes(concat newDecl))
+    return $ concat
+      [ previouslyExportedSymbols
+      , newClassDecls
+      , newOperatorDecl
+      , catMaybes(concat newDecl)
+      ]
 
 -- handleDeprecated :: RTerm -> IO (Maybe String)
 -- handleDeprecated rTerm = do
@@ -148,6 +177,9 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
 
 operators :: [Char]
 operators = ['!','#','$','%','&','*','+','.','/','<','=','>','?','@','\\','^','|','-','~',':']
+
+isOperator :: RTerm -> Bool
+isOperator t = head (rName t) `elem` operators
 
 getAllClassesNames :: RTerm -> [String]
 getAllClassesNames x =

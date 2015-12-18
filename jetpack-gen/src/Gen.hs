@@ -41,16 +41,6 @@ jetpackGen = do
   let reexportedPackages = ()
   return ()
 
-data Reexport
-  = Reexport
-    { as  :: String
-    , mod :: String
-    }
-  | ReexportUnqualified
-    { mod :: String
-    }
-  deriving (Eq, Show, Read)
-
 parseReexports :: IO [(String, String)]
 parseReexports = do
   print (jetpackFolder ++ "imports.md")
@@ -58,7 +48,7 @@ parseReexports = do
   x <- mapM myread $ lines f
   print "  parsed:"
   print $ "total: " ++ (show.length $ catMaybes x)
-  return $ map (\(Reexport a b) -> (a,b)) (catMaybes x)
+  return $ map (\(Qualified a b) -> (a,b)) (catMaybes x)
   where
     myread :: String -> IO (Maybe Reexport)
     myread line = do

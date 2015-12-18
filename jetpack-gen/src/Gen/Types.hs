@@ -26,6 +26,16 @@ isRClass x = case x of
 
 -- | RSynonym { rName :: String, rNbTyVars :: Int }
 
+data Reexport
+  = Qualified
+    { as  :: String
+    , mod :: String
+    }
+  | Unqualified
+    { mod :: String
+    }
+  deriving (Eq, Show, Read)
+
 
 jetpackFolder :: String
 jetpackFolder = "../jetpack/"
