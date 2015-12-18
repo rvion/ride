@@ -16,7 +16,7 @@ Ride is a big project aiming to provide
 
 ### packages: 
 
-![Alt text](/doc/doc/packages-deps-tree.png "packages dependencies")
+![Alt text](/doc/packages-deps-tree.png "packages dependencies")
 
 - 'haskell-web-ide'
 - 'jetpack'
