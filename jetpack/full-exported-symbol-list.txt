@@ -1088,6 +1088,7 @@ Double
 Float
 Int
 Word
+!
 map_assocs
 map_delete
 map_deleteAt
@@ -1399,6 +1400,7 @@ hm_mapWithKey
 hm_singleton
 hm_unionWith
 HmHashMap
+<|
 ne_break
 ne_cons
 ne_cycle
@@ -1458,6 +1460,8 @@ ne_xor
 ne_zip
 ne_zipWith
 NeNonEmpty
+!?
+//
 vec_accum
 vec_accumulate
 vec_accumulate_
@@ -2392,6 +2396,17 @@ mtl_withState
 mtl_withStateT
 MtlState
 MtlStateT
+$$
+$$+
+$$++
+$$+-
+$=
+$=+
+=$
+=$$+
+=$$++
+=$$+-
+=$=
 c_connect
 c_fuse
 c_addCleanup
@@ -2522,6 +2537,7 @@ StorableStream
 fromFile
 Stream
 uncons
+<?>
 parse_optional
 parse_alphaNumChar
 parse_anyChar
@@ -3689,6 +3705,7 @@ wai_mk'FromHeader
 pattern WaiFromHeader
 wai_mk'FromFallback
 pattern WaiFromFallback
+>->
 wai_addBase
 wai_addSlash
 wai_contains
@@ -3731,6 +3748,7 @@ runQuery
 getState
 SafeAction
 runSafeAction
+<//>
 spock_defaultCookieSettings
 spock_body
 spock_bytes
@@ -4232,6 +4250,10 @@ GToJSON
 gToJSON
 ToJSON
 toJSON
+.!=
+.:
+.:?
+.=
 js_decode
 js_decode'
 js_decodeStrict
@@ -4400,6 +4422,20 @@ _3
 _4
 _5
 ix
+%=
+*=
++=
+-=
+//=
+%~
+.~
+<%~
+<<%~
+<<.~
+^.
+^..
+^?
+^?!
 lens_preview
 lens_use
 lens_view
