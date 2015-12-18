@@ -8,8 +8,8 @@ import           Codec.Compression.GZip.AsGzip as X
 import           Control.Concurrent.AsCtrl as X
 import           Control.Concurrent.STM.AsStm as X
 import           Control.Monad.IO.Class.AsTrans as X
-import           Control.Monad.State.Lazy.AsMtl as X
 import           Control.Monad.Trans.Class.AsTrans as X
+import           Control.Monad.Trans.Resource.AsTrans as X
 import           Control.Monad.Trans.State.Lazy.AsTrans as X
 import           Data.Aeson.AsJs as X
 import           Data.Aeson.Lens.AsJs as X
@@ -36,7 +36,9 @@ import           Data.Text.Lazy.IO.AsLt as X
 import           Data.Vector.AsVec as X
 import           Lens.Micro.Platform.AsLens as X
 import           Network.HTTP.Conduit.AsHttp as X
-import           Network.HTTP.Types.Status.AsWai as X
+import           Network.HTTP.Types.AsHttp as X
+import           Network.HTTP.Types.Header.AsHttp as X
+import           Network.HTTP.Types.Status.AsHttp as X
 import           Network.URI.AsUri as X
 import           Network.Wai.AsWai as X
 import           Network.Wai.Handler.Warp.AsWai as X
