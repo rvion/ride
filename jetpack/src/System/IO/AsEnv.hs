@@ -255,15 +255,15 @@ type EnvSeekMode  = I.SeekMode
 
 -- constructor :: AbsoluteSeek
 env_mk'AbsoluteSeek =  I.AbsoluteSeek
-pattern EnvAbsoluteSeek  <-  I.AbsoluteSeek 
+pattern EnvAbsoluteSeek  <-  I.AbsoluteSeek
 
 -- constructor :: RelativeSeek
 env_mk'RelativeSeek =  I.RelativeSeek
-pattern EnvRelativeSeek  <-  I.RelativeSeek 
+pattern EnvRelativeSeek  <-  I.RelativeSeek
 
 -- constructor :: SeekFromEnd
 env_mk'SeekFromEnd =  I.SeekFromEnd
-pattern EnvSeekFromEnd  <-  I.SeekFromEnd 
+pattern EnvSeekFromEnd  <-  I.SeekFromEnd
 
 type EnvTextEncoding  = I.TextEncoding
 
@@ -273,11 +273,11 @@ type EnvBufferMode  = I.BufferMode
 
 -- constructor :: NoBuffering
 env_mk'NoBuffering =  I.NoBuffering
-pattern EnvNoBuffering  <-  I.NoBuffering 
+pattern EnvNoBuffering  <-  I.NoBuffering
 
 -- constructor :: LineBuffering
 env_mk'LineBuffering =  I.LineBuffering
-pattern EnvLineBuffering  <-  I.LineBuffering 
+pattern EnvLineBuffering  <-  I.LineBuffering
 
 -- constructor :: Maybe Int -> BlockBuffering
 env_mk'BlockBuffering =  I.BlockBuffering
@@ -289,11 +289,11 @@ type EnvNewline  = I.Newline
 
 -- constructor :: LF
 env_mk'LF =  I.LF
-pattern EnvLF  <-  I.LF 
+pattern EnvLF  <-  I.LF
 
 -- constructor :: CRLF
 env_mk'CRLF =  I.CRLF
-pattern EnvCRLF  <-  I.CRLF 
+pattern EnvCRLF  <-  I.CRLF
 
 type EnvNewlineMode  = I.NewlineMode
 get_env_inputNL o = I.inputNL o
@@ -309,18 +309,18 @@ type EnvIOMode  = I.IOMode
 
 -- constructor :: ReadMode
 env_mk'ReadMode =  I.ReadMode
-pattern EnvReadMode  <-  I.ReadMode 
+pattern EnvReadMode  <-  I.ReadMode
 
 -- constructor :: WriteMode
 env_mk'WriteMode =  I.WriteMode
-pattern EnvWriteMode  <-  I.WriteMode 
+pattern EnvWriteMode  <-  I.WriteMode
 
 -- constructor :: AppendMode
 env_mk'AppendMode =  I.AppendMode
-pattern EnvAppendMode  <-  I.AppendMode 
+pattern EnvAppendMode  <-  I.AppendMode
 
 -- constructor :: ReadWriteMode
 env_mk'ReadWriteMode =  I.ReadWriteMode
-pattern EnvReadWriteMode  <-  I.ReadWriteMode 
+pattern EnvReadWriteMode  <-  I.ReadWriteMode
 
 type EnvIO a = I.IO a

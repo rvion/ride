@@ -108,7 +108,7 @@ type WsHandshakeException  = I.HandshakeException
 
 -- constructor :: NotSupported
 ws_mk'NotSupported =  I.NotSupported
-pattern WsNotSupported  <-  I.NotSupported 
+pattern WsNotSupported  <-  I.NotSupported
 
 -- constructor :: RequestHead -> String -> MalformedRequest
 ws_mk'MalformedRequest =  I.MalformedRequest
@@ -174,7 +174,7 @@ pattern WsCloseRequest a b <-  I.CloseRequest a b
 
 -- constructor :: ConnectionClosed
 ws_mk'ConnectionClosed =  I.ConnectionClosed
-pattern WsConnectionClosed  <-  I.ConnectionClosed 
+pattern WsConnectionClosed  <-  I.ConnectionClosed
 
 -- constructor :: String -> ParseException
 ws_mk'ParseException =  I.ParseException

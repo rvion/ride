@@ -127,7 +127,7 @@ pattern CChunk a <-  I.Chunk a
 
 -- constructor :: Flush
 c_mk'Flush =  I.Flush
-pattern CFlush  <-  I.Flush 
+pattern CFlush  <-  I.Flush
 
 type CProducer a b = I.Producer a b
 

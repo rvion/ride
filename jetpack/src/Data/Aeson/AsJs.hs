@@ -113,4 +113,4 @@ pattern JsBool a <-  I.Bool a
 
 -- constructor :: Null
 js_mk'Null =  I.Null
-pattern JsNull  <-  I.Null 
+pattern JsNull  <-  I.Null

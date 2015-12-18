@@ -42,4 +42,4 @@ pattern JsBoolPrim a <-  I.BoolPrim a
 
 -- constructor :: NullPrim
 js_mk'NullPrim =  I.NullPrim
-pattern JsNullPrim  <-  I.NullPrim 
+pattern JsNullPrim  <-  I.NullPrim

@@ -241,7 +241,7 @@ pattern SpockCookieValidFor a <-  I.CookieValidFor a
 
 -- constructor :: CookieValidForSession
 spock_mk'CookieValidForSession =  I.CookieValidForSession
-pattern SpockCookieValidForSession  <-  I.CookieValidForSession 
+pattern SpockCookieValidForSession  <-  I.CookieValidForSession
 
 type SpockCookieSettings  = I.CookieSettings
 get_spock_cs_EOL o = I.cs_EOL o
@@ -295,7 +295,7 @@ pattern SpockPCConn a <-  I.PCConn a
 
 -- constructor :: PCNoDatabase
 spock_mk'PCNoDatabase =  I.PCNoDatabase
-pattern SpockPCNoDatabase  <-  I.PCNoDatabase 
+pattern SpockPCNoDatabase  <-  I.PCNoDatabase
 
 type SpockSessionCfg a = I.SessionCfg a
 get_spock_sc_cookieName o = I.sc_cookieName o
@@ -365,23 +365,23 @@ type SpockClientPreferredFormat  = I.ClientPreferredFormat
 
 -- constructor :: PrefJSON
 spock_mk'PrefJSON =  I.PrefJSON
-pattern SpockPrefJSON  <-  I.PrefJSON 
+pattern SpockPrefJSON  <-  I.PrefJSON
 
 -- constructor :: PrefXML
 spock_mk'PrefXML =  I.PrefXML
-pattern SpockPrefXML  <-  I.PrefXML 
+pattern SpockPrefXML  <-  I.PrefXML
 
 -- constructor :: PrefHTML
 spock_mk'PrefHTML =  I.PrefHTML
-pattern SpockPrefHTML  <-  I.PrefHTML 
+pattern SpockPrefHTML  <-  I.PrefHTML
 
 -- constructor :: PrefText
 spock_mk'PrefText =  I.PrefText
-pattern SpockPrefText  <-  I.PrefText 
+pattern SpockPrefText  <-  I.PrefText
 
 -- constructor :: PrefUnknown
 spock_mk'PrefUnknown =  I.PrefUnknown
-pattern SpockPrefUnknown  <-  I.PrefUnknown 
+pattern SpockPrefUnknown  <-  I.PrefUnknown
 
 type SpockActionCtxT a b c = I.ActionCtxT a b c
 
@@ -411,39 +411,39 @@ type SpockStdMethod  = I.StdMethod
 
 -- constructor :: GET
 spock_mk'GET =  I.GET
-pattern SpockGET  <-  I.GET 
+pattern SpockGET  <-  I.GET
 
 -- constructor :: POST
 spock_mk'POST =  I.POST
-pattern SpockPOST  <-  I.POST 
+pattern SpockPOST  <-  I.POST
 
 -- constructor :: HEAD
 spock_mk'HEAD =  I.HEAD
-pattern SpockHEAD  <-  I.HEAD 
+pattern SpockHEAD  <-  I.HEAD
 
 -- constructor :: PUT
 spock_mk'PUT =  I.PUT
-pattern SpockPUT  <-  I.PUT 
+pattern SpockPUT  <-  I.PUT
 
 -- constructor :: DELETE
 spock_mk'DELETE =  I.DELETE
-pattern SpockDELETE  <-  I.DELETE 
+pattern SpockDELETE  <-  I.DELETE
 
 -- constructor :: TRACE
 spock_mk'TRACE =  I.TRACE
-pattern SpockTRACE  <-  I.TRACE 
+pattern SpockTRACE  <-  I.TRACE
 
 -- constructor :: CONNECT
 spock_mk'CONNECT =  I.CONNECT
-pattern SpockCONNECT  <-  I.CONNECT 
+pattern SpockCONNECT  <-  I.CONNECT
 
 -- constructor :: OPTIONS
 spock_mk'OPTIONS =  I.OPTIONS
-pattern SpockOPTIONS  <-  I.OPTIONS 
+pattern SpockOPTIONS  <-  I.OPTIONS
 
 -- constructor :: PATCH
 spock_mk'PATCH =  I.PATCH
-pattern SpockPATCH  <-  I.PATCH 
+pattern SpockPATCH  <-  I.PATCH
 
 type SpockPath a = I.Path a
 

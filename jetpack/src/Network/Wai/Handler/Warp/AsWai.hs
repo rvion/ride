@@ -248,7 +248,7 @@ type WaiTimeoutThread  = I.TimeoutThread
 
 -- constructor :: TimeoutThread
 wai_mk'TimeoutThread =  I.TimeoutThread
-pattern WaiTimeoutThread  <-  I.TimeoutThread 
+pattern WaiTimeoutThread  <-  I.TimeoutThread
 
 type WaiBufSize  = I.BufSize
 
@@ -316,19 +316,19 @@ pattern WaiBadFirstLine a <-  I.BadFirstLine a
 
 -- constructor :: NonHttp
 wai_mk'NonHttp =  I.NonHttp
-pattern WaiNonHttp  <-  I.NonHttp 
+pattern WaiNonHttp  <-  I.NonHttp
 
 -- constructor :: IncompleteHeaders
 wai_mk'IncompleteHeaders =  I.IncompleteHeaders
-pattern WaiIncompleteHeaders  <-  I.IncompleteHeaders 
+pattern WaiIncompleteHeaders  <-  I.IncompleteHeaders
 
 -- constructor :: ConnectionClosedByPeer
 wai_mk'ConnectionClosedByPeer =  I.ConnectionClosedByPeer
-pattern WaiConnectionClosedByPeer  <-  I.ConnectionClosedByPeer 
+pattern WaiConnectionClosedByPeer  <-  I.ConnectionClosedByPeer
 
 -- constructor :: OverLargeHeader
 wai_mk'OverLargeHeader =  I.OverLargeHeader
-pattern WaiOverLargeHeader  <-  I.OverLargeHeader 
+pattern WaiOverLargeHeader  <-  I.OverLargeHeader
 
 -- constructor :: String -> BadProxyHeader
 wai_mk'BadProxyHeader =  I.BadProxyHeader
@@ -344,7 +344,7 @@ type WaiTransport  = I.Transport
 
 -- constructor :: TCP
 wai_mk'TCP =  I.TCP
-pattern WaiTCP  <-  I.TCP 
+pattern WaiTCP  <-  I.TCP
 get_wai_tlsMajorVersion o = I.tlsMajorVersion o
 set_wai_tlsMajorVersion x o = o { I.tlsMajorVersion = x}
 get_wai_tlsMinorVersion o = I.tlsMinorVersion o

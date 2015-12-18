@@ -179,10 +179,10 @@ pattern OptInfoMsg a <-  I.InfoMsg a
 
 -- constructor :: ShowHelpText
 opt_mk'ShowHelpText =  I.ShowHelpText
-pattern OptShowHelpText  <-  I.ShowHelpText 
+pattern OptShowHelpText  <-  I.ShowHelpText
 
 -- constructor :: UnknownError
 opt_mk'UnknownError =  I.UnknownError
-pattern OptUnknownError  <-  I.UnknownError 
+pattern OptUnknownError  <-  I.UnknownError
 
 type OptReadM a = I.ReadM a

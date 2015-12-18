@@ -68,8 +68,8 @@ pattern JsTaggedObject a b <-  I.TaggedObject a b
 
 -- constructor :: ObjectWithSingleField
 js_mk'ObjectWithSingleField =  I.ObjectWithSingleField
-pattern JsObjectWithSingleField  <-  I.ObjectWithSingleField 
+pattern JsObjectWithSingleField  <-  I.ObjectWithSingleField
 
 -- constructor :: TwoElemArray
 js_mk'TwoElemArray =  I.TwoElemArray
-pattern JsTwoElemArray  <-  I.TwoElemArray 
+pattern JsTwoElemArray  <-  I.TwoElemArray

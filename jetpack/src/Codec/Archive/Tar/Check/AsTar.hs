@@ -33,7 +33,7 @@ pattern TarNonPortableFormat a <-  I.NonPortableFormat a
 
 -- constructor :: NonPortableFileType
 tar_mk'NonPortableFileType =  I.NonPortableFileType
-pattern TarNonPortableFileType  <-  I.NonPortableFileType 
+pattern TarNonPortableFileType  <-  I.NonPortableFileType
 
 -- constructor :: FilePath -> NonPortableEntryNameChar
 tar_mk'NonPortableEntryNameChar =  I.NonPortableEntryNameChar

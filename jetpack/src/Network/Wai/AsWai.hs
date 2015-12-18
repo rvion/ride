@@ -98,7 +98,7 @@ type WaiRequestBodyLength  = I.RequestBodyLength
 
 -- constructor :: ChunkedBody
 wai_mk'ChunkedBody =  I.ChunkedBody
-pattern WaiChunkedBody  <-  I.ChunkedBody 
+pattern WaiChunkedBody  <-  I.ChunkedBody
 
 -- constructor :: Word64 -> KnownLength
 wai_mk'KnownLength =  I.KnownLength

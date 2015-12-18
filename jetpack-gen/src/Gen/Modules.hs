@@ -111,7 +111,8 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                   then do
                     put ["\n-- constructor :: ", constrType]
                     put [conName, " =  I.", rName]
-                    put ["pattern ", patName, " ", tyVars, " <-  I.", rName, " ", tyVars]
+                    put $ ["pattern ", patName, " ", tyVars, " <-  I.", rName] ++
+                      (if (length tyVars) > 0 then [" ",tyVars] else [])
                     return [Just conName, Just ("pattern " ++ patName)]
                   else return []
                 return (conss ++ concat getsets)

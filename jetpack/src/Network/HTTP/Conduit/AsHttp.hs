@@ -122,7 +122,7 @@ pattern HttpUnparseableRedirect a <-  I.UnparseableRedirect a
 
 -- constructor :: TooManyRetries
 http_mk'TooManyRetries =  I.TooManyRetries
-pattern HttpTooManyRetries  <-  I.TooManyRetries 
+pattern HttpTooManyRetries  <-  I.TooManyRetries
 
 -- constructor :: String -> HttpParserException
 http_mk'HttpParserException =  I.HttpParserException
@@ -130,15 +130,15 @@ pattern HttpHttpParserException a <-  I.HttpParserException a
 
 -- constructor :: HandshakeFailed
 http_mk'HandshakeFailed =  I.HandshakeFailed
-pattern HttpHandshakeFailed  <-  I.HandshakeFailed 
+pattern HttpHandshakeFailed  <-  I.HandshakeFailed
 
 -- constructor :: OverlongHeaders
 http_mk'OverlongHeaders =  I.OverlongHeaders
-pattern HttpOverlongHeaders  <-  I.OverlongHeaders 
+pattern HttpOverlongHeaders  <-  I.OverlongHeaders
 
 -- constructor :: ResponseTimeout
 http_mk'ResponseTimeout =  I.ResponseTimeout
-pattern HttpResponseTimeout  <-  I.ResponseTimeout 
+pattern HttpResponseTimeout  <-  I.ResponseTimeout
 
 -- constructor :: String -> Int -> FailedConnectionException
 http_mk'FailedConnectionException =  I.FailedConnectionException
@@ -150,7 +150,7 @@ pattern HttpFailedConnectionException2 a b c d <-  I.FailedConnectionException2 
 
 -- constructor :: ExpectedBlankAfter100Continue
 http_mk'ExpectedBlankAfter100Continue =  I.ExpectedBlankAfter100Continue
-pattern HttpExpectedBlankAfter100Continue  <-  I.ExpectedBlankAfter100Continue 
+pattern HttpExpectedBlankAfter100Continue  <-  I.ExpectedBlankAfter100Continue
 
 -- constructor :: ByteString -> InvalidStatusLine
 http_mk'InvalidStatusLine =  I.InvalidStatusLine
@@ -170,7 +170,7 @@ pattern HttpProxyConnectException a b c <-  I.ProxyConnectException a b c
 
 -- constructor :: NoResponseDataReceived
 http_mk'NoResponseDataReceived =  I.NoResponseDataReceived
-pattern HttpNoResponseDataReceived  <-  I.NoResponseDataReceived 
+pattern HttpNoResponseDataReceived  <-  I.NoResponseDataReceived
 
 -- constructor :: SomeException -> TlsException
 http_mk'TlsException =  I.TlsException
@@ -178,7 +178,7 @@ pattern HttpTlsException a <-  I.TlsException a
 
 -- constructor :: TlsNotSupported
 http_mk'TlsNotSupported =  I.TlsNotSupported
-pattern HttpTlsNotSupported  <-  I.TlsNotSupported 
+pattern HttpTlsNotSupported  <-  I.TlsNotSupported
 
 -- constructor :: Word64 -> Word64 -> ResponseBodyTooShort
 http_mk'ResponseBodyTooShort =  I.ResponseBodyTooShort
@@ -186,11 +186,11 @@ pattern HttpResponseBodyTooShort a b <-  I.ResponseBodyTooShort a b
 
 -- constructor :: InvalidChunkHeaders
 http_mk'InvalidChunkHeaders =  I.InvalidChunkHeaders
-pattern HttpInvalidChunkHeaders  <-  I.InvalidChunkHeaders 
+pattern HttpInvalidChunkHeaders  <-  I.InvalidChunkHeaders
 
 -- constructor :: IncompleteHeaders
 http_mk'IncompleteHeaders =  I.IncompleteHeaders
-pattern HttpIncompleteHeaders  <-  I.IncompleteHeaders 
+pattern HttpIncompleteHeaders  <-  I.IncompleteHeaders
 
 -- constructor :: ByteString -> InvalidDestinationHost
 http_mk'InvalidDestinationHost =  I.InvalidDestinationHost
@@ -206,7 +206,7 @@ pattern HttpInvalidProxyEnvironmentVariable a b <-  I.InvalidProxyEnvironmentVar
 
 -- constructor :: ResponseLengthAndChunkingBothUsed
 http_mk'ResponseLengthAndChunkingBothUsed =  I.ResponseLengthAndChunkingBothUsed
-pattern HttpResponseLengthAndChunkingBothUsed  <-  I.ResponseLengthAndChunkingBothUsed 
+pattern HttpResponseLengthAndChunkingBothUsed  <-  I.ResponseLengthAndChunkingBothUsed
 
 -- constructor :: SomeException -> ByteString -> Int -> TlsExceptionHostPort
 http_mk'TlsExceptionHostPort =  I.TlsExceptionHostPort

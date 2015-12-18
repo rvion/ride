@@ -105,19 +105,19 @@ type GzipCompressionLevel  = I.CompressionLevel
 
 -- constructor :: DefaultCompression
 gzip_mk'DefaultCompression =  I.DefaultCompression
-pattern GzipDefaultCompression  <-  I.DefaultCompression 
+pattern GzipDefaultCompression  <-  I.DefaultCompression
 
 -- constructor :: NoCompression
 gzip_mk'NoCompression =  I.NoCompression
-pattern GzipNoCompression  <-  I.NoCompression 
+pattern GzipNoCompression  <-  I.NoCompression
 
 -- constructor :: BestSpeed
 gzip_mk'BestSpeed =  I.BestSpeed
-pattern GzipBestSpeed  <-  I.BestSpeed 
+pattern GzipBestSpeed  <-  I.BestSpeed
 
 -- constructor :: BestCompression
 gzip_mk'BestCompression =  I.BestCompression
-pattern GzipBestCompression  <-  I.BestCompression 
+pattern GzipBestCompression  <-  I.BestCompression
 
 -- constructor :: Int -> CompressionLevel
 gzip_mk'CompressionLevel =  I.CompressionLevel
@@ -127,29 +127,29 @@ type GzipCompressionStrategy  = I.CompressionStrategy
 
 -- constructor :: DefaultStrategy
 gzip_mk'DefaultStrategy =  I.DefaultStrategy
-pattern GzipDefaultStrategy  <-  I.DefaultStrategy 
+pattern GzipDefaultStrategy  <-  I.DefaultStrategy
 
 -- constructor :: Filtered
 gzip_mk'Filtered =  I.Filtered
-pattern GzipFiltered  <-  I.Filtered 
+pattern GzipFiltered  <-  I.Filtered
 
 -- constructor :: HuffmanOnly
 gzip_mk'HuffmanOnly =  I.HuffmanOnly
-pattern GzipHuffmanOnly  <-  I.HuffmanOnly 
+pattern GzipHuffmanOnly  <-  I.HuffmanOnly
 
 type GzipMemoryLevel  = I.MemoryLevel
 
 -- constructor :: DefaultMemoryLevel
 gzip_mk'DefaultMemoryLevel =  I.DefaultMemoryLevel
-pattern GzipDefaultMemoryLevel  <-  I.DefaultMemoryLevel 
+pattern GzipDefaultMemoryLevel  <-  I.DefaultMemoryLevel
 
 -- constructor :: MinMemoryLevel
 gzip_mk'MinMemoryLevel =  I.MinMemoryLevel
-pattern GzipMinMemoryLevel  <-  I.MinMemoryLevel 
+pattern GzipMinMemoryLevel  <-  I.MinMemoryLevel
 
 -- constructor :: MaxMemoryLevel
 gzip_mk'MaxMemoryLevel =  I.MaxMemoryLevel
-pattern GzipMaxMemoryLevel  <-  I.MaxMemoryLevel 
+pattern GzipMaxMemoryLevel  <-  I.MaxMemoryLevel
 
 -- constructor :: Int -> MemoryLevel
 gzip_mk'MemoryLevel =  I.MemoryLevel
@@ -159,7 +159,7 @@ type GzipMethod  = I.Method
 
 -- constructor :: Deflated
 gzip_mk'Deflated =  I.Deflated
-pattern GzipDeflated  <-  I.Deflated 
+pattern GzipDeflated  <-  I.Deflated
 
 type GzipWindowBits  = I.WindowBits
 
@@ -169,4 +169,4 @@ pattern GzipWindowBits a <-  I.WindowBits a
 
 -- constructor :: DefaultWindowBits
 gzip_mk'DefaultWindowBits =  I.DefaultWindowBits
-pattern GzipDefaultWindowBits  <-  I.DefaultWindowBits 
+pattern GzipDefaultWindowBits  <-  I.DefaultWindowBits

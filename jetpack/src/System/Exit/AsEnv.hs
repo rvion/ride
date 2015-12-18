@@ -22,7 +22,7 @@ type EnvExitCode  = I.ExitCode
 
 -- constructor :: ExitSuccess
 env_mk'ExitSuccess =  I.ExitSuccess
-pattern EnvExitSuccess  <-  I.ExitSuccess 
+pattern EnvExitSuccess  <-  I.ExitSuccess
 
 -- constructor :: Int -> ExitFailure
 env_mk'ExitFailure =  I.ExitFailure

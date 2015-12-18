@@ -46,35 +46,35 @@ type TarFormatError  = I.FormatError
 
 -- constructor :: TruncatedArchive
 tar_mk'TruncatedArchive =  I.TruncatedArchive
-pattern TarTruncatedArchive  <-  I.TruncatedArchive 
+pattern TarTruncatedArchive  <-  I.TruncatedArchive
 
 -- constructor :: ShortTrailer
 tar_mk'ShortTrailer =  I.ShortTrailer
-pattern TarShortTrailer  <-  I.ShortTrailer 
+pattern TarShortTrailer  <-  I.ShortTrailer
 
 -- constructor :: BadTrailer
 tar_mk'BadTrailer =  I.BadTrailer
-pattern TarBadTrailer  <-  I.BadTrailer 
+pattern TarBadTrailer  <-  I.BadTrailer
 
 -- constructor :: TrailingJunk
 tar_mk'TrailingJunk =  I.TrailingJunk
-pattern TarTrailingJunk  <-  I.TrailingJunk 
+pattern TarTrailingJunk  <-  I.TrailingJunk
 
 -- constructor :: ChecksumIncorrect
 tar_mk'ChecksumIncorrect =  I.ChecksumIncorrect
-pattern TarChecksumIncorrect  <-  I.ChecksumIncorrect 
+pattern TarChecksumIncorrect  <-  I.ChecksumIncorrect
 
 -- constructor :: NotTarFormat
 tar_mk'NotTarFormat =  I.NotTarFormat
-pattern TarNotTarFormat  <-  I.NotTarFormat 
+pattern TarNotTarFormat  <-  I.NotTarFormat
 
 -- constructor :: UnrecognisedTarFormat
 tar_mk'UnrecognisedTarFormat =  I.UnrecognisedTarFormat
-pattern TarUnrecognisedTarFormat  <-  I.UnrecognisedTarFormat 
+pattern TarUnrecognisedTarFormat  <-  I.UnrecognisedTarFormat
 
 -- constructor :: HeaderBadNumericEncoding
 tar_mk'HeaderBadNumericEncoding =  I.HeaderBadNumericEncoding
-pattern TarHeaderBadNumericEncoding  <-  I.HeaderBadNumericEncoding 
+pattern TarHeaderBadNumericEncoding  <-  I.HeaderBadNumericEncoding
 
 type TarEntries a = I.Entries a
 
@@ -84,7 +84,7 @@ pattern TarNext a b <-  I.Next a b
 
 -- constructor :: Done
 tar_mk'Done =  I.Done
-pattern TarDone  <-  I.Done 
+pattern TarDone  <-  I.Done
 
 -- constructor :: e -> Fail
 tar_mk'Fail =  I.Fail
@@ -102,7 +102,7 @@ pattern TarNormalFile a b <-  I.NormalFile a b
 
 -- constructor :: Directory
 tar_mk'Directory =  I.Directory
-pattern TarDirectory  <-  I.Directory 
+pattern TarDirectory  <-  I.Directory
 
 -- constructor :: LinkTarget -> SymbolicLink
 tar_mk'SymbolicLink =  I.SymbolicLink
@@ -122,7 +122,7 @@ pattern TarBlockDevice a b <-  I.BlockDevice a b
 
 -- constructor :: NamedPipe
 tar_mk'NamedPipe =  I.NamedPipe
-pattern TarNamedPipe  <-  I.NamedPipe 
+pattern TarNamedPipe  <-  I.NamedPipe
 
 -- constructor :: TypeCode -> ByteString -> FileSize -> OtherEntryType
 tar_mk'OtherEntryType =  I.OtherEntryType

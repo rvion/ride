@@ -118,7 +118,7 @@ type EnvStdStream  = I.StdStream
 
 -- constructor :: Inherit
 env_mk'Inherit =  I.Inherit
-pattern EnvInherit  <-  I.Inherit 
+pattern EnvInherit  <-  I.Inherit
 
 -- constructor :: Handle -> UseHandle
 env_mk'UseHandle =  I.UseHandle
@@ -126,4 +126,4 @@ pattern EnvUseHandle a <-  I.UseHandle a
 
 -- constructor :: CreatePipe
 env_mk'CreatePipe =  I.CreatePipe
-pattern EnvCreatePipe  <-  I.CreatePipe 
+pattern EnvCreatePipe  <-  I.CreatePipe

@@ -193,89 +193,89 @@ type AnsiBlinkSpeed  = I.BlinkSpeed
 
 -- constructor :: SlowBlink
 ansi_mk'SlowBlink =  I.SlowBlink
-pattern AnsiSlowBlink  <-  I.SlowBlink 
+pattern AnsiSlowBlink  <-  I.SlowBlink
 
 -- constructor :: RapidBlink
 ansi_mk'RapidBlink =  I.RapidBlink
-pattern AnsiRapidBlink  <-  I.RapidBlink 
+pattern AnsiRapidBlink  <-  I.RapidBlink
 
 -- constructor :: NoBlink
 ansi_mk'NoBlink =  I.NoBlink
-pattern AnsiNoBlink  <-  I.NoBlink 
+pattern AnsiNoBlink  <-  I.NoBlink
 
 type AnsiColor  = I.Color
 
 -- constructor :: Black
 ansi_mk'Black =  I.Black
-pattern AnsiBlack  <-  I.Black 
+pattern AnsiBlack  <-  I.Black
 
 -- constructor :: Red
 ansi_mk'Red =  I.Red
-pattern AnsiRed  <-  I.Red 
+pattern AnsiRed  <-  I.Red
 
 -- constructor :: Green
 ansi_mk'Green =  I.Green
-pattern AnsiGreen  <-  I.Green 
+pattern AnsiGreen  <-  I.Green
 
 -- constructor :: Yellow
 ansi_mk'Yellow =  I.Yellow
-pattern AnsiYellow  <-  I.Yellow 
+pattern AnsiYellow  <-  I.Yellow
 
 -- constructor :: Blue
 ansi_mk'Blue =  I.Blue
-pattern AnsiBlue  <-  I.Blue 
+pattern AnsiBlue  <-  I.Blue
 
 -- constructor :: Magenta
 ansi_mk'Magenta =  I.Magenta
-pattern AnsiMagenta  <-  I.Magenta 
+pattern AnsiMagenta  <-  I.Magenta
 
 -- constructor :: Cyan
 ansi_mk'Cyan =  I.Cyan
-pattern AnsiCyan  <-  I.Cyan 
+pattern AnsiCyan  <-  I.Cyan
 
 -- constructor :: White
 ansi_mk'White =  I.White
-pattern AnsiWhite  <-  I.White 
+pattern AnsiWhite  <-  I.White
 
 type AnsiColorIntensity  = I.ColorIntensity
 
 -- constructor :: Dull
 ansi_mk'Dull =  I.Dull
-pattern AnsiDull  <-  I.Dull 
+pattern AnsiDull  <-  I.Dull
 
 -- constructor :: Vivid
 ansi_mk'Vivid =  I.Vivid
-pattern AnsiVivid  <-  I.Vivid 
+pattern AnsiVivid  <-  I.Vivid
 
 type AnsiConsoleIntensity  = I.ConsoleIntensity
 
 -- constructor :: BoldIntensity
 ansi_mk'BoldIntensity =  I.BoldIntensity
-pattern AnsiBoldIntensity  <-  I.BoldIntensity 
+pattern AnsiBoldIntensity  <-  I.BoldIntensity
 
 -- constructor :: FaintIntensity
 ansi_mk'FaintIntensity =  I.FaintIntensity
-pattern AnsiFaintIntensity  <-  I.FaintIntensity 
+pattern AnsiFaintIntensity  <-  I.FaintIntensity
 
 -- constructor :: NormalIntensity
 ansi_mk'NormalIntensity =  I.NormalIntensity
-pattern AnsiNormalIntensity  <-  I.NormalIntensity 
+pattern AnsiNormalIntensity  <-  I.NormalIntensity
 
 type AnsiConsoleLayer  = I.ConsoleLayer
 
 -- constructor :: Foreground
 ansi_mk'Foreground =  I.Foreground
-pattern AnsiForeground  <-  I.Foreground 
+pattern AnsiForeground  <-  I.Foreground
 
 -- constructor :: Background
 ansi_mk'Background =  I.Background
-pattern AnsiBackground  <-  I.Background 
+pattern AnsiBackground  <-  I.Background
 
 type AnsiSGR  = I.SGR
 
 -- constructor :: Reset
 ansi_mk'Reset =  I.Reset
-pattern AnsiReset  <-  I.Reset 
+pattern AnsiReset  <-  I.Reset
 
 -- constructor :: ConsoleIntensity -> SetConsoleIntensity
 ansi_mk'SetConsoleIntensity =  I.SetConsoleIntensity
@@ -309,12 +309,12 @@ type AnsiUnderlining  = I.Underlining
 
 -- constructor :: SingleUnderline
 ansi_mk'SingleUnderline =  I.SingleUnderline
-pattern AnsiSingleUnderline  <-  I.SingleUnderline 
+pattern AnsiSingleUnderline  <-  I.SingleUnderline
 
 -- constructor :: DoubleUnderline
 ansi_mk'DoubleUnderline =  I.DoubleUnderline
-pattern AnsiDoubleUnderline  <-  I.DoubleUnderline 
+pattern AnsiDoubleUnderline  <-  I.DoubleUnderline
 
 -- constructor :: NoUnderline
 ansi_mk'NoUnderline =  I.NoUnderline
-pattern AnsiNoUnderline  <-  I.NoUnderline 
+pattern AnsiNoUnderline  <-  I.NoUnderline

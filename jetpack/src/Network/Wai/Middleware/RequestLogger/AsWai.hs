@@ -65,12 +65,12 @@ type WaiIPAddrSource  = I.IPAddrSource
 
 -- constructor :: FromSocket
 wai_mk'FromSocket =  I.FromSocket
-pattern WaiFromSocket  <-  I.FromSocket 
+pattern WaiFromSocket  <-  I.FromSocket
 
 -- constructor :: FromHeader
 wai_mk'FromHeader =  I.FromHeader
-pattern WaiFromHeader  <-  I.FromHeader 
+pattern WaiFromHeader  <-  I.FromHeader
 
 -- constructor :: FromFallback
 wai_mk'FromFallback =  I.FromFallback
-pattern WaiFromFallback  <-  I.FromFallback 
+pattern WaiFromFallback  <-  I.FromFallback

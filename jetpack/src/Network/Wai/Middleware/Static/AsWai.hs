@@ -68,11 +68,11 @@ type WaiCachingStrategy  = I.CachingStrategy
 
 -- constructor :: NoCaching
 wai_mk'NoCaching =  I.NoCaching
-pattern WaiNoCaching  <-  I.NoCaching 
+pattern WaiNoCaching  <-  I.NoCaching
 
 -- constructor :: PublicStaticCaching
 wai_mk'PublicStaticCaching =  I.PublicStaticCaching
-pattern WaiPublicStaticCaching  <-  I.PublicStaticCaching 
+pattern WaiPublicStaticCaching  <-  I.PublicStaticCaching
 
 -- constructor :: FileMeta -> RequestHeaders -> CustomCaching
 wai_mk'CustomCaching =  I.CustomCaching
