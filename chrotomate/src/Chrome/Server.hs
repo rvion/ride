@@ -1,17 +1,17 @@
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE KindSignatures #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE NoMonomorphismRestriction #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE ScopedTypeVariables #-}
+
+{-# LANGUAGE MultiParamTypeClasses      #-}
+{-# LANGUAGE NamedFieldPuns             #-}
+{-# LANGUAGE NoImplicitPrelude          #-}
+{-# LANGUAGE NoMonomorphismRestriction  #-}
+{-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 
 module Chrome.Server where
 
-import           JetPack
 import           Chrome.Command
 import           Chrome.DB
+import           JetPack
 -- import Control.Monad.Trans.State (StateT)
 data Ctx = Ctx
   { ctxDB     :: DB
@@ -27,7 +27,7 @@ webserver _ctx = do
   spock_runSpock port $ spock_spockT (runM _ctx) ride
 
 runM :: Ctx -> M a -> IO a
-runM _ctx m = flip trans_evalStateT _ctx (unM m)
+runM _ctx m = trans_evalStateT (unM m) _ctx
 
 a = spock_var
 b = (<//>)

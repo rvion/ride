@@ -1,15 +1,13 @@
 {-# LANGUAGE RecordWildCards #-}
 module Gen.Modules where
-
-import           Control.Monad     (forM)
+import           Control.Monad
 import           Data.Char         (isLower, toLower, toUpper)
 import           Data.List
-import           Debug.Trace
 import           Data.Maybe
-import           Control.Monad
 import           Data.String.Utils
-import           Gen.Types
+import           Debug.Trace
 import           Gen.Log
+import           Gen.Types
 import           System.Directory  (createDirectoryIfMissing)
 import           System.IO
 
@@ -52,8 +50,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
           -- _type = typeSdoc decl
         case x of
           RId _ rType
-            | _reexported_name `elem` previouslyExportedSymbols -> do
-                -- putStrLn $ concat ["  warn: (",_reexported_name, ") previously exported"]
+            | _reexported_name `elem` previouslyExportedSymbols ->
                 return [Nothing]
             -- | head _name `elem` operators -> do
             --     put ["\n-- (",_name,") :: ",rType]
@@ -99,7 +96,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
                     put ["pattern ", patName, " ", tyVars, " <-  I.", rName, " ", tyVars]
                     return [Just conName, Just ("pattern " ++ patName)]
                   else return []
-                return (conss ++ (concat getsets))
+                return (conss ++ concat getsets)
           RClass n nexpo fns -> do
             print ("oksssssssss", RClass n nexpo fns)
             return [Nothing]
@@ -112,22 +109,22 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
 
     let (allClassesRTerm, otherRTermsWithSymbols) = partition isRClass reexports
     let (allSymbols, otherRTerms) = partition (\x-> head (rName x) `elem` operators) otherRTermsWithSymbols
-    let (classesRTerm, alreadyExportedClassesRTerm) = partition (\x -> not $ (rName x) `elem` previouslyExportedSymbols) allClassesRTerm
+    let (classesRTerm, alreadyExportedClassesRTerm) = partition (\x -> notElem (rName x) previouslyExportedSymbols) allClassesRTerm
     -- let allSymbolsNotPreviouslyExported = filter allSymbols ()
-    forM alreadyExportedClassesRTerm $ \x -> asWarning $ putStrLn $ concat ["  warn: name of class member(",rName x, ") previously exported"]
+    forM_ alreadyExportedClassesRTerm $ \x -> asWarning $ putStrLn $ concat ["  warn: name of class member(",rName x, ") previously exported"]
     -- print "rv"
     -- print ("classes: ", map (rName) classesRTerm)
     -- print ("func & types: ", map (rName) otherRTerms)
     put
       [ "module ",moduleName,".", _fileName
       , "\n  ( "
-      ,  if (not . null $ classesRTerm)
+      ,  if not . null $ classesRTerm
           then "-- unqualified class re-export\n  " ++
-            (intercalate ", " (map toClassExp classesRTerm)) ++ "\n  , "
+            intercalate ", " (map toClassExp classesRTerm) ++ "\n  , "
           else ""
-      ,  if (not . null $ allSymbols)
+      ,  if not . null $ allSymbols
           then "-- unqualified operators re-export\n  " ++
-            (intercalate ", " (catMaybes $ map toOpExt allSymbols)) ++ "\n  , "
+            intercalate ", " (catMaybes $ map toOpExt allSymbols) ++ "\n  , "
           else ""
       , "module ",moduleName,".", _fileName
       , "\n  ) where"
@@ -137,7 +134,7 @@ printReexports (mod, prefix) reexports previouslyExportedSymbols = do
       ]
 
     let newClassDecls = concatMap getAllClassesNames classesRTerm
-    newDecl <- forM otherRTerms $ \rTerm -> do
+    newDecl <- forM otherRTerms $ \rTerm -> 
       reexportFn rTerm
 
     -- print (previouslyExportedSymbols)
@@ -152,21 +149,21 @@ operators :: String
 operators = ['!','#','$','%','&','*','+','.','/','<','=','>','?','@','\\','^','|','-','~',':']
 
 getAllClassesNames :: RTerm -> [String]
-getAllClassesNames x = if (rNameExported x) then ((rName x):(map rName (rAssos x))) else (map rName (rAssos x))
+getAllClassesNames x = if rNameExported x then (rName x):(map rName (rAssos x)) else map rName (rAssos x)
 
 rNameClever x =
-  let _name = (rName x)
+  let _name = rName x
   in  if head _name `elem` operators
-        then ("(I." ++ _name ++ ")")
-        else ("I."++_name)
+        then "(I." ++ _name ++ ")"
+        else "I."++_name
 
 toClassExp :: RTerm -> String
 toClassExp (RClass s nexpo t) = if nexpo
-  then concat $["I.", s,"("] ++ (intersperse ", " (map rNameClever t)) ++ [")"] -- Typeclass itself is not exported http://stackoverflow.com/questions/17849870/closed-type-classes
-  else concat $ (intersperse ", " (map rNameClever t))
+  then concat $["I.", s,"("] ++ intersperse ", " (map rNameClever t) ++ [")"] -- Typeclass itself is not exported http://stackoverflow.com/questions/17849870/closed-type-classes
+  else intercalate ", " (map rNameClever t)
 
 toOpExt :: RTerm -> Maybe String
-toOpExt (RId n t) = Just $ concat $ ["(I.", n,")"]
+toOpExt (RId n t) = Just $ concat ["(I.", n,")"]
 toOpExt o = error $ show (shoCon o, rName o) -- (RDataCon{..}) = Nothing
 
   -- asWarning $ putStrLn $ concat ["  warn: (",rName, ") as a type constructor is not yet supported"]

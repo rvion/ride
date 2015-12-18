@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE PatternSynonyms   #-}
 module Chrome.Command where
 import           JetPack
 -- import           Data.Aeson (ToJSON, FromJSON, toJSON, parseJSON, Value(..))

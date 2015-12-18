@@ -2,7 +2,7 @@ module Gen.Cabal where
 
 import           Data.List
 import           Gen.Names
-import Gen.Types
+import           Gen.Types
 
 writeCabalFile :: [(String, String)] -> [String] -> IO ()
 writeCabalFile reexports deps = writeFile (jetpackFolder ++ "jetpack.cabal") content

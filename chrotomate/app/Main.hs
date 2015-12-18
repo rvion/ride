@@ -1,5 +1,5 @@
 {-# LANGUAGE NamedFieldPuns    #-}
-{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Main ( main ) where
@@ -7,8 +7,8 @@ module Main ( main ) where
 import           Chrome.Command
 import           Chrome.DB
 import           Chrome.Server
+import           JetPack
 import           Opts
-import JetPack
 
 -- 2: Get the list of pages
 data ChromiumPageInfo = ChromiumPageInfo

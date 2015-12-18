@@ -195,7 +195,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
                       , rTyVars = map toS   (ifConArgTys con)
                       , rNbTyVars = length $ ifConArgTys con -- duplicata
                       , rConFields = map toS $ filter (\x -> x `elem` map nameOccName exportedNames) (ifConFields con)
-                      , rConIsReexported = (ifConOcc con) `elem` (map nameOccName exportedNames)
+                      , rConIsReexported = ifConOcc con `elem` map nameOccName exportedNames
                       }
                   -- else traceShow (
                   --   "not exported"
@@ -217,7 +217,7 @@ findReexports (mod, modules) previouslyExportedSymbols =
         -- if toS n == "FromJSON" then error (show (toS n, toS decl, loc)) else
         _ -> Just $ RClass
           ( toS ifName ) -- ARGH, don't do (toS n) here...
-          (ifName `elem` (map nameOccName exportedNames))
+          (ifName `elem` map nameOccName exportedNames)
           (mapMaybe
             (\(IfaceClassOp n' _ t') -> if n' `elem` map nameOccName exportedNames
                 then Just $  RId (toS n') (onOneLine.toS$t')

@@ -8,4 +8,4 @@ module JetPack
   ) where
 
 import           BasePrelude as X
-import           Exports as X hiding (try,uncons)
+import           Exports     as X hiding (try, uncons)
