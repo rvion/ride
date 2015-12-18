@@ -23,9 +23,9 @@ writeCabalFile reexports deps = writeFile (jetpackFolder ++ "jetpack.cabal") con
       , "\n"
       , "\nlibrary"
       , "\n  hs-source-dirs:      src"
-      , "\n  exposed-modules:     JetPack Exports"
-      , "\n  other-modules:       "]
-      ++ intersperse ", " (map toN reexports) ++
+      , "\n  exposed-modules:     JetPack Exports "
+      ]-- , "\n  other-modules:       "]
+      ++ intersperse " " (map toN reexports) ++
       [ "\n  build-depends:       "] ++ intersperse ", " deps ++
       [ "\n  ghc-options:         -Wall -fno-warn-missing-signatures"
       , "\n  default-extensions:  NoMonomorphismRestriction, FlexibleContexts, MagicHash, DataKinds, RankNTypes, PatternSynonyms, TypeFamilies"
