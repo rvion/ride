@@ -35,6 +35,7 @@ import           Data.Text.Lazy.Encoding.AsLt as X
 import           Data.Text.Lazy.IO.AsLt as X
 import           Data.Vector.AsVec as X
 import           Lens.Micro.Platform.AsLens as X
+import           Network.HTTP.Client.AsHttp as X
 import           Network.HTTP.Conduit.AsHttp as X
 import           Network.HTTP.Types.AsHttp as X
 import           Network.HTTP.Types.Header.AsHttp as X
