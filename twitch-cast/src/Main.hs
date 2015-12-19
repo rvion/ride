@@ -1,9 +1,31 @@
 module Main where
-
+-- import Data.Functor.Identity (Indentity)
 import Jetpack
 import HLS
 import Types
 import Lucid
+
+-- sk = ansi_setSGR [ansi_mk'Vivid ansi_mk'Blue]
+
+main :: IO ()
+main = do
+  putStrLn "starting webserver"
+  let ctx  = Ctx {streams = [d2']}
+  spock_runSpock 3000 $ spock_spockT (runM ctx) $ do
+
+    spock_get "ok" $ do
+      (Ctx{..}) <- lift (M trans_get)
+      spock_json $js_object ["ok" .= (33::Int)]
+
+    spock_get ("test" <//> spock_var) $ \v -> do
+      liftIO (startVlc demoHLSParams)
+      spock_text  v
+  return ()
+
+
+
+
+
 
 newtype M a = M
   { unM :: TransStateT Ctx IO a
@@ -17,12 +39,11 @@ doStuffWithVLCOutput :: EnvHandle -> IO ()
 doStuffWithVLCOutput h = -- do
   forever $ do
     l <- env_hGetLine h
-    putStrLn l
+    env_hPutStrLn env_stderr l
 
-
-demoG :: IO ()
-demoG = do
-  (mb_stdin_hdl, mb_stdout_hdl, mb_stderr_hdl, ph) <- env_createProcess (vlcCmd demoHLSParams)
+startVlc :: HLSParams -> IO ()
+startVlc hlsParams = do
+  (mb_stdin_hdl, mb_stdout_hdl, mb_stderr_hdl, ph) <- env_createProcess (vlcCmd hlsParams)
   case mb_stdout_hdl of
     Nothing -> print "err"
     Just stdout_hdl -> do
@@ -31,30 +52,20 @@ demoG = do
   return ()
 
 vlcCmd :: HLSParams -> EnvCreateProcess
-vlcCmd hlsParam = env_proc "vlc" [vlcCmdParam hlsParam]
-  & set_env_std_in env_mk'Inherit
+vlcCmd hlsParam = env_proc "yes" [vlcCmdParam hlsParam]
+  & set_env_std_in env_mk'CreatePipe
+  & set_env_std_out env_mk'CreatePipe
+  & set_env_std_err env_mk'Inherit
 
 a = env_createProcess
 runM :: Ctx -> M a -> IO a
 runM ctx = (\x -> trans_evalStateT x ctx) . unM
 
-main :: IO ()
-main = do
-  putStrLn "hello world"
-  let ctx  = Ctx {streams = [d2']}
-  spock_runSpock 3000 $ spock_spockT (runM ctx) $ do
 
-    spock_get "ok" $ do
-      (Ctx{..}) <- lift (M trans_get)
-      spock_json $js_object ["ok" .= (33::Int)]
-
-    spock_get ("test" <//> spock_var) $ \v -> do
-      spock_text  v
-  return ()
-
-
--- a :: HtmlT () ()
--- a = div [] $ do
---   h1_ [] "ko"
---   h2_ [] "good"
------------------
+showStream :: Html ()
+showStream = do
+  h1_ [] "Twitch-Streams"
+  table_ $ do
+    (tr_ (td_ (p_ "Hello, World!")))
+    (tr_ (td_ (p_ "Hello, World!")))
+    (tr_ (td_ (p_ "Hello, World!")))
